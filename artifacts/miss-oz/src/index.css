@@ -217,4 +217,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .grain-overlay { display: none; }
+  /* Quiet all decorative motion (sunburst, seal, blob, bob, twinkle, marquee) */
+  #hero *,
+  .animate-\[mq_32s_linear_infinite\] {
+    animation: none !important;
+  }
 }

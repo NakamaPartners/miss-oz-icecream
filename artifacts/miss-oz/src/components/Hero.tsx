@@ -46,6 +46,9 @@ export default function Hero() {
   const idxRef = useRef(0);
 
   const f = FLAVORS[idx];
+  const dark = f.ink === '#F2E1C2';
+  const frameColor = dark ? 'rgba(242,225,194,0.42)' : 'rgba(36,17,16,0.30)';
+  const frameColorSoft = dark ? 'rgba(242,225,194,0.22)' : 'rgba(36,17,16,0.15)';
 
   function spin(dir: number, currentIdx: number) {
     setArtOpacity(0);
@@ -70,6 +73,10 @@ export default function Hero() {
   }
 
   useEffect(() => {
+    const reduce = typeof window !== 'undefined'
+      && window.matchMedia
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return; // respect motion preference — no auto-advancing carousel
     autoRef.current = setInterval(() => spin(1, idxRef.current), 5500);
     return () => { if (autoRef.current) clearInterval(autoRef.current); };
   }, []);
@@ -77,142 +84,157 @@ export default function Hero() {
   return (
     <div
       id="hero"
-      className="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden px-[5vw] pt-10 pb-[120px] text-center"
+      className="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden px-[5vw] pt-16 pb-[128px] text-center"
       style={{ background: f.bg, transition: 'background 0.7s ease' }}
     >
-      {/* Floating SVG decorators */}
-      <svg className="floater absolute z-10 hidden md:block" data-speed="0.5" data-rot="14"
-        style={{ top: '34%', left: '4%', width: 70, height: 90 }} viewBox="0 0 60 80" aria-hidden="true">
-        <path d="M18 34 L42 34 L31 74 L29 74 Z" fill="none" stroke="#241110" strokeWidth="3" strokeLinejoin="round"/>
-        <circle cx="30" cy="22" r="14" fill="none" stroke="#241110" strokeWidth="3"/>
+      {/* Vintage double-rule frame, like an old label */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-[12px] md:inset-[18px] z-[35] rounded-[5px] border" style={{ borderColor: frameColor }} />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-[19px] md:inset-[26px] z-[35] rounded-[3px] border" style={{ borderColor: frameColorSoft }} />
+
+      {/* Spinning parlor seal, tucked in the corner */}
+      <svg className="hidden lg:block absolute top-[9%] right-[8vw] z-20" style={{ width: 92, height: 92, animation: 'spinbadge 18s linear infinite' }} viewBox="0 0 100 100" aria-hidden="true">
+        <defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+        <circle cx="50" cy="50" r="49" fill="var(--cream)" stroke="#241110" strokeWidth="2"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#241110" strokeWidth="0.75"/>
+        <text style={{ fontFamily: "'EB Garamond', serif", fontSize: 11.5, letterSpacing: '2.5px', fontWeight: 600, textTransform: 'uppercase', fill: '#241110' }}>
+          <textPath href="#circ">Miss Oz · est. 2007 · Portland · scoops · croffles ·</textPath>
+        </text>
+        <circle cx="50" cy="50" r="7" fill="#8C2A54"/>
       </svg>
-      <svg className="floater absolute z-10 opacity-70" data-speed="0.75" data-rot="-18"
-        style={{ top: '30%', right: '4%', width: 48, height: 48 }} viewBox="0 0 46 46" aria-hidden="true">
-        <circle cx="20" cy="28" r="11" fill="none" stroke="#241110" strokeWidth="2.5"/>
-        <path d="M26 18 Q34 6 40 8" fill="none" stroke="#241110" strokeWidth="2.5" strokeLinecap="round"/>
-      </svg>
 
-      <span className="block text-[13px] tracking-[5px] uppercase font-bold mb-3.5" style={{ color: f.ink, opacity: 0.85 }}>
-        Small batch · Portland, Oregon
-      </span>
+      {/* Content column with clean vertical rhythm */}
+      <div className="relative z-20 flex flex-col items-center w-full max-w-[880px] mx-auto">
+        <span className="block text-[12px] tracking-[5px] uppercase font-bold mb-2.5" style={{ color: f.ink, opacity: 0.85 }}>
+          Small batch · Portland, Oregon
+        </span>
 
-      <div
-        className="text-[clamp(28px,4vw,40px)] mb-1 relative z-40"
-        style={{ fontFamily: "'Yellowtail', cursive", color: f.ink, opacity: 0.95, transition: 'color 0.5s ease' }}
-      >
-        {f.kicker}
-      </div>
-
-      <h1
-        className="max-w-[94vw] relative z-10 -mb-[14px]"
-        style={{
-          fontFamily: "'Macklin Display', 'Playfair Display', serif",
-          fontWeight: 700,
-          fontStyle: 'italic',
-          fontSize: 'clamp(38px, 9.5vw, 122px)',
-          lineHeight: 1.0,
-          letterSpacing: '0.5px',
-          color: f.ink,
-          textShadow: `2px 3px 0 ${f.shadow}`,
-          transition: 'color 0.5s ease, text-shadow 0.5s ease',
-        }}
-      >
-        {f.title}
-      </h1>
-
-      {/* Stage */}
-      <div
-        className="relative flex items-center justify-center z-20"
-        style={{ margin: '-30px 0 10px', width: 'min(430px, 88vw)', height: 'min(430px, 88vw)' }}
-      >
-        {/* Twinkle stars */}
-        <svg style={{ position: 'absolute', top: '6%', right: '2%', zIndex: 3, animation: 'twinkle 3.4s infinite', opacity: 0.7 }} width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
-        <svg style={{ position: 'absolute', bottom: '10%', left: '0%', zIndex: 3, animation: 'twinkle 3.9s infinite 0.9s', opacity: 0.7 }} width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
-
-        {/* Flavor tag pill */}
-        <div style={{
-          position: 'absolute', top: '-6px', left: '-14px', zIndex: 4,
-          background: 'var(--cocoa)', color: 'var(--cream)',
-          fontFamily: "'Yellowtail', cursive", fontSize: 19,
-          padding: '8px 18px', borderRadius: 22,
-          transform: 'rotate(-5deg)', boxShadow: '2px 4px 12px rgba(36,17,16,0.20)',
-        }}>
-          {f.tag}
+        {/* Vintage swash divider */}
+        <div className="flex items-center gap-2 mb-1" style={{ color: f.ink }}>
+          <span className="h-px w-7" style={{ background: 'currentColor', opacity: 0.4 }} />
+          <span style={{ opacity: 0.6, fontSize: 11 }}>✦</span>
+          <span className="h-px w-7" style={{ background: 'currentColor', opacity: 0.4 }} />
         </div>
 
-        {/* Spinning badge */}
-        <svg style={{ position: 'absolute', bottom: -26, right: -26, zIndex: 4, width: 104, height: 104, animation: 'spinbadge 14s linear infinite' }} viewBox="0 0 100 100" aria-hidden="true">
-          <defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
-          <circle cx="50" cy="50" r="49" fill="var(--cream)" stroke="#241110" strokeWidth="2"/>
-          <text style={{ fontFamily: "'EB Garamond', serif", fontSize: 11.5, letterSpacing: '2.5px', fontWeight: 600, textTransform: 'uppercase', fill: '#241110' }}>
-            <textPath href="#circ">Miss Oz · est. 2007 · Portland · scoops · croffles ·</textPath>
-          </text>
-          <circle cx="50" cy="50" r="7" fill="#8C2A54"/>
-        </svg>
-
-        {/* Side vine decorators */}
-        <svg className="hidden md:block" style={{ position: 'absolute', left: -56, top: '38%', zIndex: 3 }} width="40" height="46" viewBox="0 0 40 46" aria-hidden="true"><path d="M34 6 Q22 12 30 23 M28 26 Q14 30 22 40" fill="none" stroke="#241110" strokeWidth="3.5" strokeLinecap="round"/></svg>
-        <svg className="hidden md:block" style={{ position: 'absolute', right: -56, top: '38%', zIndex: 3, transform: 'scaleX(-1)' }} width="40" height="46" viewBox="0 0 40 46" aria-hidden="true"><path d="M34 6 Q22 12 30 23 M28 26 Q14 30 22 40" fill="none" stroke="#241110" strokeWidth="3.5" strokeLinecap="round"/></svg>
-
-        {/* Blob */}
         <div
-          className="absolute inset-[6%] z-10"
+          className="text-[clamp(26px,3.6vw,38px)] leading-none"
+          style={{ fontFamily: "'Yellowtail', cursive", color: f.ink, opacity: 0.95, transition: 'color 0.5s ease' }}
+        >
+          {f.kicker}
+        </div>
+
+        <h1
+          className="max-w-[94vw] mt-2"
           style={{
-            background: f.blob,
-            opacity: 0.4,
-            animation: 'blobmorph 10s ease-in-out infinite',
-            transform: blobTransform,
-            transition: 'background 0.7s ease, transform 0.7s ease',
+            fontFamily: "'Macklin Display', 'Playfair Display', serif",
+            fontWeight: 700,
+            fontStyle: 'italic',
+            fontSize: 'clamp(40px, 8.2vw, 100px)',
+            lineHeight: 1.06,
+            letterSpacing: '0.5px',
+            color: f.ink,
+            textShadow: `2px 3px 0 ${f.shadow}`,
+            transition: 'color 0.5s ease, text-shadow 0.5s ease',
           }}
-        />
+        >
+          {f.title}
+        </h1>
 
-        {/* Ice cream cone photo */}
-        <img
-          src={f.photo}
-          alt={f.title}
-          className="absolute z-20"
-          style={{
-            inset: '5%',
-            width: '90%',
-            height: '90%',
-            objectFit: 'contain',
-            objectPosition: 'center bottom',
-            filter: 'drop-shadow(4px 8px 16px rgba(36,17,16,0.3))',
-            animation: 'bob 4s ease-in-out infinite',
-            opacity: artOpacity,
-            transform: `rotate(${artRotate}deg) scale(${artScale})`,
-            transition: 'transform 0.4s cubic-bezier(.34,1.56,.64,1), opacity 0.3s ease',
-          }}
-        />
-      </div>
+        {/* Flavor tag — a little ticket, safely below the title */}
+        <div className="mt-4">
+          <span
+            className="inline-block px-5 py-1.5 rounded-full text-[18px]"
+            style={{
+              fontFamily: "'Yellowtail', cursive",
+              background: 'var(--cocoa)', color: 'var(--cream)',
+              transform: 'rotate(-2deg)', boxShadow: '2px 4px 12px rgba(36,17,16,0.22)',
+            }}
+          >
+            {f.tag}
+          </span>
+        </div>
 
-      <div
-        className="text-[21px] max-w-[460px] mx-auto mt-[14px] mb-[24px] italic font-semibold relative z-30"
-        style={{ color: f.ink, transition: 'color 0.5s ease' }}
-      >
-        {f.sub}
-      </div>
-
-      <button
-        type="button"
-        className="inline-block bg-[var(--cocoa)] text-[var(--cream)] py-4 px-10 rounded-[30px] text-[17px] tracking-[1.5px] font-semibold uppercase border-2 border-transparent z-30 hover:bg-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-      >
-        Order Online
-      </button>
-
-      {/* Dots */}
-      <div className="flex gap-[10px] justify-center mt-[24px] z-30">
-        {FLAVORS.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            aria-label={`Show ${FLAVORS[i].title}`}
-            aria-current={i === idx}
-            onClick={() => { if (autoRef.current) clearInterval(autoRef.current); idxRef.current = i; setIdx(i); setArtOpacity(1); setArtRotate(i % 2 === 0 ? -3 : 3); setArtScale(1); }}
-            className="w-[11px] h-[11px] rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cocoa)] focus-visible:ring-offset-2"
-            style={{ background: i === idx ? 'var(--cocoa)' : 'rgba(36,17,16,0.25)', transform: i === idx ? 'scale(1.3)' : 'scale(1)' }}
+        {/* Stage */}
+        <div
+          className="relative flex items-center justify-center mt-8"
+          style={{ width: 'min(400px, 80vw)', height: 'min(400px, 80vw)' }}
+        >
+          {/* Retro sunburst rays */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-[-15%] z-0"
+            style={{
+              background: 'repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,0.14) 0deg 6deg, transparent 6deg 13deg)',
+              borderRadius: '50%',
+              WebkitMaskImage: 'radial-gradient(circle, #000 58%, transparent 62%)',
+              maskImage: 'radial-gradient(circle, #000 58%, transparent 62%)',
+              animation: 'spinbadge 90s linear infinite',
+            }}
           />
-        ))}
+
+          {/* Twinkle stars */}
+          <svg style={{ position: 'absolute', top: '2%', right: '0%', zIndex: 3, animation: 'twinkle 3.4s infinite', opacity: 0.7 }} width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
+          <svg style={{ position: 'absolute', bottom: '6%', left: '-2%', zIndex: 3, animation: 'twinkle 3.9s infinite 0.9s', opacity: 0.7 }} width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
+
+          {/* Blob */}
+          <div
+            className="absolute inset-[8%] z-10"
+            style={{
+              background: f.blob,
+              opacity: 0.42,
+              animation: 'blobmorph 10s ease-in-out infinite',
+              transform: blobTransform,
+              transition: 'background 0.7s ease, transform 0.7s ease',
+            }}
+          />
+
+          {/* Ice cream cone photo */}
+          <img
+            src={f.photo}
+            alt={f.title}
+            className="absolute z-20"
+            style={{
+              inset: '4%',
+              width: '92%',
+              height: '92%',
+              objectFit: 'contain',
+              objectPosition: 'center bottom',
+              filter: 'drop-shadow(4px 8px 16px rgba(36,17,16,0.3))',
+              animation: 'bob 4s ease-in-out infinite',
+              opacity: artOpacity,
+              transform: `rotate(${artRotate}deg) scale(${artScale})`,
+              transition: 'transform 0.4s cubic-bezier(.34,1.56,.64,1), opacity 0.3s ease',
+            }}
+          />
+        </div>
+
+        <p
+          className="text-[20px] max-w-[440px] mx-auto mt-8 mb-6 italic font-semibold"
+          style={{ color: f.ink, transition: 'color 0.5s ease' }}
+        >
+          {f.sub}
+        </p>
+
+        <button
+          type="button"
+          className="inline-block bg-[var(--cocoa)] text-[var(--cream)] py-4 px-10 rounded-[30px] text-[17px] tracking-[1.5px] font-semibold uppercase border-2 border-transparent hover:bg-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        >
+          Order Online
+        </button>
+
+        {/* Dots */}
+        <div className="flex gap-[10px] justify-center mt-6">
+          {FLAVORS.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Show ${FLAVORS[i].title}`}
+              aria-current={i === idx}
+              onClick={() => { if (autoRef.current) clearInterval(autoRef.current); idxRef.current = i; setIdx(i); setArtOpacity(1); setArtRotate(i % 2 === 0 ? -3 : 3); setArtScale(1); }}
+              className="w-[11px] h-[11px] rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cocoa)] focus-visible:ring-offset-2"
+              style={{ background: i === idx ? 'var(--cocoa)' : 'rgba(36,17,16,0.25)', transform: i === idx ? 'scale(1.3)' : 'scale(1)' }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Nav arrows */}
@@ -220,15 +242,15 @@ export default function Hero() {
         type="button"
         aria-label="Previous flavor"
         onClick={() => go(-1)}
-        className="absolute left-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 hover:scale-110 transition-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)]"
-        style={{ width: 58, height: 58, fontSize: 22 }}
+        className="absolute left-[4vw] md:left-[6vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 hover:scale-110 transition-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)]"
+        style={{ width: 54, height: 54, fontSize: 22 }}
       >←</button>
       <button
         type="button"
         aria-label="Next flavor"
         onClick={() => go(1)}
-        className="absolute right-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 hover:scale-110 transition-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)]"
-        style={{ width: 58, height: 58, fontSize: 22 }}
+        className="absolute right-[4vw] md:right-[6vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 hover:scale-110 transition-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)]"
+        style={{ width: 54, height: 54, fontSize: 22 }}
       >→</button>
 
       {/* Scallop bottom */}

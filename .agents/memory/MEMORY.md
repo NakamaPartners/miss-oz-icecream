@@ -1,0 +1,1 @@
+- [Miss Oz hero + intro loader](miss-oz-hero-and-loader.md) — screenshot catches the 1.5s splash (toggle Loader useState to false to verify); keep hero a spaced flex column, no negative-margin overlap; gate motion behind reduced-motion.
