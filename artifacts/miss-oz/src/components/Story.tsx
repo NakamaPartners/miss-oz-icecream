@@ -10,7 +10,7 @@ export default function Story() {
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
           className="block text-[12px] tracking-[5px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-3"
         >
-          Our story
+          Pull up a stool
         </motion.span>
         <motion.span
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
@@ -31,6 +31,9 @@ export default function Story() {
         </motion.p>
         <motion.p initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.32 }} className="mb-2 leading-[1.85] text-[19px] text-[#1d0e0d]">
           Now we're Miss Oz, named after our beloved dog and everything she stood for: nature, animals, and slowing down for the sweet parts. Same hands, same traditions, new chapter.
+        </motion.p>
+        <motion.p initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.38 }} className="mb-2 leading-[1.85] text-[19px] text-[#1d0e0d]">
+          Push open the door and it's the same as it's always been — cones hand-dipped to order, a record turning in the corner, and a stool with your name on it. No rush here. Stay as long as you like.
         </motion.p>
 
         <motion.div

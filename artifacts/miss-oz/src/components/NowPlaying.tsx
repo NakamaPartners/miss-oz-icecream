@@ -74,7 +74,7 @@ export default function NowPlaying() {
         {/* Spinning vinyl (click to toggle) */}
         <button
           onClick={() => setPlaying((p) => !p)}
-          className="clickable relative shrink-0 rounded-full cursor-none"
+          className="clickable relative shrink-0 rounded-full"
           style={{ order: 3, width: 54, height: 54 }}
           aria-label={playing ? 'Pause the parlor music' : 'Play the parlor music'}
           title={playing ? 'Pause' : 'Play'}

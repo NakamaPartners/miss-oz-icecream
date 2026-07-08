@@ -44,56 +44,8 @@ export default function Hero() {
   const [blobTransform, setBlobTransform] = useState('rotate(-4deg) scale(1)');
   const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const idxRef = useRef(0);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLButtonElement>(null);
 
   const f = FLAVORS[idx];
-
-  // Mouse parallax: gently tilt the cone stage toward the cursor for a hands-on feel
-  useEffect(() => {
-    const hero = heroRef.current;
-    const stage = stageRef.current;
-    if (!hero || !stage) return;
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    let raf = 0;
-    const onMove = (e: MouseEvent) => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const r = hero.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        stage.style.transform = `perspective(900px) rotateY(${px * 12}deg) rotateX(${-py * 12}deg)`;
-      });
-    };
-    const onLeave = () => {
-      cancelAnimationFrame(raf);
-      stage.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg)';
-    };
-    hero.addEventListener('mousemove', onMove);
-    hero.addEventListener('mouseleave', onLeave);
-    return () => {
-      hero.removeEventListener('mousemove', onMove);
-      hero.removeEventListener('mouseleave', onLeave);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  // Magnetic CTA
-  function onCtaMove(e: React.MouseEvent) {
-    const el = ctaRef.current;
-    if (!el) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const r = el.getBoundingClientRect();
-    const x = e.clientX - (r.left + r.width / 2);
-    const y = e.clientY - (r.top + r.height / 2);
-    el.style.transform = `translate(${x * 0.35}px, ${y * 0.45}px)`;
-  }
-  function onCtaLeave() {
-    if (ctaRef.current) ctaRef.current.style.transform = '';
-  }
 
   function spin(dir: number, currentIdx: number) {
     setArtOpacity(0);
@@ -124,7 +76,6 @@ export default function Hero() {
 
   return (
     <div
-      ref={heroRef}
       id="hero"
       className="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden px-[5vw] pt-10 pb-[120px] text-center"
       style={{ background: f.bg, transition: 'background 0.7s ease' }}
@@ -175,9 +126,8 @@ export default function Hero() {
 
       {/* Stage */}
       <div
-        ref={stageRef}
         className="relative flex items-center justify-center z-20"
-        style={{ margin: '-30px 0 10px', width: 'min(430px, 88vw)', height: 'min(430px, 88vw)', transition: 'transform 0.3s ease-out', transformStyle: 'preserve-3d' }}
+        style={{ margin: '-30px 0 10px', width: 'min(430px, 88vw)', height: 'min(430px, 88vw)' }}
       >
         {/* Twinkle stars */}
         <svg style={{ position: 'absolute', top: '6%', right: '2%', zIndex: 3, animation: 'twinkle 2.2s infinite' }} width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
@@ -249,12 +199,8 @@ export default function Hero() {
       </div>
 
       <button
-        ref={ctaRef}
         type="button"
-        onMouseMove={onCtaMove}
-        onMouseLeave={onCtaLeave}
-        className="clickable inline-block bg-[var(--cocoa)] text-[var(--cream)] py-4 px-10 rounded-[30px] text-[17px] tracking-[1.5px] font-semibold uppercase border-2 border-transparent cursor-none z-30 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-        style={{ transition: 'transform 0.2s cubic-bezier(.34,1.56,.64,1), background 0.3s ease' }}
+        className="inline-block bg-[var(--cocoa)] text-[var(--cream)] py-4 px-10 rounded-[30px] text-[17px] tracking-[1.5px] font-semibold uppercase border-2 border-transparent z-30 hover:bg-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
       >
         Order Online
       </button>
@@ -262,26 +208,33 @@ export default function Hero() {
       {/* Dots */}
       <div className="flex gap-[10px] justify-center mt-[24px] z-30">
         {FLAVORS.map((_, i) => (
-          <div
+          <button
             key={i}
+            type="button"
+            aria-label={`Show ${FLAVORS[i].title}`}
+            aria-current={i === idx}
             onClick={() => { if (autoRef.current) clearInterval(autoRef.current); idxRef.current = i; setIdx(i); setArtOpacity(1); setArtRotate(i % 2 === 0 ? -3 : 3); setArtScale(1); }}
-            className="w-[11px] h-[11px] rounded-full cursor-none transition-all duration-300"
+            className="w-[11px] h-[11px] rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cocoa)] focus-visible:ring-offset-2"
             style={{ background: i === idx ? 'var(--cocoa)' : 'rgba(36,17,16,0.25)', transform: i === idx ? 'scale(1.3)' : 'scale(1)' }}
           />
         ))}
       </div>
 
       {/* Nav arrows */}
-      <div
+      <button
+        type="button"
+        aria-label="Previous flavor"
         onClick={() => go(-1)}
-        className="clickable absolute left-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 cursor-none hover:scale-110 transition-transform"
+        className="absolute left-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 hover:scale-110 transition-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)]"
         style={{ width: 58, height: 58, fontSize: 22 }}
-      >←</div>
-      <div
+      >←</button>
+      <button
+        type="button"
+        aria-label="Next flavor"
         onClick={() => go(1)}
-        className="clickable absolute right-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 cursor-none hover:scale-110 transition-transform"
+        className="absolute right-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 hover:scale-110 transition-transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)]"
         style={{ width: 58, height: 58, fontSize: 22 }}
-      >→</div>
+      >→</button>
 
       {/* Scallop bottom */}
       <div className="clip-scallop absolute bottom-[-1px] left-0 right-0 h-[46px] z-40" />

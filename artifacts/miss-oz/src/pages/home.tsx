@@ -1,5 +1,4 @@
 import Loader from '../components/Loader';
-import Cursor from '../components/Cursor';
 import Nav from '../components/Nav';
 import Hero from '../components/Hero';
 import Marquee from '../components/Marquee';
@@ -17,7 +16,6 @@ export default function Home() {
   return (
     <main className="relative bg-[var(--cream)] min-h-screen">
       <Loader />
-      <Cursor />
       <div className="grain-overlay" aria-hidden="true" />
       <NowPlaying />
       <Nav />

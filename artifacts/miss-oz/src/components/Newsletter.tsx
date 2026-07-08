@@ -53,9 +53,9 @@ export default function Newsletter() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email here*"
                   required
-                  className="font-sans w-full p-[17px_20px] border-[2.5px] border-[var(--cocoa)] bg-white rounded-[12px] text-[17px] mb-[16px] text-[var(--cocoa)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] cursor-auto md:cursor-none"
+                  className="font-sans w-full p-[17px_20px] border-[2.5px] border-[var(--cocoa)] bg-white rounded-[12px] text-[17px] mb-[16px] text-[var(--cocoa)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] cursor-auto"
                 />
-                <button type="submit" className="inline-block bg-[var(--berry)] text-[var(--cream)] py-[16px] px-[46px] rounded-[30px] text-[16px] tracking-[2px] uppercase font-semibold shadow-[5px_5px_0_var(--cocoa)] hover:translate-y-[2px] hover:shadow-[3px_3px_0_var(--cocoa)] transition-all cursor-none">
+                <button type="submit" className="inline-block bg-[var(--berry)] text-[var(--cream)] py-[16px] px-[46px] rounded-[30px] text-[16px] tracking-[2px] uppercase font-semibold shadow-[5px_5px_0_var(--cocoa)] hover:translate-y-[2px] hover:shadow-[3px_3px_0_var(--cocoa)] transition-all">
                   Subscribe
                 </button>
               </>

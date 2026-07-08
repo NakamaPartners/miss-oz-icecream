@@ -70,7 +70,7 @@ export default function VoteFlavor() {
 
               <button
                 onClick={() => handleVote(i)}
-                className="vote-btn clickable font-sans bg-[var(--cocoa)] text-[var(--cream)] border-none py-[11px] px-[28px] rounded-full text-[15px] font-semibold tracking-[0.5px] cursor-none hover:bg-[var(--berry)] transition-colors"
+                className="vote-btn clickable font-sans bg-[var(--cocoa)] text-[var(--cream)] border-none py-[11px] px-[28px] rounded-full text-[15px] font-semibold tracking-[0.5px] hover:bg-[var(--berry)] transition-colors"
               >
                 {voted[i] ? 'Voted ♥' : 'Vote'}
               </button>
