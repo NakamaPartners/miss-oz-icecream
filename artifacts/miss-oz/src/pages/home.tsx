@@ -11,6 +11,7 @@ import SweetNotes from '../components/SweetNotes';
 import VoteFlavor from '../components/VoteFlavor';
 import Footer from '../components/Footer';
 import NowPlaying from '../components/NowPlaying';
+import FlavorDrop from '../components/FlavorDrop';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <Marquee />
       <div id="about"><Story /></div>
       <div id="menu"><Menu /></div>
+      <FlavorDrop />
       <div id="wholesale"><Wholesale /></div>
       <div id="events"><Events /></div>
       <SweetNotes />
