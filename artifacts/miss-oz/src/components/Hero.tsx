@@ -86,14 +86,10 @@ export default function Hero() {
         <path d="M18 34 L42 34 L31 74 L29 74 Z" fill="none" stroke="#241110" strokeWidth="3" strokeLinejoin="round"/>
         <circle cx="30" cy="22" r="14" fill="none" stroke="#241110" strokeWidth="3"/>
       </svg>
-      <svg className="floater absolute z-10" data-speed="0.75" data-rot="-18"
-        style={{ top: '30%', right: '4%', width: 54, height: 54 }} viewBox="0 0 46 46" aria-hidden="true">
-        <circle cx="20" cy="28" r="11" fill="none" stroke="#241110" strokeWidth="3"/>
-        <path d="M26 18 Q34 6 40 8" fill="none" stroke="#241110" strokeWidth="3" strokeLinecap="round"/>
-      </svg>
-      <svg className="floater absolute z-10" data-speed="0.6" data-rot="10"
-        style={{ bottom: '22%', left: '10%', width: 50, height: 50 }} viewBox="0 0 46 46" aria-hidden="true">
-        <path d="M23 4 L27 17 L41 17 L30 25 L34 39 L23 30 L12 39 L16 25 L5 17 L19 17 Z" fill="none" stroke="#241110" strokeWidth="3" strokeLinejoin="round"/>
+      <svg className="floater absolute z-10 opacity-70" data-speed="0.75" data-rot="-18"
+        style={{ top: '30%', right: '4%', width: 48, height: 48 }} viewBox="0 0 46 46" aria-hidden="true">
+        <circle cx="20" cy="28" r="11" fill="none" stroke="#241110" strokeWidth="2.5"/>
+        <path d="M26 18 Q34 6 40 8" fill="none" stroke="#241110" strokeWidth="2.5" strokeLinecap="round"/>
       </svg>
 
       <span className="block text-[13px] tracking-[5px] uppercase font-bold mb-3.5" style={{ color: f.ink, opacity: 0.85 }}>
@@ -117,7 +113,7 @@ export default function Hero() {
           lineHeight: 1.0,
           letterSpacing: '0.5px',
           color: f.ink,
-          textShadow: `4px 4px 0 ${f.shadow}`,
+          textShadow: `2px 3px 0 ${f.shadow}`,
           transition: 'color 0.5s ease, text-shadow 0.5s ease',
         }}
       >
@@ -130,9 +126,8 @@ export default function Hero() {
         style={{ margin: '-30px 0 10px', width: 'min(430px, 88vw)', height: 'min(430px, 88vw)' }}
       >
         {/* Twinkle stars */}
-        <svg style={{ position: 'absolute', top: '6%', right: '2%', zIndex: 3, animation: 'twinkle 2.2s infinite' }} width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
-        <svg style={{ position: 'absolute', bottom: '10%', left: '0%', zIndex: 3, animation: 'twinkle 2.8s infinite 0.7s' }} width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
-        <svg style={{ position: 'absolute', top: '16%', left: '6%', zIndex: 3, animation: 'twinkle 3.1s infinite 1.2s' }} width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
+        <svg style={{ position: 'absolute', top: '6%', right: '2%', zIndex: 3, animation: 'twinkle 3.4s infinite', opacity: 0.7 }} width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
+        <svg style={{ position: 'absolute', bottom: '10%', left: '0%', zIndex: 3, animation: 'twinkle 3.9s infinite 0.9s', opacity: 0.7 }} width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
 
         {/* Flavor tag pill */}
         <div style={{
@@ -140,7 +135,7 @@ export default function Hero() {
           background: 'var(--cocoa)', color: 'var(--cream)',
           fontFamily: "'Yellowtail', cursive", fontSize: 19,
           padding: '8px 18px', borderRadius: 22,
-          transform: 'rotate(-8deg)', boxShadow: '4px 4px 0 rgba(36,17,16,0.25)',
+          transform: 'rotate(-5deg)', boxShadow: '2px 4px 12px rgba(36,17,16,0.20)',
         }}>
           {f.tag}
         </div>
@@ -164,8 +159,8 @@ export default function Hero() {
           className="absolute inset-[6%] z-10"
           style={{
             background: f.blob,
-            opacity: 0.5,
-            animation: 'blobmorph 7s ease-in-out infinite',
+            opacity: 0.4,
+            animation: 'blobmorph 10s ease-in-out infinite',
             transform: blobTransform,
             transition: 'background 0.7s ease, transform 0.7s ease',
           }}

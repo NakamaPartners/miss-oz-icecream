@@ -8,6 +8,7 @@ import Wholesale from '../components/Wholesale';
 import Events from '../components/Events';
 import SweetNotes from '../components/SweetNotes';
 import VoteFlavor from '../components/VoteFlavor';
+import Guestbook from '../components/Guestbook';
 import Footer from '../components/Footer';
 import NowPlaying from '../components/NowPlaying';
 import FlavorDrop from '../components/FlavorDrop';
@@ -27,6 +28,7 @@ export default function Home() {
       <div id="wholesale"><Wholesale /></div>
       <div id="events"><Events /></div>
       <SweetNotes />
+      <Guestbook />
       <VoteFlavor />
       <Footer />
     </main>

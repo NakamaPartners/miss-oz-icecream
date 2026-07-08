@@ -180,8 +180,8 @@
   50% { border-radius: 54% 46% 44% 56% / 42% 56% 44% 58%; } 
 }
 @keyframes bob { 
-  0%, 100% { transform: translateY(0) rotate(-5deg); } 
-  50% { transform: translateY(-12px) rotate(-3deg); } 
+  0%, 100% { transform: translateY(0) rotate(-4deg); } 
+  50% { transform: translateY(-8px) rotate(-3deg); } 
 }
 @keyframes spinbadge { 
   from { transform: rotate(0deg); } 
