@@ -30,7 +30,7 @@ export default function Wholesale() {
 
       <div className="flex gap-[28px] flex-wrap justify-center max-w-[1000px] mx-auto mt-[44px] mb-[30px]">
         <motion.div initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="bg-[var(--berry-deep)] border-[2.5px] border-[var(--gold-hi)] rounded-[18px] py-[34px] px-[28px] flex-1 min-w-full md:min-w-[250px] text-center shadow-[7px_7px_0_rgba(36,17,16,0.4)]">
-          <div className="font-display text-[54px] text-[var(--gold-hi)]">+$130</div>
+          <div className="font-display text-[54px] text-[var(--gold-hi)]">$130</div>
           <div className="text-[18px] mt-2 font-semibold">2.5 gal ice cream</div>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }} className="bg-[var(--berry-deep)] border-[2.5px] border-[var(--gold-hi)] rounded-[18px] py-[34px] px-[28px] flex-1 min-w-full md:min-w-[250px] text-center shadow-[7px_7px_0_rgba(36,17,16,0.4)]">
