@@ -7,7 +7,7 @@ const FLAVORS = [
     sub: 'Deep Oregon berry, churned in small batches right in the shop.',
     bg: '#EAB8CE',
     blob: '#8C2A54',
-    photo: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=1000&q=85',
+    photo: '/images/cone-marionberry.png',
     ink: '#241110',
     shadow: 'rgba(255,255,255,0.4)',
     tag: 'the OG',
@@ -18,7 +18,7 @@ const FLAVORS = [
     sub: 'Sweet, spiced, and impossible to have just once.',
     bg: '#E3B44C',
     blob: '#5E1735',
-    photo: 'https://images.unsplash.com/photo-1560008581-09826d1de69e?w=1000&q=85',
+    photo: '/images/cone-orange.png',
     ink: '#241110',
     shadow: 'rgba(251,242,223,0.5)',
     tag: 'sells out. often.',
@@ -29,7 +29,7 @@ const FLAVORS = [
     sub: 'Croissant-waffle, cookies, cream — the neighborhood legend.',
     bg: '#8C2A54',
     blob: '#EAB8CE',
-    photo: 'https://images.unsplash.com/photo-1488900128323-21503983a07e?w=1000&q=85',
+    photo: '/images/cone-strawberry.png',
     ink: '#F2E1C2',
     shadow: 'rgba(36,17,16,0.45)',
     tag: 'neighborhood legend',
@@ -39,33 +39,40 @@ const FLAVORS = [
 export default function Hero() {
   const [idx, setIdx] = useState(0);
   const [artOpacity, setArtOpacity] = useState(1);
-  const [artTransform, setArtTransform] = useState('rotate(-3deg) scale(1)');
+  const [artRotate, setArtRotate] = useState(-3);
+  const [artScale, setArtScale] = useState(1);
   const [blobTransform, setBlobTransform] = useState('rotate(-4deg) scale(1)');
   const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const idxRef = useRef(0);
 
   const f = FLAVORS[idx];
 
-  function spin(dir: number) {
+  function spin(dir: number, currentIdx: number) {
     setArtOpacity(0);
-    setArtTransform(`rotate(${dir * 14}deg) scale(0.7)`);
+    setArtRotate(dir * 14);
+    setArtScale(0.7);
     setBlobTransform(`rotate(${dir * 10 - 4}deg) scale(0.92)`);
     setTimeout(() => {
-      setIdx((i) => (i + dir + FLAVORS.length) % FLAVORS.length);
+      const nextIdx = (currentIdx + dir + FLAVORS.length) % FLAVORS.length;
+      idxRef.current = nextIdx;
+      setIdx(nextIdx);
       setArtOpacity(1);
-      setArtTransform(`rotate(${idx % 2 === 0 ? 3 : -3}deg) scale(1)`);
+      setArtRotate(nextIdx % 2 === 0 ? -3 : 3);
+      setArtScale(1);
       setBlobTransform('rotate(-4deg) scale(1)');
     }, 230);
   }
 
   function go(dir: number) {
     if (autoRef.current) clearInterval(autoRef.current);
-    spin(dir);
+    spin(dir, idxRef.current);
+    autoRef.current = setInterval(() => spin(1, idxRef.current), 5500);
   }
 
   useEffect(() => {
-    autoRef.current = setInterval(() => spin(1), 5500);
+    autoRef.current = setInterval(() => spin(1, idxRef.current), 5500);
     return () => { if (autoRef.current) clearInterval(autoRef.current); };
-  }, [idx]);
+  }, []);
 
   return (
     <div
@@ -93,15 +100,22 @@ export default function Hero() {
         Small batch · Portland, Oregon
       </span>
 
-      <div className="font-script text-[clamp(28px,4vw,40px)] mb-1 relative z-40" style={{ color: f.ink, opacity: 0.95, transition: 'color 0.5s ease' }}>
+      <div
+        className="text-[clamp(28px,4vw,40px)] mb-1 relative z-40"
+        style={{ fontFamily: "'Yellowtail', cursive", color: f.ink, opacity: 0.95, transition: 'color 0.5s ease' }}
+      >
         {f.kicker}
       </div>
 
       <h1
-        className="font-display font-normal uppercase max-w-[94vw] relative z-10 -mb-[14px] tracking-[0.5px]"
+        className="max-w-[94vw] relative z-10 -mb-[14px]"
         style={{
+          fontFamily: "'Macklin Display', 'Playfair Display', serif",
+          fontWeight: 700,
+          fontStyle: 'italic',
           fontSize: 'clamp(38px, 9.5vw, 122px)',
           lineHeight: 1.0,
+          letterSpacing: '0.5px',
           color: f.ink,
           textShadow: `4px 4px 0 ${f.shadow}`,
           transition: 'color 0.5s ease, text-shadow 0.5s ease',
@@ -157,18 +171,21 @@ export default function Hero() {
           }}
         />
 
-        {/* Art cutout — background-image div matching reference */}
-        <div
-          className="absolute inset-[8%] z-20 mix-blend-multiply"
+        {/* Ice cream cone photo */}
+        <img
+          src={f.photo}
+          alt={f.title}
+          className="absolute z-20"
           style={{
-            backgroundImage: `url(${f.photo})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            filter: 'contrast(1.06) saturate(1.08)',
+            inset: '5%',
+            width: '90%',
+            height: '90%',
+            objectFit: 'contain',
+            objectPosition: 'center bottom',
+            filter: 'drop-shadow(4px 8px 16px rgba(36,17,16,0.3))',
             animation: 'bob 4s ease-in-out infinite',
             opacity: artOpacity,
-            transform: artTransform,
+            transform: `rotate(${artRotate}deg) scale(${artScale})`,
             transition: 'transform 0.4s cubic-bezier(.34,1.56,.64,1), opacity 0.3s ease',
           }}
         />
@@ -181,7 +198,7 @@ export default function Hero() {
         {f.sub}
       </div>
 
-      <div className="inline-block bg-[var(--cocoa)] text-[var(--cream)] py-4 px-10 rounded-[30px] text-[17px] tracking-[1.5px] font-semibold uppercase border-2 border-transparent cursor-none z-30 clickable">
+      <div className="clickable inline-block bg-[var(--cocoa)] text-[var(--cream)] py-4 px-10 rounded-[30px] text-[17px] tracking-[1.5px] font-semibold uppercase border-2 border-transparent cursor-none z-30">
         Order Online
       </div>
 
@@ -190,7 +207,7 @@ export default function Hero() {
         {FLAVORS.map((_, i) => (
           <div
             key={i}
-            onClick={() => { if (autoRef.current) clearInterval(autoRef.current); setIdx(i); }}
+            onClick={() => { if (autoRef.current) clearInterval(autoRef.current); idxRef.current = i; setIdx(i); setArtOpacity(1); setArtRotate(i % 2 === 0 ? -3 : 3); setArtScale(1); }}
             className="w-[11px] h-[11px] rounded-full cursor-none transition-all duration-300"
             style={{ background: i === idx ? 'var(--cocoa)' : 'rgba(36,17,16,0.25)', transform: i === idx ? 'scale(1.3)' : 'scale(1)' }}
           />
@@ -200,14 +217,12 @@ export default function Hero() {
       {/* Nav arrows */}
       <div
         onClick={() => go(-1)}
-        id="prevBtn"
-        className="clickable absolute left-[5vw] md:left-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 cursor-none hover:scale-110 transition-transform"
+        className="clickable absolute left-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 cursor-none hover:scale-110 transition-transform"
         style={{ width: 58, height: 58, fontSize: 22 }}
       >←</div>
       <div
         onClick={() => go(1)}
-        id="nextBtn"
-        className="clickable absolute right-[5vw] md:right-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 cursor-none hover:scale-110 transition-transform"
+        className="clickable absolute right-[5vw] top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full border-2 border-[var(--cream)] text-[var(--cream)] bg-[var(--cocoa)] z-30 cursor-none hover:scale-110 transition-transform"
         style={{ width: 58, height: 58, fontSize: 22 }}
       >→</div>
 

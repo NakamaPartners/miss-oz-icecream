@@ -9,7 +9,6 @@ import Wholesale from '../components/Wholesale';
 import Events from '../components/Events';
 import SweetNotes from '../components/SweetNotes';
 import VoteFlavor from '../components/VoteFlavor';
-import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 
 export default function Home() {
@@ -26,7 +25,6 @@ export default function Home() {
       <div id="events"><Events /></div>
       <SweetNotes />
       <VoteFlavor />
-      <Newsletter />
       <Footer />
     </main>
   );

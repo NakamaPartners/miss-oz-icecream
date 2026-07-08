@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&family=Playfair+Display:ital,wght@1,600;1,700&family=Yellowtail&family=EB+Garamond:wght@400;500;600&display=swap');
+
+@font-face {
+  font-family: 'Macklin Display';
+  src: url('/fonts/Macklin_Display_Bold_Italic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
