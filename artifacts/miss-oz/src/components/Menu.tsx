@@ -2,6 +2,40 @@ import { motion } from 'framer-motion';
 
 const macklin = { fontFamily: "'Macklin Display', 'Playfair Display', serif", fontWeight: 700, fontStyle: 'italic' };
 
+const cardRects = new WeakMap<HTMLElement, DOMRect>();
+const cardRafs = new WeakMap<HTMLElement, number>();
+const prefersReduced = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function onTiltEnter(e: React.MouseEvent<HTMLDivElement>) {
+  // Cache bounds once on enter so mousemove doesn't force layout every frame
+  cardRects.set(e.currentTarget, e.currentTarget.getBoundingClientRect());
+}
+function onTilt(e: React.MouseEvent<HTMLDivElement>) {
+  if (prefersReduced()) return;
+  const c = e.currentTarget;
+  const r = cardRects.get(c) ?? c.getBoundingClientRect();
+  const { clientX, clientY } = e;
+  const prev = cardRafs.get(c);
+  if (prev) cancelAnimationFrame(prev);
+  cardRafs.set(
+    c,
+    requestAnimationFrame(() => {
+      const px = (clientX - r.left) / r.width - 0.5;
+      const py = (clientY - r.top) / r.height - 0.5;
+      c.style.transform = `perspective(760px) rotateY(${px * 7}deg) rotateX(${-py * 7}deg) translateY(-8px)`;
+      c.style.boxShadow = '0 18px 40px rgba(28,13,12,0.20)';
+    })
+  );
+}
+function onTiltLeave(e: React.MouseEvent<HTMLDivElement>) {
+  const c = e.currentTarget;
+  const prev = cardRafs.get(c);
+  if (prev) cancelAnimationFrame(prev);
+  c.style.transform = '';
+  c.style.boxShadow = '0 4px 24px rgba(28,13,12,0.08)';
+}
+
 const CARDS = [
   {
     title: 'Small-Batch Scoops',
@@ -63,22 +97,26 @@ export default function Menu() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-white rounded-[16px] overflow-hidden text-left group"
-              style={{ boxShadow: '0 4px 24px rgba(28,13,12,0.08)', border: '1px solid rgba(28,13,12,0.06)' }}
             >
               <div
-                className="h-[200px] overflow-hidden"
+                onMouseEnter={onTiltEnter}
+                onMouseMove={onTilt}
+                onMouseLeave={onTiltLeave}
+                className="tilt-card bg-white rounded-[16px] overflow-hidden text-left group h-full"
+                style={{ boxShadow: '0 4px 24px rgba(28,13,12,0.08)', border: '1px solid rgba(28,13,12,0.06)' }}
               >
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-6">
-                <h4 className="font-display font-normal text-[20px] mb-2 text-[var(--cocoa)]">{card.title}</h4>
-                <div className="text-[15px] italic text-[#5a3e35] leading-relaxed">{card.desc}</div>
+                <div className="h-[200px] overflow-hidden">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6">
+                  <h4 className="font-display font-normal text-[20px] mb-2 text-[var(--cocoa)]">{card.title}</h4>
+                  <div className="text-[15px] italic text-[#5a3e35] leading-relaxed">{card.desc}</div>
+                </div>
               </div>
             </motion.div>
           ))}

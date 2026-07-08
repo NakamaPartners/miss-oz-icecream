@@ -44,8 +44,56 @@ export default function Hero() {
   const [blobTransform, setBlobTransform] = useState('rotate(-4deg) scale(1)');
   const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const idxRef = useRef(0);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLButtonElement>(null);
 
   const f = FLAVORS[idx];
+
+  // Mouse parallax: gently tilt the cone stage toward the cursor for a hands-on feel
+  useEffect(() => {
+    const hero = heroRef.current;
+    const stage = stageRef.current;
+    if (!hero || !stage) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = hero.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        stage.style.transform = `perspective(900px) rotateY(${px * 12}deg) rotateX(${-py * 12}deg)`;
+      });
+    };
+    const onLeave = () => {
+      cancelAnimationFrame(raf);
+      stage.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg)';
+    };
+    hero.addEventListener('mousemove', onMove);
+    hero.addEventListener('mouseleave', onLeave);
+    return () => {
+      hero.removeEventListener('mousemove', onMove);
+      hero.removeEventListener('mouseleave', onLeave);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // Magnetic CTA
+  function onCtaMove(e: React.MouseEvent) {
+    const el = ctaRef.current;
+    if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const r = el.getBoundingClientRect();
+    const x = e.clientX - (r.left + r.width / 2);
+    const y = e.clientY - (r.top + r.height / 2);
+    el.style.transform = `translate(${x * 0.35}px, ${y * 0.45}px)`;
+  }
+  function onCtaLeave() {
+    if (ctaRef.current) ctaRef.current.style.transform = '';
+  }
 
   function spin(dir: number, currentIdx: number) {
     setArtOpacity(0);
@@ -76,6 +124,7 @@ export default function Hero() {
 
   return (
     <div
+      ref={heroRef}
       id="hero"
       className="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden px-[5vw] pt-10 pb-[120px] text-center"
       style={{ background: f.bg, transition: 'background 0.7s ease' }}
@@ -126,8 +175,9 @@ export default function Hero() {
 
       {/* Stage */}
       <div
+        ref={stageRef}
         className="relative flex items-center justify-center z-20"
-        style={{ margin: '-30px 0 10px', width: 'min(430px, 88vw)', height: 'min(430px, 88vw)' }}
+        style={{ margin: '-30px 0 10px', width: 'min(430px, 88vw)', height: 'min(430px, 88vw)', transition: 'transform 0.3s ease-out', transformStyle: 'preserve-3d' }}
       >
         {/* Twinkle stars */}
         <svg style={{ position: 'absolute', top: '6%', right: '2%', zIndex: 3, animation: 'twinkle 2.2s infinite' }} width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 L14 9 L22 12 L14 15 L12 23 L10 15 L2 12 L10 9 Z" fill="#241110"/></svg>
@@ -198,9 +248,16 @@ export default function Hero() {
         {f.sub}
       </div>
 
-      <div className="clickable inline-block bg-[var(--cocoa)] text-[var(--cream)] py-4 px-10 rounded-[30px] text-[17px] tracking-[1.5px] font-semibold uppercase border-2 border-transparent cursor-none z-30">
+      <button
+        ref={ctaRef}
+        type="button"
+        onMouseMove={onCtaMove}
+        onMouseLeave={onCtaLeave}
+        className="clickable inline-block bg-[var(--cocoa)] text-[var(--cream)] py-4 px-10 rounded-[30px] text-[17px] tracking-[1.5px] font-semibold uppercase border-2 border-transparent cursor-none z-30 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        style={{ transition: 'transform 0.2s cubic-bezier(.34,1.56,.64,1), background 0.3s ease' }}
+      >
         Order Online
-      </div>
+      </button>
 
       {/* Dots */}
       <div className="flex gap-[10px] justify-center mt-[24px] z-30">

@@ -10,12 +10,15 @@ import Events from '../components/Events';
 import SweetNotes from '../components/SweetNotes';
 import VoteFlavor from '../components/VoteFlavor';
 import Footer from '../components/Footer';
+import NowPlaying from '../components/NowPlaying';
 
 export default function Home() {
   return (
     <main className="relative bg-[var(--cream)] min-h-screen">
       <Loader />
       <Cursor />
+      <div className="grain-overlay" aria-hidden="true" />
+      <NowPlaying />
       <Nav />
       <Hero />
       <Marquee />
