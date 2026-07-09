@@ -20,7 +20,6 @@ export default function Nav() {
             className="h-[52px] w-[52px] object-contain"
             style={{ mixBlendMode: 'multiply' }}
           />
-          <span className="text-[23px] text-[var(--berry)] leading-none hidden sm:block" style={{ fontFamily: 'var(--font-groovy)', fontStyle: 'italic' }}>Miss Oz</span>
         </a>
         <div className="flex items-center gap-5 text-[15px] font-semibold tracking-[0.3px]">
           <button type="button" onClick={() => scrollTo('about')} className="hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">About</button>
