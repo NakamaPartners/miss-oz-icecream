@@ -26,3 +26,16 @@ collided with both the pill and the cone. User reported it as "texts overlapping
 twinkle, marquee) must stay gated behind `@media (prefers-reduced-motion: reduce)` (CSS uses
 `#hero * { animation: none !important }`) and the auto-advancing carousel interval is skipped when
 that media query matches.
+
+# Hero title transition "tear" glitch
+
+**Rule:** do NOT CSS-`transition` the flavor `<h1>`'s `text-shadow` during the carousel change —
+transition only `color`. Let the shadow snap.
+
+**Why:** the giant groovy italic title has a hard-offset `text-shadow`. Animating text-shadow while
+the flavor swaps (layered with the sunburst spin / blob morph / cone bob and the `overflow-hidden`
+hero) produced torn, ghosted shadow fragments across the word — user reported it as a "text error
+when it changes." The torn color matched the shadow color exactly (white for Marionberry).
+
+**How to apply:** in Hero.tsx the h1 style must keep a static `textShadow` but its `transition` must
+list `color` only, never `text-shadow`. Animating text-shadow is a known repaint-artifact source.

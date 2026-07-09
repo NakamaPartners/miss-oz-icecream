@@ -127,7 +127,7 @@ export default function Hero() {
               letterSpacing: '0.5px',
               color: f.ink,
               textShadow: `2px 3px 0 ${f.shadow}`,
-              transition: 'color 0.5s ease, text-shadow 0.5s ease',
+              transition: 'color 0.5s ease',
             }}
           >
             {f.title}
