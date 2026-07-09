@@ -117,7 +117,7 @@ export default function Hero() {
 
         <div
           className="text-[clamp(26px,3.6vw,38px)] leading-none"
-          style={{ fontFamily: "'Yellowtail', cursive", color: f.ink, opacity: 0.95, transition: 'color 0.5s ease' }}
+          style={{ fontFamily: 'var(--font-script)', color: f.ink, opacity: 0.95, transition: 'color 0.5s ease' }}
         >
           {f.kicker}
         </div>
@@ -150,7 +150,7 @@ export default function Hero() {
           <span
             className="inline-block px-5 py-1.5 rounded-full text-[18px]"
             style={{
-              fontFamily: "'Yellowtail', cursive",
+              fontFamily: 'var(--font-script)',
               background: 'var(--cocoa)', color: 'var(--cream)',
               transform: 'rotate(-2deg)', boxShadow: '2px 4px 12px rgba(36,17,16,0.22)',
             }}
