@@ -6,11 +6,9 @@ import Story from '../components/Story';
 import Menu from '../components/Menu';
 import Wholesale from '../components/Wholesale';
 import Events from '../components/Events';
-import SweetNotes from '../components/SweetNotes';
 import VoteFlavor from '../components/VoteFlavor';
 import Guestbook from '../components/Guestbook';
 import Footer from '../components/Footer';
-import NowPlaying from '../components/NowPlaying';
 import FlavorDrop from '../components/FlavorDrop';
 
 export default function Home() {
@@ -18,7 +16,6 @@ export default function Home() {
     <main className="relative bg-[var(--cream)] min-h-screen">
       <Loader />
       <div className="grain-overlay" aria-hidden="true" />
-      <NowPlaying />
       <Nav />
       <Hero />
       <Marquee />
@@ -27,7 +24,6 @@ export default function Home() {
       <FlavorDrop />
       <div id="wholesale"><Wholesale /></div>
       <div id="events"><Events /></div>
-      <SweetNotes />
       <Guestbook />
       <VoteFlavor />
       <Footer />
