@@ -91,17 +91,6 @@ export default function Hero() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-[12px] md:inset-[18px] z-[35] rounded-[5px] border" style={{ borderColor: frameColor }} />
       <div aria-hidden="true" className="pointer-events-none absolute inset-[19px] md:inset-[26px] z-[35] rounded-[3px] border" style={{ borderColor: frameColorSoft }} />
 
-      {/* Spinning parlor seal, tucked in the corner */}
-      <svg className="hidden lg:block absolute top-[9%] right-[8vw] z-20" style={{ width: 92, height: 92, animation: 'spinbadge 18s linear infinite' }} viewBox="0 0 100 100" aria-hidden="true">
-        <defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
-        <circle cx="50" cy="50" r="49" fill="var(--cream)" stroke="#241110" strokeWidth="2"/>
-        <circle cx="50" cy="50" r="43" fill="none" stroke="#241110" strokeWidth="0.75"/>
-        <text style={{ fontFamily: "'EB Garamond', serif", fontSize: 11.5, letterSpacing: '2.5px', fontWeight: 600, textTransform: 'uppercase', fill: '#241110' }}>
-          <textPath href="#circ">Miss Oz · est. 2007 · Portland · scoops · croffles ·</textPath>
-        </text>
-        <circle cx="50" cy="50" r="7" fill="#8C2A54"/>
-      </svg>
-
       {/* Content column with clean vertical rhythm */}
       <div className="relative z-20 flex flex-col items-center w-full max-w-[880px] mx-auto">
         <span className="block text-[12px] tracking-[5px] uppercase font-bold mb-2.5" style={{ color: f.ink, opacity: 0.85 }}>
