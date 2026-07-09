@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const macklin = { fontFamily: "'Macklin Display', 'Playfair Display', serif", fontWeight: 700, fontStyle: 'italic' };
+const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' };
 
 export default function Events() {
   return (

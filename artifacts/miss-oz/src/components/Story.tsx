@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const macklin = { fontFamily: "'Macklin Display', 'Playfair Display', serif", fontWeight: 700, fontStyle: 'italic' as const };
+const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
 
 const rise = {
   initial: { opacity: 0, y: 24 },

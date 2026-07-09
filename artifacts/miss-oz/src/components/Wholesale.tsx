@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 
-const macklin = { fontFamily: "'Macklin Display', 'Playfair Display', serif", fontWeight: 700, fontStyle: 'italic' };
+const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' };
 
 const items = [
   { price: '$130', name: '2.5 gal ice cream', note: 'Any flavor on the case list · churned to order' },

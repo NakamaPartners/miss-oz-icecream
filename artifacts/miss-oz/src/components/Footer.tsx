@@ -16,8 +16,8 @@ export default function Footer() {
       <div
         className="leading-[1.02] mb-[10px]"
         style={{
-          fontFamily: "'Macklin Display', 'Playfair Display', serif",
-          fontWeight: 700,
+          fontFamily: 'var(--font-groovy)',
+          fontWeight: 400,
           fontStyle: 'italic',
           fontSize: 'clamp(52px, 9vw, 116px)',
         }}
@@ -28,7 +28,7 @@ export default function Footer() {
 
       <span
         className="text-[var(--pink)] mb-[60px] inline-block"
-        style={{ fontFamily: "'Yellowtail', cursive", fontSize: 36 }}
+        style={{ fontFamily: "'Yellowtail', cursive", fontSize: 32 }}
       >
         — Miss Oz &amp; the whole parlor
       </span>

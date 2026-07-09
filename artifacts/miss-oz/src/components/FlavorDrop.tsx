@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const macklin = { fontFamily: "'Macklin Display', 'Playfair Display', serif", fontWeight: 700, fontStyle: 'italic' as const };
+const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
 const PUMPKIN = '#E8722C';
 
 function Sparkle({ size = 22, color = PUMPKIN, delay = 0, className = '', style = {} as React.CSSProperties }) {

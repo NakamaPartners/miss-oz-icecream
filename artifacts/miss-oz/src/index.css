@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Shrikhand&family=Playfair+Display:ital,wght@1,600;1,700&family=Yellowtail&family=EB+Garamond:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&family=Playfair+Display:ital,wght@1,600;1,700&family=Yellowtail&family=Bagel+Fat+One&family=EB+Garamond:wght@400;500;600&display=swap');
 
 @font-face {
   font-family: 'Macklin Display';
@@ -108,6 +108,7 @@
   --app-font-mono: Menlo, monospace;
   --font-display: 'Shrikhand', cursive;
   --font-script: 'Yellowtail', cursive;
+  --font-groovy: 'Bagel Fat One', 'Shrikhand', cursive;
 
   --radius: 0.5rem;
 }

@@ -130,8 +130,8 @@ export default function Hero() {
           <h1
             className="max-w-[94vw]"
             style={{
-              fontFamily: "'Macklin Display', 'Playfair Display', serif",
-              fontWeight: 700,
+              fontFamily: 'var(--font-groovy)',
+              fontWeight: 400,
               fontStyle: 'italic',
               fontSize: '1em',
               lineHeight: 1.06,
