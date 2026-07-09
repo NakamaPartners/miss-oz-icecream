@@ -45,7 +45,7 @@ export default function Footer() {
         <div>
           <h5 className="text-[var(--gold-hi)] tracking-[3px] font-semibold uppercase text-[13px] mb-[12px]">Contact</h5>
           <p className="leading-[1.8] text-[#EFE2CE]">
-            bluecanvascorp<br />@gmail.com<br />Tel: 503-224-2021
+            Tel: (503) 224-2021<br />@missozicecreamcafe
           </p>
         </div>
 
