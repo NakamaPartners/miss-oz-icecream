@@ -4,21 +4,25 @@ const macklin = { fontFamily: "'Macklin Display', 'Playfair Display', serif", fo
 
 const CARDS = [
   {
+    no: 'I',
     title: 'Small-Batch Scoops',
     desc: 'Marionberry, Thai iced tea, kulfi, coffee crackle, summer rose & friends',
     image: 'https://homesweetcone.com/wp-content/uploads/2023/12/HSC_photo23-600x400.jpg',
   },
   {
+    no: 'II',
     title: 'Croffles',
     desc: 'Croissant waffles — Oreo pop, brunost, fresh cream, fudge drizzle',
     image: 'https://www.missinthekitchen.com/wp-content/uploads/2024/02/Croffles-Croissant-Waffles-Recipe-photo.jpg',
   },
   {
+    no: 'III',
     title: 'Coffee & Drinks',
     desc: 'Espresso drinks, floats, and something warm for the rainy days',
-    image: 'https://pureearthcoffee.com/cdn/shop/articles/pexels-thirdman-8936895.jpg',
+    image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80',
   },
   {
+    no: 'IV',
     title: 'Cookies & Cakes',
     desc: 'Basque cheesecake, fresh cookies, and seasonal bakes',
     image: 'https://dishnthekitchen.com/wp-content/uploads/2022/03/vertbasquecheesecakesliceright.jpg',
@@ -55,7 +59,7 @@ export default function Menu() {
           Every flavor made in-house. Ask for a sample — we insist.
         </motion.p>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-[24px] max-w-[1100px] mx-auto mt-[46px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[28px] max-w-[900px] mx-auto mt-[52px]">
           {CARDS.map((card, i) => (
             <motion.div
               key={i}
@@ -65,19 +69,42 @@ export default function Menu() {
               transition={{ duration: 0.5, delay: i * 0.08 }}
             >
               <div
-                className="bg-white rounded-[16px] overflow-hidden text-left group h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_rgba(28,13,12,0.14)]"
-                style={{ boxShadow: '0 4px 24px rgba(28,13,12,0.08)', border: '1px solid rgba(28,13,12,0.06)' }}
+                className="relative bg-[var(--cream)] rounded-[10px] overflow-hidden text-left group h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_34px_rgba(28,13,12,0.18)]"
+                style={{ boxShadow: '0 6px 22px rgba(28,13,12,0.10)' }}
               >
-                <div className="h-[200px] overflow-hidden">
+                {/* aged-paper double-rule frame */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-[10px] z-20 rounded-[6px]"
+                  style={{ border: '1px solid var(--gold)', boxShadow: 'inset 0 0 0 3px var(--cream), inset 0 0 0 4px rgba(199,154,59,0.45)' }}
+                />
+                <div className="relative h-[210px] overflow-hidden">
                   <img
                     src={card.image}
                     alt={card.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-105"
+                    style={{ filter: 'sepia(0.22) saturate(1.05) contrast(0.98)' }}
                     loading="lazy"
                   />
+                  {/* vintage warm wash + vignette */}
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(120% 90% at 50% 20%, transparent 55%, rgba(94,23,53,0.28) 100%)', mixBlendMode: 'multiply' }} />
+                  {/* roman-numeral chapter medallion */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute top-[18px] left-[18px] z-10 grid place-items-center w-[44px] h-[44px] rounded-full text-[var(--cream-hi)]"
+                    style={{ background: 'var(--berry-deep)', border: '2px solid var(--gold-hi)', boxShadow: '0 3px 8px rgba(28,13,12,0.3)' }}
+                  >
+                    <span className="font-display text-[16px] leading-none tracking-[0.5px]">{card.no}</span>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h4 className="font-display font-normal text-[20px] mb-2 text-[var(--cocoa)]">{card.title}</h4>
+                <div className="relative z-10 px-7 pt-6 pb-8">
+                  <h3 className="font-normal text-[24px] mb-1 text-[var(--cocoa)]" style={macklin}>{card.title}</h3>
+                  {/* little ornamental rule */}
+                  <div aria-hidden="true" className="flex items-center gap-2 my-3 text-[var(--gold)]">
+                    <span className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, var(--gold))' }} />
+                    <span className="text-[11px] leading-none">✦</span>
+                    <span className="h-px flex-1" style={{ background: 'linear-gradient(90deg, var(--gold), transparent)' }} />
+                  </div>
                   <div className="text-[15px] italic text-[#5a3e35] leading-relaxed">{card.desc}</div>
                 </div>
               </div>
