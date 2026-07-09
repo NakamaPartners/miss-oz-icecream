@@ -1,1 +1,2 @@
 - [Miss Oz hero + intro loader](miss-oz-hero-and-loader.md) — screenshot catches the 1.5s splash (toggle Loader useState to false to verify); keep hero a spaced flex column, no negative-margin overlap; gate motion behind reduced-motion.
+- [Vercel external deploy](vercel-external-deploy.md) — artifact vite config must tolerate missing PORT/BASE_PATH; Vercel sets Root Dir to the artifact folder, so vercel.json must live inside it with outputDirectory "dist/public".

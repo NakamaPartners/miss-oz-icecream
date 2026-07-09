@@ -122,22 +122,28 @@ export default function Hero() {
           {f.kicker}
         </div>
 
-        <h1
-          className="max-w-[94vw] mt-2"
-          style={{
-            fontFamily: "'Macklin Display', 'Playfair Display', serif",
-            fontWeight: 700,
-            fontStyle: 'italic',
-            fontSize: 'clamp(40px, 8.2vw, 100px)',
-            lineHeight: 1.06,
-            letterSpacing: '0.5px',
-            color: f.ink,
-            textShadow: `2px 3px 0 ${f.shadow}`,
-            transition: 'color 0.5s ease, text-shadow 0.5s ease',
-          }}
+        {/* Fixed-height title box so 1-line vs 2-line flavor names don't change hero height */}
+        <div
+          className="mt-2 flex items-center justify-center min-h-[2.12em] sm:min-h-[1.06em]"
+          style={{ fontSize: 'clamp(40px, 8.2vw, 100px)' }}
         >
-          {f.title}
-        </h1>
+          <h1
+            className="max-w-[94vw]"
+            style={{
+              fontFamily: "'Macklin Display', 'Playfair Display', serif",
+              fontWeight: 700,
+              fontStyle: 'italic',
+              fontSize: '1em',
+              lineHeight: 1.06,
+              letterSpacing: '0.5px',
+              color: f.ink,
+              textShadow: `2px 3px 0 ${f.shadow}`,
+              transition: 'color 0.5s ease, text-shadow 0.5s ease',
+            }}
+          >
+            {f.title}
+          </h1>
+        </div>
 
         {/* Flavor tag — a little ticket, safely below the title */}
         <div className="mt-4">
@@ -207,12 +213,19 @@ export default function Hero() {
           />
         </div>
 
-        <p
-          className="text-[20px] max-w-[440px] mx-auto mt-8 mb-6 italic font-semibold"
-          style={{ color: f.ink, transition: 'color 0.5s ease' }}
+        {/* Fixed-height description box so varying line counts don't change hero height.
+            min-height is typography-relative: 20px × 1.4 line-height → 2.8em = 2 lines, 4.2em = 3 lines. */}
+        <div
+          className="flex items-center justify-center mt-8 mb-6 min-h-[4.2em] sm:min-h-[2.8em]"
+          style={{ fontSize: '20px' }}
         >
-          {f.sub}
-        </p>
+          <p
+            className="max-w-[440px] mx-auto italic font-semibold text-center leading-[1.4]"
+            style={{ fontSize: '1em', color: f.ink, transition: 'color 0.5s ease' }}
+          >
+            {f.sub}
+          </p>
+        </div>
 
         <button
           type="button"
