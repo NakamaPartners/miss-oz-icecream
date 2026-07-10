@@ -17,8 +17,11 @@ reduced-motion-aware `handleNav` smooth scroll); (2) a HORIZONTAL vintage scene 
 `/images/hero-parlor.png` framed by the blinking marquee **bulb border** (`.poster-frame` + 4
 `.bulbstrip`s, cream inner frame, `.filmgrain`), `object-cover` `aspect-[4/3] sm:aspect-[16/9]`, with
 the "Miss Oz" wordmark (Est 2007 eyebrow / `--font-script` h1 / teal cafe pill) OVERLAID as absolute
-DOM text in the open sky top-right, cream-offset text-shadow for a painted-sign look (the sole `<h1>`;
-image `alt` describes the scene, not the wordmark); (4) a "Step Inside" row of 4 vintage
+DOM text in the open sky top-right (the sole `<h1>`; image `alt` describes the scene, not the
+wordmark). **To make DOM text feel "part of the image":** render `.filmgrain` AFTER the wordmark in
+DOM (its multiply grain then runs over the lettering, sharing the scene's texture) and flatten shadows
+to a single faded cream offset (painted-ink, not a raised sticker) — user asked for exactly this blend
+rather than baking text into a regenerated image (script spelling is unreliable when generated); (4) a "Step Inside" row of 4 vintage
 color-blocked section panels (`TONES` map: cream/teal/pink/gold bg+border+text; each an `<a>` with
 eyebrow + display title + italic desc + hover-nudge "→", linking via `handleNav` to real sections —
 Handmade→#menu, Pickup/Delivery→#menu, Vote→#vote, Vintage Vibes→#about); (5) a brick bottom ribbon ("Locally Owned ★ Small Business ★ Big Heart ★

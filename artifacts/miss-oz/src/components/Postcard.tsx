@@ -87,29 +87,31 @@ export default function Postcard() {
             alt="Vintage scene — a glowing ICE CREAM arrow sign pointing toward a little striped-awning ice cream parlor at dusk"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="filmgrain" aria-hidden="true" />
 
-          {/* wordmark set into the open sky, beside the sign */}
-          <div className="absolute z-10 top-[7%] right-[5%] max-w-[66%] flex flex-col items-end text-right">
+          {/* wordmark painted into the open sky, beside the sign */}
+          <div className="absolute top-[7%] right-[5%] max-w-[66%] flex flex-col items-end text-right opacity-[0.97]">
             <span
               className="block text-[var(--gold)] uppercase font-bold mb-1 text-[clamp(8px,1.5vw,12px)]"
-              style={{ fontFamily: 'var(--font-sans)', letterSpacing: 'clamp(2px,0.5vw,4px)', textShadow: '0 1px 3px rgba(28,13,12,0.5)' }}
+              style={{ fontFamily: 'var(--font-sans)', letterSpacing: 'clamp(2px,0.5vw,4px)', textShadow: '1px 1px 0 rgba(255,244,214,0.35)' }}
             >
               ✦ Est. 2007 · Pearl District ✦
             </span>
             <h1
               className="leading-[0.9] text-[var(--berry)]"
-              style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(34px,6.6vw,76px)', textShadow: '2px 2px 0 var(--cream-hi), 4px 5px 12px rgba(28,13,12,0.35)' }}
+              style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(34px,6.6vw,76px)', textShadow: '1.5px 1.5px 0 rgba(255,244,214,0.5)' }}
             >
               Miss&nbsp;Oz
             </h1>
             <span
               className="inline-block mt-2 rounded-[4px] text-[var(--cream-hi)] uppercase font-bold px-3 py-1 text-[clamp(8px,1.4vw,13px)]"
-              style={{ background: 'var(--teal-deep)', fontFamily: 'var(--font-sans)', letterSpacing: 'clamp(1.5px,0.4vw,3px)', boxShadow: '0 3px 8px rgba(28,13,12,0.4)' }}
+              style={{ background: 'var(--teal-deep)', fontFamily: 'var(--font-sans)', letterSpacing: 'clamp(1.5px,0.4vw,3px)', boxShadow: '0 2px 5px rgba(28,13,12,0.25)' }}
             >
               Ice Cream &amp; Dessert Cafe
             </span>
           </div>
+
+          {/* grain sits OVER the wordmark so the lettering shares the scene's aged texture */}
+          <div className="filmgrain" aria-hidden="true" />
         </div>
       </div>
 
