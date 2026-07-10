@@ -72,6 +72,14 @@
   --gold-hi: #E3B44C;
   --cocoa: #1C0D0C;
 
+  /* Vintage diner accents (poster board) */
+  --teal: #2C5D5B;
+  --teal-deep: #173F3C;
+  --brick: #BD5749;
+  --brick-deep: #9C3F35;
+  --paper: #EFE2C4;
+  --paper-hi: #F6EDD6;
+
   /* HSL Conversions for Shadcn compatibility */
   --background: 39 60% 85%; /* cream */
   --foreground: 3 39% 8%; /* cocoa */
@@ -216,11 +224,143 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* ===== Vintage single-screen poster board ===== */
+.poster-frame {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  background:
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.14) 0 2px, transparent 2px 9px),
+    radial-gradient(140% 120% at 50% 50%, var(--teal) 0%, var(--teal-deep) 75%);
+  padding: clamp(22px, 3.4vw, 44px);
+}
+
+/* Chasing marquee light bulbs, set into the frame band */
+.bulbstrip { position: absolute; overflow: hidden; z-index: 3; pointer-events: none; }
+.bulbstrip .bulbs { position: absolute; inset: 0; }
+.bulbstrip-h { left: 8px; right: 8px; height: 14px; }
+.bulbstrip-h.top { top: clamp(11px, 1.5vw, 22px); }
+.bulbstrip-h.bottom { bottom: clamp(11px, 1.5vw, 22px); }
+.bulbstrip-v { top: 8px; bottom: 8px; width: 14px; }
+.bulbstrip-v.left { left: clamp(11px, 1.5vw, 22px); }
+.bulbstrip-v.right { right: clamp(11px, 1.5vw, 22px); }
+
+.bulbstrip-h .bulbs {
+  background-image: radial-gradient(circle at center, #FFF3CE 0 4px, rgba(255,236,180,0.2) 5px, transparent 6px);
+  background-repeat: repeat-x; background-size: 27px 100%; background-position: 2px center;
+  filter: drop-shadow(0 0 5px rgba(255,244,214,0.9)) drop-shadow(0 0 10px rgba(227,180,76,0.65));
+}
+.bulbstrip-v .bulbs {
+  background-image: radial-gradient(circle at center, #FFF3CE 0 4px, rgba(255,236,180,0.2) 5px, transparent 6px);
+  background-repeat: repeat-y; background-size: 100% 27px; background-position: center 2px;
+  filter: drop-shadow(0 0 5px rgba(255,244,214,0.9)) drop-shadow(0 0 10px rgba(227,180,76,0.65));
+}
+.bulbstrip-h .bulbs-b { background-position: 15.5px center; }
+.bulbstrip-v .bulbs-b { background-position: center 15.5px; }
+@keyframes bulbblink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0.18; } }
+.bulbs-a { animation: bulbblink 1.15s steps(1, end) infinite; }
+.bulbs-b { animation: bulbblink 1.15s steps(1, end) infinite; animation-delay: 0.575s; }
+
+.poster-stage {
+  position: relative; z-index: 2;
+  flex: 1;
+  min-height: calc(100vh - clamp(44px, 6.8vw, 88px));
+  min-height: calc(100svh - clamp(44px, 6.8vw, 88px));
+  border: 3px solid var(--teal-deep);
+  border-radius: 6px;
+  box-shadow: 0 0 0 3px var(--gold), 0 0 0 6px var(--teal-deep);
+  background:
+    radial-gradient(130% 95% at 50% 50%, transparent 55%, rgba(60,40,20,0.28) 100%),
+    radial-gradient(120% 80% at 50% -8%, rgba(234,184,206,0.28), transparent 55%),
+    var(--paper);
+  padding: clamp(18px, 2.4vw, 36px) clamp(16px, 2.8vw, 40px);
+  display: flex; flex-direction: column;
+  gap: clamp(9px, 1.15vw, 16px);
+  overflow: hidden;
+}
+/* Aged-paper mottle + fibre grain layered over the whole board */
+.poster-stage::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(120,80,30,0.10), transparent 22%),
+    radial-gradient(circle at 88% 76%, rgba(120,80,30,0.10), transparent 22%),
+    radial-gradient(circle at 68% 12%, rgba(90,55,20,0.08), transparent 18%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: auto, auto, auto, 220px 220px;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+.poster-stage > * { position: relative; z-index: 1; }
+
+/* Vintage bordered panel used for left scene / right column / cards */
+.vpanel {
+  border: 2px solid var(--teal-deep);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 2px rgba(255,244,214,0.5), 0 4px 10px rgba(28,13,12,0.2);
+}
+
+/* Vertical "ICE CREAM" marquee arrow sign with bulbs on every edge */
+.marquee-sign {
+  position: relative;
+  background: linear-gradient(180deg, var(--brick) 0%, var(--brick-deep) 100%);
+  border: 2px solid var(--gold-hi);
+  border-radius: 9px;
+  box-shadow: 0 6px 16px rgba(28,13,12,0.35);
+}
+.marquee-sign::before {
+  content: ""; position: absolute; inset: 5px; border-radius: 5px; pointer-events: none;
+  background:
+    radial-gradient(circle, #FFF3CE 0 2.2px, transparent 3px) 0 0 / 13px 13px repeat-x,
+    radial-gradient(circle, #FFF3CE 0 2.2px, transparent 3px) 0 100% / 13px 13px repeat-x,
+    radial-gradient(circle, #FFF3CE 0 2.2px, transparent 3px) 0 0 / 13px 13px repeat-y,
+    radial-gradient(circle, #FFF3CE 0 2.2px, transparent 3px) 100% 0 / 13px 13px repeat-y;
+  filter: drop-shadow(0 0 3px rgba(255,244,214,0.9));
+  animation: bulbblink 1.15s steps(1, end) infinite;
+}
+
+/* Round distressed stamp (Made in Portland / Meet Oz) */
+.vstamp {
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+
+/* Heavy film-grain + faded wash for the hero image — genuine old-photo feel */
+.filmgrain {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 190px 190px;
+  opacity: 0.26;
+  mix-blend-mode: multiply;
+}
+.hero-faded {
+  filter: sepia(0.32) saturate(0.82) contrast(0.94) brightness(1.03);
+}
+
+/* Vertical "ICE CREAM" blade sign */
+.blade-text {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 2px;
+}
+
+/* Big MISS OZ wordmark with a berry outline */
+.wordmark-oz {
+  color: var(--cream-hi);
+  -webkit-text-stroke: 2px var(--berry-deep);
+  paint-order: stroke fill;
+  text-shadow: 4px 5px 0 rgba(28,13,12,0.28);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .grain-overlay { display: none; }
-  /* Quiet all decorative motion (sunburst, seal, blob, bob, twinkle, marquee) */
+  /* Quiet all decorative motion (sunburst, seal, blob, bob, twinkle, marquee, bulbs) */
   #hero *,
+  .bulbs-a, .bulbs-b,
+  .marquee-sign::before,
   .animate-\[mq_32s_linear_infinite\] {
     animation: none !important;
   }
+  .bulbs-b { opacity: 0.55; }
 }

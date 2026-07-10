@@ -1,6 +1,5 @@
 import Loader from '../components/Loader';
-import Nav from '../components/Nav';
-import Hero from '../components/Hero';
+import PosterBoard from '../components/PosterBoard';
 import Marquee from '../components/Marquee';
 import Story from '../components/Story';
 import Menu from '../components/Menu';
@@ -16,8 +15,7 @@ export default function Home() {
     <main className="relative bg-[var(--cream)] min-h-screen">
       <Loader />
       <div className="grain-overlay" aria-hidden="true" />
-      <Nav />
-      <Hero />
+      <PosterBoard />
       <Marquee />
       <div id="about"><Story /></div>
       <div id="menu"><Menu /></div>
@@ -25,7 +23,7 @@ export default function Home() {
       <div id="wholesale"><Wholesale /></div>
       <div id="events"><Events /></div>
       <Guestbook />
-      <VoteFlavor />
+      <div id="vote"><VoteFlavor /></div>
       <Footer />
     </main>
   );
