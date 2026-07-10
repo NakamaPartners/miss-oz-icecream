@@ -12,12 +12,18 @@ Screenshot tool captures immediately on a fresh load, so it almost always catche
 **To screenshot actual content:** temporarily flip the Loader's initial `useState(true)` → `false`,
 screenshot, then flip it back. Don't forget to restore it.
 
-**PosterBoard is a compact content-height poster, NOT a full-screen landing.** The user explicitly
-rejected the earlier full-viewport version (three tall `100svh` columns stretched into skinny
-strips) — they want the reference: a dense horizontal poster (hero band + nav + 5 cards + footer)
-sized to its content. Keep `.poster-frame`/`.poster-stage` free of `100svh`/`flex:1` stretch; the
-hero row uses a bounded `lg:h-[clamp(300px,33vw,450px)]` band. Left panel is an illustrated vintage
-travel-poster cone scene (`hero-cone-scene.png`), not a photo.
+**Current hero = single-photo vintage postcard (`Postcard.tsx`), NOT the multi-panel poster.** The
+user rejected the bulb-frame poster (both the full-viewport 3-column version AND the compact
+horizontal poster with nav+5cards) and approved a clean full-bleed postcard: one vintage sundae
+photo (`postcard-hero.png`) with left-aligned overlay text + a slim nav bar below. `PosterBoard.tsx`
+and the `hero-cone-scene.png`/`hero-parlor.png` images were deleted. Legibility comes from
+`.postcard-scrim` (left-to-right on desktop, top-to-bottom mobile variant) + `.postcard-aged` +
+`.filmgrain`. The poster CSS (`.poster-frame/.poster-stage/.vpanel/.marquee-sign/.bulbstrip`) is now
+unused but left in `index.css`.
+
+**Wordmark font changed to script.** The "Miss Oz" wordmark now uses `--font-script` (Pacifico), NOT
+`--font-groovy` (Bagel Fat One). **Why:** the approved postcard reference showed a flowing brush
+script wordmark; this supersedes the earlier "keep Bagel Fat One" decision.
 
 **Below-the-fold sections still can't be screenshotted in one shot** (tool captures from top, can't
 scroll). To review lower sections (Story, FlavorDrop, Wholesale, etc.), temporarily gate the poster

@@ -1,5 +1,5 @@
 import Loader from '../components/Loader';
-import PosterBoard from '../components/PosterBoard';
+import Postcard from '../components/Postcard';
 import Marquee from '../components/Marquee';
 import Story from '../components/Story';
 import Wholesale from '../components/Wholesale';
@@ -18,7 +18,7 @@ export default function Home() {
     <main className="relative bg-[var(--cream)] min-h-screen">
       <Loader />
       <div className="grain-overlay" aria-hidden="true" />
-      <PosterBoard />
+      <Postcard />
       <Marquee />
       <div id="about"><Story /></div>
       <CheckerRule />

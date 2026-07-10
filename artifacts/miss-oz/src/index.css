@@ -337,6 +337,28 @@
   opacity: 0.26;
   mix-blend-mode: multiply;
 }
+/* ===== Single-photo vintage postcard hero ===== */
+.postcard {
+  border-radius: 10px;
+  overflow: hidden;
+  border: clamp(8px, 1.1vw, 14px) solid var(--cream);
+  box-shadow: 0 20px 55px rgba(28,13,12,0.45), inset 0 0 0 2px rgba(140,42,84,0.22);
+}
+.photo-vintage { filter: sepia(0.26) saturate(0.86) contrast(0.96) brightness(1.05); }
+.postcard-scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(95deg, rgba(244,236,214,0.95) 0%, rgba(244,236,214,0.85) 30%, rgba(244,236,214,0.4) 52%, rgba(244,236,214,0) 72%);
+}
+.postcard-aged {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply;
+  background: radial-gradient(120% 95% at 50% 50%, transparent 52%, rgba(60,40,20,0.4) 100%);
+}
+@media (max-width: 700px) {
+  .postcard-scrim {
+    background: linear-gradient(180deg, rgba(244,236,214,0.94) 0%, rgba(244,236,214,0.85) 52%, rgba(244,236,214,0.4) 100%);
+  }
+}
+
 /* Vertical "ICE CREAM" blade sign */
 .blade-text {
   writing-mode: vertical-rl;
