@@ -76,6 +76,12 @@ Each panel `<a>` has a faded tone-on-tone vintage wallpaper behind it (`/images/
 
 The seasonal section (`FlavorDrop.tsx`, the `#menu` div) was originally a modern phone-style autoplay VIDEO reel — user called it "trash" and wanted vintage. Now it's a static vintage screen-print POSTER (`/images/seasonal-pumpkin-poster.webp`) presented as a lit lobby card: dark cocoa frame + cream mat around the `<img>`, a decorative radial "lit" glow behind (`-z-0`, aria-hidden), a hanging "SEASONAL" enamel tab + "Yum! Yum!" script accent (`z-20`, above the `z-10` frame). Section backdrop is a faded tone-on-tone autumn wallpaper (`/images/seasonbg-autumn.webp`) under a cream scrim so the right-column copy stays legible. The old `public/video/pumpkin-drop.mp4` + `pumpkin-poster.jpg` were deleted. **Why:** poster-in-a-frame reads far more vintage than a social-media video reel. Generated posters with SHORT block/serif lettering ("SEASONAL", "PUMPKIN", "HOUSEMADE · SMALL BATCH") come out crisp — this one nailed it first try.
 
+# Story section mascot + background cutouts
+
+The "our story" section (`Story.tsx`, `#about`) has a rubber-hose vintage cartoon "ice cream man" (`/images/ice-cream-man.webp`) peeking from the bottom-left behind the aged-paper card: a `motion.div` positioned `absolute bottom-left z-0 pointer-events-none hidden lg:block` (card is `z-10` so he peeks from behind), one-time `whileInView` entrance + an idle vertical bob gated by `useReducedMotion()` (set `animate`/`transition` to `undefined` when reduced).
+
+**`removeImageBackground` silently fails** — it returned an outputPath but the flat background was still fully present. For a flat/near-uniform generated background, chroma-key with ImageMagick instead: generate the character on a FLAT solid pale background with generous margin, then `magick in.png -alpha on -channel RGBA -fuzz 18% -fill none -draw "alpha 0,0 floodfill" -draw "alpha W-1,0 floodfill" -draw "alpha 0,H-1 floodfill" -draw "alpha W-1,H-1 floodfill" +channel -trim +repage -resize NxN out.webp`. Flood-fill from the 4 corners (not global color replace) so same-colored areas inside the character aren't punched out. **Always visually inspect the cutout** — both AI removal and chroma-key can leave halos or holes.
+
 # Hero layout constraint (overlap bug)
 
 **Rule:** keep the hero as a single centered flex column with normal spacing — do NOT use negative

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
 
@@ -9,6 +9,7 @@ const rise = {
 };
 
 export default function Story() {
+  const reduce = useReducedMotion();
   return (
     <section className="parlour-paper relative py-[90px] md:py-[140px] px-[6vw] bg-[var(--cream)] overflow-hidden">
       {/* Faint decorative laurels in the far corners */}
@@ -19,11 +20,29 @@ export default function Story() {
         <path d="M50 8 C30 20 30 50 50 62 C70 50 70 20 50 8 Z M50 40 C38 48 38 70 50 82 C62 70 62 48 50 40 Z" fill="none" stroke="var(--cocoa)" strokeWidth="1.5" />
       </svg>
 
+      {/* Vintage ice cream man — rubber-hose mascot peeking from behind the card */}
+      <motion.div
+        className="hidden lg:block absolute bottom-[24px] left-[2vw] xl:left-[5vw] z-0 w-[clamp(150px,13vw,210px)] pointer-events-none"
+        initial={{ opacity: 0, x: -30, rotate: -5 }}
+        whileInView={{ opacity: 1, x: 0, rotate: -3 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+      >
+        <motion.img
+          src="/images/ice-cream-man.webp"
+          alt="A cheerful vintage cartoon ice cream man waving hello with a cone"
+          className="w-full select-none"
+          style={{ filter: 'drop-shadow(0 12px 18px rgba(28,13,12,0.28))' }}
+          animate={reduce ? undefined : { y: [0, -8, 0] }}
+          transition={reduce ? undefined : { duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </motion.div>
+
       {/* Aged paper panel */}
       <motion.div
         {...rise}
         transition={{ duration: 0.7 }}
-        className="relative max-w-[860px] mx-auto rounded-[6px] px-[8vw] py-[64px] md:px-[80px] md:pt-[92px] md:pb-[76px]"
+        className="relative z-10 max-w-[860px] mx-auto rounded-[6px] px-[8vw] py-[64px] md:px-[80px] md:pt-[92px] md:pb-[76px]"
         style={{
           background: 'var(--cream-hi)',
           boxShadow: '0 24px 60px rgba(28,13,12,0.12), inset 0 0 90px rgba(199,154,59,0.10)',
