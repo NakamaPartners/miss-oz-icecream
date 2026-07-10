@@ -79,7 +79,7 @@ export default function Postcard() {
       <div className="poster-frame mx-auto max-w-[1080px] rounded-[10px]">
         <Bulbs />
         <div
-          className="relative overflow-hidden rounded-[6px] aspect-[4/3] sm:aspect-[16/9]"
+          className="relative overflow-hidden rounded-[6px] aspect-[5/4] sm:aspect-[3/2]"
           style={{ border: '5px solid var(--cream)', boxShadow: 'inset 0 0 0 1px rgba(199,154,59,0.55), 0 10px 26px rgba(28,13,12,0.3)' }}
         >
           <img

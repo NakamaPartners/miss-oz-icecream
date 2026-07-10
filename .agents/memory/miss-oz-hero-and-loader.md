@@ -15,7 +15,8 @@ screenshot, then flip it back. Don't forget to restore it.
 **Current hero = stacked, top-to-bottom** (`Postcard.tsx`): (1) slim teal nav bar (anchor links,
 reduced-motion-aware `handleNav` smooth scroll); (2) a HORIZONTAL vintage scene image
 `/images/hero-parlor.png` framed by the blinking marquee **bulb border** (`.poster-frame` + 4
-`.bulbstrip`s, cream inner frame, `.filmgrain`), `object-cover` `aspect-[4/3] sm:aspect-[16/9]`, with
+`.bulbstrip`s, cream inner frame, `.filmgrain`), `object-cover` `aspect-[5/4] sm:aspect-[3/2]` (source is a SQUARE 1024² — a wider
+container like 16/9 crops the cone/awning awkwardly, so keep the frame taller to show the whole scene), with
 the "Miss Oz" wordmark (Est 2007 eyebrow / `--font-script` h1 / teal cafe pill) OVERLAID as absolute
 DOM text in the open sky top-right (the sole `<h1>`; image `alt` describes the scene, not the
 wordmark). **To make DOM text feel "part of the image":** render `.filmgrain` AFTER the wordmark in
