@@ -22,7 +22,12 @@ DOM text in the open sky top-right (the sole `<h1>`; image `alt` describes the s
 wordmark). **To make DOM text feel "part of the image":** render `.filmgrain` AFTER the wordmark in
 DOM (its multiply grain then runs over the lettering, sharing the scene's texture) and flatten shadows
 to a single faded cream offset (painted-ink, not a raised sticker) — user asked for exactly this blend
-rather than baking text into a regenerated image (script spelling is unreliable when generated); (4) a "Step Inside" row of 4 vintage
+rather than baking text into a regenerated image (script spelling is unreliable when generated);
+then a "Step Inside" **2-up card grid** (`grid-cols-1 sm:grid-cols-2`) — each card is a native `<a>`
+row with text left + a transparent vintage cutout illustration right (`public/images/panel-*.png`:
+cone/van/sundae/milkshake, generated with `removeBackground:true`; images are decorative — `alt=""`
++ `aria-hidden`, link keeps its `aria-label`). Note: `removeBackground` can silently fail and leave a
+solid bg — inspect each cutout and regenerate on a plain white bg if so; (4) a "Step Inside" row of 4 vintage
 color-blocked section panels (`TONES` map: cream/teal/pink/gold bg+border+text; each an `<a>` with
 eyebrow + display title + italic desc + hover-nudge "→", linking via `handleNav` to real sections —
 Handmade→#menu, Pickup/Delivery→#menu, Vote→#vote, Vintage Vibes→#about); (5) a brick bottom ribbon ("Locally Owned ★ Small Business ★ Big Heart ★
