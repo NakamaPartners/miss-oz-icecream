@@ -12,20 +12,20 @@ Screenshot tool captures immediately on a fresh load, so it almost always catche
 **To screenshot actual content:** temporarily flip the Loader's initial `useState(true)` → `false`,
 screenshot, then flip it back. Don't forget to restore it.
 
-**Current hero = a LIT vintage menu board with a blinking marquee bulb border** (`Postcard.tsx`).
-Minimal HTML header (Est 2007, "Miss Oz" `--font-script` wordmark, teal cafe bar) ABOVE a
-`.poster-frame` board that contains: 4 `.bulbstrip`s (the blinking light border), a `.poster-stage`
-inner board holding a teal nav bar (anchor links, reduced-motion-aware `handleNav` smooth scroll), a
-2-col grid (left = ONE fixed minimal vintage scene `/images/icecream-scene-b.png` in a `.vpanel` +
-`.filmgrain`; right = a plain non-interactive flavor menu list with CSS `group-hover` highlight), and
-a brick bottom ribbon ("Locally Owned ★ Small Business ★ Big Heart ★ @missozicecream").
-**Why:** user shared a reference of a horizontal vintage menu board (bulb border, top nav, panels,
-bottom ribbon) and asked to match it, keep ONE minimal vintage image (a "scenery with ice cream and
-the icecream arrow lights thing"), and give the hero a light border that blinks on/off alternating.
-Full hero-progression of rejected directions: bulb-frame 3-panel poster → compact horizontal poster
-→ single-photo postcard w/ CSS overlay text → one baked-in-text AI poster → crossfading interactive
-flavor-photo menu → THIS lit menu board (approved). NOTE a separate `FlavorDrop` "#menu" section
-still exists deeper on the page; the hero's "See the full menu" links to it (not a conflict).
+**Current hero = stacked, top-to-bottom** (`Postcard.tsx`): (1) minimal header — Est 2007, "Miss Oz"
+`--font-script` wordmark, teal cafe bar; (2) slim teal nav bar (anchor links, reduced-motion-aware
+`handleNav` smooth scroll); (3) a HORIZONTAL vintage scene image `/images/hero-parlor.png` framed by
+the blinking marquee **bulb border** (`.poster-frame` + 4 `.bulbstrip`s, cream inner frame,
+`.filmgrain`), `object-cover` `aspect-[4/3] sm:aspect-[16/9]`; (4) a separate RECTANGULAR menu card
+(gold inset border, "Today at the Counter", 2-col `sm:grid-cols-2` flavor list with dotted leaders,
+"See the full menu" link); (5) a brick bottom ribbon ("Locally Owned ★ Small Business ★ Big Heart ★
+@missozicecream"). **Why:** user wanted the wordmark above the image, the vintage image as a
+standalone horizontal banner ON TOP OF (not inside) the menu, and the menu as its own rectangular
+section — "make it feel natural". Full hero-progression of rejected directions: bulb-frame 3-panel
+poster → compact horizontal poster → single-photo postcard w/ CSS overlay text → one baked-in-text AI
+poster → crossfading interactive flavor-photo menu → lit all-in-one menu board → THIS stacked
+image-over-menu layout (approved). NOTE a separate `FlavorDrop` "#menu" section still exists deeper on
+the page; the hero's "See the full menu" links to it (not a conflict).
 
 **The blinking bulb border is REUSED existing CSS**, not new: `.poster-frame` + `.bulbstrip`
 (`-h.top/.bottom`, `-v.left/.right`) each with two children `.bulbs.bulbs-a` + `.bulbs.bulbs-b`
