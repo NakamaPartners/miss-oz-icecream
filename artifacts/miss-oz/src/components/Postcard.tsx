@@ -90,8 +90,8 @@ export default function Postcard() {
           style={{ border: '5px solid var(--cream)', boxShadow: 'inset 0 0 0 1px rgba(199,154,59,0.55), 0 10px 26px rgba(28,13,12,0.3)' }}
         >
           <img
-            src="/images/hero-parlor-v2.png"
-            alt="Vintage golden-hour scene — a glowing bulb-outlined L-shaped arrow sign reading Miss Oz, Est. 2007, Scooped Fresh Daily, beside a little striped-awning ice cream parlor by a lake"
+            src="/images/hero-parlor-v3.webp"
+            alt="Vintage soda-fountain interior — a bulb-lit marquee sign reading Miss Oz Ice Cream & Cafe, Est. 2007, above a marble counter lined with chrome stools, tall sundaes and a milkshake mixer, over a red-and-cream checkerboard floor"
             className="absolute inset-0 w-full h-full object-cover"
           />
 
