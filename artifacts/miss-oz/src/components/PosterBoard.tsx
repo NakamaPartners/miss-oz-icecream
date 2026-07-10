@@ -84,12 +84,12 @@ export default function PosterBoard() {
       <Bulbs />
       <div className="poster-stage">
         {/* Main three-panel masthead */}
-        <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,2fr)_minmax(0,1.02fr)] gap-3 lg:gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,2fr)_minmax(0,1.02fr)] gap-3 lg:gap-4 lg:h-[clamp(300px,33vw,450px)]">
           {/* LEFT — illustrated Portland scene + ICE CREAM sign */}
           <div className="vpanel relative overflow-hidden min-h-[190px] lg:min-h-0">
-            <img src="/images/hero-parlor.png" alt="A faded vintage photo of a classic ice cream cone in an old-fashioned parlor" className="hero-faded absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 40%' }} />
+            <img src="/images/hero-cone-scene.png" alt="A vintage travel-poster illustration of a triple-scoop ice cream cone in front of Mount Hood, a waterfall and pine forest" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 40%' }} />
             <div className="filmgrain" aria-hidden="true" />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(23,63,60,0.28), transparent 40%), radial-gradient(120% 90% at 50% 50%, transparent 60%, rgba(28,13,12,0.28))' }} />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(23,63,60,0.22), transparent 45%), radial-gradient(120% 90% at 50% 50%, transparent 62%, rgba(28,13,12,0.24))' }} />
             {/* Vertical ICE CREAM marquee sign */}
             <div className="marquee-sign absolute left-2.5 top-3 bottom-3 w-[44px] lg:w-[50px] flex items-center justify-center">
               <span className="blade-text text-[var(--cream-hi)] font-bold" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(15px,1.5vw,22px)' }}>
@@ -104,7 +104,7 @@ export default function PosterBoard() {
           </div>
 
           {/* CENTER — masthead banner */}
-          <div className="vpanel flex flex-col items-center text-center px-3 py-3 lg:py-4" style={{ background: 'var(--paper-hi)' }}>
+          <div className="vpanel flex flex-col items-center justify-center text-center px-3 py-3 lg:py-4" style={{ background: 'var(--paper-hi)' }}>
             <div className="flex items-center gap-2 text-[var(--brick)]">
               <Star size={10} />
               <span className="text-[10px] sm:text-[12px] tracking-[4px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>Est. 2007</span>

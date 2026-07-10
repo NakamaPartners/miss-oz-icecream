@@ -235,8 +235,6 @@
 /* ===== Vintage single-screen poster board ===== */
 .poster-frame {
   position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
   background:
     repeating-linear-gradient(45deg, rgba(0,0,0,0.14) 0 2px, transparent 2px 9px),
     radial-gradient(140% 120% at 50% 50%, var(--teal) 0%, var(--teal-deep) 75%);
@@ -271,9 +269,6 @@
 
 .poster-stage {
   position: relative; z-index: 2;
-  flex: 1;
-  min-height: calc(100vh - clamp(44px, 6.8vw, 88px));
-  min-height: calc(100svh - clamp(44px, 6.8vw, 88px));
   border: 3px solid var(--teal-deep);
   border-radius: 6px;
   box-shadow: 0 0 0 3px var(--gold), 0 0 0 6px var(--teal-deep);
@@ -342,10 +337,6 @@
   opacity: 0.26;
   mix-blend-mode: multiply;
 }
-.hero-faded {
-  filter: sepia(0.32) saturate(0.82) contrast(0.94) brightness(1.03);
-}
-
 /* Vertical "ICE CREAM" blade sign */
 .blade-text {
   writing-mode: vertical-rl;

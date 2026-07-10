@@ -12,12 +12,16 @@ Screenshot tool captures immediately on a fresh load, so it almost always catche
 **To screenshot actual content:** temporarily flip the Loader's initial `useState(true)` → `false`,
 screenshot, then flip it back. Don't forget to restore it.
 
-**Below-the-fold sections can't be screenshotted normally:** the landing `PosterBoard` uses
-`min-height:100svh`, so on any viewport (the Screenshot tool captures from the top and can't scroll)
-the first screenful is always the poster — even a 3000px-tall viewport just stretches the poster to
-3000px. To review the sections below (Story, FlavorDrop, Wholesale, Events, etc.), temporarily
-gate the poster render in `home.tsx` (e.g. `{false && <PosterBoard />}`), screenshot tall, then
-restore.
+**PosterBoard is a compact content-height poster, NOT a full-screen landing.** The user explicitly
+rejected the earlier full-viewport version (three tall `100svh` columns stretched into skinny
+strips) — they want the reference: a dense horizontal poster (hero band + nav + 5 cards + footer)
+sized to its content. Keep `.poster-frame`/`.poster-stage` free of `100svh`/`flex:1` stretch; the
+hero row uses a bounded `lg:h-[clamp(300px,33vw,450px)]` band. Left panel is an illustrated vintage
+travel-poster cone scene (`hero-cone-scene.png`), not a photo.
+
+**Below-the-fold sections still can't be screenshotted in one shot** (tool captures from top, can't
+scroll). To review lower sections (Story, FlavorDrop, Wholesale, etc.), temporarily gate the poster
+render in `home.tsx` (e.g. `{false && <PosterBoard />}`), screenshot tall, then restore.
 
 # Hero layout constraint (overlap bug)
 
