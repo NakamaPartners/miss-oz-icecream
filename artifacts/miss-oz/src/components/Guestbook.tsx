@@ -86,7 +86,7 @@ export default function Guestbook() {
   }
 
   return (
-    <section className="relative py-[80px] md:py-[130px] px-[6vw] bg-[var(--cream)] overflow-hidden">
+    <section className="parlour-paper relative py-[80px] md:py-[130px] px-[6vw] bg-[var(--cream)] overflow-hidden">
       {/* aged edge vignette for a well-thumbed-book feel */}
       <div
         aria-hidden="true"

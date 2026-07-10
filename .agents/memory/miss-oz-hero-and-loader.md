@@ -12,6 +12,13 @@ Screenshot tool captures immediately on a fresh load, so it almost always catche
 **To screenshot actual content:** temporarily flip the Loader's initial `useState(true)` → `false`,
 screenshot, then flip it back. Don't forget to restore it.
 
+**Below-the-fold sections can't be screenshotted normally:** the landing `PosterBoard` uses
+`min-height:100svh`, so on any viewport (the Screenshot tool captures from the top and can't scroll)
+the first screenful is always the poster — even a 3000px-tall viewport just stretches the poster to
+3000px. To review the sections below (Story, FlavorDrop, Wholesale, Events, etc.), temporarily
+gate the poster render in `home.tsx` (e.g. `{false && <PosterBoard />}`), screenshot tall, then
+restore.
+
 # Hero layout constraint (overlap bug)
 
 **Rule:** keep the hero as a single centered flex column with normal spacing — do NOT use negative

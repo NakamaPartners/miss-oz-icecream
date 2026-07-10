@@ -66,7 +66,7 @@ export default function VoteFlavor() {
   }
 
   return (
-    <section className="text-center py-[80px] md:py-[130px] px-[6vw] bg-[var(--cream)] overflow-hidden">
+    <section className="parlour-paper text-center py-[80px] md:py-[130px] px-[6vw] bg-[var(--cream)] overflow-hidden">
       <motion.span
         initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
         className="block text-[12px] tracking-[5px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-3"

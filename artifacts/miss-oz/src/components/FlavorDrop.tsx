@@ -17,7 +17,7 @@ function Sparkle({ size = 22, color = PUMPKIN, delay = 0, className = '', style 
 
 export default function FlavorDrop() {
   return (
-    <section className="relative overflow-hidden py-[80px] md:py-[120px] px-[6vw] bg-[var(--cream-hi)]">
+    <section className="parlour-paper relative overflow-hidden py-[80px] md:py-[120px] px-[6vw] bg-[var(--cream-hi)]">
       <div className="grid grid-cols-1 md:grid-cols-[minmax(0,340px)_1fr] gap-10 md:gap-[64px] items-center max-w-[1040px] mx-auto">
         {/* Reel */}
         <motion.div

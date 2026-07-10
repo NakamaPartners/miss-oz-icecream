@@ -4,7 +4,7 @@ const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 
 
 export default function Events() {
   return (
-    <section id="events" className="text-center py-[80px] md:py-[130px] px-[6vw] bg-[var(--pink)]">
+    <section id="events" className="parlour-paper text-center py-[80px] md:py-[130px] px-[6vw] bg-[var(--pink)]">
       <motion.span
         initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
         className="block text-[12px] tracking-[5px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-3"
@@ -39,9 +39,15 @@ export default function Events() {
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.25 + i * 0.1 }}
-            className="bg-white rounded-[14px] p-[36px] text-center"
-            style={{ boxShadow: '0 4px 24px rgba(28,13,12,0.10)' }}
+            className="relative rounded-[8px] p-[36px] pt-[40px] text-center bg-[var(--cream-hi)]"
+            style={{ boxShadow: '0 10px 30px rgba(28,13,12,0.16)', border: '1.5px solid var(--gold)' }}
           >
+            <div aria-hidden="true" className="pointer-events-none absolute inset-[8px] rounded-[5px] border border-[rgba(199,154,59,0.5)]" />
+            <div className="flex items-center justify-center gap-2 mb-3 text-[var(--gold)]" aria-hidden="true">
+              <span className="h-px w-8" style={{ background: 'currentColor', opacity: 0.6 }} />
+              <span className="text-[12px]">✦</span>
+              <span className="h-px w-8" style={{ background: 'currentColor', opacity: 0.6 }} />
+            </div>
             <h4 className="font-display font-normal text-[24px] mb-[10px] text-[var(--cocoa)]">{card.title}</h4>
             <p className="italic text-[17px] text-[#1d0e0d] leading-relaxed opacity-80">{card.body}</p>
           </motion.div>
