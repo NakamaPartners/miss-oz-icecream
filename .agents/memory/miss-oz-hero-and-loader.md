@@ -16,13 +16,12 @@ screenshot, then flip it back. Don't forget to restore it.
 reduced-motion-aware `handleNav` smooth scroll); (2) a HORIZONTAL vintage scene image
 `/images/hero-parlor.png` framed by the blinking marquee **bulb border** (`.poster-frame` + 4
 `.bulbstrip`s, cream inner frame, `.filmgrain`), `object-cover` `aspect-[5/4] sm:aspect-[3/2]` (source is a SQUARE 1024² — a wider
-container like 16/9 crops the cone/awning awkwardly, so keep the frame taller to show the whole scene), with
-the "Miss Oz" wordmark (Est 2007 eyebrow / `--font-script` h1 / teal cafe pill) OVERLAID as absolute
-DOM text in the open sky top-right (the sole `<h1>`; image `alt` describes the scene, not the
-wordmark). **To make DOM text feel "part of the image":** render `.filmgrain` AFTER the wordmark in
-DOM (its multiply grain then runs over the lettering, sharing the scene's texture) and flatten shadows
-to a single faded cream offset (painted-ink, not a raised sticker) — user asked for exactly this blend
-rather than baking text into a regenerated image (script spelling is unreliable when generated);
+container like 16/9 crops the cone/awning awkwardly, so keep the frame taller to show the whole scene), — the "MISS OZ" branding is now BAKED INTO the illustration itself (the arrow sign face reads "MISS
+OZ" with an "ICE CREAM & DESSERT CAFE" board below it). There is NO DOM wordmark overlay anymore; the
+sole `<h1>` is a visually-hidden `sr-only` heading ("Miss Oz — Ice Cream & Dessert Cafe") and the
+image `alt` describes the branded sign. **Note:** baked text via `generateImage` worked here because
+the sign copy is short block capitals — generated ~2 candidates and picked the correctly-spelled one;
+script/cursive baked text is still unreliable, so if regenerating keep the sign lettering blocky;
 then a "Step Inside" **2-up card grid** (`grid-cols-1 sm:grid-cols-2`) — each card is a native `<a>`
 row with text left + a transparent vintage cutout illustration right (`public/images/panel-*.png`:
 cone/van/sundae/milkshake, generated with `removeBackground:true`; images are decorative — `alt=""`
