@@ -17,6 +17,7 @@ export default function Home() {
   return (
     <main className="relative bg-[var(--cream)] min-h-screen">
       <Loader />
+      <div className="paper-overlay" aria-hidden="true" />
       <div className="grain-overlay" aria-hidden="true" />
       <Postcard />
       <Marquee />

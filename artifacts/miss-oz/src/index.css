@@ -232,6 +232,19 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Full-page aged-parchment wash — real paper texture multiplied over the whole comp so nothing reads as flat modern cream */
+.paper-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 940;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("/images/paper-texture.webp");
+  background-size: cover;
+  background-position: center;
+}
+
 /* ===== Vintage single-screen poster board ===== */
 .poster-frame {
   position: relative;

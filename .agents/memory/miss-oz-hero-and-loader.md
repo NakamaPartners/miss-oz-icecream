@@ -82,6 +82,10 @@ The "our story" section (`Story.tsx`, `#about`) has a rubber-hose vintage cartoo
 
 **`removeImageBackground` silently fails** — it returned an outputPath but the flat background was still fully present. For a flat/near-uniform generated background, chroma-key with ImageMagick instead: generate the character on a FLAT solid pale background with generous margin, then `magick in.png -alpha on -channel RGBA -fuzz 18% -fill none -draw "alpha 0,0 floodfill" -draw "alpha W-1,0 floodfill" -draw "alpha 0,H-1 floodfill" -draw "alpha W-1,H-1 floodfill" +channel -trim +repage -resize NxN out.webp`. Flood-fill from the 4 corners (not global color replace) so same-colored areas inside the character aren't punched out. **Always visually inspect the cutout** — both AI removal and chroma-key can leave halos or holes.
 
+# Full-page aged-parchment wash (killing flat cream)
+
+Flat `--cream` gutters/sections read too modern. Fix: a real seamless paper texture (`/images/paper-texture.webp`) applied as a **fixed full-viewport overlay** (`.paper-overlay`) with `mix-blend-mode: multiply`, `opacity ~0.5`, `background-size: cover`, `pointer-events: none`, added as a `<div>` inside `<main>` next to the existing `.grain-overlay`. Multiplying a light parchment over the whole comp warms/ages every surface at once (gutters, cream sections, even the hero) without editing each section's bg. **Z-index invariant:** loader splash (`z-[999]`) must stay above both overlays; paper-overlay `z-940` sits just under grain-overlay `z-950`. **Why:** one global overlay is far less work and more cohesive than retinting each section; multiply is the right blend since the texture is light. Generate the texture with EVEN lighting / no dark vignette so it doesn't darken screen edges.
+
 # Hero layout constraint (overlap bug)
 
 **Rule:** keep the hero as a single centered flex column with normal spacing — do NOT use negative
