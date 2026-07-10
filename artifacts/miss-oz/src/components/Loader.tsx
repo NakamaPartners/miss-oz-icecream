@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 export default function Loader() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const reduce = useReducedMotion();
 
   useEffect(() => {

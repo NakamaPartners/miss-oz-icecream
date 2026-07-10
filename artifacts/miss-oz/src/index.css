@@ -302,6 +302,22 @@
   box-shadow: inset 0 0 0 2px rgba(255,244,214,0.5), 0 4px 10px rgba(28,13,12,0.2);
 }
 
+/* Bulb-lit ballot frame for the "vote for the next flavor" cards */
+.bulbframe { position: relative; }
+.bulbframe::after {
+  content: ""; position: absolute; inset: 7px; border-radius: 11px; pointer-events: none; z-index: 2;
+  background:
+    radial-gradient(circle, #FFF3CE 0 2.4px, transparent 3.2px) 0 0 / 15px 15px repeat-x,
+    radial-gradient(circle, #FFF3CE 0 2.4px, transparent 3.2px) 0 100% / 15px 15px repeat-x,
+    radial-gradient(circle, #FFF3CE 0 2.4px, transparent 3.2px) 0 0 / 15px 15px repeat-y,
+    radial-gradient(circle, #FFF3CE 0 2.4px, transparent 3.2px) 100% 0 / 15px 15px repeat-y;
+  filter: drop-shadow(0 0 3px rgba(255,244,214,0.85));
+  animation: bulbblink 1.2s steps(1, end) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bulbframe::after { animation: none; }
+}
+
 /* Vertical "ICE CREAM" marquee arrow sign with bulbs on every edge */
 .marquee-sign {
   position: relative;

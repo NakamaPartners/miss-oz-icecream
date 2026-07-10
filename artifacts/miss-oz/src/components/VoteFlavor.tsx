@@ -4,9 +4,9 @@ import { motion, useReducedMotion, animate, AnimatePresence } from 'framer-motio
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
 
 const CARDS = [
-  { name: 'Ube Honeycomb',        note: 'purple, golden, a little dramatic', bg: 'var(--cream-hi)', scoop: '#7C5AA6', drip: '#5E3F86' },
-  { name: 'Rose & Pistachio',     note: 'the summer rose, all grown up',      bg: '#F6D9E4',         scoop: '#E39BB6', drip: '#8FA36B' },
-  { name: 'Brown Butter Croffle', note: 'the croffle, but frozen',            bg: '#F0E2C4',         scoop: '#C79055', drip: '#9A6B37' },
+  { name: 'Ube Honeycomb',        note: 'purple, golden, a little dramatic', bg: 'var(--cream-hi)', img: '/images/flavor-ube.png' },
+  { name: 'Rose & Pistachio',     note: 'the summer rose, all grown up',      bg: '#F6D9E4',         img: '/images/flavor-rose.png' },
+  { name: 'Brown Butter Croffle', note: 'the croffle, but frozen',            bg: '#F0E2C4',         img: '/images/flavor-croffle.png' },
 ];
 
 /* Animated number that counts up on mount (or jumps instantly under reduced motion) */
@@ -22,23 +22,6 @@ function CountUp({ to, reduce, suffix = '' }: { to: number; reduce: boolean; suf
     return () => controls.stop();
   }, [to, reduce]);
   return <>{val}{suffix}</>;
-}
-
-/* A little hand-scooped cone glyph, tinted per flavor */
-function Scoop({ scoop, drip }: { scoop: string; drip: string }) {
-  return (
-    <svg width="46" height="52" viewBox="0 0 46 52" aria-hidden="true" className="mx-auto">
-      {/* scoop */}
-      <circle cx="23" cy="17" r="14" fill={scoop} />
-      <circle cx="18" cy="13" r="4" fill="rgba(255,255,255,0.35)" />
-      {/* drip */}
-      <path d="M14 24 q9 6 18 0" fill="none" stroke={drip} strokeWidth="1.6" opacity="0.5" />
-      {/* cone */}
-      <path d="M11 27 L35 27 L23 50 Z" fill="var(--gold)" />
-      <path d="M16 27 L23 50 M23 27 L23 50 M30 27 L23 50" stroke="rgba(28,13,12,0.28)" strokeWidth="1" />
-      <path d="M11 27 L35 27" stroke="rgba(28,13,12,0.28)" strokeWidth="1" />
-    </svg>
-  );
 }
 
 export default function VoteFlavor() {
@@ -109,13 +92,12 @@ export default function VoteFlavor() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               animate={isChoice && !reduce ? { scale: [1, 1.05, 1] } : {}}
-              className="relative rounded-[16px] p-[28px] pt-[30px] w-full md:w-[290px] text-center flex flex-col"
+              className="bulbframe relative rounded-[16px] p-[15px] w-full md:w-[290px] flex"
               style={{
-                background: card.bg,
+                background: 'var(--teal-deep)',
                 boxShadow: isLeader
-                  ? '0 10px 30px rgba(140,42,84,0.28), 0 0 0 2px var(--gold-hi)'
-                  : '0 4px 20px rgba(28,13,12,0.09)',
-                border: '1px solid rgba(28,13,12,0.07)',
+                  ? '0 12px 34px rgba(140,42,84,0.34), 0 0 0 2px var(--gold-hi)'
+                  : '0 6px 20px rgba(28,13,12,0.28)',
                 transition: 'box-shadow 0.5s ease',
               }}
             >
@@ -134,10 +116,21 @@ export default function VoteFlavor() {
                 )}
               </AnimatePresence>
 
-              <Scoop scoop={card.scoop} drip={card.drip} />
+              {/* Inner ballot panel (light face inside the bulb frame) */}
+              <div
+                className="relative z-[1] flex flex-col text-center w-full rounded-[10px] px-[22px] pt-[22px] pb-[24px]"
+                style={{ background: card.bg, boxShadow: 'inset 0 0 0 1px rgba(28,13,12,0.06)' }}
+              >
+                <img
+                  src={card.img}
+                  alt=""
+                  aria-hidden="true"
+                  className="mx-auto w-[clamp(118px,58%,148px)] h-auto object-contain mb-[6px]"
+                  style={{ filter: 'drop-shadow(0 4px 6px rgba(28,13,12,0.3))' }}
+                />
 
-              <h3 className="font-normal text-[23px] mt-[10px] mb-[4px] text-[var(--cocoa)]" style={macklin}>{card.name}</h3>
-              <div className="font-script text-[20px] text-[var(--berry)] mb-[18px]">{card.note}</div>
+                <h3 className="font-normal text-[23px] mt-[6px] mb-[4px] text-[var(--cocoa)]" style={macklin}>{card.name}</h3>
+                <div className="font-script text-[20px] text-[var(--berry)] mb-[18px]">{card.note}</div>
 
               {/* Sparkle burst on vote */}
               {burst === i && !reduce && (
@@ -197,6 +190,7 @@ export default function VoteFlavor() {
                     </div>
                   </div>
                 )}
+                </div>
               </div>
             </motion.div>
           );
