@@ -12,30 +12,39 @@ Screenshot tool captures immediately on a fresh load, so it almost always catche
 **To screenshot actual content:** temporarily flip the Loader's initial `useState(true)` → `false`,
 screenshot, then flip it back. Don't forget to restore it.
 
-**Current hero = a minimal, semi-interactive vintage MENU board** (`Postcard.tsx`). Minimal HTML
-header (Est 2007, "Miss Oz" `--font-script` wordmark, teal cafe bar) + a framed menu card: a large
-horizontal featured photo (crossfades via framer `AnimatePresence`) beside an interactive list of 4
-flavor `<button>`s (hover/focus/click → `setActive`, `aria-pressed`, decorative `alt=""` thumbs) +
-the slim anchor nav below. Featured images: `/images/flavor-{marionberry,thaitea,kulfi,coffee}.png`.
-**Why:** the user rejected the fully-baked-in AI poster as "too obviously AI-generated" and asked for
-WAY more minimalistic, horizontal, vintage, ≤3 objects per image, with the rest of the space being a
-"menu with vintage images that is semi interactive". Full hero-progression of rejected directions:
-bulb-frame 3-panel poster → compact horizontal poster → single-photo postcard w/ CSS overlay text →
-one baked-in-text AI poster → THIS interactive menu (approved). NOTE a separate `FlavorDrop` "#menu"
-section still exists deeper on the page; the hero's "See the full menu" links to it (not a conflict).
+**Current hero = a LIT vintage menu board with a blinking marquee bulb border** (`Postcard.tsx`).
+Minimal HTML header (Est 2007, "Miss Oz" `--font-script` wordmark, teal cafe bar) ABOVE a
+`.poster-frame` board that contains: 4 `.bulbstrip`s (the blinking light border), a `.poster-stage`
+inner board holding a teal nav bar (anchor links, reduced-motion-aware `handleNav` smooth scroll), a
+2-col grid (left = ONE fixed minimal vintage scene `/images/icecream-scene-b.png` in a `.vpanel` +
+`.filmgrain`; right = a plain non-interactive flavor menu list with CSS `group-hover` highlight), and
+a brick bottom ribbon ("Locally Owned ★ Small Business ★ Big Heart ★ @missozicecream").
+**Why:** user shared a reference of a horizontal vintage menu board (bulb border, top nav, panels,
+bottom ribbon) and asked to match it, keep ONE minimal vintage image (a "scenery with ice cream and
+the icecream arrow lights thing"), and give the hero a light border that blinks on/off alternating.
+Full hero-progression of rejected directions: bulb-frame 3-panel poster → compact horizontal poster
+→ single-photo postcard w/ CSS overlay text → one baked-in-text AI poster → crossfading interactive
+flavor-photo menu → THIS lit menu board (approved). NOTE a separate `FlavorDrop` "#menu" section
+still exists deeper on the page; the hero's "See the full menu" links to it (not a conflict).
 
-**Minimal vintage product photos read as far less "AI":** `generateImage` at `resolution:"high"`
-with a "minimal 1960s Kodachrome studio photo, SINGLE scoop in one coupe glass, plain aged-cream
-backdrop, lots of negative space, heavy film grain, ≤2 objects, no text" prompt gives clean,
-consistent, believable vintage shots. Keep the framing identical across flavors for consistency.
-Output is ~square (1024²); for a horizontal frame use `object-cover` (single centered subject, no
-text to crop). Busy multi-object baked-text posters are what looked obviously AI-generated.
+**The blinking bulb border is REUSED existing CSS**, not new: `.poster-frame` + `.bulbstrip`
+(`-h.top/.bottom`, `-v.left/.right`) each with two children `.bulbs.bulbs-a` + `.bulbs.bulbs-b`
+(radial-gradient dots, offset half a bulb, `@keyframes bulbblink` + `animation-delay` = adjacent
+bulbs alternate on/off), plus `.poster-stage`, `.vpanel`, `.marquee-sign` — all already in
+`index.css` with a `prefers-reduced-motion` block that quiets the bulbs. This system had been dead
+code from an earlier rejected `PosterBoard`; it was revived here. `Nav.tsx`/`Hero.tsx`/`Menu.tsx`
+remain dead.
+
+**A single fixed vintage SCENE reads as minimal & on-brand:** `generateImage` at `resolution:"high"`
+with a "minimal vintage screen-print travel-poster illustration, a retro 'ICE CREAM' arrow sign with
+light bulbs + one ice cream cone, flat dusk sky + low treeline, muted teal/cream/brick palette,
+grainy, lots of negative space, few objects" prompt renders the short "ICE CREAM" sign text cleanly
+and matches the site palette. The illustration variant beat the photographic one for cohesion.
+Output is ~square (1024²); display via `object-cover` in a wide `.vpanel` (sign upper-left, cone
+right → cropping top/bottom is safe).
 
 **Grain knobs:** global `.grain-overlay` opacity and `.filmgrain` opacity (both in `index.css`) —
-raise them when the user asks for "more grainy". The old poster CSS
-(`.poster-frame/.poster-stage/.vpanel/.marquee-sign/.bulbstrip`, `.postcard-scrim/-aged`,
-`.photo-vintage`) and `PosterBoard.tsx`/`Nav.tsx`/`Hero.tsx` are dead — hero copy is no longer HTML
-text, so `--font-script`/`--font-groovy` wordmark styling no longer applies to the hero.
+raise them when the user asks for "more grainy".
 
 **Below-the-fold sections still can't be screenshotted in one shot** (tool captures from top, can't
 scroll). To review lower sections (Story, FlavorDrop, Wholesale, etc.), temporarily gate the poster
