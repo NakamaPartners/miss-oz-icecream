@@ -31,8 +31,8 @@ export default function Story() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
       >
         <motion.img
-          src="/images/ice-cream-man.webp"
-          alt="A cheerful vintage cartoon ice cream man waving hello with a cone"
+          src="/images/ice-cream-mascot.webp"
+          alt="A cheerful vintage cartoon ice cream cone with a smiley face, waving hello"
           className="w-full select-none"
           style={{ filter: 'drop-shadow(0 12px 18px rgba(28,13,12,0.28))' }}
           animate={reduce ? undefined : { y: [0, -8, 0] }}
