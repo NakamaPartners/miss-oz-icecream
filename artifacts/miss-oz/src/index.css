@@ -346,6 +346,28 @@
   box-shadow: 0 20px 55px rgba(28,13,12,0.45), inset 0 0 0 2px rgba(140,42,84,0.22);
 }
 
+/* ===== Vintage diner menu book ===== */
+.menu-page {
+  position: relative;
+  background:
+    radial-gradient(130% 100% at 50% 0%, transparent 58%, rgba(120,80,30,0.12) 100%),
+    radial-gradient(circle at 16% 18%, rgba(120,80,30,0.09), transparent 24%),
+    radial-gradient(circle at 84% 86%, rgba(120,80,30,0.09), transparent 24%),
+    linear-gradient(180deg, var(--cream-hi), var(--cream));
+}
+.menu-page::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.42; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+.menu-page > * { position: relative; z-index: 1; }
+.menu-page-l { box-shadow: inset -24px 0 32px -24px rgba(28,13,12,0.42); }
+.menu-page-r { box-shadow: inset 24px 0 32px -24px rgba(28,13,12,0.42); }
+@media (max-width: 767px) {
+  .menu-page-l, .menu-page-r { box-shadow: none; }
+}
+
 /* Vertical "ICE CREAM" blade sign */
 .blade-text {
   writing-mode: vertical-rl;
