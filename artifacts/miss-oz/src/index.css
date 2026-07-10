@@ -227,7 +227,7 @@
   inset: 0;
   pointer-events: none;
   z-index: 950;
-  opacity: 0.085;
+  opacity: 0.12;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -334,29 +334,16 @@
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 190px 190px;
-  opacity: 0.26;
+  opacity: 0.36;
   mix-blend-mode: multiply;
 }
 /* ===== Single-photo vintage postcard hero ===== */
 .postcard {
+  position: relative;
   border-radius: 10px;
   overflow: hidden;
   border: clamp(8px, 1.1vw, 14px) solid var(--cream);
   box-shadow: 0 20px 55px rgba(28,13,12,0.45), inset 0 0 0 2px rgba(140,42,84,0.22);
-}
-.photo-vintage { filter: sepia(0.26) saturate(0.86) contrast(0.96) brightness(1.05); }
-.postcard-scrim {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(95deg, rgba(244,236,214,0.95) 0%, rgba(244,236,214,0.85) 30%, rgba(244,236,214,0.4) 52%, rgba(244,236,214,0) 72%);
-}
-.postcard-aged {
-  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply;
-  background: radial-gradient(120% 95% at 50% 50%, transparent 52%, rgba(60,40,20,0.4) 100%);
-}
-@media (max-width: 700px) {
-  .postcard-scrim {
-    background: linear-gradient(180deg, rgba(244,236,214,0.94) 0%, rgba(244,236,214,0.85) 52%, rgba(244,236,214,0.4) 100%);
-  }
 }
 
 /* Vertical "ICE CREAM" blade sign */
