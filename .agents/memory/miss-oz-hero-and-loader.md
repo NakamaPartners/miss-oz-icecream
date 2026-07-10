@@ -14,14 +14,11 @@ screenshot, then flip it back. Don't forget to restore it.
 
 **Current hero = stacked, top-to-bottom** (`Postcard.tsx`): (1) slim teal nav bar (anchor links,
 reduced-motion-aware `handleNav` smooth scroll); (2) a HORIZONTAL vintage scene image
-`/images/hero-parlor.png` framed by the blinking marquee **bulb border** (`.poster-frame` + 4
-`.bulbstrip`s, cream inner frame, `.filmgrain`), `object-cover` `aspect-[5/4] sm:aspect-[3/2]` (source is a SQUARE 1024² — a wider
-container like 16/9 crops the cone/awning awkwardly, so keep the frame taller to show the whole scene), — the "MISS OZ" branding is now BAKED INTO the illustration itself (the arrow sign face reads "MISS
-OZ" with an "ICE CREAM & DESSERT CAFE" board below it). There is NO DOM wordmark overlay anymore; the
+`/images/hero-parlor-v2.png` framed by the blinking marquee **bulb border** (`.poster-frame` + 4
+`.bulbstrip`s, cream inner frame, `.filmgrain`), `object-cover` `aspect-[5/4] sm:aspect-[4/3]` (source is a SQUARE 1024² — a wider
+container like 16/9 or 3/2 crops the sign/awning; keep the frame taller/nearer square to "zoom out" and show the whole scene), — the branding is BAKED INTO the illustration: an L-SHAPED (bent) bulb-lit marquee arrow whose face reads "MISS OZ", with an "EST. 2007" ribbon banner across the top and a hanging "SCOOPED FRESH DAILY" board; the parlor building carries an "ICE CREAM" board. There is NO DOM wordmark overlay; the
 sole `<h1>` is a visually-hidden `sr-only` heading ("Miss Oz — Ice Cream & Dessert Cafe") and the
-image `alt` describes the branded sign. **Note:** baked text via `generateImage` worked here because
-the sign copy is short block capitals — generated ~2 candidates and picked the correctly-spelled one;
-script/cursive baked text is still unreliable, so if regenerating keep the sign lettering blocky;
+image `alt` describes the branded sign. **Cache-bust:** when swapping the hero, RENAME the file (e.g. `hero-parlor.png`→`hero-parlor-v2.png`) and update the `src` — reusing the same filename left users seeing the stale cached image. **Baked text note:** `generateImage` renders short block capitals ("MISS OZ", "EST. 2007", "SCOOPED FRESH DAILY") cleanly — generate ~2 candidates and pick the correctly-spelled one; script/cursive baked text is still unreliable, so keep sign lettering blocky;
 then a "Step Inside" **2-up card grid** (`grid-cols-1 sm:grid-cols-2`) — each card is a native `<a>`
 row with text left + a transparent vintage cutout illustration right (`public/images/panel-*.png`:
 cone/van/sundae/milkshake, generated with `removeBackground:true`; images are decorative — `alt=""`
@@ -60,6 +57,16 @@ raise them when the user asks for "more grainy".
 **Below-the-fold sections still can't be screenshotted in one shot** (tool captures from top, can't
 scroll). To review lower sections (Story, FlavorDrop, Wholesale, etc.), temporarily gate the poster
 render in `home.tsx` (e.g. `{false && <PosterBoard />}`), screenshot tall, then restore.
+
+# Vintage bulb-lit vote cards
+
+The "Vote for the Next Flavor" cards (`VoteFlavor.tsx`) are vintage bulb-lit ballots: an outer
+`--teal-deep` frame with class `.bulbframe` (new in `index.css`: a `::after` drawing blinking cream
+bulbs around the inner edge, quieted under `prefers-reduced-motion`) wrapping a light inner panel that
+holds a transparent vintage flavor illustration (`/images/flavor-{ube,rose,croffle}.png`, decorative
+`alt=""`+`aria-hidden`) + name + note + vote button/results. **Why a DARK frame:** the marquee bulbs
+are cream (`#FFF3CE`), so they only read against a dark band — put bulbs on teal, not on the light card
+face. Reuse `.bulbframe` for any future card that needs the lights.
 
 # Hero layout constraint (overlap bug)
 

@@ -79,12 +79,12 @@ export default function Postcard() {
       <div className="poster-frame mx-auto max-w-[1080px] rounded-[10px]">
         <Bulbs />
         <div
-          className="relative overflow-hidden rounded-[6px] aspect-[5/4] sm:aspect-[3/2]"
+          className="relative overflow-hidden rounded-[6px] aspect-[5/4] sm:aspect-[4/3]"
           style={{ border: '5px solid var(--cream)', boxShadow: 'inset 0 0 0 1px rgba(199,154,59,0.55), 0 10px 26px rgba(28,13,12,0.3)' }}
         >
           <img
-            src="/images/hero-parlor.png"
-            alt="Vintage dusk scene — a glowing bulb-outlined arrow sign reading Miss Oz above an Ice Cream & Dessert Cafe board, beside a little striped-awning parlor"
+            src="/images/hero-parlor-v2.png"
+            alt="Vintage golden-hour scene — a glowing bulb-outlined L-shaped arrow sign reading Miss Oz, Est. 2007, Scooped Fresh Daily, beside a little striped-awning ice cream parlor by a lake"
             className="absolute inset-0 w-full h-full object-cover"
           />
 
