@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 import FlavorDrop from '../components/FlavorDrop';
 
 const CheckerRule = () => (
-  <div className="checker-strip h-[15px] border-y-2 border-[var(--cocoa)]" aria-hidden="true" />
+  <div className="checker-floor h-[26px] border-y-2 border-[var(--cocoa)]" aria-hidden="true" />
 );
 
 export default function Home() {

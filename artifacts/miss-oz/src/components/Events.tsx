@@ -1,10 +1,14 @@
 import { motion } from 'framer-motion';
+import { Bunting, Starburst } from './Decor';
 
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' };
 
 export default function Events() {
   return (
-    <section id="events" className="parlour-paper text-center py-[80px] md:py-[130px] px-[6vw] bg-[var(--pink)]">
+    <section id="events" className="parlour-paper relative overflow-hidden text-center py-[80px] md:py-[130px] px-[6vw] bg-[var(--pink)]">
+      <Bunting className="absolute top-0 left-0 right-0" />
+      <Starburst size={150} color="var(--berry)" className="pointer-events-none absolute -bottom-8 -left-8 opacity-[0.10] hidden md:block" />
+      <Starburst size={120} color="var(--berry)" className="pointer-events-none absolute top-[86px] right-[4vw] opacity-[0.10] hidden md:block" />
       <motion.span
         initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
         className="block text-[12px] tracking-[5px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-3"

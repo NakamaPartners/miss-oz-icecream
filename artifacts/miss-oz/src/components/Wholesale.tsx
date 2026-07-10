@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { Bunting, Starburst } from './Decor';
 
 const items = [
   { price: '$130', name: '2.5 gal ice cream', note: 'Any flavor on the case list · churned to order' },
@@ -19,6 +20,9 @@ export default function Wholesale() {
       id="wholesale"
       className="relative overflow-hidden text-center py-[80px] md:py-[130px] px-[6vw] bg-[var(--berry)] text-[var(--cream)]"
     >
+      <Bunting className="absolute top-0 left-0 right-0 z-10" />
+      <Starburst size={180} color="var(--gold)" className="pointer-events-none absolute top-[64px] left-[3vw] opacity-[0.12] hidden md:block" />
+      <Starburst size={140} color="var(--gold)" className="pointer-events-none absolute bottom-[64px] right-[4vw] opacity-[0.12] hidden md:block" />
       {/* diner-table vignette + warm pool of light */}
       <div
         aria-hidden="true"

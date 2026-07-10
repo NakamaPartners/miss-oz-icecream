@@ -190,6 +190,46 @@
       radial-gradient(circle at 85% 84%, rgba(120,80,30,0.07), transparent 26%),
       radial-gradient(circle at 78% 12%, rgba(90,55,20,0.05), transparent 20%);
   }
+  /* Classic soda-fountain checkerboard floor — cherry-red on cream */
+  .checker-floor {
+    background-color: var(--cream-hi);
+    background-image:
+      linear-gradient(45deg, var(--brick) 25%, transparent 25%, transparent 75%, var(--brick) 75%),
+      linear-gradient(45deg, var(--brick) 25%, transparent 25%, transparent 75%, var(--brick) 75%);
+    background-size: 34px 34px;
+    background-position: 0 0, 17px 17px;
+  }
+  /* Hanging pennant bunting — a string of triangular parlor flags */
+  .bunting {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 9px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    padding-top: 2px;
+    pointer-events: none;
+  }
+  .bunting::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(28,13,12,0.4);
+  }
+  .pennant {
+    flex: none;
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 21px solid currentColor;
+    transform-origin: top center;
+    filter: drop-shadow(0 2px 2px rgba(28,13,12,0.22));
+    animation: sway 3.4s ease-in-out infinite;
+  }
 }
 
 @keyframes blobmorph { 
@@ -219,6 +259,13 @@
 @keyframes eq {
   0%, 100% { transform: scaleY(0.3); }
   50% { transform: scaleY(1); }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-3.5deg); }
+  50% { transform: rotate(3.5deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pennant { animation: none; transform: none; }
 }
 
 /* Tactile film-grain overlay — warms the whole page and kills the flat digital sheen */

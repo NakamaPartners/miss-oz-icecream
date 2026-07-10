@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { Bunting } from './Decor';
 
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
 
@@ -12,6 +13,7 @@ export default function Story() {
   const reduce = useReducedMotion();
   return (
     <section className="parlour-paper relative py-[90px] md:py-[140px] px-[6vw] bg-[var(--cream)] overflow-hidden">
+      <Bunting className="absolute top-0 left-0 right-0" />
       {/* Faint decorative laurels in the far corners */}
       <svg aria-hidden="true" className="hidden md:block absolute top-[60px] left-[4vw] opacity-[0.12]" width="120" height="120" viewBox="0 0 100 100">
         <path d="M50 8 C30 20 30 50 50 62 C70 50 70 20 50 8 Z M50 40 C38 48 38 70 50 82 C62 70 62 48 50 40 Z" fill="none" stroke="var(--cocoa)" strokeWidth="1.5" />

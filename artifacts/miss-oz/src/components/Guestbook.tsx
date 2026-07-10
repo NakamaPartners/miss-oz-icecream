@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { Starburst } from './Decor';
 
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
 
@@ -85,6 +86,8 @@ export default function Guestbook() {
 
   return (
     <section className="parlour-paper relative py-[80px] md:py-[120px] px-[6vw] bg-[var(--cream)] overflow-hidden">
+      <Starburst size={160} color="var(--gold)" className="pointer-events-none absolute top-[50px] left-[3vw] opacity-[0.10] hidden md:block" />
+      <Starburst size={130} color="var(--berry)" className="pointer-events-none absolute bottom-[60px] right-[4vw] opacity-[0.09] hidden md:block" />
       {/* diner-table vignette */}
       <div
         aria-hidden="true"

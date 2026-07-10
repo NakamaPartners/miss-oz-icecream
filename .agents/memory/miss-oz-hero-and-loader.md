@@ -86,6 +86,21 @@ The "our story" section (`Story.tsx`, `#about`) has a rubber-hose vintage cartoo
 
 Flat `--cream` gutters/sections read too modern. Fix: a real seamless paper texture (`/images/paper-texture.webp`) applied as a **fixed full-viewport overlay** (`.paper-overlay`) with `mix-blend-mode: multiply`, `opacity ~0.5`, `background-size: cover`, `pointer-events: none`, added as a `<div>` inside `<main>` next to the existing `.grain-overlay`. Multiplying a light parchment over the whole comp warms/ages every surface at once (gutters, cream sections, even the hero) without editing each section's bg. **Z-index invariant:** loader splash (`z-[999]`) must stay above both overlays; paper-overlay `z-940` sits just under grain-overlay `z-950`. **Why:** one global overlay is far less work and more cohesive than retinting each section; multiply is the right blend since the texture is light. Generate the texture with EVEN lighting / no dark vignette so it doesn't darken screen edges.
 
+# Soda-fountain decor kit (parlor "feel" pass)
+
+To push the whole site toward a 1950s–60s ice-cream-parlor feel, a shared `Decor.tsx` provides
+`Bunting` (a flex string of triangular pennants, colors cycle berry/gold/teal/pink/brick, CSS `sway`
+gated by reduced-motion) and `Starburst` (atomic sunburst SVG). CSS utilities `.checker-floor`
+(cherry-red-on-cream diner tile) + `.bunting`/`.pennant` live in `index.css`. Bunting is dropped at
+section tops (hero above nav, Story/Wholesale/Events/VoteFlavor, Footer below its scallop) and faint
+starbursts in flat-color section corners; the between-section `CheckerRule` in `home.tsx` uses
+`.checker-floor`, and `Marquee` got checker-floor top/bottom edges + ✦ separators.
+
+**Invariant:** every decorative overlay here is BOTH `aria-hidden` AND non-interactive — full-width
+absolutely-positioned toppers (bunting) intercept clicks over nav/eyebrows unless `pointer-events:none`
+is set (it's on `.bunting` in CSS; starbursts use the `pointer-events-none` utility inline). Code
+review failed the first pass precisely because `.bunting` lacked `pointer-events:none`.
+
 # Hero layout constraint (overlap bug)
 
 **Rule:** keep the hero as a single centered flex column with normal spacing — do NOT use negative

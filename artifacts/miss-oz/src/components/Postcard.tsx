@@ -1,3 +1,5 @@
+import { Bunting } from './Decor';
+
 const NAV = [
   { label: 'Home', target: 'home' },
   { label: 'About', target: 'about' },
@@ -55,6 +57,11 @@ export default function Postcard() {
       className="relative overflow-hidden px-[4vw] pt-[clamp(26px,4vw,52px)] pb-[clamp(16px,2vw,30px)] bg-[var(--cream-hi)]"
       aria-label="Miss Oz Ice Cream & Dessert Cafe"
     >
+      {/* festive pennant bunting greets you at the door */}
+      <div className="relative mx-auto max-w-[1080px] mb-[clamp(8px,1.2vw,14px)]">
+        <Bunting />
+      </div>
+
       {/* slim nav */}
       <nav
         className="mx-auto max-w-[1080px] mb-[clamp(14px,2vw,22px)] flex flex-wrap items-center justify-center gap-x-1 gap-y-1 rounded-[5px] px-3 py-2 border-2"
