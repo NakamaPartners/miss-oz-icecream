@@ -12,11 +12,13 @@ Screenshot tool captures immediately on a fresh load, so it almost always catche
 **To screenshot actual content:** temporarily flip the Loader's initial `useState(true)` → `false`,
 screenshot, then flip it back. Don't forget to restore it.
 
-**Current hero = stacked, top-to-bottom** (`Postcard.tsx`): (1) minimal header — Est 2007, "Miss Oz"
-`--font-script` wordmark, teal cafe bar; (2) slim teal nav bar (anchor links, reduced-motion-aware
-`handleNav` smooth scroll); (3) a HORIZONTAL vintage scene image `/images/hero-parlor.png` framed by
-the blinking marquee **bulb border** (`.poster-frame` + 4 `.bulbstrip`s, cream inner frame,
-`.filmgrain`), `object-cover` `aspect-[4/3] sm:aspect-[16/9]`; (4) a "Step Inside" row of 4 vintage
+**Current hero = stacked, top-to-bottom** (`Postcard.tsx`): (1) slim teal nav bar (anchor links,
+reduced-motion-aware `handleNav` smooth scroll); (2) a HORIZONTAL vintage scene image
+`/images/hero-parlor.png` framed by the blinking marquee **bulb border** (`.poster-frame` + 4
+`.bulbstrip`s, cream inner frame, `.filmgrain`), `object-cover` `aspect-[4/3] sm:aspect-[16/9]`, with
+the "Miss Oz" wordmark (Est 2007 eyebrow / `--font-script` h1 / teal cafe pill) OVERLAID as absolute
+DOM text in the open sky top-right, cream-offset text-shadow for a painted-sign look (the sole `<h1>`;
+image `alt` describes the scene, not the wordmark); (4) a "Step Inside" row of 4 vintage
 color-blocked section panels (`TONES` map: cream/teal/pink/gold bg+border+text; each an `<a>` with
 eyebrow + display title + italic desc + hover-nudge "→", linking via `handleNav` to real sections —
 Handmade→#menu, Pickup/Delivery→#menu, Vote→#vote, Vintage Vibes→#about); (5) a brick bottom ribbon ("Locally Owned ★ Small Business ★ Big Heart ★

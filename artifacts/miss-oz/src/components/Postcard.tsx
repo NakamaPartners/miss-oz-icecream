@@ -55,19 +55,6 @@ export default function Postcard() {
       className="relative overflow-hidden px-[4vw] pt-[clamp(26px,4vw,52px)] pb-[clamp(16px,2vw,30px)] bg-[var(--cream-hi)]"
       aria-label="Miss Oz Ice Cream & Dessert Cafe"
     >
-      {/* wordmark, above the hero image */}
-      <div className="text-center mb-[clamp(16px,2.2vw,26px)]">
-        <span className="block text-[var(--gold)] text-[11px] tracking-[4px] uppercase font-bold mb-1" style={{ fontFamily: 'var(--font-sans)' }}>
-          ✦ Est. 2007 · Pearl District ✦
-        </span>
-        <h1 className="leading-none text-[var(--berry)]" style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(44px,7.5vw,84px)' }}>
-          Miss&nbsp;Oz
-        </h1>
-        <span className="inline-block mt-2 px-4 py-1 rounded-[4px] text-[var(--cream-hi)] text-[11px] sm:text-[13px] tracking-[3px] uppercase font-bold" style={{ background: 'var(--teal-deep)', fontFamily: 'var(--font-sans)' }}>
-          Ice Cream &amp; Dessert Cafe
-        </span>
-      </div>
-
       {/* slim nav */}
       <nav
         className="mx-auto max-w-[1080px] mb-[clamp(14px,2vw,22px)] flex flex-wrap items-center justify-center gap-x-1 gap-y-1 rounded-[5px] px-3 py-2 border-2"
@@ -101,6 +88,28 @@ export default function Postcard() {
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="filmgrain" aria-hidden="true" />
+
+          {/* wordmark set into the open sky, beside the sign */}
+          <div className="absolute z-10 top-[7%] right-[5%] max-w-[66%] flex flex-col items-end text-right">
+            <span
+              className="block text-[var(--gold)] uppercase font-bold mb-1 text-[clamp(8px,1.5vw,12px)]"
+              style={{ fontFamily: 'var(--font-sans)', letterSpacing: 'clamp(2px,0.5vw,4px)', textShadow: '0 1px 3px rgba(28,13,12,0.5)' }}
+            >
+              ✦ Est. 2007 · Pearl District ✦
+            </span>
+            <h1
+              className="leading-[0.9] text-[var(--berry)]"
+              style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(34px,6.6vw,76px)', textShadow: '2px 2px 0 var(--cream-hi), 4px 5px 12px rgba(28,13,12,0.35)' }}
+            >
+              Miss&nbsp;Oz
+            </h1>
+            <span
+              className="inline-block mt-2 rounded-[4px] text-[var(--cream-hi)] uppercase font-bold px-3 py-1 text-[clamp(8px,1.4vw,13px)]"
+              style={{ background: 'var(--teal-deep)', fontFamily: 'var(--font-sans)', letterSpacing: 'clamp(1.5px,0.4vw,3px)', boxShadow: '0 3px 8px rgba(28,13,12,0.4)' }}
+            >
+              Ice Cream &amp; Dessert Cafe
+            </span>
+          </div>
         </div>
       </div>
 
