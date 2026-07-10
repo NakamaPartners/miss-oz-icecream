@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
-const PUMPKIN = '#E8722C';
+const PUMPKIN = '#C0512A';
 
 function Sparkle({ size = 22, color = PUMPKIN, delay = 0, className = '', style = {} as React.CSSProperties }) {
   return (
@@ -17,47 +17,67 @@ function Sparkle({ size = 22, color = PUMPKIN, delay = 0, className = '', style 
 
 export default function FlavorDrop() {
   return (
-    <section className="parlour-paper relative overflow-hidden py-[80px] md:py-[120px] px-[6vw] bg-[var(--cream-hi)]">
-      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,340px)_1fr] gap-10 md:gap-[64px] items-center max-w-[1040px] mx-auto">
-        {/* Reel */}
+    <section
+      className="parlour-paper relative overflow-hidden py-[84px] md:py-[128px] px-[6vw]"
+      style={{
+        backgroundColor: 'var(--cream-hi)',
+        backgroundImage:
+          'linear-gradient(rgba(243,235,215,0.72), rgba(243,235,215,0.72)), url(/images/seasonbg-autumn.webp)',
+        backgroundSize: 'auto, 640px',
+        backgroundRepeat: 'repeat',
+      }}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,360px)_1fr] gap-12 md:gap-[72px] items-center max-w-[1060px] mx-auto">
+        {/* Framed seasonal poster — a lit lobby card */}
         <motion.div
           initial={{ opacity: 0, y: 30, rotate: -4 }}
-          whileInView={{ opacity: 1, y: 0, rotate: -2 }}
+          whileInView={{ opacity: 1, y: 0, rotate: -1.6 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-[min(300px,80vw)]"
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-[min(340px,84vw)]"
         >
+          {/* warm glow, as if the frame is lit */}
           <div
-            className="relative rounded-[26px] overflow-hidden bg-black"
-            style={{ boxShadow: '0 20px 50px rgba(28,13,12,0.28)', border: '5px solid #140807', aspectRatio: '9 / 16' }}
+            className="absolute -inset-6 rounded-[30px] blur-2xl -z-0"
+            style={{ background: 'radial-gradient(60% 55% at 50% 42%, rgba(216,124,58,0.42), transparent 70%)' }}
+            aria-hidden="true"
+          />
+
+          {/* the frame */}
+          <div
+            className="relative z-10 rounded-[8px] p-[9px]"
+            style={{
+              background: 'linear-gradient(150deg, #23100e, #3a1c17 55%, #23100e)',
+              boxShadow: '0 24px 54px rgba(28,13,12,0.4), inset 0 0 0 1px rgba(255,244,214,0.14)',
+            }}
           >
-            <video
-              src="/video/pumpkin-drop.mp4"
-              poster="/video/pumpkin-poster.jpg"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-            />
-            {/* seasonal tag */}
-            <div
-              className="absolute top-3 left-3 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[1.5px] text-white py-1 px-2.5 rounded-full"
-              style={{ background: PUMPKIN, boxShadow: '0 3px 10px rgba(0,0,0,0.25)' }}
-            >
-              <span className="w-[7px] h-[7px] rounded-full bg-white animate-pulse" /> Seasonal
+            <div className="rounded-[4px] p-[6px]" style={{ background: 'var(--cream-hi)' }}>
+              <img
+                src="/images/seasonal-pumpkin-poster.webp"
+                alt="Seasonal flavor poster — housemade small-batch pumpkin ice cream at Miss Oz"
+                className="block w-full h-auto rounded-[2px]"
+                style={{ boxShadow: 'inset 0 0 0 1px rgba(28,13,12,0.12)' }}
+              />
             </div>
+          </div>
+
+          {/* hanging SEASONAL enamel tab */}
+          <div
+            className="absolute z-20 -top-4 left-5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[2px] text-[var(--cream-hi)] py-1.5 px-3 rounded-[3px] -rotate-2"
+            style={{ background: PUMPKIN, boxShadow: '0 4px 12px rgba(28,13,12,0.35), inset 0 0 0 1px rgba(255,244,214,0.35)', fontFamily: 'var(--font-sans)' }}
+          >
+            <span className="w-[7px] h-[7px] rounded-full bg-[var(--cream-hi)] animate-pulse" /> Seasonal
           </div>
 
           {/* Yum! script accent */}
           <div
-            className="absolute -right-5 -bottom-3 font-script text-[34px] text-[var(--berry)] -rotate-6 select-none"
+            className="absolute z-20 -right-4 -bottom-5 font-script text-[36px] text-[var(--berry)] -rotate-6 select-none"
             style={{ textShadow: '2px 2px 0 var(--cream-hi)' }}
             aria-hidden="true"
           >
             Yum! Yum!
           </div>
-          <Sparkle size={26} color="var(--gold-hi)" delay={0.4} className="absolute -left-4 top-6" />
+          <Sparkle size={26} color="var(--gold-hi)" delay={0.4} className="absolute z-20 -left-4 top-8" />
         </motion.div>
 
         {/* Copy */}
@@ -99,13 +119,13 @@ export default function FlavorDrop() {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.28 }}
             className="mt-7 flex flex-wrap gap-3 justify-center md:justify-start"
           >
-            <span className="py-2 px-4 rounded-full text-[14px] font-semibold text-white" style={{ background: 'var(--cocoa)' }}>🎃 Pumpkin ice cream</span>
+            <span className="py-2 px-4 rounded-full text-[14px] font-semibold text-[var(--cream-hi)]" style={{ background: 'var(--cocoa)' }}>🎃 Pumpkin ice cream</span>
             <span className="py-2 px-4 rounded-full text-[14px] font-semibold text-[var(--cocoa)]" style={{ background: 'var(--gold-hi)' }}>☕ Pumpkin latte</span>
           </motion.div>
         </div>
       </div>
 
-      {/* Checkerboard strip — a nod to the reel's footer */}
+      {/* Checkerboard strip — a nod to the parlour floor */}
       <div className="checker-strip absolute bottom-0 left-0 right-0 h-[22px]" aria-hidden="true" />
     </section>
   );
