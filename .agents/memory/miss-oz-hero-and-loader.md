@@ -68,6 +68,10 @@ holds a transparent vintage flavor illustration (`/images/flavor-{ube,rose,croff
 are cream (`#FFF3CE`), so they only read against a dark band — put bulbs on teal, not on the light card
 face. Reuse `.bulbframe` for any future card that needs the lights.
 
+# "Step Inside" panel vintage backgrounds
+
+Each panel `<a>` has a faded tone-on-tone vintage wallpaper behind it (`/images/panelbg-{cream,teal,pink,gold}.webp`) applied via CSS `backgroundImage: linear-gradient(scrim,scrim), url(bg)` — the `scrim` (a semi-transparent tone-color rgba in the `TONES` map) sits OVER the image to keep the eyebrow/title/desc text legible; the foreground icon `<img>` stays on top. **Why WebP + resized:** the generated backgrounds were ~2MB PNGs each (~8MB above-the-fold) — a real LCP regression flagged in review. Convert decorative bg art with `magick <png> -resize 800x800 -quality 68 <webp>` (drops to ~15-30KB each). Rule: any decorative full-bleed background must be compressed WebP, never a raw multi-MB generated PNG.
+
 # Hero layout constraint (overlap bug)
 
 **Rule:** keep the hero as a single centered flex column with normal spacing — do NOT use negative
