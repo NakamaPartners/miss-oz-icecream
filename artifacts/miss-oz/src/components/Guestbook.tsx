@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' };
+const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
 
 type Entry = { id: string; name: string; note: string; when: string };
 
@@ -48,8 +48,6 @@ function loadEntries(): Entry[] {
   }
 }
 
-const PAPER_TONES = ['#FBF2DF', '#F6D9E4', '#F0E2C4', '#EAD9C4'];
-
 export default function Guestbook() {
   const [entries, setEntries] = useState<Entry[]>(SEED);
   const [name, setName] = useState('');
@@ -86,15 +84,15 @@ export default function Guestbook() {
   }
 
   return (
-    <section className="parlour-paper relative py-[80px] md:py-[130px] px-[6vw] bg-[var(--cream)] overflow-hidden">
-      {/* aged edge vignette for a well-thumbed-book feel */}
+    <section className="parlour-paper relative py-[80px] md:py-[120px] px-[6vw] bg-[var(--cream)] overflow-hidden">
+      {/* diner-table vignette */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
-        style={{ background: 'radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(28,13,12,0.06) 100%)' }}
+        style={{ background: 'radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(28,13,12,0.07) 100%)' }}
       />
 
-      <div className="relative text-center max-w-[720px] mx-auto">
+      <div className="relative text-center max-w-[720px] mx-auto mb-[clamp(24px,3vw,40px)]">
         <motion.span
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
           className="block text-[12px] tracking-[5px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-3"
@@ -103,104 +101,137 @@ export default function Guestbook() {
         </motion.span>
         <motion.span
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-          className="block font-script text-[var(--berry-deep)] text-[clamp(30px,3.5vw,42px)] mb-2"
+          className="block font-script text-[var(--berry-deep)] text-[clamp(28px,3.4vw,40px)] mb-1"
         >
           put your name in the book
         </motion.span>
         <motion.h2
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.15 }}
-          className="text-[clamp(42px,6vw,80px)] leading-[0.98] mb-5 text-[var(--cocoa)]"
+          className="text-[clamp(40px,5.6vw,74px)] leading-[0.98] mb-4 text-[var(--cocoa)]"
           style={macklin}
         >
           The Parlor Guestbook
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
-          className="italic text-[18px] text-[#1d0e0d] opacity-80"
+          className="italic text-[17px] text-[#1d0e0d] opacity-80"
         >
           Every parlor worth its salt keeps a book by the door. Leave a memory, a favorite scoop, or just a hello.
         </motion.p>
       </div>
 
-      {/* Sign-in card, styled like a page from a ledger */}
-      <motion.form
-        onSubmit={handleSubmit}
+      {/* ===== Open guest ledger ===== */}
+      <motion.div
         initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
-        className="relative max-w-[560px] mx-auto mt-[44px] rounded-[6px] p-[26px] md:p-[34px] text-left"
-        style={{
-          background: 'var(--cream-hi)',
-          border: '1px solid rgba(28,13,12,0.14)',
-          boxShadow: '0 10px 30px rgba(28,13,12,0.10)',
-          backgroundImage: 'repeating-linear-gradient(rgba(28,13,12,0.05) 0 1px, transparent 1px 34px)',
-        }}
+        className="relative mx-auto max-w-[900px]"
       >
-        <label htmlFor="gb-name" className="block text-[12px] tracking-[3px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-1.5">
-          Your name
-        </label>
-        <input
-          id="gb-name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          maxLength={40}
-          placeholder="e.g. The Alvarez family"
-          className="w-full bg-transparent border-b-2 border-[rgba(28,13,12,0.25)] pb-2 mb-6 text-[20px] font-script text-[var(--berry-deep)] placeholder:text-[rgba(28,13,12,0.3)] placeholder:font-sans placeholder:italic placeholder:text-[16px] focus:outline-none focus:border-[var(--berry)] transition-colors"
-        />
-
-        <label htmlFor="gb-note" className="block text-[12px] tracking-[3px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-1.5">
-          Leave a note
-        </label>
-        <textarea
-          id="gb-note"
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          maxLength={180}
-          rows={3}
-          placeholder="A memory, a favorite flavor, a hello…"
-          className="w-full bg-transparent border-2 border-[rgba(28,13,12,0.18)] rounded-[4px] p-3 mb-2 text-[17px] leading-[1.6] text-[#1d0e0d] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic resize-none focus:outline-none focus:border-[var(--berry)] transition-colors"
-        />
-        <div className="flex items-center justify-between gap-4 mt-3 flex-wrap">
-          <span className="text-[13px] text-[var(--cocoa)] opacity-55 italic">{note.length}/180</span>
-          <button
-            type="submit"
-            disabled={!name.trim() || !note.trim()}
-            className="bg-[var(--cocoa)] text-[var(--cream)] py-[12px] px-[30px] rounded-full text-[15px] font-semibold tracking-[0.5px] hover:bg-[var(--berry)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"
-          >
-            {justSigned ? 'Signed ♥' : 'Leave your mark'}
-          </button>
+        {/* GUESTBOOK tab */}
+        <div
+          className="relative z-20 mx-auto -mb-[9px] w-fit px-6 py-1.5 rounded-t-[8px] text-[12px] tracking-[4px] uppercase font-bold text-[var(--cream-hi)]"
+          style={{ background: 'var(--cocoa)', boxShadow: 'inset 0 0 0 1.5px var(--gold)', fontFamily: 'var(--font-sans)' }}
+        >
+          ✦&nbsp;&nbsp;Guestbook&nbsp;&nbsp;✦
         </div>
-        <p ref={liveRef} aria-live="polite" className="sr-only" />
-      </motion.form>
 
-      <p className="text-center text-[14px] tracking-[2px] uppercase font-bold text-[var(--cocoa)] opacity-45 mt-[38px] mb-[26px]">
-        {entries.length} {entries.length === 1 ? 'note' : 'notes'} in the book
-      </p>
-
-      {/* The signed pages */}
-      <ul className="flex flex-wrap justify-center gap-[18px] max-w-[1000px] mx-auto list-none p-0">
-        {entries.slice(0, 9).map((entry, i) => (
-          <motion.li
-            key={entry.id}
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: Math.min(i, 4) * 0.06 }}
-            className="w-full md:w-[300px] p-[24px] rounded-[4px] text-left"
-            style={{
-              background: PAPER_TONES[i % PAPER_TONES.length],
-              transform: `rotate(${i % 2 === 0 ? -1 : 1.2}deg)`,
-              boxShadow: '0 6px 20px rgba(28,13,12,0.10)',
-              border: '1px solid rgba(28,13,12,0.06)',
-            }}
-          >
+        {/* leather-look cover */}
+        <div
+          className="relative rounded-[12px] p-[10px] md:p-[14px]"
+          style={{ background: 'linear-gradient(160deg, var(--berry-deep), #3a0e20)', boxShadow: '0 34px 80px rgba(0,0,0,0.5), inset 0 0 0 2px var(--gold), inset 0 0 0 4px var(--berry-deep)' }}
+        >
+          <div className="relative grid md:grid-cols-2 rounded-[5px] overflow-hidden">
+            {/* spine crease */}
             <div
               aria-hidden="true"
-              className="w-[64px] h-[16px] mx-auto -mt-[34px] mb-3 rounded-sm -rotate-2"
-              style={{ background: 'rgba(199,154,59,0.30)' }}
+              className="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-[8px] z-10"
+              style={{ background: 'linear-gradient(90deg, transparent, rgba(28,13,12,0.34) 42%, rgba(28,13,12,0.34) 58%, transparent)' }}
             />
-            <p className="text-[16px] leading-[1.6] italic text-[#1d0e0d] mb-3">“{entry.note}”</p>
-            <div className="font-script text-[21px] text-[var(--berry-deep)] leading-tight">{entry.name}</div>
-            <div className="text-[12px] tracking-[1px] uppercase text-[var(--cocoa)] opacity-50 mt-1">{entry.when}</div>
-          </motion.li>
-        ))}
-      </ul>
+
+            {/* LEFT PAGE — sign the book */}
+            <form
+              onSubmit={handleSubmit}
+              className="ledger-page ledger-page-l text-left pl-[58px] pr-[26px] md:pr-[38px] py-[38px] md:py-[48px] flex flex-col"
+            >
+              <div className="text-[var(--berry-deep)] leading-none mb-6" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px,2.8vw,28px)' }}>
+                Sign the book
+              </div>
+
+              <label htmlFor="gb-name" className="block text-[11px] tracking-[3px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-1" style={{ fontFamily: 'var(--font-sans)' }}>
+                Your name
+              </label>
+              <input
+                id="gb-name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength={40}
+                placeholder="e.g. The Alvarez family"
+                className="w-full bg-transparent border-b-2 border-[rgba(28,13,12,0.28)] pb-2 mb-6 text-[21px] font-script text-[var(--berry-deep)] placeholder:text-[rgba(28,13,12,0.3)] placeholder:font-sans placeholder:italic placeholder:text-[15px] focus:outline-none focus:border-[var(--berry)] transition-colors"
+              />
+
+              <label htmlFor="gb-note" className="block text-[11px] tracking-[3px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-1" style={{ fontFamily: 'var(--font-sans)' }}>
+                Leave a note
+              </label>
+              <textarea
+                id="gb-note"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                maxLength={180}
+                rows={3}
+                placeholder="A memory, a favorite flavor, a hello…"
+                className="w-full bg-transparent border-2 border-[rgba(28,13,12,0.2)] rounded-[4px] p-3 mb-2 text-[16px] leading-[1.6] text-[#1d0e0d] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic resize-none focus:outline-none focus:border-[var(--berry)] transition-colors"
+              />
+              <div className="flex items-center justify-between gap-4 mt-2 flex-wrap">
+                <span className="text-[13px] text-[var(--cocoa)] opacity-55 italic" style={{ fontFamily: 'var(--font-sans)' }}>{note.length}/180</span>
+                <button
+                  type="submit"
+                  disabled={!name.trim() || !note.trim()}
+                  className="bg-[var(--cocoa)] text-[var(--cream)] py-[11px] px-[26px] rounded-full text-[14px] font-semibold tracking-[0.5px] hover:bg-[var(--berry)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"
+                >
+                  {justSigned ? 'Signed ♥' : 'Leave your mark'}
+                </button>
+              </div>
+              <p ref={liveRef} aria-live="polite" className="sr-only" />
+
+              <div className="mt-auto pt-6 text-center text-[12px] tracking-[2px] uppercase text-[var(--cocoa)] opacity-40" style={{ fontFamily: 'var(--font-sans)' }} aria-hidden="true">
+                — one —
+              </div>
+            </form>
+
+            {/* RIGHT PAGE — the signatures */}
+            <div className="ledger-page ledger-page-r text-left pl-[58px] pr-[26px] md:pr-[38px] py-[38px] md:py-[48px] flex flex-col">
+              <div className="flex items-baseline justify-between gap-3 mb-4">
+                <div className="text-[var(--berry-deep)] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px,2.8vw,28px)' }}>
+                  Signatures
+                </div>
+                <span className="text-[11px] tracking-[2px] uppercase font-bold text-[var(--cocoa)] opacity-45" style={{ fontFamily: 'var(--font-sans)' }}>
+                  {entries.length} {entries.length === 1 ? 'entry' : 'entries'}
+                </span>
+              </div>
+
+              <ul className="flex flex-col" role="list">
+                {entries.slice(0, 6).map((entry, i) => (
+                  <motion.li
+                    key={entry.id}
+                    initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: Math.min(i, 4) * 0.06 }}
+                    className={`py-[12px] ${i > 0 ? 'border-t border-[rgba(28,13,12,0.12)]' : ''}`}
+                  >
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-script text-[20px] text-[var(--berry-deep)] leading-tight shrink-0">{entry.name}</span>
+                      <span aria-hidden="true" className="flex-1 self-end mb-[5px] border-b border-dotted border-[rgba(28,13,12,0.28)]" />
+                      <span className="text-[11px] tracking-[1px] uppercase text-[var(--cocoa)] opacity-50 shrink-0 whitespace-nowrap" style={{ fontFamily: 'var(--font-sans)' }}>{entry.when}</span>
+                    </div>
+                    <p className="text-[14.5px] leading-[1.55] italic text-[#1d0e0d] opacity-85 mt-1" style={{ fontFamily: 'var(--font-sans)' }}>“{entry.note}”</p>
+                  </motion.li>
+                ))}
+              </ul>
+
+              <div className="mt-auto pt-6 text-center text-[12px] tracking-[2px] uppercase text-[var(--cocoa)] opacity-40" style={{ fontFamily: 'var(--font-sans)' }} aria-hidden="true">
+                — two —
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
