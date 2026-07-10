@@ -12,21 +12,24 @@ Screenshot tool captures immediately on a fresh load, so it almost always catche
 **To screenshot actual content:** temporarily flip the Loader's initial `useState(true)` → `false`,
 screenshot, then flip it back. Don't forget to restore it.
 
-**Current hero = ONE fully AI-generated vintage poster image with ALL text baked in** (`Postcard.tsx`
-renders `/images/hero-poster-b.png` full-width inside the `.postcard` cream frame + a `.filmgrain`
-overlay, with the slim HTML nav "menu" bar below). **Why:** the user rejected CSS/HTML text over a
-photo as "not vintage" — they explicitly wanted the text image-generated so it captures the vintage
-feel, and wanted the whole scene (vintage van, string lights, lit ice cream parlour, sundae) in one
-grainy poster. The generated poster spells the copy correctly (Miss Oz, Est 2007, Ice Cream &
-Dessert Cafe, Small Batch Big Heart, Where Sweet Memories Begin, Life is better with ice cream).
-Full poster copy lives in the img `alt` for accessibility. Progression of rejected heroes: bulb-frame
-3-panel poster → compact horizontal poster → single-photo postcard with CSS overlay text → THIS
-baked-in poster (approved direction).
+**Current hero = a minimal, semi-interactive vintage MENU board** (`Postcard.tsx`). Minimal HTML
+header (Est 2007, "Miss Oz" `--font-script` wordmark, teal cafe bar) + a framed menu card: a large
+horizontal featured photo (crossfades via framer `AnimatePresence`) beside an interactive list of 4
+flavor `<button>`s (hover/focus/click → `setActive`, `aria-pressed`, decorative `alt=""` thumbs) +
+the slim anchor nav below. Featured images: `/images/flavor-{marionberry,thaitea,kulfi,coffee}.png`.
+**Why:** the user rejected the fully-baked-in AI poster as "too obviously AI-generated" and asked for
+WAY more minimalistic, horizontal, vintage, ≤3 objects per image, with the rest of the space being a
+"menu with vintage images that is semi interactive". Full hero-progression of rejected directions:
+bulb-frame 3-panel poster → compact horizontal poster → single-photo postcard w/ CSS overlay text →
+one baked-in-text AI poster → THIS interactive menu (approved). NOTE a separate `FlavorDrop` "#menu"
+section still exists deeper on the page; the hero's "See the full menu" links to it (not a conflict).
 
-**Generating baked-in-text posters works well here:** `generateImage` at `resolution:"high"` with
-a 1950s screen-printed-advertisement prompt renders short poster copy cleanly. Generate 2 variants
-in parallel and pick the one with the best text + scene. Output is ~square (1024²) — display it
-full-width (`block w-full h-auto`), never `object-cover` (crops the baked text).
+**Minimal vintage product photos read as far less "AI":** `generateImage` at `resolution:"high"`
+with a "minimal 1960s Kodachrome studio photo, SINGLE scoop in one coupe glass, plain aged-cream
+backdrop, lots of negative space, heavy film grain, ≤2 objects, no text" prompt gives clean,
+consistent, believable vintage shots. Keep the framing identical across flavors for consistency.
+Output is ~square (1024²); for a horizontal frame use `object-cover` (single centered subject, no
+text to crop). Busy multi-object baked-text posters are what looked obviously AI-generated.
 
 **Grain knobs:** global `.grain-overlay` opacity and `.filmgrain` opacity (both in `index.css`) —
 raise them when the user asks for "more grainy". The old poster CSS
