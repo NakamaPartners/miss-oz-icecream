@@ -24,7 +24,7 @@ export default function Story() {
 
       {/* Vintage ice cream man — rubber-hose mascot peeking from behind the card */}
       <motion.div
-        className="hidden lg:block absolute bottom-[24px] left-[2vw] xl:left-[5vw] z-0 w-[clamp(150px,13vw,210px)] pointer-events-none"
+        className="block absolute bottom-[8px] left-[1vw] md:left-[2vw] xl:left-[4vw] z-20 w-[clamp(96px,15vw,210px)] pointer-events-none"
         initial={{ opacity: 0, x: -30, rotate: -5 }}
         whileInView={{ opacity: 1, x: 0, rotate: -3 }}
         viewport={{ once: true }}
