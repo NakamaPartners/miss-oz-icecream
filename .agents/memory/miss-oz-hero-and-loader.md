@@ -16,9 +16,10 @@ screenshot, then flip it back. Don't forget to restore it.
 `--font-script` wordmark, teal cafe bar; (2) slim teal nav bar (anchor links, reduced-motion-aware
 `handleNav` smooth scroll); (3) a HORIZONTAL vintage scene image `/images/hero-parlor.png` framed by
 the blinking marquee **bulb border** (`.poster-frame` + 4 `.bulbstrip`s, cream inner frame,
-`.filmgrain`), `object-cover` `aspect-[4/3] sm:aspect-[16/9]`; (4) a separate RECTANGULAR menu card
-(gold inset border, "Today at the Counter", 2-col `sm:grid-cols-2` flavor list with dotted leaders,
-"See the full menu" link); (5) a brick bottom ribbon ("Locally Owned ★ Small Business ★ Big Heart ★
+`.filmgrain`), `object-cover` `aspect-[4/3] sm:aspect-[16/9]`; (4) a "Step Inside" row of 4 vintage
+color-blocked section panels (`TONES` map: cream/teal/pink/gold bg+border+text; each an `<a>` with
+eyebrow + display title + italic desc + hover-nudge "→", linking via `handleNav` to real sections —
+Handmade→#menu, Pickup/Delivery→#menu, Vote→#vote, Vintage Vibes→#about); (5) a brick bottom ribbon ("Locally Owned ★ Small Business ★ Big Heart ★
 @missozicecream"). **Why:** user wanted the wordmark above the image, the vintage image as a
 standalone horizontal banner ON TOP OF (not inside) the menu, and the menu as its own rectangular
 section — "make it feel natural". Full hero-progression of rejected directions: bulb-frame 3-panel

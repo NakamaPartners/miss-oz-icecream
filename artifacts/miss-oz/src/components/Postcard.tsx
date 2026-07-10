@@ -8,11 +8,20 @@ const NAV = [
   { label: 'Contact', target: 'contact' },
 ];
 
-const flavors = [
-  { name: 'Marionberry', note: 'Oregon berries, swirled tart & sweet', price: '$6' },
-  { name: 'Thai Iced Tea', note: 'Spiced black tea & sweet cream', price: '$6' },
-  { name: 'Pistachio Kulfi', note: 'Cardamom & pistachio, slow-churned', price: '$6.5' },
-  { name: 'Stumptown Coffee', note: 'Cold-brew roast, small batch', price: '$6' },
+type Tone = 'cream' | 'teal' | 'pink' | 'gold';
+
+const TONES: Record<Tone, { bg: string; border: string; title: string; desc: string; eyebrow: string }> = {
+  cream: { bg: 'var(--paper)', border: 'var(--teal-deep)', title: 'var(--cocoa)', desc: 'var(--cocoa)', eyebrow: 'var(--teal-deep)' },
+  teal: { bg: 'var(--teal-deep)', border: 'var(--gold)', title: 'var(--cream-hi)', desc: 'var(--gold-hi)', eyebrow: 'var(--gold-hi)' },
+  pink: { bg: 'var(--pink)', border: 'var(--berry)', title: 'var(--berry-deep)', desc: 'var(--cocoa)', eyebrow: 'var(--berry)' },
+  gold: { bg: 'var(--gold)', border: 'var(--brick)', title: 'var(--cocoa)', desc: 'var(--cocoa)', eyebrow: 'var(--cocoa)' },
+};
+
+const panels: { title: string; sub: string; desc: string; target: string; tone: Tone }[] = [
+  { title: 'Handmade Ice Cream', sub: 'Small batch, big heart', desc: 'Classic recipes, real flavor', target: 'menu', tone: 'cream' },
+  { title: 'Pickup or Delivery', sub: "We've got you", desc: 'Uber Eats · DoorDash · Grubhub', target: 'menu', tone: 'teal' },
+  { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what’s next', target: 'vote', tone: 'pink' },
+  { title: 'Vintage Vibes', sub: 'Sweet times', desc: 'Slow down, stay awhile', target: 'about', tone: 'gold' },
 ];
 
 const hrefFor = (t: string) => (t === 'home' ? '#home' : `#${t}`);
@@ -95,38 +104,37 @@ export default function Postcard() {
         </div>
       </div>
 
-      {/* MENU — its own rectangular section, on top of nothing but below the image */}
-      <div
-        className="mx-auto max-w-[1080px] mt-[clamp(18px,2.4vw,30px)] rounded-[8px] p-[clamp(18px,2.6vw,34px)]"
-        style={{ background: 'linear-gradient(180deg, var(--cream-hi), var(--cream))', boxShadow: '0 14px 34px rgba(28,13,12,0.16), inset 0 0 0 1.5px var(--gold), inset 0 0 0 4px var(--cream-hi), inset 0 0 0 5.5px rgba(199,154,59,0.4)' }}
-      >
-        <div className="flex items-center gap-3 mb-[clamp(12px,1.6vw,20px)]">
-          <span className="text-[var(--berry-deep)] text-[13px] tracking-[3px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>Today at the Counter</span>
-          <span className="flex-1 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
+      {/* SECTION PANELS — vintage cards, click to explore (minimal interaction) */}
+      <div className="mx-auto max-w-[1080px] mt-[clamp(18px,2.4vw,30px)]">
+        <div className="flex items-center justify-center gap-3 mb-[clamp(14px,1.8vw,22px)]">
+          <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
+          <span className="text-[var(--berry-deep)] text-[12px] tracking-[4px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>Step Inside</span>
+          <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
         </div>
 
-        <ul className="grid sm:grid-cols-2 gap-x-[clamp(24px,4vw,56px)] gap-y-1" role="list">
-          {flavors.map((f) => (
-            <li key={f.name} className="py-[11px] border-b border-[rgba(28,13,12,0.1)]">
-              <div className="flex items-baseline gap-2">
-                <span className="text-[18px] md:text-[20px] leading-tight text-[var(--cocoa)]" style={{ fontFamily: 'var(--font-display)' }}>{f.name}</span>
-                <span aria-hidden="true" className="flex-1 self-end mb-[5px] border-b border-dotted border-[rgba(28,13,12,0.3)]" />
-                <span className="text-[18px] md:text-[20px] whitespace-nowrap text-[var(--berry)]" style={{ fontFamily: 'var(--font-display)', textShadow: '1px 1px 0 rgba(199,154,59,0.3)' }}>{f.price}</span>
-              </div>
-              <p className="italic text-[13px] text-[var(--cocoa)] opacity-65 leading-snug mt-0.5" style={{ fontFamily: 'var(--font-sans)' }}>{f.note}</p>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-[clamp(14px,1.8vw,22px)]">
-          <a
-            href="#menu"
-            onClick={(e) => handleNav(e, 'menu')}
-            className="inline-flex items-center gap-2 text-[13px] tracking-[1.5px] uppercase font-bold text-[var(--berry)] hover:text-[var(--berry-deep)] transition-colors"
-            style={{ fontFamily: 'var(--font-sans)' }}
-          >
-            See the full menu <span aria-hidden="true">→</span>
-          </a>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(12px,1.5vw,18px)]">
+          {panels.map((p) => {
+            const t = TONES[p.tone];
+            return (
+              <a
+                key={p.title}
+                href={hrefFor(p.target)}
+                onClick={(e) => handleNav(e, p.target)}
+                aria-label={`${p.title} — go to the ${p.target} section`}
+                className="group relative flex flex-col justify-between rounded-[7px] border-2 p-[clamp(15px,1.7vw,20px)] min-h-[158px] transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"
+                style={{ background: t.bg, borderColor: t.border, boxShadow: 'inset 0 0 0 2px rgba(255,244,214,0.35), 0 6px 16px rgba(28,13,12,0.2)' }}
+              >
+                <div>
+                  <span className="block text-[10.5px] tracking-[3px] uppercase font-bold mb-1.5" style={{ color: t.eyebrow, fontFamily: 'var(--font-sans)' }}>{p.sub}</span>
+                  <span className="block leading-[1.03] text-[clamp(21px,1.9vw,26px)]" style={{ color: t.title, fontFamily: 'var(--font-display)' }}>{p.title}</span>
+                </div>
+                <span className="mt-4 flex items-center gap-1.5 italic text-[12.5px] opacity-90" style={{ color: t.desc, fontFamily: 'var(--font-sans)' }}>
+                  {p.desc}
+                  <span aria-hidden="true" className="not-italic inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                </span>
+              </a>
+            );
+          })}
         </div>
       </div>
 
