@@ -39,60 +39,80 @@ function handleNav(e: React.MouseEvent<HTMLAnchorElement>, target: string) {
   document.getElementById(target)?.scrollIntoView({ behavior });
 }
 
+/* Soft ink-on-paper fade on all four edges of the hero scene */
+const HERO_MASK =
+  'linear-gradient(to bottom, transparent 0%, black 7%, black 88%, transparent 100%), linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)';
+
 export default function Postcard() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden px-[6vw] pt-[clamp(40px,6vw,70px)] pb-[clamp(20px,3vw,40px)] bg-[var(--cream-hi)]"
+      className="relative pt-[clamp(40px,6vw,80px)] pb-[clamp(30px,5vw,60px)] overflow-hidden"
       aria-label="Miss Oz Ice Cream & Dessert Cafe"
     >
-      {/* festive pennant bunting greets you at the door */}
-      <div className="relative mx-auto max-w-[1080px] mb-[clamp(8px,1.2vw,14px)]">
+      {/* Bunting hanging below the global border */}
+      <div
+        className="absolute left-0 right-0 z-10 pointer-events-none"
+        style={{ top: 'clamp(14px, 2vw, 26px)' }}
+        aria-hidden="true"
+      >
         <Bunting />
       </div>
 
-      {/* slim nav */}
-      <nav
-        className="mx-auto max-w-[1080px] mb-[clamp(14px,2vw,22px)] flex flex-wrap items-center justify-center gap-x-1 gap-y-1 rounded-[5px] px-4 py-2.5 border-2 stitch-border relative"
-        style={{ background: 'var(--teal-deep)', borderColor: 'var(--gold)', boxShadow: '0 4px 12px rgba(28,13,12,0.2)' }}
-      >
-        {NAV.map((item, i) => (
-          <span key={item.label} className="flex items-center relative z-10">
-            {i > 0 && <span className="text-[var(--gold-hi)] mx-1 sm:mx-2 text-[10px]" aria-hidden="true">★</span>}
-            <a
-              href={hrefFor(item.target)}
-              onClick={(e) => handleNav(e, item.target)}
-              className="text-[var(--cream-hi)] hover:text-[var(--gold-hi)] transition-colors uppercase tracking-[1.5px] text-[11px] sm:text-[13px] font-bold focus-visible:outline-none focus-visible:text-[var(--gold-hi)] focus-visible:underline underline-offset-4"
-              style={{ fontFamily: 'var(--font-sans)', textShadow: '1px 1px 0 rgba(28,13,12,0.25)' }}
-            >
-              {item.label}
-            </a>
-          </span>
-        ))}
-      </nav>
+      <div className="relative z-20 mx-auto max-w-[1200px] px-[4vw]">
+        {/* MASTHEAD: editorial double rules framing the nav */}
+        <div className="flex flex-col items-center mt-[10px] sm:mt-[20px] mb-[20px] sm:mb-[30px] relative z-20">
+          <div className="w-full border-t-[2.5px] border-b-[1px] border-[var(--cocoa)] h-[5px] sm:h-[7px] mb-3 sm:mb-4 opacity-70" aria-hidden="true" />
 
-      {/* HERO IMAGE — seamless multiplied vignette */}
-      <div className="relative mx-auto max-w-[1200px] mt-[clamp(24px,4vw,48px)] mb-[clamp(32px,5vw,60px)]">
-        <div 
-          className="relative w-full aspect-[4/3] sm:aspect-[7/5] transition-all duration-700"
-          style={{ 
-            WebkitMaskImage: 'radial-gradient(ellipse 95% 115% at 50% 42%, black 45%, transparent 92%)',
-            maskImage: 'radial-gradient(ellipse 95% 115% at 50% 42%, black 45%, transparent 92%)',
-            mixBlendMode: 'multiply'
+          <nav className="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-8 gap-y-2">
+            {NAV.map((item, i) => (
+              <span key={item.label} className="flex items-center">
+                {i > 0 && <span className="text-[var(--gold)] mx-2 sm:mx-4 text-[10px] sm:text-[11px] opacity-70" aria-hidden="true">✦</span>}
+                <a
+                  href={hrefFor(item.target)}
+                  onClick={(e) => handleNav(e, item.target)}
+                  className="text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors uppercase tracking-[3px] sm:tracking-[5px] text-[11px] sm:text-[13px] font-bold focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4 opacity-90 hover:opacity-100"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  {item.label}
+                </a>
+              </span>
+            ))}
+          </nav>
+
+          <div className="w-full border-t-[1px] border-b-[2.5px] border-[var(--cocoa)] h-[5px] sm:h-[7px] mt-3 sm:mt-4 opacity-70" aria-hidden="true" />
+        </div>
+      </div>
+
+      {/* HERO SCENE — the full, uncropped illustration printed straight onto the paper,
+          fading softly into the page on all four edges */}
+      <div className="relative w-full z-0 pointer-events-none -mt-2 sm:-mt-4">
+        <div
+          className="w-full relative max-w-[1100px] mx-auto"
+          style={{
+            maskImage: HERO_MASK,
+            WebkitMaskImage: HERO_MASK,
+            maskComposite: 'intersect',
+            WebkitMaskComposite: 'source-in',
+            maskSize: '100% 100%',
+            WebkitMaskSize: '100% 100%',
+            maskRepeat: 'no-repeat',
+            WebkitMaskRepeat: 'no-repeat',
           }}
         >
           <img
             src="/images/hero-parlor-v4.webp"
             alt="Vintage golden-hour scene — a giant bulb-lit Miss Oz marquee sign with a starburst topper, reading Ice Cream & Cafe, Est. 2007, beside a striped-awning ice cream parlor with a retro ice cream van parked out front"
-            className="absolute inset-0 w-full h-full object-cover object-[50%_78%]"
+            className="w-full h-auto mix-blend-multiply grayscale-[15%] sepia-[25%] contrast-[1.1] opacity-90"
           />
-          <h1 className="sr-only">Miss Oz — Ice Cream &amp; Dessert Cafe</h1>
-          <div className="filmgrain opacity-60" aria-hidden="true" />
+          {/* Soft color wash linking the ink to the paper tone */}
+          <div className="absolute inset-0 bg-[var(--gold)] opacity-[0.12] mix-blend-color pointer-events-none" aria-hidden="true" />
         </div>
+        <h1 className="sr-only">Miss Oz — Ice Cream &amp; Dessert Cafe</h1>
       </div>
 
-      {/* SECTION PANELS — vintage cards, click to explore (minimal interaction) */}
-      <div className="mx-auto max-w-[1080px]">
+      {/* SECTION PANELS — poster-like taped cards, click to explore */}
+      <div className="relative z-20 mx-auto max-w-[1080px] px-[4vw] sm:px-0 mt-[clamp(18px,2.4vw,30px)]">
         <div className="flex items-center justify-center gap-3 mb-[clamp(14px,1.8vw,22px)]">
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
           <span className="text-[var(--berry-deep)] text-[12px] tracking-[4px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>Step Inside</span>
@@ -141,17 +161,17 @@ export default function Postcard() {
             );
           })}
         </div>
-      </div>
 
-      {/* bottom ribbon */}
-      <div
-        className="mx-auto max-w-[1080px] mt-[clamp(14px,2vw,22px)] rounded-[5px] px-3 py-3 text-center border-2 ticket-notch relative"
-        style={{ background: 'var(--brick)', borderColor: 'var(--gold-hi)', boxShadow: '0 6px 16px rgba(28,13,12,0.25)' }}
-      >
-        <div className="absolute inset-1 stitch-border border-[rgba(255,244,214,0.4)] pointer-events-none rounded-[2px]" aria-hidden="true" />
-        <span className="text-[var(--cream-hi)] text-[11px] sm:text-[12.5px] tracking-[2px] uppercase font-bold relative z-10" style={{ fontFamily: 'var(--font-sans)', textShadow: '1px 1px 0 rgba(28,13,12,0.2)' }}>
-          Locally Owned <span className="text-[var(--gold-hi)] mx-1">★</span> Small Business <span className="text-[var(--gold-hi)] mx-1">★</span> Big Heart <span className="text-[var(--gold-hi)] mx-1">★</span> @missozicecream
-        </span>
+        {/* bottom ribbon */}
+        <div
+          className="mt-[clamp(14px,2vw,22px)] rounded-[5px] px-3 py-3 text-center border-2 ticket-notch relative"
+          style={{ background: 'var(--brick)', borderColor: 'var(--gold-hi)', boxShadow: '0 6px 16px rgba(28,13,12,0.25)' }}
+        >
+          <div className="absolute inset-1 stitch-border border-[rgba(255,244,214,0.4)] pointer-events-none rounded-[2px]" aria-hidden="true" />
+          <span className="text-[var(--cream-hi)] text-[11px] sm:text-[12.5px] tracking-[2px] uppercase font-bold relative z-10" style={{ fontFamily: 'var(--font-sans)', textShadow: '1px 1px 0 rgba(28,13,12,0.2)' }}>
+            Locally Owned <span className="text-[var(--gold-hi)] mx-1">★</span> Small Business <span className="text-[var(--gold-hi)] mx-1">★</span> Big Heart <span className="text-[var(--gold-hi)] mx-1">★</span> @missozicecream
+          </span>
+        </div>
       </div>
     </section>
   );
