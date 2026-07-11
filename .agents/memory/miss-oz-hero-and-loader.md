@@ -14,7 +14,7 @@ screenshot, then flip it back. Don't forget to restore it.
 
 **Current hero = stacked, top-to-bottom** (`Postcard.tsx`): (1) slim teal nav bar (anchor links,
 reduced-motion-aware `handleNav` smooth scroll); (2) a HORIZONTAL vintage scene image
-`/images/hero-parlor-v2.png` framed by the blinking marquee **bulb border** (`.poster-frame` + 4
+(currently `/images/hero-parlor-v4.webp` — a big MISS OZ marquee sign + parlor + retro ice cream van, per user request; serve hero as compressed WebP, not multi-MB PNG) framed by the blinking marquee **bulb border** (`.poster-frame` + 4
 `.bulbstrip`s, cream inner frame, `.filmgrain`), `object-cover` `aspect-[5/4] sm:aspect-[4/3]` (source is a SQUARE 1024² — a wider
 container like 16/9 or 3/2 crops the sign/awning; keep the frame taller/nearer square to "zoom out" and show the whole scene), — the branding is BAKED INTO the illustration: an L-SHAPED (bent) bulb-lit marquee arrow whose face reads "MISS OZ", with an "EST. 2007" ribbon banner across the top and a hanging "SCOOPED FRESH DAILY" board; the parlor building carries an "ICE CREAM" board. There is NO DOM wordmark overlay; the
 sole `<h1>` is a visually-hidden `sr-only` heading ("Miss Oz — Ice Cream & Dessert Cafe") and the
@@ -78,7 +78,7 @@ The seasonal section (`FlavorDrop.tsx`, the `#menu` div) was originally a modern
 
 # Story section mascot + background cutouts
 
-The "our story" section (`Story.tsx`, `#about`) has a rubber-hose vintage cartoon "ice cream man" (`/images/ice-cream-man.webp`) peeking from the bottom-left behind the aged-paper card: a `motion.div` positioned `absolute bottom-left z-0 pointer-events-none hidden lg:block` (card is `z-10` so he peeks from behind), one-time `whileInView` entrance + an idle vertical bob gated by `useReducedMotion()` (set `animate`/`transition` to `undefined` when reduced).
+The "our story" section (`Story.tsx`, `#about`) has a vintage cartoon MASCOT: a smiley-faced ice cream cone (`/images/ice-cream-mascot.webp`, replaced the earlier "ice cream man" character) peeking IN FRONT of the aged-paper card's bottom-left corner: a plain `div`+`img`, `absolute bottom-left z-20 pointer-events-none`, visible at ALL breakpoints (`w-[clamp(96px,15vw,210px)]`). **User explicitly wants it a STILL image — no entrance animation, no idle bob; do not re-add framer-motion here.** (Earlier version was `hidden lg:block z-0` behind the card, which made it invisible in the narrow Replit preview — keep it in front and unhidden.)
 
 **`removeImageBackground` silently fails** — it returned an outputPath but the flat background was still fully present. For a flat/near-uniform generated background, chroma-key with ImageMagick instead: generate the character on a FLAT solid pale background with generous margin, then `magick in.png -alpha on -channel RGBA -fuzz 18% -fill none -draw "alpha 0,0 floodfill" -draw "alpha W-1,0 floodfill" -draw "alpha 0,H-1 floodfill" -draw "alpha W-1,H-1 floodfill" +channel -trim +repage -resize NxN out.webp`. Flood-fill from the 4 corners (not global color replace) so same-colored areas inside the character aren't punched out. **Always visually inspect the cutout** — both AI removal and chroma-key can leave halos or holes.
 

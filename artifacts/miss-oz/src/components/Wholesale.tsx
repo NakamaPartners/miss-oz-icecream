@@ -54,7 +54,15 @@ export default function Wholesale() {
             className="relative rounded-[12px] p-[10px] md:p-[14px]"
             style={{ background: 'linear-gradient(160deg, var(--berry-deep), #3a0e20)', boxShadow: '0 34px 80px rgba(0,0,0,0.55), inset 0 0 0 2px var(--gold), inset 0 0 0 4px var(--berry-deep)' }}
           >
-            <div className="relative grid md:grid-cols-2 rounded-[5px] overflow-hidden">
+            {/* The ribbon bookmark, hangs below the cover */}
+            <div
+              aria-hidden="true"
+              className="absolute top-0 bottom-[-34px] left-1/2 -translate-x-1/2 w-[28px] z-0 drop-shadow-[0_8px_12px_rgba(0,0,0,0.4)]"
+            >
+              <div className="w-full h-full" style={{ background: 'linear-gradient(90deg, #b08226, var(--gold-hi) 40%, var(--gold) 60%, #a0741e)', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 14px), 0 100%)' }} />
+            </div>
+
+            <div className="relative z-10 grid md:grid-cols-2 rounded-[5px] overflow-hidden stitch-border-light">
               {/* spine crease */}
               <div
                 aria-hidden="true"
@@ -141,13 +149,12 @@ export default function Wholesale() {
                 <div className="mt-7 text-center">
                   <button
                     type="button"
-                    className="inline-flex items-center gap-2 rounded-full px-7 py-[13px] text-[14px] font-bold tracking-[1px] uppercase text-[var(--cream)] bg-[var(--berry)] transition-transform duration-200 hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--cream)]"
-                    style={{ boxShadow: '0 8px 20px rgba(28,13,12,0.25)' }}
+                    className="inline-flex items-center gap-2 rounded-full px-7 py-[13px] text-[14px] font-bold tracking-[1px] uppercase text-[var(--cream)] bg-[var(--berry)] transition-transform duration-200 mech-btn hover:bg-[var(--berry-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--cream)]"
                   >
                     Open a wholesale account
                     <span aria-hidden="true">→</span>
                   </button>
-                  <div className="mt-3 text-[12.5px] italic text-[var(--cocoa)] opacity-55" style={{ fontFamily: 'var(--font-sans)' }}>
+                  <div className="mt-4 text-[12.5px] italic text-[var(--cocoa)] opacity-60" style={{ fontFamily: 'var(--font-sans)' }}>
                     Or say hello at @missozicecreamcafe
                   </div>
                 </div>

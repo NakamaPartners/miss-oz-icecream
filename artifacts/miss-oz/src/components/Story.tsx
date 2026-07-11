@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Bunting } from './Decor';
 
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
@@ -10,7 +10,6 @@ const rise = {
 };
 
 export default function Story() {
-  const reduce = useReducedMotion();
   return (
     <section className="parlour-paper relative py-[90px] md:py-[140px] px-[6vw] bg-[var(--cream)] overflow-hidden">
       <Bunting className="absolute top-0 left-0 right-0" />
@@ -22,23 +21,15 @@ export default function Story() {
         <path d="M50 8 C30 20 30 50 50 62 C70 50 70 20 50 8 Z M50 40 C38 48 38 70 50 82 C62 70 62 48 50 40 Z" fill="none" stroke="var(--cocoa)" strokeWidth="1.5" />
       </svg>
 
-      {/* Vintage ice cream man — rubber-hose mascot peeking from behind the card */}
-      <motion.div
-        className="block absolute bottom-[8px] left-[1vw] md:left-[2vw] xl:left-[4vw] z-20 w-[clamp(96px,15vw,210px)] pointer-events-none"
-        initial={{ opacity: 0, x: -30, rotate: -5 }}
-        whileInView={{ opacity: 1, x: 0, rotate: -3 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
-      >
-        <motion.img
+      {/* Vintage ice cream mascot — still image peeking beside the card */}
+      <div className="block absolute bottom-[8px] left-[1vw] md:left-[2vw] xl:left-[4vw] z-20 w-[clamp(96px,15vw,210px)] pointer-events-none rotate-[-3deg]">
+        <img
           src="/images/ice-cream-mascot.webp"
           alt="A cheerful vintage cartoon ice cream cone with a smiley face, waving hello"
           className="w-full select-none"
           style={{ filter: 'drop-shadow(0 12px 18px rgba(28,13,12,0.28))' }}
-          animate={reduce ? undefined : { y: [0, -8, 0] }}
-          transition={reduce ? undefined : { duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         />
-      </motion.div>
+      </div>
 
       {/* Aged paper panel */}
       <motion.div
@@ -53,15 +44,15 @@ export default function Story() {
       >
         {/* Double-rule frame — echoes the hero label */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-[12px] rounded-[4px] border border-[rgba(28,13,12,0.22)]" />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-[18px] rounded-[2px] border border-[rgba(28,13,12,0.12)]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-[18px] rounded-[2px] stitch-border border-[rgba(28,13,12,0.22)]" />
 
         {/* Wax-seal stamp riding the top edge */}
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-[40px] z-10">
           <div
             className="relative flex items-center justify-center rounded-full"
-            style={{ width: 80, height: 80, background: 'var(--berry)', boxShadow: '0 8px 20px rgba(28,13,12,0.22)' }}
+            style={{ width: 84, height: 84, background: 'var(--berry)', boxShadow: '0 8px 24px rgba(28,13,12,0.3), inset 0 4px 8px rgba(255,255,255,0.2), inset 0 -4px 8px rgba(0,0,0,0.3)' }}
           >
-            <svg width="80" height="80" viewBox="0 0 100 100" aria-hidden="true" className="absolute inset-0">
+            <svg width="84" height="84" viewBox="0 0 100 100" aria-hidden="true" className="absolute inset-0">
               <defs><path id="storyseal" d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0" /></defs>
               <text style={{ fontFamily: "'EB Garamond', serif", fontSize: 10.5, letterSpacing: '2px', fontWeight: 600, textTransform: 'uppercase', fill: 'var(--cream)' }}>
                 <textPath href="#storyseal">· est. 2007 · Pearl District ·</textPath>
@@ -104,7 +95,7 @@ export default function Story() {
           className="mb-[18px] leading-[1.9] text-[18px] md:text-[19px] text-[#1d0e0d] text-left">
           <span
             className="float-left mr-3 mt-1 leading-[0.72] text-[var(--berry)]"
-            style={{ ...macklin, fontSize: '68px' }}
+            style={{ ...macklin, fontSize: '68px', textShadow: '1px 2px 0 rgba(28,13,12,0.15), -1px -1px 0 rgba(255,255,255,0.4)' }}
           >
             F
           </span>

@@ -141,7 +141,7 @@ export default function Guestbook() {
           className="relative rounded-[12px] p-[10px] md:p-[14px]"
           style={{ background: 'linear-gradient(160deg, var(--berry-deep), #3a0e20)', boxShadow: '0 34px 80px rgba(0,0,0,0.5), inset 0 0 0 2px var(--gold), inset 0 0 0 4px var(--berry-deep)' }}
         >
-          <div className="relative grid md:grid-cols-2 rounded-[5px] overflow-hidden">
+          <div className="relative grid md:grid-cols-2 rounded-[5px] overflow-hidden stitch-border-light">
             {/* spine crease */}
             <div
               aria-hidden="true"
@@ -168,7 +168,7 @@ export default function Guestbook() {
                 onChange={(e) => setName(e.target.value)}
                 maxLength={40}
                 placeholder="e.g. The Alvarez family"
-                className="w-full bg-transparent border-b-2 border-[rgba(28,13,12,0.28)] pb-2 mb-6 text-[21px] font-script text-[var(--berry-deep)] placeholder:text-[rgba(28,13,12,0.3)] placeholder:font-sans placeholder:italic placeholder:text-[15px] focus:outline-none focus:border-[var(--berry)] transition-colors"
+                className="w-full bg-transparent border-b-2 border-[rgba(28,13,12,0.28)] pb-[6px] mb-[28px] text-[22px] font-script text-[var(--berry-deep)] placeholder:text-[rgba(28,13,12,0.3)] placeholder:font-sans placeholder:italic placeholder:text-[16px] focus:outline-none focus:border-[var(--berry)] transition-colors"
               />
 
               <label htmlFor="gb-note" className="block text-[11px] tracking-[3px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-1" style={{ fontFamily: 'var(--font-sans)' }}>
@@ -181,14 +181,18 @@ export default function Guestbook() {
                 maxLength={180}
                 rows={3}
                 placeholder="A memory, a favorite flavor, a hello…"
-                className="w-full bg-transparent border-2 border-[rgba(28,13,12,0.2)] rounded-[4px] p-3 mb-2 text-[16px] leading-[1.6] text-[#1d0e0d] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic resize-none focus:outline-none focus:border-[var(--berry)] transition-colors"
+                className="w-full bg-transparent border-0 rounded-none px-2 text-[18px] leading-[34px] text-[#1d0e0d] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic resize-none focus:outline-none focus:bg-[rgba(255,255,255,0.4)] transition-colors mb-4"
+                style={{
+                  backgroundImage: 'repeating-linear-gradient(transparent 0, transparent 32.5px, rgba(28,13,12,0.08) 32.5px, rgba(28,13,12,0.08) 34px)',
+                  backgroundAttachment: 'local'
+                }}
               />
               <div className="flex items-center justify-between gap-4 mt-2 flex-wrap">
                 <span className="text-[13px] text-[var(--cocoa)] opacity-55 italic" style={{ fontFamily: 'var(--font-sans)' }}>{note.length}/180</span>
                 <button
                   type="submit"
                   disabled={!name.trim() || !note.trim()}
-                  className="bg-[var(--cocoa)] text-[var(--cream)] py-[11px] px-[26px] rounded-full text-[14px] font-semibold tracking-[0.5px] hover:bg-[var(--berry)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"
+                  className="bg-[var(--cocoa)] text-[var(--cream)] py-[11px] px-[26px] rounded-full text-[14px] font-semibold tracking-[0.5px] mech-btn hover:bg-[var(--berry)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"
                 >
                   {justSigned ? 'Signed ♥' : 'Leave your mark'}
                 </button>

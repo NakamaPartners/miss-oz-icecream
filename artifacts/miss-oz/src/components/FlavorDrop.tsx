@@ -51,6 +51,8 @@ export default function FlavorDrop() {
               boxShadow: '0 24px 54px rgba(28,13,12,0.4), inset 0 0 0 1px rgba(255,244,214,0.14)',
             }}
           >
+            <div className="tape-strip top-[-10px] right-[10%] rotate-3" aria-hidden="true" />
+            <div className="tape-strip top-[-6px] left-[10%] -rotate-6" aria-hidden="true" />
             <div className="rounded-[4px] p-[6px]" style={{ background: 'var(--cream-hi)' }}>
               <img
                 src="/images/seasonal-pumpkin-poster.webp"
@@ -63,10 +65,13 @@ export default function FlavorDrop() {
 
           {/* hanging SEASONAL enamel tab */}
           <div
-            className="absolute z-20 -top-4 left-5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[2px] text-[var(--cream-hi)] py-1.5 px-3 rounded-[3px] -rotate-2"
-            style={{ background: PUMPKIN, boxShadow: '0 4px 12px rgba(28,13,12,0.35), inset 0 0 0 1px rgba(255,244,214,0.35)', fontFamily: 'var(--font-sans)' }}
+            className="absolute z-20 -top-5 left-3 flex items-center justify-center w-[72px] h-[72px] rounded-full text-[11px] font-bold uppercase tracking-[2px] text-[var(--cream-hi)] leading-none text-center -rotate-12"
+            style={{ background: PUMPKIN, boxShadow: '0 6px 16px rgba(28,13,12,0.4)', fontFamily: 'var(--font-sans)', border: '2px dashed var(--cream-hi)' }}
           >
-            <span className="w-[7px] h-[7px] rounded-full bg-[var(--cream-hi)] animate-pulse" /> Seasonal
+            <div className="flex flex-col items-center justify-center gap-1">
+              <span className="w-[6px] h-[6px] rounded-full bg-[var(--cream-hi)] motion-safe:animate-pulse" />
+              New!
+            </div>
           </div>
 
           {/* Yum! script accent */}
@@ -119,8 +124,14 @@ export default function FlavorDrop() {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.28 }}
             className="mt-7 flex flex-wrap gap-3 justify-center md:justify-start"
           >
-            <span className="py-2 px-4 rounded-full text-[14px] font-semibold text-[var(--cream-hi)]" style={{ background: 'var(--cocoa)' }}>🎃 Pumpkin ice cream</span>
-            <span className="py-2 px-4 rounded-full text-[14px] font-semibold text-[var(--cocoa)]" style={{ background: 'var(--gold-hi)' }}>☕ Pumpkin latte</span>
+            <span className="py-2 px-4 rounded-full text-[14px] font-semibold text-[var(--cream-hi)] flex items-center gap-2 border-[1.5px] border-[var(--cocoa)] shadow-sm" style={{ background: 'var(--cocoa)' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2c-2 0-3 3-3 3s1 1 3 1 3-1 3-1-1-3-3-3z" /><path d="M5 10c-1.5 2-2 5-1 8 1.5 4 6 5 8 5s6.5-1 8-5c1-3 .5-6-1-8-2-3-5-4-8-4s-6 1-8 4z" /><path d="M8 14s1-1 2 0" /><path d="M16 14s-1-1-2 0" /><path d="M10 18s1-1 2 0" /></svg>
+              Pumpkin ice cream
+            </span>
+            <span className="py-2 px-4 rounded-full text-[14px] font-semibold text-[var(--cocoa)] flex items-center gap-2 border-[1.5px] border-[var(--gold-hi)] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.4)]" style={{ background: 'var(--gold-hi)' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1" /><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" /><line x1="6" y1="2" x2="6" y2="4" /><line x1="10" y1="2" x2="10" y2="4" /><line x1="14" y1="2" x2="14" y2="4" /></svg>
+              Pumpkin latte
+            </span>
           </motion.div>
         </div>
       </div>

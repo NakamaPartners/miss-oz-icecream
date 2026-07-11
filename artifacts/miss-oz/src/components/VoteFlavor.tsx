@@ -120,9 +120,12 @@ export default function VoteFlavor() {
 
               {/* Inner ballot panel (light face inside the bulb frame) */}
               <div
-                className="relative z-[1] flex flex-col text-center w-full rounded-[10px] px-[22px] pt-[22px] pb-[24px]"
+                className="relative z-[1] flex flex-col text-center w-full rounded-[10px] px-[22px] pt-[22px] pb-[24px] overflow-hidden"
                 style={{ background: card.bg, boxShadow: 'inset 0 0 0 1px rgba(28,13,12,0.06)' }}
               >
+                <div className="absolute top-2 bottom-2 left-[6px] w-[14px] punch-holes opacity-60" aria-hidden="true" />
+                <div className="absolute top-2 bottom-2 right-[6px] w-[14px] punch-holes opacity-60" aria-hidden="true" />
+
                 <img
                   src={card.img}
                   alt=""
@@ -131,8 +134,8 @@ export default function VoteFlavor() {
                   style={{ filter: 'drop-shadow(0 4px 6px rgba(28,13,12,0.3))' }}
                 />
 
-                <h3 className="font-normal text-[23px] mt-[6px] mb-[4px] text-[var(--cocoa)]" style={macklin}>{card.name}</h3>
-                <div className="font-script text-[20px] text-[var(--berry)] mb-[18px]">{card.note}</div>
+                <h3 className="font-normal text-[23px] mt-[6px] mb-[4px] text-[var(--cocoa)] relative z-10" style={macklin}>{card.name}</h3>
+                <div className="font-script text-[20px] text-[var(--berry)] mb-[18px] relative z-10">{card.note}</div>
 
               {/* Sparkle burst on vote */}
               {burst === i && !reduce && (
@@ -156,11 +159,11 @@ export default function VoteFlavor() {
               )}
 
               {/* Button (before vote) or result (after) */}
-              <div className="mt-auto">
+              <div className="mt-auto relative z-10">
                 {!revealed ? (
                   <button
                     onClick={() => handleVote(i)}
-                    className="vote-btn clickable font-sans bg-[var(--cocoa)] text-[var(--cream)] border-none py-[12px] px-[30px] rounded-full text-[15px] font-semibold tracking-[0.5px] hover:bg-[var(--berry)] hover:scale-[1.04] active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--berry)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                    className="vote-btn clickable font-sans bg-[var(--cocoa)] text-[var(--cream)] border-none py-[12px] px-[30px] rounded-full text-[15px] font-semibold tracking-[0.5px] mech-btn hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--berry)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   >
                     Vote for this
                   </button>

@@ -230,6 +230,95 @@
     filter: drop-shadow(0 2px 2px rgba(28,13,12,0.22));
     animation: sway 3.4s ease-in-out infinite;
   }
+
+  /* NEW VINTAGE UTILITIES */
+  .ticket-notch {
+    -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 16px, black 17px), radial-gradient(circle at 100% 50%, transparent 16px, black 17px);
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-composite: source-in;
+    mask-image: radial-gradient(circle at 0% 50%, transparent 16px, black 17px), radial-gradient(circle at 100% 50%, transparent 16px, black 17px);
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mask-composite: intersect;
+  }
+  .scissor-cut {
+    border: 2px dashed rgba(242,225,194,0.4);
+    position: relative;
+    border-radius: 8px;
+  }
+  .scissor-cut::before {
+    content: "✂";
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    font-size: 20px;
+    line-height: 1;
+    color: rgba(242,225,194,0.8);
+    transform: rotate(90deg);
+  }
+  .tape-strip {
+    position: absolute;
+    width: clamp(50px, 9vw, 84px);
+    height: clamp(18px, 2.5vw, 26px);
+    background: rgba(239, 226, 196, 0.85);
+    box-shadow: 0 1px 3px rgba(28,13,12,0.25), inset 0 0 0 1px rgba(255,255,255,0.4);
+    z-index: 10;
+    mix-blend-mode: hard-light;
+    border-radius: 2px;
+    filter: drop-shadow(0 2px 4px rgba(28,13,12,0.25));
+  }
+  .tape-strip::before, .tape-strip::after {
+    content: ""; position: absolute; top: 0; bottom: 0; width: 3px;
+    background: transparent;
+  }
+  .tape-strip::before { left: 0; border-left: 2px dotted rgba(28,13,12,0.15); }
+  .tape-strip::after { right: 0; border-right: 2px dotted rgba(28,13,12,0.15); border-left: none; }
+
+  .photo-corner {
+    position: absolute;
+    width: clamp(24px, 4vw, 36px);
+    height: clamp(24px, 4vw, 36px);
+    border: clamp(3px, 0.6vw, 5px) solid var(--cocoa);
+    z-index: 5;
+    box-shadow: 2px 2px 6px rgba(28,13,12,0.35), inset 2px 2px 6px rgba(28,13,12,0.2);
+    opacity: 0.95;
+    background: transparent;
+  }
+  .photo-corner-tl { top: -2px; left: -2px; border-right: none; border-bottom: none; border-top-left-radius: 3px; }
+  .photo-corner-tr { top: -2px; right: -2px; border-left: none; border-bottom: none; border-top-right-radius: 3px; }
+  .photo-corner-bl { bottom: -2px; left: -2px; border-right: none; border-top: none; border-bottom-left-radius: 3px; }
+  .photo-corner-br { bottom: -2px; right: -2px; border-left: none; border-top: none; border-bottom-right-radius: 3px; }
+
+  .mech-btn {
+    box-shadow: 0 6px 0 var(--cocoa), 0 10px 20px rgba(28,13,12,0.4), inset 0 2px 0 rgba(255,255,255,0.2);
+    transform: translateY(0);
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mech-btn:active, .mech-btn:focus-visible {
+    box-shadow: 0 0px 0 var(--cocoa), 0 2px 5px rgba(28,13,12,0.4), inset 0 2px 0 rgba(255,255,255,0.2);
+    transform: translateY(6px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mech-btn, .mech-btn:active, .mech-btn:focus-visible {
+      transition: none;
+      transform: none;
+    }
+  }
+
+  .stitch-border {
+    border: 2px dashed rgba(28,13,12,0.25);
+  }
+  .stitch-border-light {
+    border: 2px dashed rgba(255,244,214,0.35);
+  }
+
+  .punch-holes {
+    background-image: radial-gradient(circle, rgba(28,13,12,0.25) 2px, transparent 2.5px);
+    background-size: 14px 14px;
+    background-position: center top;
+    background-repeat: repeat-y;
+  }
 }
 
 @keyframes blobmorph { 
@@ -274,7 +363,7 @@
   inset: 0;
   pointer-events: none;
   z-index: 950;
-  opacity: 0.12;
+  opacity: 0.15;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -285,7 +374,7 @@
   inset: 0;
   pointer-events: none;
   z-index: 940;
-  opacity: 0.5;
+  opacity: 0.55;
   mix-blend-mode: multiply;
   background-image: url("/images/paper-texture.webp");
   background-size: cover;
@@ -460,8 +549,10 @@
   background-size: 200px 200px;
 }
 .ledger-page::before {
-  content: ""; position: absolute; top: 0; bottom: 0; left: 38px; width: 1.5px; z-index: 0;
-  background: rgba(140,42,84,0.32);
+  content: ""; position: absolute; top: 0; bottom: 0; left: 38px; width: 6px; z-index: 0;
+  border-left: 1.5px solid rgba(140,42,84,0.38);
+  border-right: 1.5px solid rgba(140,42,84,0.38);
+  background: transparent;
 }
 .ledger-page > * { position: relative; z-index: 1; }
 .ledger-page-l { box-shadow: inset -24px 0 32px -24px rgba(28,13,12,0.42); }

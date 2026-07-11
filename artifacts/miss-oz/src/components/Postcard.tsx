@@ -64,17 +64,17 @@ export default function Postcard() {
 
       {/* slim nav */}
       <nav
-        className="mx-auto max-w-[1080px] mb-[clamp(14px,2vw,22px)] flex flex-wrap items-center justify-center gap-x-1 gap-y-1 rounded-[5px] px-3 py-2 border-2"
-        style={{ background: 'var(--teal-deep)', borderColor: 'var(--gold)' }}
+        className="mx-auto max-w-[1080px] mb-[clamp(14px,2vw,22px)] flex flex-wrap items-center justify-center gap-x-1 gap-y-1 rounded-[5px] px-4 py-2.5 border-2 stitch-border relative"
+        style={{ background: 'var(--teal-deep)', borderColor: 'var(--gold)', boxShadow: '0 4px 12px rgba(28,13,12,0.2)' }}
       >
         {NAV.map((item, i) => (
-          <span key={item.label} className="flex items-center">
+          <span key={item.label} className="flex items-center relative z-10">
             {i > 0 && <span className="text-[var(--gold-hi)] mx-1 sm:mx-2 text-[10px]" aria-hidden="true">★</span>}
             <a
               href={hrefFor(item.target)}
               onClick={(e) => handleNav(e, item.target)}
               className="text-[var(--cream-hi)] hover:text-[var(--gold-hi)] transition-colors uppercase tracking-[1.5px] text-[11px] sm:text-[13px] font-bold focus-visible:outline-none focus-visible:text-[var(--gold-hi)] focus-visible:underline underline-offset-4"
-              style={{ fontFamily: 'var(--font-sans)' }}
+              style={{ fontFamily: 'var(--font-sans)', textShadow: '1px 1px 0 rgba(28,13,12,0.25)' }}
             >
               {item.label}
             </a>
@@ -83,17 +83,21 @@ export default function Postcard() {
       </nav>
 
       {/* HERO IMAGE — horizontal vintage scene, framed with the blinking bulb border */}
-      <div className="poster-frame mx-auto max-w-[1080px] rounded-[10px]">
+      <div className="poster-frame mx-auto max-w-[1080px] rounded-[10px] shadow-[0_16px_40px_rgba(28,13,12,0.3)]">
         <Bulbs />
         <div
           className="relative overflow-hidden rounded-[6px] aspect-[5/4] sm:aspect-[4/3]"
           style={{ border: '5px solid var(--cream)', boxShadow: 'inset 0 0 0 1px rgba(199,154,59,0.55), 0 10px 26px rgba(28,13,12,0.3)' }}
         >
           <img
-            src="/images/hero-parlor-v3.webp"
-            alt="Vintage soda-fountain interior — a bulb-lit marquee sign reading Miss Oz Ice Cream & Cafe, Est. 2007, above a marble counter lined with chrome stools, tall sundaes and a milkshake mixer, over a red-and-cream checkerboard floor"
+            src="/images/hero-parlor-v4.webp"
+            alt="Vintage golden-hour scene — a giant bulb-lit Miss Oz marquee sign with a starburst topper, reading Ice Cream & Cafe, Est. 2007, beside a striped-awning ice cream parlor with a retro ice cream van parked out front"
             className="absolute inset-0 w-full h-full object-cover"
           />
+          <div className="photo-corner photo-corner-tl" aria-hidden="true" />
+          <div className="photo-corner photo-corner-tr" aria-hidden="true" />
+          <div className="photo-corner photo-corner-bl" aria-hidden="true" />
+          <div className="photo-corner photo-corner-br" aria-hidden="true" />
 
           {/* branding now lives in the illustration; keep an accessible page heading */}
           <h1 className="sr-only">Miss Oz — Ice Cream &amp; Dessert Cafe</h1>
@@ -131,7 +135,8 @@ export default function Postcard() {
                   boxShadow: 'inset 0 0 0 2px rgba(255,244,214,0.35), 0 6px 16px rgba(28,13,12,0.2)',
                 }}
               >
-                <div className="flex flex-col justify-between flex-1 min-w-0">
+                <div className="tape-strip top-[-8px] left-1/2 -translate-x-1/2 rotate-2 group-hover:rotate-3 transition-transform" aria-hidden="true" />
+                <div className="flex flex-col justify-between flex-1 min-w-0 pt-2">
                   <div>
                     <span className="block text-[10.5px] tracking-[3px] uppercase font-bold mb-1.5" style={{ color: t.eyebrow, fontFamily: 'var(--font-sans)' }}>{p.sub}</span>
                     <span className="block leading-[1.03] text-[clamp(21px,1.9vw,26px)]" style={{ color: t.title, fontFamily: 'var(--font-display)' }}>{p.title}</span>
@@ -156,10 +161,11 @@ export default function Postcard() {
 
       {/* bottom ribbon */}
       <div
-        className="mx-auto max-w-[1080px] mt-[clamp(14px,2vw,22px)] rounded-[5px] px-3 py-2 text-center border-2"
-        style={{ background: 'var(--brick)', borderColor: 'var(--gold-hi)' }}
+        className="mx-auto max-w-[1080px] mt-[clamp(14px,2vw,22px)] rounded-[5px] px-3 py-3 text-center border-2 ticket-notch relative"
+        style={{ background: 'var(--brick)', borderColor: 'var(--gold-hi)', boxShadow: '0 6px 16px rgba(28,13,12,0.25)' }}
       >
-        <span className="text-[var(--cream-hi)] text-[11px] sm:text-[12.5px] tracking-[2px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>
+        <div className="absolute inset-1 stitch-border border-[rgba(255,244,214,0.4)] pointer-events-none rounded-[2px]" aria-hidden="true" />
+        <span className="text-[var(--cream-hi)] text-[11px] sm:text-[12.5px] tracking-[2px] uppercase font-bold relative z-10" style={{ fontFamily: 'var(--font-sans)', textShadow: '1px 1px 0 rgba(28,13,12,0.2)' }}>
           Locally Owned <span className="text-[var(--gold-hi)] mx-1">★</span> Small Business <span className="text-[var(--gold-hi)] mx-1">★</span> Big Heart <span className="text-[var(--gold-hi)] mx-1">★</span> @missozicecream
         </span>
       </div>

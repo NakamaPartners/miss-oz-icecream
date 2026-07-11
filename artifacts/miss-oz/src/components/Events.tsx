@@ -43,17 +43,25 @@ export default function Events() {
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.25 + i * 0.1 }}
-            className="relative rounded-[8px] p-[36px] pt-[40px] text-center bg-[var(--cream-hi)]"
-            style={{ boxShadow: '0 10px 30px rgba(28,13,12,0.16)', border: '1.5px solid var(--gold)' }}
+            className="ticket-notch relative rounded-[8px] p-[36px] pt-[40px] text-center bg-[var(--cream-hi)] overflow-hidden"
+            style={{ boxShadow: '0 10px 30px rgba(28,13,12,0.16)', border: '2px solid var(--gold)' }}
           >
-            <div aria-hidden="true" className="pointer-events-none absolute inset-[8px] rounded-[5px] border border-[rgba(199,154,59,0.5)]" />
-            <div className="flex items-center justify-center gap-2 mb-3 text-[var(--gold)]" aria-hidden="true">
-              <span className="h-px w-8" style={{ background: 'currentColor', opacity: 0.6 }} />
-              <span className="text-[12px]">✦</span>
-              <span className="h-px w-8" style={{ background: 'currentColor', opacity: 0.6 }} />
+            <div className="absolute top-0 bottom-0 left-[48px] w-px border-l-2 border-dashed border-[rgba(28,13,12,0.15)]" aria-hidden="true" />
+            <div className="absolute top-0 bottom-0 left-0 w-[48px] flex items-center justify-center bg-[rgba(28,13,12,0.03)]" aria-hidden="true">
+               <span className="transform -rotate-90 text-[10px] tracking-[4px] uppercase font-bold text-[var(--cocoa)] opacity-40 whitespace-nowrap">Admit One</span>
             </div>
-            <h4 className="font-display font-normal text-[24px] mb-[10px] text-[var(--cocoa)]">{card.title}</h4>
-            <p className="italic text-[17px] text-[#1d0e0d] leading-relaxed opacity-80">{card.body}</p>
+            
+            <div aria-hidden="true" className="pointer-events-none absolute inset-[8px] left-[56px] rounded-[3px] stitch-border border-[rgba(199,154,59,0.4)]" />
+            
+            <div className="ml-[24px]">
+              <div className="flex items-center justify-center gap-2 mb-3 text-[var(--gold)]" aria-hidden="true">
+                <span className="h-px w-8" style={{ background: 'currentColor', opacity: 0.6 }} />
+                <span className="text-[12px]">✦</span>
+                <span className="h-px w-8" style={{ background: 'currentColor', opacity: 0.6 }} />
+              </div>
+              <h4 className="font-display font-normal text-[24px] mb-[10px] text-[var(--cocoa)]">{card.title}</h4>
+              <p className="italic text-[17px] text-[#1d0e0d] leading-relaxed opacity-80">{card.body}</p>
+            </div>
           </motion.div>
         ))}
       </div>
