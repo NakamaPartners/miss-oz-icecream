@@ -306,6 +306,10 @@
     }
   }
 
+  .mq-track:hover {
+    animation-play-state: paused;
+  }
+
   .stitch-border {
     border: 2px dashed rgba(28,13,12,0.25);
   }
@@ -582,8 +586,184 @@
   #hero *,
   .bulbs-a, .bulbs-b,
   .marquee-sign::before,
-  .animate-\[mq_32s_linear_infinite\] {
+  .animate-\[mq_32s_linear_infinite\],
+  .nav-link::after,
+  .tape-peel,
+  .flicker-hover:hover,
+  .wax-seal,
+  .sprinkle,
+  .menu-card-img-inner,
+  .menu-book,
+  .ticket-lift,
+  .poster-lift {
     animation: none !important;
+    transition: none !important;
   }
+  /* Neutralize transforms too — the flip is decorative (card text is duplicated below the image) */
+  .group:hover .menu-card-img-inner,
+  .group:focus-within .menu-card-img-inner {
+    transform: none !important;
+  }
+  .ledger-input,
+  .ledger-input:focus {
+    transform: none !important;
+    transition: none !important;
+  }
+  /* Any Tailwind hover-translate micro-lift (vote buttons, taped cards, menu cards) */
+  [class*="hover:-translate"],
+  [class*="hover:-translate"]:hover {
+    transform: none !important;
+    transition: none !important;
+  }
+  .nav-link::after,
+  .tape-peel,
+  .wax-seal,
+  .sprinkle,
+  .menu-book,
+  .ticket-lift,
+  .poster-lift {
+    transform: none !important;
+  }
+  .group:hover .tape-peel, .group:focus-visible .tape-peel, .focus-within .tape-peel { transform: none !important; }
+  .menu-book:hover { transform: none !important; box-shadow: 0 34px 80px rgba(0,0,0,0.55), inset 0 0 0 2px var(--gold), inset 0 0 0 4px var(--berry-deep) !important; }
+  .poster-lift:hover { transform: none !important; box-shadow: 0 24px 54px rgba(28,13,12,0.4), inset 0 0 0 1px rgba(255,244,214,0.14) !important; }
+  .wax-seal:hover { transform: none !important; filter: drop-shadow(0 8px 24px rgba(28,13,12,0.3)); }
   .bulbs-b { opacity: 0.55; }
+}
+
+/* Nav Bulb Underline */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -4px; height: 5px;
+  background-image: radial-gradient(circle at center, var(--gold-hi) 0 2px, transparent 2.5px);
+  background-size: 10px 5px;
+  background-repeat: repeat-x;
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 0.2s, transform 0.2s;
+  filter: drop-shadow(0 0 3px rgba(227,180,76,0.6));
+}
+.nav-link:hover::after, .nav-link:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tape Peel Interaction */
+.tape-peel {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  transform-origin: top center;
+}
+.group:hover .tape-peel, .group:focus-visible .tape-peel, a:hover .tape-peel, a:focus-visible .tape-peel, button:hover .tape-peel, button:focus-visible .tape-peel, .hover-target:hover .tape-peel {
+  transform: scaleY(0.7) rotate(-2deg) translateY(-2px);
+  filter: drop-shadow(0 4px 2px rgba(28,13,12,0.3));
+}
+
+/* Ledger field interaction */
+.ledger-input {
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.ledger-input:focus {
+  background-color: rgba(255,255,255,0.4) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(28,13,12,0.05);
+  border-bottom-style: solid;
+}
+
+/* Flicker effect on hover */
+.flicker-hover {
+  transition: filter 0.2s ease;
+}
+.flicker-hover:hover, .flicker-hover:focus-visible {
+  animation: lights-flicker 0.2s infinite alternate;
+}
+@keyframes lights-flicker {
+  0% { filter: brightness(1); }
+  30% { filter: brightness(1.2) drop-shadow(0 0 8px rgba(255,244,214,0.6)); }
+  70% { filter: brightness(0.9); }
+  100% { filter: brightness(1.3) drop-shadow(0 0 12px rgba(227,180,76,0.8)); }
+}
+
+/* Menu Flip Cards */
+.perspective-1000 { perspective: 1000px; }
+.menu-card-img-inner {
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.group:hover .menu-card-img-inner, .group:focus-within .menu-card-img-inner {
+  transform: rotateY(180deg);
+}
+.card-front, .card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Wax Seal Interaction */
+.wax-seal {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+}
+.wax-seal:hover {
+  transform: scale(1.15) rotate(8deg);
+  filter: drop-shadow(0 12px 24px rgba(28,13,12,0.4));
+}
+.wax-seal-crack {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M35 15 Q40 30 35 45 T45 70 Q42 85 55 95' stroke='rgba(28,13,12,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M35 45 Q50 40 65 55' stroke='rgba(28,13,12,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  opacity: 0;
+  transition: opacity 0.3s ease 0.1s;
+  pointer-events: none;
+}
+.wax-seal:hover .wax-seal-crack {
+  opacity: 1;
+}
+
+/* Sprinkles */
+.sprinkle {
+  position: absolute;
+  width: 6px;
+  height: 14px;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  animation: sprinkle-pop 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+@keyframes sprinkle-pop {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+  60% { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1) rotate(var(--r)); opacity: 0; }
+}
+
+/* Menu Book Hover */
+.menu-book {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+}
+.menu-book:hover {
+  transform: translateY(-8px) rotateX(2deg);
+  box-shadow: 0 44px 90px rgba(0,0,0,0.6), inset 0 0 0 2px var(--gold), inset 0 0 0 4px var(--berry-deep) !important;
+}
+
+/* Ticket Lift */
+.ticket-lift {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+.ticket-lift:hover, .ticket-lift:focus-visible {
+  transform: translateY(-4px) rotate(-1deg);
+  box-shadow: 0 16px 40px rgba(28,13,12,0.2) !important;
+}
+
+/* Poster Lift */
+.poster-lift {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+}
+.poster-lift:hover {
+  transform: translateY(-6px) rotate(1.5deg);
+  box-shadow: 0 34px 64px rgba(28,13,12,0.5), inset 0 0 0 1px rgba(255,244,214,0.14) !important;
 }

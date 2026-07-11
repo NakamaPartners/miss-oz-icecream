@@ -168,7 +168,7 @@ export default function Guestbook() {
                 onChange={(e) => setName(e.target.value)}
                 maxLength={40}
                 placeholder="e.g. The Alvarez family"
-                className="w-full bg-transparent border-b-2 border-[rgba(28,13,12,0.28)] pb-[6px] mb-[28px] text-[22px] font-script text-[var(--berry-deep)] placeholder:text-[rgba(28,13,12,0.3)] placeholder:font-sans placeholder:italic placeholder:text-[16px] focus:outline-none focus:border-[var(--berry)] transition-colors"
+                className="ledger-input w-full bg-transparent border-b-2 border-[rgba(28,13,12,0.28)] pb-[6px] mb-[28px] text-[22px] font-script text-[var(--berry-deep)] placeholder:text-[rgba(28,13,12,0.3)] placeholder:font-sans placeholder:italic placeholder:text-[16px] focus:outline-none focus:border-[var(--berry)] transition-colors rounded-sm px-1 py-1"
               />
 
               <label htmlFor="gb-note" className="block text-[11px] tracking-[3px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-1" style={{ fontFamily: 'var(--font-sans)' }}>
@@ -181,7 +181,7 @@ export default function Guestbook() {
                 maxLength={180}
                 rows={3}
                 placeholder="A memory, a favorite flavor, a hello…"
-                className="w-full bg-transparent border-0 rounded-none px-2 text-[18px] leading-[34px] text-[#1d0e0d] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic resize-none focus:outline-none focus:bg-[rgba(255,255,255,0.4)] transition-colors mb-4"
+                className="ledger-input w-full bg-transparent border-0 rounded-none px-2 py-1 text-[18px] leading-[34px] text-[#1d0e0d] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic resize-none focus:outline-none focus:bg-[rgba(255,255,255,0.4)] transition-colors mb-4"
                 style={{
                   backgroundImage: 'repeating-linear-gradient(transparent 0, transparent 32.5px, rgba(28,13,12,0.08) 32.5px, rgba(28,13,12,0.08) 34px)',
                   backgroundAttachment: 'local'

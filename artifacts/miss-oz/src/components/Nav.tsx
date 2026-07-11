@@ -22,12 +22,12 @@ export default function Nav() {
           />
         </a>
         <div className="flex items-center gap-5 text-[15px] font-semibold tracking-[0.3px]">
-          <button type="button" onClick={() => scrollTo('about')} className="hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">About</button>
-          <button type="button" onClick={() => scrollTo('menu')} className="hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">Menu</button>
-          <button type="button" onClick={() => scrollTo('wholesale')} className="hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">Wholesale</button>
-          <button type="button" onClick={() => scrollTo('events')} className="hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">Events</button>
-          <button type="button" onClick={() => scrollTo('contact')} className="hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">Contact</button>
-          <button type="button" className="bg-[var(--cocoa)] text-[var(--cream)] py-2.5 px-6 rounded-full text-[14px] tracking-[1px] hover:bg-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]">Order Online</button>
+          <button type="button" onClick={() => scrollTo('about')} className="nav-link hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">About</button>
+          <button type="button" onClick={() => scrollTo('menu')} className="nav-link hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">Menu</button>
+          <button type="button" onClick={() => scrollTo('wholesale')} className="nav-link hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">Wholesale</button>
+          <button type="button" onClick={() => scrollTo('events')} className="nav-link hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">Events</button>
+          <button type="button" onClick={() => scrollTo('contact')} className="nav-link hidden md:inline-block text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4">Contact</button>
+          <button type="button" className="flicker-hover bg-[var(--cocoa)] text-[var(--cream)] py-2.5 px-6 rounded-full text-[14px] tracking-[1px] hover:bg-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]">Order Online</button>
         </div>
       </nav>
     </>

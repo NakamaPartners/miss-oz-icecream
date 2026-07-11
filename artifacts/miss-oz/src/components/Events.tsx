@@ -43,7 +43,7 @@ export default function Events() {
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.25 + i * 0.1 }}
-            className="ticket-notch relative rounded-[8px] p-[36px] pt-[40px] text-center bg-[var(--cream-hi)] overflow-hidden"
+            className="ticket-notch ticket-lift relative rounded-[8px] p-[36px] pt-[40px] text-center bg-[var(--cream-hi)] overflow-hidden"
             style={{ boxShadow: '0 10px 30px rgba(28,13,12,0.16)', border: '2px solid var(--gold)' }}
           >
             <div className="absolute top-0 bottom-0 left-[48px] w-px border-l-2 border-dashed border-[rgba(28,13,12,0.15)]" aria-hidden="true" />

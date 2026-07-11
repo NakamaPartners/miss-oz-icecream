@@ -71,7 +71,7 @@ export default function Postcard() {
                 <a
                   href={hrefFor(item.target)}
                   onClick={(e) => handleNav(e, item.target)}
-                  className="text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors uppercase tracking-[3px] sm:tracking-[5px] text-[11px] sm:text-[13px] font-bold focus-visible:outline-none focus-visible:text-[var(--berry)] focus-visible:underline underline-offset-4 opacity-90 hover:opacity-100"
+                  className="nav-link text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors uppercase tracking-[3px] sm:tracking-[5px] text-[11px] sm:text-[13px] font-bold focus-visible:outline-none focus-visible:text-[var(--berry)] opacity-90 hover:opacity-100"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   {item.label}
@@ -139,7 +139,7 @@ export default function Postcard() {
                   boxShadow: 'inset 0 0 0 2px rgba(255,244,214,0.35), 0 6px 16px rgba(28,13,12,0.2)',
                 }}
               >
-                <div className="tape-strip top-[-8px] left-1/2 -translate-x-1/2 rotate-2 group-hover:rotate-3 transition-transform" aria-hidden="true" />
+                <div className="tape-strip tape-peel top-[-8px] left-1/2 -translate-x-1/2 rotate-2" aria-hidden="true" />
                 <div className="flex flex-col justify-between flex-1 min-w-0 pt-2">
                   <div>
                     <span className="block text-[10.5px] tracking-[3px] uppercase font-bold mb-1.5" style={{ color: t.eyebrow, fontFamily: 'var(--font-sans)' }}>{p.sub}</span>

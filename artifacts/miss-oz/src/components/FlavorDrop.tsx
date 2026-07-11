@@ -45,14 +45,14 @@ export default function FlavorDrop() {
 
           {/* the frame */}
           <div
-            className="relative z-10 rounded-[8px] p-[9px]"
+            className="poster-lift group relative z-10 rounded-[8px] p-[9px]"
             style={{
               background: 'linear-gradient(150deg, #23100e, #3a1c17 55%, #23100e)',
               boxShadow: '0 24px 54px rgba(28,13,12,0.4), inset 0 0 0 1px rgba(255,244,214,0.14)',
             }}
           >
-            <div className="tape-strip top-[-10px] right-[10%] rotate-3" aria-hidden="true" />
-            <div className="tape-strip top-[-6px] left-[10%] -rotate-6" aria-hidden="true" />
+            <div className="tape-strip tape-peel top-[-10px] right-[10%] rotate-3" aria-hidden="true" />
+            <div className="tape-strip tape-peel top-[-6px] left-[10%] -rotate-6" aria-hidden="true" />
             <div className="rounded-[4px] p-[6px]" style={{ background: 'var(--cream-hi)' }}>
               <img
                 src="/images/seasonal-pumpkin-poster.webp"

@@ -25,6 +25,8 @@ function CountUp({ to, reduce, suffix = '' }: { to: number; reduce: boolean; suf
   return <>{val}{suffix}</>;
 }
 
+const VOTE_KEY = 'missoz-flavor-vote';
+
 export default function VoteFlavor() {
   const reduce = !!useReducedMotion();
   const [votes, setVotes] = useState([84, 121, 63]);
@@ -38,10 +40,33 @@ export default function VoteFlavor() {
 
   useEffect(() => () => { if (burstTimer.current) clearTimeout(burstTimer.current); }, []);
 
+  // Restore a previous vote ("one vote each") from this browser
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(VOTE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw) as { votes?: unknown; choice?: unknown };
+      if (Array.isArray(saved.votes) && saved.votes.length === 3 && saved.votes.every((v) => typeof v === 'number')) {
+        setVotes(saved.votes as number[]);
+      }
+      if (typeof saved.choice === 'number' && saved.choice >= 0 && saved.choice <= 2) {
+        setChoice(saved.choice);
+      }
+    } catch {
+      // ignore corrupt storage
+    }
+  }, []);
+
   function handleVote(i: number) {
     if (revealed) return;
-    setVotes((prev) => prev.map((v, idx) => (idx === i ? v + 1 : v)));
+    const next = votes.map((v, idx) => (idx === i ? v + 1 : v));
+    setVotes(next);
     setChoice(i);
+    try {
+      localStorage.setItem(VOTE_KEY, JSON.stringify({ votes: next, choice: i }));
+    } catch {
+      // storage unavailable (private mode) — vote still counts for this visit
+    }
     setBurst(i);
     if (!reduce) {
       if (burstTimer.current) clearTimeout(burstTimer.current);
@@ -159,13 +184,34 @@ export default function VoteFlavor() {
               )}
 
               {/* Button (before vote) or result (after) */}
-              <div className="mt-auto relative z-10">
+              <div className="mt-auto relative z-10 min-h-[64px] flex items-center justify-center">
                 {!revealed ? (
                   <button
                     onClick={() => handleVote(i)}
-                    className="vote-btn clickable font-sans bg-[var(--cocoa)] text-[var(--cream)] border-none py-[12px] px-[30px] rounded-full text-[15px] font-semibold tracking-[0.5px] mech-btn hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--berry)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                    className="relative vote-btn clickable font-sans bg-[var(--cocoa)] text-[var(--cream)] border-none py-[12px] px-[30px] rounded-full text-[15px] font-semibold tracking-[0.5px] mech-btn hover:bg-[var(--berry)] hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--berry)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   >
                     Vote for this
+                    {burst === i && !reduce && [...Array(12)].map((_, j) => {
+                      const angle = (j * 30 + Math.random() * 20 - 10) * (Math.PI / 180);
+                      const dist = 50 + Math.random() * 30;
+                      const tx = Math.cos(angle) * dist + 'px';
+                      const ty = Math.sin(angle) * dist + 'px';
+                      const r = Math.random() * 360 + 'deg';
+                      const colors = ['var(--berry)', 'var(--gold-hi)', 'var(--cream-hi)'];
+                      const bg = colors[j % colors.length];
+                      return (
+                        <span
+                          key={j}
+                          className="sprinkle"
+                          style={{
+                            '--tx': tx,
+                            '--ty': ty,
+                            '--r': r,
+                            backgroundColor: bg,
+                          } as React.CSSProperties}
+                        />
+                      );
+                    })}
                   </button>
                 ) : (
                   <div>

@@ -51,7 +51,7 @@ export default function Wholesale() {
 
           {/* leather-look cover */}
           <div
-            className="relative rounded-[12px] p-[10px] md:p-[14px]"
+            className="menu-book relative rounded-[12px] p-[10px] md:p-[14px]"
             style={{ background: 'linear-gradient(160deg, var(--berry-deep), #3a0e20)', boxShadow: '0 34px 80px rgba(0,0,0,0.55), inset 0 0 0 2px var(--gold), inset 0 0 0 4px var(--berry-deep)' }}
           >
             {/* The ribbon bookmark, hangs below the cover */}

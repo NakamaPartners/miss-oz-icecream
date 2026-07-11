@@ -78,23 +78,37 @@ export default function Menu() {
                   className="pointer-events-none absolute inset-[10px] z-20 rounded-[6px]"
                   style={{ border: '1px solid var(--gold)', boxShadow: 'inset 0 0 0 3px var(--cream), inset 0 0 0 4px rgba(199,154,59,0.45)' }}
                 />
-                <div className="relative h-[210px] overflow-hidden">
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-105"
-                    style={{ filter: 'sepia(0.22) saturate(1.05) contrast(0.98)' }}
-                    loading="lazy"
-                  />
-                  {/* vintage warm wash + vignette */}
-                  <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(120% 90% at 50% 20%, transparent 55%, rgba(94,23,53,0.28) 100%)', mixBlendMode: 'multiply' }} />
-                  {/* roman-numeral chapter medallion */}
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute top-[18px] left-[18px] z-10 grid place-items-center w-[44px] h-[44px] rounded-full text-[var(--cream-hi)]"
-                    style={{ background: 'var(--berry-deep)', border: '2px solid var(--gold-hi)', boxShadow: '0 3px 8px rgba(28,13,12,0.3)' }}
-                  >
-                    <span className="font-display text-[16px] leading-none tracking-[0.5px]">{card.no}</span>
+                
+                {/* 3D Flip Card Container */}
+                <div className="relative h-[210px] perspective-1000">
+                  <div className="relative w-full h-full menu-card-img-inner">
+                    {/* Front: Image */}
+                    <div className="absolute inset-0 card-front">
+                      <img
+                        src={card.image}
+                        alt={card.title}
+                        className="w-full h-full object-cover"
+                        style={{ filter: 'sepia(0.22) saturate(1.05) contrast(0.98)' }}
+                        loading="lazy"
+                      />
+                      {/* vintage warm wash + vignette */}
+                      <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(120% 90% at 50% 20%, transparent 55%, rgba(94,23,53,0.28) 100%)', mixBlendMode: 'multiply' }} />
+                      {/* roman-numeral chapter medallion */}
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute top-[18px] left-[18px] z-10 grid place-items-center w-[44px] h-[44px] rounded-full text-[var(--cream-hi)]"
+                        style={{ background: 'var(--berry-deep)', border: '2px solid var(--gold-hi)', boxShadow: '0 3px 8px rgba(28,13,12,0.3)' }}
+                      >
+                        <span className="font-display text-[16px] leading-none tracking-[0.5px]">{card.no}</span>
+                      </div>
+                    </div>
+                    {/* Back: Reveal Text */}
+                    <div className="absolute inset-0 card-back bg-[var(--teal-deep)] flex items-center justify-center p-6 text-center" style={{ boxShadow: 'inset 0 0 0 2px var(--gold)' }}>
+                      <div className="absolute inset-[6px] border border-dashed border-[var(--gold-hi)] opacity-40 rounded-[4px]" aria-hidden="true" />
+                      <p className="font-sans italic text-[var(--cream-hi)] text-[16px] leading-[1.6] relative z-10">
+                        {card.desc}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="relative z-10 px-7 pt-6 pb-8">

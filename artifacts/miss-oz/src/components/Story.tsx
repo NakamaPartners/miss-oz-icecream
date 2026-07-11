@@ -49,11 +49,12 @@ export default function Story() {
         <div aria-hidden="true" className="pointer-events-none absolute inset-[18px] rounded-[2px] stitch-border border-[rgba(28,13,12,0.22)]" />
 
         {/* Wax-seal stamp riding the top edge */}
-        <div aria-hidden="true" className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-[40px] z-10">
+        <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 -top-[40px] z-10">
           <div
-            className="relative flex items-center justify-center rounded-full"
+            className="wax-seal relative flex items-center justify-center rounded-full cursor-pointer"
             style={{ width: 84, height: 84, background: 'var(--berry)', boxShadow: '0 8px 24px rgba(28,13,12,0.3), inset 0 4px 8px rgba(255,255,255,0.2), inset 0 -4px 8px rgba(0,0,0,0.3)' }}
           >
+            <div className="wax-seal-crack" />
             <svg width="84" height="84" viewBox="0 0 100 100" aria-hidden="true" className="absolute inset-0">
               <defs><path id="storyseal" d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0" /></defs>
               <text style={{ fontFamily: "'EB Garamond', serif", fontSize: 10.5, letterSpacing: '2px', fontWeight: 600, textTransform: 'uppercase', fill: 'var(--cream)' }}>
@@ -61,7 +62,7 @@ export default function Story() {
               </text>
             </svg>
             {/* little cone glyph */}
-            <svg width="26" height="30" viewBox="0 0 26 30" aria-hidden="true">
+            <svg width="26" height="30" viewBox="0 0 26 30" aria-hidden="true" className="relative z-10">
               <circle cx="13" cy="9" r="7" fill="none" stroke="var(--cream)" strokeWidth="2" />
               <path d="M6 15 L20 15 L13 29 Z" fill="none" stroke="var(--cream)" strokeWidth="2" strokeLinejoin="round" />
             </svg>

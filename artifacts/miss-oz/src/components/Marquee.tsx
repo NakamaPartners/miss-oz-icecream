@@ -15,7 +15,7 @@ export default function Marquee() {
       <div className="checker-floor h-[14px]" />
       <div className="h-[4px] bg-[var(--gold)] shadow-[inset_0_1px_2px_rgba(255,255,255,0.7),0_2px_4px_rgba(0,0,0,0.5)] relative z-20" aria-hidden="true" />
       <div className="overflow-hidden py-6 shadow-[inset_0_8px_24px_rgba(0,0,0,0.8),inset_0_-8px_24px_rgba(0,0,0,0.8)]" style={{ background: '#110505' }}>
-        <div className="flex gap-8 w-max items-center animate-[mq_32s_linear_infinite]">
+        <div className="mq-track flex gap-8 w-max items-center animate-[mq_32s_linear_infinite]">
           {[...Array(2)].map((_, rep) => (
             <div key={rep} className="flex gap-8 items-center">
               {ITEMS.map((item, i) => (
