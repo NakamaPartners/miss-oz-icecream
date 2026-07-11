@@ -21,15 +21,17 @@ export default function Story() {
         <path d="M50 8 C30 20 30 50 50 62 C70 50 70 20 50 8 Z M50 40 C38 48 38 70 50 82 C62 70 62 48 50 40 Z" fill="none" stroke="var(--cocoa)" strokeWidth="1.5" />
       </svg>
 
-      {/* Vintage ice cream mascot — still image peeking beside the card */}
-      <div className="block absolute bottom-[8px] left-[1vw] md:left-[2vw] xl:left-[4vw] z-20 w-[clamp(96px,15vw,210px)] pointer-events-none rotate-[-3deg]">
-        <img
-          src="/images/ice-cream-mascot.webp"
-          alt="A cheerful vintage cartoon ice cream cone with a smiley face, waving hello"
-          className="w-full select-none"
-          style={{ filter: 'drop-shadow(0 12px 18px rgba(28,13,12,0.28))' }}
-        />
-      </div>
+      {/* Vintage ice cream mascot parade — still images repeating across the full width */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-[8px] left-0 right-0 z-20 pointer-events-none h-[clamp(88px,11vw,170px)]"
+        style={{
+          backgroundImage: 'url(/images/ice-cream-mascot.webp)',
+          backgroundRepeat: 'space no-repeat',
+          backgroundPosition: 'bottom center',
+          backgroundSize: 'auto 100%',
+        }}
+      />
 
       {/* Aged paper panel */}
       <motion.div
