@@ -39,22 +39,11 @@ function handleNav(e: React.MouseEvent<HTMLAnchorElement>, target: string) {
   document.getElementById(target)?.scrollIntoView({ behavior });
 }
 
-function Bulbs() {
-  return (
-    <>
-      <span className="bulbstrip bulbstrip-h top" aria-hidden="true"><span className="bulbs bulbs-a" /><span className="bulbs bulbs-b" /></span>
-      <span className="bulbstrip bulbstrip-h bottom" aria-hidden="true"><span className="bulbs bulbs-a" /><span className="bulbs bulbs-b" /></span>
-      <span className="bulbstrip bulbstrip-v left" aria-hidden="true"><span className="bulbs bulbs-a" /><span className="bulbs bulbs-b" /></span>
-      <span className="bulbstrip bulbstrip-v right" aria-hidden="true"><span className="bulbs bulbs-a" /><span className="bulbs bulbs-b" /></span>
-    </>
-  );
-}
-
 export default function Postcard() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden px-[4vw] pt-[clamp(26px,4vw,52px)] pb-[clamp(16px,2vw,30px)] bg-[var(--cream-hi)]"
+      className="relative overflow-hidden px-[6vw] pt-[clamp(40px,6vw,70px)] pb-[clamp(20px,3vw,40px)] bg-[var(--cream-hi)]"
       aria-label="Miss Oz Ice Cream & Dessert Cafe"
     >
       {/* festive pennant bunting greets you at the door */}
@@ -82,33 +71,28 @@ export default function Postcard() {
         ))}
       </nav>
 
-      {/* HERO IMAGE — horizontal vintage scene, framed with the blinking bulb border */}
-      <div className="poster-frame mx-auto max-w-[1080px] rounded-[10px] shadow-[0_16px_40px_rgba(28,13,12,0.3)]">
-        <Bulbs />
-        <div
-          className="relative overflow-hidden rounded-[6px] aspect-[5/4] sm:aspect-[4/3]"
-          style={{ border: '5px solid var(--cream)', boxShadow: 'inset 0 0 0 1px rgba(199,154,59,0.55), 0 10px 26px rgba(28,13,12,0.3)' }}
+      {/* HERO IMAGE — seamless multiplied vignette */}
+      <div className="relative mx-auto max-w-[1200px] mt-[clamp(24px,4vw,48px)] mb-[clamp(32px,5vw,60px)]">
+        <div 
+          className="relative w-full aspect-[4/3] sm:aspect-[7/5] transition-all duration-700"
+          style={{ 
+            WebkitMaskImage: 'radial-gradient(ellipse 95% 115% at 50% 42%, black 45%, transparent 92%)',
+            maskImage: 'radial-gradient(ellipse 95% 115% at 50% 42%, black 45%, transparent 92%)',
+            mixBlendMode: 'multiply'
+          }}
         >
           <img
             src="/images/hero-parlor-v4.webp"
             alt="Vintage golden-hour scene — a giant bulb-lit Miss Oz marquee sign with a starburst topper, reading Ice Cream & Cafe, Est. 2007, beside a striped-awning ice cream parlor with a retro ice cream van parked out front"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-[50%_78%]"
           />
-          <div className="photo-corner photo-corner-tl" aria-hidden="true" />
-          <div className="photo-corner photo-corner-tr" aria-hidden="true" />
-          <div className="photo-corner photo-corner-bl" aria-hidden="true" />
-          <div className="photo-corner photo-corner-br" aria-hidden="true" />
-
-          {/* branding now lives in the illustration; keep an accessible page heading */}
           <h1 className="sr-only">Miss Oz — Ice Cream &amp; Dessert Cafe</h1>
-
-          {/* grain over the scene for aged texture */}
-          <div className="filmgrain" aria-hidden="true" />
+          <div className="filmgrain opacity-60" aria-hidden="true" />
         </div>
       </div>
 
       {/* SECTION PANELS — vintage cards, click to explore (minimal interaction) */}
-      <div className="mx-auto max-w-[1080px] mt-[clamp(18px,2.4vw,30px)]">
+      <div className="mx-auto max-w-[1080px]">
         <div className="flex items-center justify-center gap-3 mb-[clamp(14px,1.8vw,22px)]">
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
           <span className="text-[var(--berry-deep)] text-[12px] tracking-[4px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>Step Inside</span>

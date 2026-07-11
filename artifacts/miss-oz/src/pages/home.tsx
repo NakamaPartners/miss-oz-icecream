@@ -13,12 +13,51 @@ const CheckerRule = () => (
   <div className="checker-floor h-[26px] border-y-2 border-[var(--cocoa)]" aria-hidden="true" />
 );
 
+function GlobalMarqueeBorder() {
+  const frameWidth = 'clamp(14px, 2vw, 26px)';
+  const centerOffset = `calc(3px + (${frameWidth} / 2))`;
+  
+  return (
+    <div className="fixed inset-0 z-[960] pointer-events-none" aria-hidden="true">
+      {/* Outer gold ring */}
+      <div className="absolute inset-0 border-[3px] border-[var(--gold)] opacity-80" />
+      
+      {/* Main teal frame */}
+      <div 
+        className="absolute inset-[3px] border-[var(--teal-deep)]" 
+        style={{ 
+          borderWidth: frameWidth, 
+          boxShadow: 'inset 0 0 0 2px var(--gold)',
+          opacity: 0.95
+        }} 
+      />
+      
+      {/* Marquee Bulbs embedded in the frame */}
+      <span className="bulbstrip bulbstrip-h" style={{ left: centerOffset, right: centerOffset, top: centerOffset, transform: 'translateY(-50%)' }}>
+        <span className="bulbs bulbs-a" /><span className="bulbs bulbs-b" />
+      </span>
+      <span className="bulbstrip bulbstrip-h" style={{ left: centerOffset, right: centerOffset, bottom: centerOffset, transform: 'translateY(50%)' }}>
+        <span className="bulbs bulbs-a" /><span className="bulbs bulbs-b" />
+      </span>
+      <span className="bulbstrip bulbstrip-v" style={{ top: centerOffset, bottom: centerOffset, left: centerOffset, transform: 'translateX(-50%)' }}>
+        <span className="bulbs bulbs-a" /><span className="bulbs bulbs-b" />
+      </span>
+      <span className="bulbstrip bulbstrip-v" style={{ top: centerOffset, bottom: centerOffset, right: centerOffset, transform: 'translateX(50%)' }}>
+        <span className="bulbs bulbs-a" /><span className="bulbs bulbs-b" />
+      </span>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main className="relative bg-[var(--cream)] min-h-screen">
       <Loader />
       <div className="paper-overlay" aria-hidden="true" />
       <div className="grain-overlay" aria-hidden="true" />
+      
+      <GlobalMarqueeBorder />
+      
       <Postcard />
       <Marquee />
       <div id="about"><Story /></div>
