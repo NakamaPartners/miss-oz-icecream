@@ -21,17 +21,23 @@ export default function Story() {
         <path d="M50 8 C30 20 30 50 50 62 C70 50 70 20 50 8 Z M50 40 C38 48 38 70 50 82 C62 70 62 48 50 40 Z" fill="none" stroke="var(--cocoa)" strokeWidth="1.5" />
       </svg>
 
-      {/* Vintage ice cream mascot parade — still images repeating across the full width */}
+      {/* Vintage mascot parade — a still cast of parlor characters strolling across the full width */}
       <div
         aria-hidden="true"
-        className="absolute bottom-[8px] left-0 right-0 z-20 pointer-events-none h-[clamp(88px,11vw,170px)]"
-        style={{
-          backgroundImage: 'url(/images/ice-cream-mascot.webp)',
-          backgroundRepeat: 'space no-repeat',
-          backgroundPosition: 'bottom center',
-          backgroundSize: 'auto 100%',
-        }}
-      />
+        className="absolute bottom-[8px] left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-end justify-center gap-[clamp(18px,3vw,44px)] h-[clamp(88px,11vw,170px)] w-max"
+      >
+        {[...Array(4)].map((_, rep) =>
+          ['/images/ice-cream-mascot.webp', '/images/mascot-shake.webp', '/images/mascot-popsicle.webp', '/images/mascot-sundae.webp', '/images/mascot-croffle.webp'].map((src, i) => (
+            <img
+              key={`${rep}-${i}`}
+              src={src}
+              alt=""
+              loading="lazy"
+              className="h-full w-auto shrink-0"
+            />
+          ))
+        )}
+      </div>
 
       {/* Aged paper panel */}
       <motion.div
