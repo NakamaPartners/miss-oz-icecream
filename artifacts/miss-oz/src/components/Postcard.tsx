@@ -101,7 +101,7 @@ export default function Postcard() {
           }}
         >
           <img
-            src="/images/hero-parlor-v4.webp"
+            src="/images/hero-parlor-v5.webp"
             alt="Vintage golden-hour scene — a giant bulb-lit Miss Oz marquee sign with a starburst topper, reading Ice Cream & Cafe, Est. 2007, beside a striped-awning ice cream parlor with a retro ice cream van parked out front"
             className="w-full h-auto mix-blend-multiply grayscale-[15%] sepia-[25%] contrast-[1.1] opacity-90"
           />
