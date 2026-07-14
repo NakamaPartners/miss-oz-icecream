@@ -114,38 +114,58 @@ export default function Postcard() {
             className="absolute left-0 right-0 top-[clamp(14px,2.4vw,32px)] flex justify-center"
           >
             <div
-              className="relative text-center leading-none px-[clamp(22px,3.4vw,44px)] py-[clamp(12px,1.6vw,20px)] rounded-[6px]"
+              className="relative rounded-[10px] p-[5px]"
               style={{
-                background: 'var(--cream-hi)',
-                border: '2.5px solid var(--berry-deep)',
-                boxShadow:
-                  'inset 0 0 0 3px var(--cream-hi), inset 0 0 0 4.5px var(--berry-deep), 0 8px 26px rgba(20,10,8,0.45)',
+                background: 'var(--berry-deep)',
+                boxShadow: '0 10px 30px rgba(20,10,8,0.5), 0 2px 6px rgba(20,10,8,0.35)',
               }}
             >
-              {/* corner ornaments */}
-              <span className="absolute top-[7px] left-[8px] text-[var(--berry-deep)] text-[10px] leading-none">✦</span>
-              <span className="absolute top-[7px] right-[8px] text-[var(--berry-deep)] text-[10px] leading-none">✦</span>
-              <span className="absolute bottom-[7px] left-[8px] text-[var(--berry-deep)] text-[10px] leading-none">✦</span>
-              <span className="absolute bottom-[7px] right-[8px] text-[var(--berry-deep)] text-[10px] leading-none">✦</span>
-
-              <span
-                className="block text-[var(--berry-deep)]"
+              <div
+                className="relative text-center leading-none rounded-[7px] px-[clamp(24px,3.6vw,48px)] py-[clamp(12px,1.6vw,18px)]"
                 style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(30px, 4.2vw, 52px)',
-                  letterSpacing: '0.01em',
+                  background:
+                    'radial-gradient(ellipse at 50% 0%, #fdf3dd 0%, var(--cream-hi) 60%, #f0dfbc 100%)',
+                  border: '1.5px dotted var(--gold)',
+                  outline: '1px solid rgba(93,26,58,0.35)',
+                  outlineOffset: '-4px',
                 }}
               >
-                Miss Oz
-              </span>
-              <span
-                className="mt-[8px] flex items-center justify-center gap-2 text-[9px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase text-[var(--berry-deep)]"
-                style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
-              >
-                <span className="inline-block w-6 h-px bg-[var(--berry-deep)] opacity-60" />
-                Ice Cream &amp; Dessert Cafe
-                <span className="inline-block w-6 h-px bg-[var(--berry-deep)] opacity-60" />
-              </span>
+                {/* EST row */}
+                <span
+                  className="flex items-center justify-center gap-2 text-[8px] sm:text-[9px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--berry-deep)] opacity-80"
+                  style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
+                >
+                  <span className="text-[var(--gold)] text-[9px]">✦</span>
+                  Est. 2007 · Pearl District
+                  <span className="text-[var(--gold)] text-[9px]">✦</span>
+                </span>
+
+                <span
+                  className="block mt-[6px] text-[var(--berry-deep)]"
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(30px, 4.2vw, 52px)',
+                    letterSpacing: '0.01em',
+                    textShadow: '0 1px 0 rgba(255,248,230,0.9), 0 2px 2px rgba(93,26,58,0.18)',
+                  }}
+                >
+                  Miss Oz
+                </span>
+
+                {/* divider */}
+                <span className="mt-[8px] mb-[7px] flex items-center justify-center gap-2" aria-hidden="true">
+                  <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
+                  <span className="text-[var(--berry)] text-[10px] leading-none rotate-45 inline-block">◆</span>
+                  <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
+                </span>
+
+                <span
+                  className="block text-[9px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase text-[var(--cocoa)]"
+                  style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
+                >
+                  Ice Cream &amp; Dessert Cafe
+                </span>
+              </div>
             </div>
           </div>
         </div>
