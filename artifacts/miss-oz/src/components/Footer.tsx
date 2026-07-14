@@ -14,36 +14,40 @@ export default function Footer() {
       <div className="clip-scallop-top absolute top-[-1px] left-0 right-0 h-[46px]" aria-hidden="true" />
       <Bunting className="absolute top-[54px] left-0 right-0" />
 
-      {/* Big editorial tagline */}
-      <div
-        className="leading-[1.02] mb-[10px]"
-        style={{
-          fontFamily: 'var(--font-groovy)',
-          fontWeight: 400,
-          fontStyle: 'italic',
-          fontSize: 'clamp(52px, 9vw, 116px)',
-        }}
-      >
-        Sweet Memories<br />
-        <em className="not-italic text-[var(--gold-hi)]">Begin Here.</em>
+      {/* Tagline + Oz riding shotgun, side by side so they never overlap */}
+      <div className="flex flex-wrap items-start justify-between gap-x-[40px] gap-y-[36px]">
+        <div className="min-w-0">
+          {/* Big editorial tagline */}
+          <div
+            className="leading-[1.02] mb-[10px]"
+            style={{
+              fontFamily: 'var(--font-groovy)',
+              fontWeight: 400,
+              fontStyle: 'italic',
+              fontSize: 'clamp(52px, 9vw, 116px)',
+            }}
+          >
+            Sweet Memories<br />
+            <em className="not-italic text-[var(--gold-hi)]">Begin Here.</em>
+          </div>
+
+          <span
+            className="text-[var(--pink)] mb-[60px] inline-block"
+            style={{ fontFamily: 'var(--font-script)', fontSize: 30 }}
+          >
+            — Miss Oz &amp; the whole parlor
+          </span>
+        </div>
+
+        <figure
+          className="relative w-[clamp(160px,16vw,210px)] rotate-[-3deg] bg-[var(--cream-hi)] p-[8px] pb-[10px] rounded-[3px] mx-auto sm:mx-0 mb-[40px] sm:mb-0 shrink-0"
+          style={{ boxShadow: '0 12px 32px rgba(0,0,0,0.4)' }}
+        >
+          <span aria-hidden="true" className="absolute -top-[11px] left-1/2 -translate-x-1/2 w-[64px] h-[20px] rotate-[3deg]" style={{ background: 'rgba(214,193,150,0.75)', boxShadow: '0 1px 3px rgba(28,13,12,0.2)' }} />
+          <img src="/images/oz-goggles.webp" alt="Oz the dog wearing driving goggles in the front seat of a car" loading="lazy" className="w-full aspect-[4/5] object-cover rounded-[2px] sepia-[10%] saturate-[0.94]" />
+          <figcaption className="font-script-alt text-[16px] text-[var(--berry-deep)] text-center mt-[6px] leading-tight">off to find the next flavor</figcaption>
+        </figure>
       </div>
-
-      <span
-        className="text-[var(--pink)] mb-[60px] inline-block"
-        style={{ fontFamily: 'var(--font-script)', fontSize: 30 }}
-      >
-        — Miss Oz &amp; the whole parlor
-      </span>
-
-      {/* Oz riding shotgun to the next flavor */}
-      <figure
-        className="hidden xl:block absolute right-[7vw] top-[96px] w-[200px] rotate-[-3deg] bg-[var(--cream-hi)] p-[8px] pb-[10px] rounded-[3px]"
-        style={{ boxShadow: '0 12px 32px rgba(0,0,0,0.4)' }}
-      >
-        <span aria-hidden="true" className="absolute -top-[11px] left-1/2 -translate-x-1/2 w-[64px] h-[20px] rotate-[3deg]" style={{ background: 'rgba(214,193,150,0.75)', boxShadow: '0 1px 3px rgba(28,13,12,0.2)' }} />
-        <img src="/images/oz-goggles.webp" alt="Oz the dog wearing driving goggles in the front seat of a car" loading="lazy" className="w-full aspect-[4/5] object-cover rounded-[2px] sepia-[10%] saturate-[0.94]" />
-        <figcaption className="font-script-alt text-[16px] text-[var(--berry-deep)] text-center mt-[6px] leading-tight">off to find the next flavor</figcaption>
-      </figure>
 
       {/* Four-column info + mailing list */}
       <div className="flex justify-between flex-wrap gap-[34px] border-t border-[rgba(242,225,194,0.3)] pt-[34px] text-[16px]">

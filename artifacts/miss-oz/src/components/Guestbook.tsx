@@ -95,17 +95,6 @@ export default function Guestbook() {
         style={{ background: 'radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(28,13,12,0.07) 100%)' }}
       />
 
-      {/* Oz keeping an eye on the book */}
-      <motion.figure
-        initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
-        className="hidden xl:block absolute right-[4vw] top-[110px] w-[190px] rotate-[3deg] bg-[var(--cream-hi)] p-[8px] pb-[10px] rounded-[3px] z-10"
-        style={{ boxShadow: '0 10px 28px rgba(28,13,12,0.18)' }}
-      >
-        <span aria-hidden="true" className="absolute -top-[11px] left-1/2 -translate-x-1/2 w-[64px] h-[20px] rotate-[-4deg]" style={{ background: 'rgba(214,193,150,0.75)', boxShadow: '0 1px 3px rgba(28,13,12,0.15)' }} />
-        <img src="/images/oz-couch.webp" alt="Oz the dog resting with her chin down, watching the room" loading="lazy" className="w-full aspect-square object-cover rounded-[2px] sepia-[10%] saturate-[0.94]" />
-        <figcaption className="font-script-alt text-[16px] text-[var(--berry-deep)] text-center mt-[6px] leading-tight">she reads every entry</figcaption>
-      </motion.figure>
-
       <div className="relative text-center max-w-[720px] mx-auto mb-[clamp(24px,3vw,40px)]">
         <motion.span
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
@@ -249,6 +238,17 @@ export default function Guestbook() {
             </div>
           </div>
         </div>
+
+        {/* Oz keeping an eye on the book — sits beside/below the ledger, never over text */}
+        <motion.figure
+          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.15 }}
+          className="relative w-[clamp(150px,15vw,190px)] rotate-[3deg] bg-[var(--cream-hi)] p-[8px] pb-[10px] rounded-[3px] mt-[46px] mx-auto md:mx-0 md:ml-auto md:mr-[10px]"
+          style={{ boxShadow: '0 10px 28px rgba(28,13,12,0.18)' }}
+        >
+          <span aria-hidden="true" className="absolute -top-[11px] left-1/2 -translate-x-1/2 w-[64px] h-[20px] rotate-[-4deg]" style={{ background: 'rgba(214,193,150,0.75)', boxShadow: '0 1px 3px rgba(28,13,12,0.15)' }} />
+          <img src="/images/oz-couch.webp" alt="Oz the dog resting with her chin down, watching the room" loading="lazy" className="w-full aspect-square object-cover rounded-[2px] sepia-[10%] saturate-[0.94]" />
+          <figcaption className="font-script-alt text-[16px] text-[var(--berry-deep)] text-center mt-[6px] leading-tight">she reads every entry</figcaption>
+        </motion.figure>
       </motion.div>
     </section>
   );
