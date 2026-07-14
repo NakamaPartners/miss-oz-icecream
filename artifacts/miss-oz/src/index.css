@@ -15,6 +15,13 @@
   font-display: swap;
 }
 @font-face {
+  font-family: 'Higante';
+  src: url('/fonts/Higante-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Macklin Display';
   src: url('/fonts/Macklin_Display_Bold_Italic.ttf') format('truetype');
   font-weight: 700;
@@ -131,10 +138,10 @@
   --app-font-sans: 'EB Garamond', serif;
   --app-font-serif: 'Playfair Display', serif;
   --app-font-mono: Menlo, monospace;
-  --font-display: 'Shrikhand', cursive;
+  --font-display: 'Higante', 'Shrikhand', cursive;
   --font-script: 'Kaleidos', 'Pacifico', cursive;
   --font-script-alt: 'Lemongrass', 'Pacifico', cursive;
-  --font-groovy: 'Bagel Fat One', 'Shrikhand', cursive;
+  --font-groovy: 'Higante', 'Bagel Fat One', 'Shrikhand', cursive;
 
   --radius: 0.5rem;
 }
