@@ -35,6 +35,16 @@ export default function Footer() {
         — Miss Oz &amp; the whole parlor
       </span>
 
+      {/* Oz riding shotgun to the next flavor */}
+      <figure
+        className="hidden xl:block absolute right-[7vw] top-[96px] w-[200px] rotate-[-3deg] bg-[var(--cream-hi)] p-[8px] pb-[10px] rounded-[3px]"
+        style={{ boxShadow: '0 12px 32px rgba(0,0,0,0.4)' }}
+      >
+        <span aria-hidden="true" className="absolute -top-[11px] left-1/2 -translate-x-1/2 w-[64px] h-[20px] rotate-[3deg]" style={{ background: 'rgba(214,193,150,0.75)', boxShadow: '0 1px 3px rgba(28,13,12,0.2)' }} />
+        <img src="/images/oz-goggles.webp" alt="Oz the dog wearing driving goggles in the front seat of a car" loading="lazy" className="w-full aspect-[4/5] object-cover rounded-[2px] sepia-[10%] saturate-[0.94]" />
+        <figcaption className="font-script-alt text-[16px] text-[var(--berry-deep)] text-center mt-[6px] leading-tight">off to find the next flavor</figcaption>
+      </figure>
+
       {/* Four-column info + mailing list */}
       <div className="flex justify-between flex-wrap gap-[34px] border-t border-[rgba(242,225,194,0.3)] pt-[34px] text-[16px]">
         {/* Address */}

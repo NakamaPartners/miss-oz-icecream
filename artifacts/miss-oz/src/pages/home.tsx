@@ -9,6 +9,7 @@ import Guestbook from '../components/Guestbook';
 import Footer from '../components/Footer';
 import FlavorDrop from '../components/FlavorDrop';
 import MeetOz from '../components/MeetOz';
+import { MotionConfig } from 'framer-motion';
 
 const CheckerRule = () => (
   <div className="checker-floor h-[26px] border-y-2 border-[var(--cocoa)]" aria-hidden="true" />
@@ -52,6 +53,7 @@ function GlobalMarqueeBorder() {
 
 export default function Home() {
   return (
+    <MotionConfig reducedMotion="user">
     <main className="relative bg-[var(--cream)] min-h-screen">
       <Loader />
       <div className="paper-overlay" aria-hidden="true" />
@@ -72,5 +74,6 @@ export default function Home() {
       <div id="vote"><VoteFlavor /></div>
       <Footer />
     </main>
+    </MotionConfig>
   );
 }

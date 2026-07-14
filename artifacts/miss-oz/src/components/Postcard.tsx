@@ -101,7 +101,7 @@ export default function Postcard() {
           }}
         >
           <img
-            src="/images/storefront-photo-wide.webp"
+            src="/images/storefront-photo-wide2.webp"
             alt="The real Miss Oz storefront in Portland's Pearl District — a corner shop with a neon Open sign in the window, lantern lights glowing inside, a plant-filled balcony above, and a bike parked out front"
             className="w-full h-auto mix-blend-multiply sepia-[12%] saturate-[0.92] contrast-[1.04] opacity-95"
           />

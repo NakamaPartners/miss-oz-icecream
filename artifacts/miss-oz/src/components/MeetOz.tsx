@@ -142,9 +142,9 @@ export default function MeetOz() {
           transition={{ duration: 0.7, delay: 0.35 }}
           className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 items-start"
         >
-          <Snapshot alt="Oz the dog in yellow boots among autumn leaves" caption="yellow boots season" rotate="-2.5deg" />
-          <Snapshot alt="Oz the dog wearing her crown" caption="her royal highness" rotate="1.5deg" />
-          <Snapshot alt="Oz the dog on a flavor research trip" caption="research department" rotate="-1deg" />
+          <Snapshot src="/images/oz-boots.webp" alt="Oz, a tricolor Cavalier King Charles Spaniel, wearing yellow boots in a carpet of autumn leaves" caption="yellow boots season" rotate="-2.5deg" />
+          <Snapshot src="/images/oz-flowers.webp" alt="Oz smiling on a sunny trail beside yellow wildflowers" caption="research department" rotate="1.5deg" />
+          <Snapshot src="/images/oz-taster.webp" alt="Oz looking up with a dab of cream on her lip" caption="quality control, on duty" rotate="-1deg" />
         </motion.div>
       </div>
     </section>
