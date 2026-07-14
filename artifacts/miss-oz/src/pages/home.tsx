@@ -8,6 +8,7 @@ import VoteFlavor from '../components/VoteFlavor';
 import Guestbook from '../components/Guestbook';
 import Footer from '../components/Footer';
 import FlavorDrop from '../components/FlavorDrop';
+import MeetOz from '../components/MeetOz';
 
 const CheckerRule = () => (
   <div className="checker-floor h-[26px] border-y-2 border-[var(--cocoa)]" aria-hidden="true" />
@@ -61,6 +62,7 @@ export default function Home() {
       <Postcard />
       <Marquee />
       <div id="about"><Story /></div>
+      <div id="oz"><MeetOz /></div>
       <CheckerRule />
       <div id="menu"><FlavorDrop /></div>
       <div id="wholesale"><Wholesale /></div>

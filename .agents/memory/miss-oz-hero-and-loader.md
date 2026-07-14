@@ -94,6 +94,8 @@ The user's real client reviewed the mockup and set binding direction — keep th
 - **Brand colors story:** deep purple = marionberry (Oregon), warm cream = waffle cones, soft pink = Oregon strawberries. Accent chosen by user: **mint green** (`--mint`/`--mint-deep`, currently in the checker rules).
 - **Fonts:** script headings = **Kaleidos** (`--font-script`), small script accents = **Lemongrass** (`--font-script-alt`, utility `font-script-alt`); files live in `public/fonts/`. Both are scripts — long body paragraphs stay on the readable serif on purpose. **Higante font is still pending** (client will email it; expected for display/headline use when it arrives).
 
+- **"Meet Miss Oz" section** (`MeetOz.tsx`, `#oz`, after Story): the shop is named after her dog Oz. Three taped snapshot frames currently render "photo coming soon" placeholders — when the user uploads Oz photos, pass `src` to the `Snapshot`s (captions map to: yellow boots in autumn leaves, crown photo, travel/research). Client also wants small illustrated Oz accents sprinkled near section headers/footer later — wait for real photos to see the breed first.
+
 # Soda-fountain decor kit (parlor "feel" pass)
 
 To push the whole site toward a 1950s–60s ice-cream-parlor feel, a shared `Decor.tsx` provides
