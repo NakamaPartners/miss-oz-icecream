@@ -64,7 +64,27 @@ export default function Postcard() {
         <div className="flex flex-col items-center mt-[10px] sm:mt-[20px] mb-[20px] sm:mb-[30px] relative z-20">
           <div className="w-full border-t-[2.5px] border-b-[1px] border-[var(--cocoa)] h-[5px] sm:h-[7px] mb-3 sm:mb-4 opacity-70" aria-hidden="true" />
 
-          <nav className="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-8 gap-y-2">
+          {/* Wordmark */}
+          <a
+            href="#home"
+            onClick={(e) => handleNav(e, 'home')}
+            className="mb-1 sm:mb-2 text-center leading-none text-[var(--berry-deep)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)] rounded"
+          >
+            <span
+              className="block"
+              style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 4.6vw, 54px)', letterSpacing: '0.01em' }}
+            >
+              Miss Oz
+            </span>
+            <span
+              className="block mt-[6px] text-[10px] sm:text-[11px] tracking-[4px] sm:tracking-[6px] uppercase text-[var(--cocoa)] opacity-80"
+              style={{ fontFamily: 'var(--font-sans)', fontWeight: 600 }}
+            >
+              Ice Cream &amp; Dessert Cafe
+            </span>
+          </a>
+
+          <nav className="mt-2 sm:mt-3 flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-8 gap-y-2">
             {NAV.map((item, i) => (
               <span key={item.label} className="flex items-center">
                 {i > 0 && <span className="text-[var(--gold)] mx-2 sm:mx-4 text-[10px] sm:text-[11px] opacity-70" aria-hidden="true">✦</span>}
