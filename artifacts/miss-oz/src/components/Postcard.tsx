@@ -108,32 +108,45 @@ export default function Postcard() {
           {/* Soft color wash linking the ink to the paper tone */}
           <div className="absolute inset-0 bg-[var(--gold)] opacity-[0.12] mix-blend-color pointer-events-none" aria-hidden="true" />
 
-          {/* Wordmark over the top of the photo */}
+          {/* Wordmark plaque over the top of the photo */}
           <div
             aria-hidden="true"
-            className="absolute left-0 right-0 top-[clamp(12px,2.2vw,28px)] text-center leading-none"
+            className="absolute left-0 right-0 top-[clamp(14px,2.4vw,32px)] flex justify-center"
           >
-            <span
-              className="block text-[var(--cream-hi)]"
+            <div
+              className="relative text-center leading-none px-[clamp(22px,3.4vw,44px)] py-[clamp(12px,1.6vw,20px)] rounded-[6px]"
               style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(40px, 5.6vw, 68px)',
-                letterSpacing: '0.01em',
-                textShadow: '0 2px 4px rgba(20,10,8,0.85), 0 6px 22px rgba(20,10,8,0.6)',
+                background: 'var(--cream-hi)',
+                border: '2.5px solid var(--berry-deep)',
+                boxShadow:
+                  'inset 0 0 0 3px var(--cream-hi), inset 0 0 0 4.5px var(--berry-deep), 0 8px 26px rgba(20,10,8,0.45)',
               }}
             >
-              Miss Oz
-            </span>
-            <span
-              className="block mt-[8px] text-[10px] sm:text-[12px] tracking-[4px] sm:tracking-[6px] uppercase text-[var(--cream-hi)]"
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontWeight: 600,
-                textShadow: '0 1px 3px rgba(20,10,8,0.9), 0 4px 14px rgba(20,10,8,0.7)',
-              }}
-            >
-              Ice Cream &amp; Dessert Cafe
-            </span>
+              {/* corner ornaments */}
+              <span className="absolute top-[7px] left-[8px] text-[var(--berry-deep)] text-[10px] leading-none">✦</span>
+              <span className="absolute top-[7px] right-[8px] text-[var(--berry-deep)] text-[10px] leading-none">✦</span>
+              <span className="absolute bottom-[7px] left-[8px] text-[var(--berry-deep)] text-[10px] leading-none">✦</span>
+              <span className="absolute bottom-[7px] right-[8px] text-[var(--berry-deep)] text-[10px] leading-none">✦</span>
+
+              <span
+                className="block text-[var(--berry-deep)]"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(30px, 4.2vw, 52px)',
+                  letterSpacing: '0.01em',
+                }}
+              >
+                Miss Oz
+              </span>
+              <span
+                className="mt-[8px] flex items-center justify-center gap-2 text-[9px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase text-[var(--berry-deep)]"
+                style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
+              >
+                <span className="inline-block w-6 h-px bg-[var(--berry-deep)] opacity-60" />
+                Ice Cream &amp; Dessert Cafe
+                <span className="inline-block w-6 h-px bg-[var(--berry-deep)] opacity-60" />
+              </span>
+            </div>
           </div>
         </div>
         <h1 className="sr-only">Miss Oz — Ice Cream &amp; Dessert Cafe</h1>
