@@ -223,7 +223,7 @@ export default function Guestbook() {
                     className={`py-[12px] ${i > 0 ? 'border-t border-[rgba(28,13,12,0.12)]' : ''}`}
                   >
                     <div className="flex items-baseline gap-2">
-                      <span className="font-script text-[20px] text-[var(--berry-deep)] leading-tight shrink-0">{entry.name}</span>
+                      <span className="font-script-alt text-[20px] text-[var(--berry-deep)] leading-tight shrink-0">{entry.name}</span>
                       <span aria-hidden="true" className="flex-1 self-end mb-[5px] border-b border-dotted border-[rgba(28,13,12,0.28)]" />
                       <span className="text-[11px] tracking-[1px] uppercase text-[var(--cocoa)] opacity-50 shrink-0 whitespace-nowrap" style={{ fontFamily: 'var(--font-sans)' }}>{entry.when}</span>
                     </div>

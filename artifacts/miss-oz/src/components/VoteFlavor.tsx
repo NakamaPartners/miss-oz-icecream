@@ -160,7 +160,7 @@ export default function VoteFlavor() {
                 />
 
                 <h3 className="font-normal text-[23px] mt-[6px] mb-[4px] text-[var(--cocoa)] relative z-10" style={macklin}>{card.name}</h3>
-                <div className="font-script text-[20px] text-[var(--berry)] mb-[18px] relative z-10">{card.note}</div>
+                <div className="font-script-alt text-[20px] text-[var(--berry)] mb-[18px] relative z-10">{card.note}</div>
 
               {/* Sparkle burst on vote */}
               {burst === i && !reduce && (

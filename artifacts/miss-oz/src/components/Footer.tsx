@@ -61,7 +61,7 @@ export default function Footer() {
         <div className="min-w-[260px] flex-1 max-w-[340px] scissor-cut p-[20px] mt-[-20px] rounded-[10px]">
           <h5 className="text-[var(--gold-hi)] tracking-[3px] font-semibold uppercase text-[13px] mb-[12px]">Mailing List</h5>
           {submitted ? (
-            <p className="text-[#EFE2CE] text-[15px] mt-2 font-script text-[22px]">Thanks for subscribing!</p>
+            <p className="text-[#EFE2CE] text-[15px] mt-2 font-script-alt text-[22px]">Thanks for subscribing!</p>
           ) : (
             <>
               <input

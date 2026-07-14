@@ -6,7 +6,7 @@ export default function Nav() {
   return (
     <>
       <div className="bg-[var(--berry)] text-[var(--cream)] text-center py-2.5 px-4 text-[12px] sm:text-[15px] tracking-[0.5px] sm:tracking-[1px] whitespace-nowrap">
-        <em className="font-script not-italic text-[var(--pink)] text-[15px] sm:text-[18px] mr-2">Small batch. Real ingredients.</em>
+        <em className="font-script-alt not-italic text-[var(--pink)] text-[15px] sm:text-[18px] mr-2">Small batch. Real ingredients.</em>
         <span className="hidden sm:inline">Lots of love since 2007</span>
         <a href="https://instagram.com/missozicecreamcafe" target="_blank" rel="noopener" aria-label="Miss Oz on Instagram" className="ml-2 sm:ml-3 inline-block align-middle opacity-70 hover:opacity-100 transition-opacity">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>

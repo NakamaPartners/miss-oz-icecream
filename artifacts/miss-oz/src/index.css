@@ -1,6 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&family=Playfair+Display:ital,wght@1,600;1,700&family=Pacifico&family=Bagel+Fat+One&family=EB+Garamond:wght@400;500;600&display=swap');
 
 @font-face {
+  font-family: 'Kaleidos';
+  src: url('/fonts/Kaleidos-Regular.woff2') format('woff2'), url('/fonts/Kaleidos-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lemongrass';
+  src: url('/fonts/Lemongrass.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Macklin Display';
   src: url('/fonts/Macklin_Display_Bold_Italic.ttf') format('truetype');
   font-weight: 700;
@@ -53,6 +67,7 @@
   --font-mono: var(--app-font-mono);
   --font-display: var(--font-display);
   --font-script: var(--font-script);
+  --font-script-alt: var(--font-script-alt);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -117,7 +132,8 @@
   --app-font-serif: 'Playfair Display', serif;
   --app-font-mono: Menlo, monospace;
   --font-display: 'Shrikhand', cursive;
-  --font-script: 'Pacifico', cursive;
+  --font-script: 'Kaleidos', 'Pacifico', cursive;
+  --font-script-alt: 'Lemongrass', 'Pacifico', cursive;
   --font-groovy: 'Bagel Fat One', 'Shrikhand', cursive;
 
   --radius: 0.5rem;
