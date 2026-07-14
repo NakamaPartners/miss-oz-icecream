@@ -15,7 +15,7 @@ export default function Footer() {
       <Bunting className="absolute top-[54px] left-0 right-0" />
 
       {/* Tagline + Oz riding shotgun, side by side so they never overlap */}
-      <div className="flex flex-wrap items-start justify-between gap-x-[40px] gap-y-[36px]">
+      <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-x-[40px] gap-y-[36px]">
         <div className="min-w-0">
           {/* Big editorial tagline */}
           <div
@@ -24,7 +24,7 @@ export default function Footer() {
               fontFamily: 'var(--font-groovy)',
               fontWeight: 400,
               fontStyle: 'italic',
-              fontSize: 'clamp(52px, 9vw, 116px)',
+              fontSize: 'clamp(40px, 6.2vw, 92px)',
             }}
           >
             Sweet Memories<br />
