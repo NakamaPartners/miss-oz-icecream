@@ -22,9 +22,9 @@ function GlobalMarqueeBorder() {
       {/* Outer gold ring */}
       <div className="absolute inset-0 border-[3px] border-[var(--gold)] opacity-80" />
       
-      {/* Main teal frame */}
+      {/* Main marionberry frame */}
       <div 
-        className="absolute inset-[3px] border-[var(--teal-deep)]" 
+        className="absolute inset-[3px] border-[var(--berry-deep)]" 
         style={{ 
           borderWidth: frameWidth, 
           boxShadow: 'inset 0 0 0 2px var(--gold)',

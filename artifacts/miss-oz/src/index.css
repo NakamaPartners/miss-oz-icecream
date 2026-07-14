@@ -75,6 +75,8 @@
   /* Vintage diner accents (poster board) */
   --teal: #2C5D5B;
   --teal-deep: #173F3C;
+  --mint: #9FD4BE;
+  --mint-deep: #4E8F79;
   --brick: #BD5749;
   --brick-deep: #9C3F35;
   --paper: #EFE2C4;
@@ -194,8 +196,8 @@
   .checker-floor {
     background-color: var(--cream-hi);
     background-image:
-      linear-gradient(45deg, var(--brick) 25%, transparent 25%, transparent 75%, var(--brick) 75%),
-      linear-gradient(45deg, var(--brick) 25%, transparent 25%, transparent 75%, var(--brick) 75%);
+      linear-gradient(45deg, var(--mint-deep) 25%, transparent 25%, transparent 75%, var(--mint-deep) 75%),
+      linear-gradient(45deg, var(--mint-deep) 25%, transparent 25%, transparent 75%, var(--mint-deep) 75%);
     background-size: 34px 34px;
     background-position: 0 0, 17px 17px;
   }

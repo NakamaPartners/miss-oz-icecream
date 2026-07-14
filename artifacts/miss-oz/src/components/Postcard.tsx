@@ -88,7 +88,7 @@ export default function Postcard() {
           fading softly into the page on all four edges */}
       <div className="relative w-full z-0 pointer-events-none -mt-2 sm:-mt-4">
         <div
-          className="w-full relative max-w-[1100px] mx-auto"
+          className="w-full relative max-w-[640px] mx-auto"
           style={{
             maskImage: HERO_MASK,
             WebkitMaskImage: HERO_MASK,
@@ -101,9 +101,9 @@ export default function Postcard() {
           }}
         >
           <img
-            src="/images/hero-parlor-v6.webp"
-            alt="Vintage golden-hour scene — a giant bulb-lit Miss Oz marquee sign with a starburst topper, reading Ice Cream & Cafe, Est. 2007, beside a striped-awning ice cream parlor with a retro ice cream van parked out front"
-            className="w-full h-auto mix-blend-multiply grayscale-[15%] sepia-[25%] contrast-[1.1] opacity-90"
+            src="/images/storefront-photo.webp"
+            alt="The real Miss Oz storefront in Portland's Pearl District — a corner shop with a neon Open sign in the window, lantern lights glowing inside, a plant-filled balcony above, and a bike parked out front"
+            className="w-full h-auto mix-blend-multiply sepia-[12%] saturate-[0.92] contrast-[1.04] opacity-95"
           />
           {/* Soft color wash linking the ink to the paper tone */}
           <div className="absolute inset-0 bg-[var(--gold)] opacity-[0.12] mix-blend-color pointer-events-none" aria-hidden="true" />
