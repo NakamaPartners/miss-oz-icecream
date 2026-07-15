@@ -9,6 +9,7 @@ import Guestbook from '../components/Guestbook';
 import Footer from '../components/Footer';
 import FlavorDrop from '../components/FlavorDrop';
 import MeetOz from '../components/MeetOz';
+import Reels from '../components/Reels';
 import { MotionConfig } from 'framer-motion';
 
 const CheckerRule = () => (
@@ -65,6 +66,7 @@ export default function Home() {
       <Marquee />
       <div id="about"><Story /></div>
       <div id="oz"><MeetOz /></div>
+      <Reels />
       <CheckerRule />
       <div id="menu"><FlavorDrop /></div>
       <div id="wholesale"><Wholesale /></div>
