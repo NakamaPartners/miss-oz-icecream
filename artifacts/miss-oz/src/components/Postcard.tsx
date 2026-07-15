@@ -333,14 +333,14 @@ export default function Postcard() {
               <div
                 className="h-[14px] rounded-t-[6px]"
                 style={{
-                  background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)',
+                  background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--teal-deep) 22px 44px)',
                   boxShadow: 'inset 0 -4px 8px rgba(28,13,12,0.28), 0 3px 8px rgba(0,0,0,0.3)',
                 }}
               />
               <div
                 className="h-[9px]"
                 style={{
-                  background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)',
+                  background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--teal-deep) 22px 44px)',
                   WebkitMaskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)',
                   maskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)',
                   WebkitMaskSize: '22px 100%',
@@ -363,7 +363,7 @@ export default function Postcard() {
                 className="rounded-[4px] px-4 py-6 md:flex-1 flex flex-row md:flex-col flex-wrap items-center justify-center gap-x-5 gap-y-[14px] md:gap-y-[22px]"
                 style={{
                   background:
-                    'radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,0.05), transparent 60%), linear-gradient(160deg, #263229 0%, #1d2622 55%, #222e28 100%)',
+                    'radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,0.06), transparent 60%), linear-gradient(160deg, #1c4a46 0%, #143633 55%, #1a423e 100%)',
                   boxShadow: 'inset 0 0 0 1.5px rgba(28,13,12,0.6), inset 0 0 24px rgba(0,0,0,0.35)',
                 }}
               >
@@ -505,13 +505,13 @@ export default function Postcard() {
                 </div>
               </div>
 
-              {/* RIGHT — chalkboard welcome panel */}
+              {/* RIGHT — berry-painted welcome panel */}
               <div
                 className="flex flex-col items-center justify-center text-center px-[26px] md:px-[34px] py-[38px] md:py-[46px]"
                 style={{
                   background:
-                    'radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,0.05), transparent 60%), linear-gradient(160deg, #263229 0%, #1d2622 55%, #222e28 100%)',
-                  boxShadow: 'inset 0 0 24px rgba(0,0,0,0.35)',
+                    'radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,0.07), transparent 60%), linear-gradient(160deg, #5e2334 0%, #491a29 55%, #55202f 100%)',
+                  boxShadow: 'inset 0 0 24px rgba(0,0,0,0.35), inset 1.5px 0 0 rgba(227,180,76,0.35)',
                 }}
               >
                 <div
