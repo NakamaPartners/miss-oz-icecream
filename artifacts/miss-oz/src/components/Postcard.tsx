@@ -380,14 +380,80 @@ export default function Postcard() {
             }}
           >
             <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] rounded-[5px] overflow-hidden" style={{ boxShadow: 'inset 0 0 0 1.5px rgba(28,13,12,0.6)' }}>
-              {/* LEFT — big photo of the counter and menu board */}
-              <div className="relative min-h-[280px] md:min-h-[420px]">
-                <img
-                  src="/images/slide-counter.webp"
-                  alt="Inside Miss Oz — the counter and hand-lettered menu board"
-                  className="absolute inset-0 w-full h-full object-cover sepia-[10%] saturate-[0.95] contrast-[1.04]"
-                />
-                <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 44px rgba(28,13,12,0.4)' }} />
+              {/* MIDDLE — big chalkboard menu board */}
+              <div
+                className="relative flex flex-col items-center px-[24px] md:px-[36px] py-[34px] md:py-[42px]"
+                style={{
+                  background:
+                    'radial-gradient(120% 90% at 35% 15%, rgba(255,255,255,0.05), transparent 60%), linear-gradient(160deg, #24302a 0%, #1c2521 55%, #212c26 100%)',
+                  boxShadow: 'inset 0 0 28px rgba(0,0,0,0.4)',
+                }}
+              >
+                {/* arched board header */}
+                <div
+                  className="w-full max-w-[430px] text-center pt-[22px] pb-[16px] px-4"
+                  style={{
+                    borderRadius: '50% 50% 6px 6px / 42% 42% 6px 6px',
+                    boxShadow: 'inset 0 0 0 2px rgba(227,180,76,0.55), inset 0 0 22px rgba(0,0,0,0.3)',
+                  }}
+                >
+                  <div className="text-[var(--gold-hi)] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,2.6vw,36px)', textShadow: '0 0 14px rgba(227,180,76,0.3)' }}>
+                    Miss Oz
+                  </div>
+                  <div className="mt-[6px] text-[11px] tracking-[4px] uppercase font-bold text-[#f3ead6] opacity-85" style={{ fontFamily: 'var(--font-sans)' }}>
+                    Ice Cream &amp; Sorbet
+                  </div>
+                  <div className="mt-[4px] text-[var(--pink)]" style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(17px,1.7vw,21px)', textShadow: '0 0 10px rgba(240,170,190,0.25)' }}>
+                    homemade flavors
+                  </div>
+                </div>
+
+                {/* chalk flavor list */}
+                <ul className="mt-[22px] w-full max-w-[430px] grid grid-cols-2 gap-x-[26px] gap-y-[9px] text-left">
+                  {[
+                    'Mexican Vanilla',
+                    'Mint Chip',
+                    'Horchata Cookie',
+                    'Coffee Crackle',
+                    'Matcha',
+                    'Fresh Banana',
+                    'Salty Caramel',
+                    'Honey',
+                    'Kulfi',
+                    'Belgian Chocolate',
+                    'Birthday Cake',
+                    'Cookies & Cream',
+                    'Thai Iced Tea',
+                    'Peanut Butter Fudge',
+                    'Butter Pecan',
+                    'Marionberry',
+                  ].map((f, i) => (
+                    <li
+                      key={f}
+                      className="leading-snug"
+                      style={{
+                        fontFamily: i % 5 === 2 ? 'var(--font-script-alt)' : 'var(--font-sans)',
+                        fontSize: i % 5 === 2 ? 17 : 13.5,
+                        letterSpacing: i % 5 === 2 ? '0.4px' : '1.6px',
+                        textTransform: i % 5 === 2 ? 'none' : 'uppercase',
+                        fontWeight: 600,
+                        color: i % 4 === 1 ? 'var(--gold-hi)' : i % 4 === 3 ? 'var(--pink)' : '#ece3cd',
+                        textShadow: '0 0 8px rgba(243,234,214,0.12)',
+                      }}
+                    >
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-[22px] flex items-center gap-3 text-[var(--gold-hi)] opacity-80" aria-hidden="true">
+                  <span className="h-px w-12" style={{ background: 'currentColor' }} />
+                  <span className="text-[11px]">✦</span>
+                  <span className="h-px w-12" style={{ background: 'currentColor' }} />
+                </div>
+                <div className="mt-[10px] text-[11px] tracking-[3px] uppercase font-bold text-[#e9e0cc] opacity-70 text-center" style={{ fontFamily: 'var(--font-sans)' }}>
+                  Churned fresh · rotating case
+                </div>
               </div>
 
               {/* RIGHT — chalkboard welcome panel */}
