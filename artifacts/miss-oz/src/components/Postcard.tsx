@@ -152,10 +152,13 @@ export default function Postcard() {
                 key={current.src}
                 src={current.src}
                 alt={current.alt}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.95 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.1, ease: 'easeInOut' }}
+                initial={{ opacity: 0, scale: 1 }}
+                animate={{ opacity: 0.95, scale: 1.06 }}
+                exit={{ opacity: 0, scale: 1.07 }}
+                transition={{
+                  opacity: { duration: 1.4, ease: [0.4, 0, 0.2, 1] },
+                  scale: { duration: 7, ease: 'linear' },
+                }}
                 className="absolute inset-0 w-full h-full object-cover mix-blend-multiply sepia-[12%] saturate-[0.92] contrast-[1.04]"
                 style={{ objectPosition: current.pos ?? 'center' }}
               />
@@ -166,19 +169,30 @@ export default function Postcard() {
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
                   key={current.slogan}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.7, ease: 'easeOut' }}
-                  className="text-center text-[var(--cream-hi)]"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(24px, 3.4vw, 44px)',
-                    letterSpacing: '0.01em',
-                    textShadow: '0 2px 4px rgba(20,10,8,0.85), 0 8px 28px rgba(20,10,8,0.65)',
-                  }}
+                  initial={{ opacity: 0, y: 18, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -12, filter: 'blur(3px)' }}
+                  transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+                  className="flex flex-col items-center text-center text-[var(--cream-hi)]"
                 >
-                  {current.slogan}
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 'clamp(24px, 3.4vw, 44px)',
+                      letterSpacing: '0.01em',
+                      textShadow: '0 2px 4px rgba(20,10,8,0.85), 0 8px 28px rgba(20,10,8,0.65)',
+                    }}
+                  >
+                    {current.slogan}
+                  </span>
+                  <span
+                    className="mt-[6px] flex items-center gap-2 text-[var(--gold-hi)]"
+                    style={{ textShadow: '0 1px 3px rgba(20,10,8,0.8)' }}
+                  >
+                    <span className="inline-block w-[46px] h-px bg-[var(--gold-hi)] opacity-80" />
+                    <span className="text-[11px] leading-none">✦</span>
+                    <span className="inline-block w-[46px] h-px bg-[var(--gold-hi)] opacity-80" />
+                  </span>
                 </motion.span>
               </AnimatePresence>
             </div>
@@ -217,11 +231,14 @@ export default function Postcard() {
             aria-hidden="true"
             className="absolute left-0 right-0 top-[clamp(14px,2.4vw,32px)] flex justify-center"
           >
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
               className="relative rounded-[10px] p-[5px]"
               style={{
-                background: 'var(--berry-deep)',
-                boxShadow: '0 10px 30px rgba(20,10,8,0.5), 0 2px 6px rgba(20,10,8,0.35)',
+                background: 'linear-gradient(160deg, #6e2246 0%, var(--berry-deep) 45%, #45102b 100%)',
+                boxShadow: '0 10px 30px rgba(20,10,8,0.5), 0 2px 6px rgba(20,10,8,0.35), inset 0 1px 0 rgba(255,244,214,0.25)',
               }}
             >
               <div
@@ -234,43 +251,56 @@ export default function Postcard() {
                   outlineOffset: '-4px',
                 }}
               >
-                {/* EST row */}
+                {/* EST row — engraved-ticket style */}
                 <span
-                  className="flex items-center justify-center gap-2 text-[8px] sm:text-[9px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--berry-deep)] opacity-80"
+                  className="flex items-center justify-center gap-[10px] text-[8px] sm:text-[9px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--berry-deep)] opacity-85"
                   style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
                 >
-                  <span className="text-[var(--gold)] text-[9px]">✦</span>
-                  Est. 2007 · Pearl District
-                  <span className="text-[var(--gold)] text-[9px]">✦</span>
+                  <span className="inline-block w-[26px] h-px bg-[var(--gold)] opacity-80" />
+                  <span className="text-[var(--gold)] text-[8px] leading-none rotate-45 inline-block">◆</span>
+                  Est<span className="lowercase -mx-1">.</span> 2007
+                  <span className="text-[var(--gold)] text-[8px] leading-none rotate-45 inline-block">◆</span>
+                  <span className="inline-block w-[26px] h-px bg-[var(--gold)] opacity-80" />
                 </span>
 
                 <span
-                  className="block mt-[6px] text-[var(--berry-deep)]"
+                  className="block mt-[7px] text-[var(--berry-deep)]"
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: 'clamp(30px, 4.2vw, 52px)',
                     letterSpacing: '0.01em',
-                    textShadow: '0 1px 0 rgba(255,248,230,0.9), 0 2px 2px rgba(93,26,58,0.18)',
+                    textShadow:
+                      '0 1px 0 rgba(255,248,230,0.95), 0 -1px 0 rgba(93,26,58,0.14), 0 3px 3px rgba(93,26,58,0.2)',
                   }}
                 >
                   Miss Oz
                 </span>
 
+                {/* script flourish */}
+                <span
+                  className="block mt-[4px] text-[var(--berry)] text-[clamp(13px,1.5vw,17px)]"
+                  style={{ fontFamily: 'var(--font-script)' }}
+                >
+                  Portland, Oregon
+                </span>
+
                 {/* divider */}
-                <span className="mt-[8px] mb-[7px] flex items-center justify-center gap-2" aria-hidden="true">
+                <span className="mt-[7px] mb-[7px] flex items-center justify-center gap-2" aria-hidden="true">
                   <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
-                  <span className="text-[var(--berry)] text-[10px] leading-none rotate-45 inline-block">◆</span>
+                  <span className="text-[var(--gold)] text-[11px] leading-none">✦</span>
                   <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
                 </span>
 
                 <span
-                  className="block text-[9px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase text-[var(--cocoa)]"
+                  className="flex items-center justify-center gap-[8px] text-[9px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase text-[var(--cocoa)]"
                   style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
                 >
-                  Ice Cream &amp; Dessert Cafe
+                  Ice Cream
+                  <span className="text-[var(--berry)] text-[8px] leading-none rotate-45 inline-block">◆</span>
+                  Dessert Cafe
                 </span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
         <h1 className="sr-only">Miss Oz — Ice Cream &amp; Dessert Cafe</h1>
