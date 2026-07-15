@@ -164,34 +164,60 @@ export default function Postcard() {
               />
             </AnimatePresence>
 
+            {/* Soft vignette so the slogan reads against any photo */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 bottom-0 h-[42%] pointer-events-none"
+              style={{
+                background:
+                  'linear-gradient(to top, rgba(24,10,14,0.72) 0%, rgba(24,10,14,0.42) 42%, rgba(24,10,14,0) 100%)',
+              }}
+            />
+
             {/* Slogan over the lower part of each photo */}
             <div className="absolute left-0 right-0 bottom-[clamp(30px,5vw,58px)] flex justify-center px-6" aria-hidden="true">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
                   key={current.slogan}
-                  initial={{ opacity: 0, y: 18, filter: 'blur(4px)' }}
+                  initial={{ opacity: 0, y: 22, filter: 'blur(5px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: -12, filter: 'blur(3px)' }}
-                  transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
-                  className="flex flex-col items-center text-center text-[var(--cream-hi)]"
+                  exit={{ opacity: 0, y: -14, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+                  className="flex flex-col items-center text-center"
                 >
+                  {/* small gold eyebrow */}
+                  <span
+                    className="mb-[8px] flex items-center gap-[10px] text-[var(--gold-hi)]"
+                    style={{ textShadow: '0 1px 3px rgba(20,10,8,0.8)' }}
+                  >
+                    <span className="inline-block w-[30px] h-px bg-[var(--gold-hi)] opacity-70" />
+                    <span className="text-[9px] leading-none rotate-45 inline-block">◆</span>
+                    <span className="inline-block w-[30px] h-px bg-[var(--gold-hi)] opacity-70" />
+                  </span>
                   <span
                     style={{
                       fontFamily: 'var(--font-display)',
-                      fontSize: 'clamp(24px, 3.4vw, 44px)',
-                      letterSpacing: '0.01em',
-                      textShadow: '0 2px 4px rgba(20,10,8,0.85), 0 8px 28px rgba(20,10,8,0.65)',
+                      fontSize: 'clamp(28px, 4vw, 54px)',
+                      letterSpacing: '0.015em',
+                      lineHeight: 1.08,
+                      background:
+                        'linear-gradient(180deg, #fdf6e3 0%, #f7e8c4 55%, #e8c98c 100%)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                      filter:
+                        'drop-shadow(0 2px 0 rgba(74,26,36,0.55)) drop-shadow(0 4px 10px rgba(20,10,8,0.75)) drop-shadow(0 12px 34px rgba(20,10,8,0.55))',
                     }}
                   >
                     {current.slogan}
                   </span>
                   <span
-                    className="mt-[6px] flex items-center gap-2 text-[var(--gold-hi)]"
+                    className="mt-[9px] flex items-center gap-2 text-[var(--gold-hi)]"
                     style={{ textShadow: '0 1px 3px rgba(20,10,8,0.8)' }}
                   >
-                    <span className="inline-block w-[46px] h-px bg-[var(--gold-hi)] opacity-80" />
-                    <span className="text-[11px] leading-none">✦</span>
-                    <span className="inline-block w-[46px] h-px bg-[var(--gold-hi)] opacity-80" />
+                    <span className="inline-block w-[56px] h-px bg-gradient-to-r from-transparent to-[var(--gold-hi)] opacity-90" />
+                    <span className="text-[12px] leading-none">✦</span>
+                    <span className="inline-block w-[56px] h-px bg-gradient-to-l from-transparent to-[var(--gold-hi)] opacity-90" />
                   </span>
                 </motion.span>
               </AnimatePresence>
