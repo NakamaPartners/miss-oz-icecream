@@ -106,27 +106,9 @@ export default function Postcard() {
       </div>
 
       <div className="relative z-20 mx-auto max-w-[1200px] px-[4vw]">
-        {/* MASTHEAD: editorial double rules framing the nav */}
+        {/* Editorial double rule where the masthead nav used to sit (nav now lives on the chalkboard easel below) */}
         <div className="flex flex-col items-center mt-[10px] sm:mt-[20px] mb-[20px] sm:mb-[30px] relative z-20">
-          <div className="w-full border-t-[2.5px] border-b-[1px] border-[var(--cocoa)] h-[5px] sm:h-[7px] mb-3 sm:mb-4 opacity-70" aria-hidden="true" />
-
-          <nav className="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-8 gap-y-2">
-            {NAV.map((item, i) => (
-              <span key={item.label} className="flex items-center">
-                {i > 0 && <span className="text-[var(--gold)] mx-2 sm:mx-4 text-[10px] sm:text-[11px] opacity-70" aria-hidden="true">✦</span>}
-                <a
-                  href={hrefFor(item.target)}
-                  onClick={(e) => handleNav(e, item.target)}
-                  className="nav-link text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors uppercase tracking-[3px] sm:tracking-[5px] text-[11px] sm:text-[13px] font-bold focus-visible:outline-none focus-visible:text-[var(--berry)] opacity-90 hover:opacity-100"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {item.label}
-                </a>
-              </span>
-            ))}
-          </nav>
-
-          <div className="w-full border-t-[1px] border-b-[2.5px] border-[var(--cocoa)] h-[5px] sm:h-[7px] mt-3 sm:mt-4 opacity-70" aria-hidden="true" />
+          <div className="w-full border-t-[2.5px] border-b-[1px] border-[var(--cocoa)] h-[5px] sm:h-[7px] opacity-70" aria-hidden="true" />
         </div>
       </div>
 
@@ -340,7 +322,55 @@ export default function Postcard() {
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[clamp(12px,1.6vw,20px)]">
+        <div className="grid grid-cols-1 lg:grid-cols-[230px_1fr] gap-[clamp(16px,2vw,26px)] items-start">
+          {/* Chalkboard easel navigation — like the old parlor sign by the door */}
+          <nav
+            aria-label="Site sections"
+            className="relative mx-auto w-full max-w-[300px] lg:max-w-none lg:sticky lg:top-[20px]"
+          >
+            {/* easel legs */}
+            <div aria-hidden="true" className="hidden lg:block absolute -bottom-[26px] left-[24px] w-[10px] h-[44px] rotate-[9deg] rounded-[2px]" style={{ background: 'linear-gradient(160deg, #8a3030, #5f1f1f)' }} />
+            <div aria-hidden="true" className="hidden lg:block absolute -bottom-[26px] right-[24px] w-[10px] h-[44px] -rotate-[9deg] rounded-[2px]" style={{ background: 'linear-gradient(160deg, #8a3030, #5f1f1f)' }} />
+            {/* wooden frame */}
+            <div
+              className="relative rounded-[8px] p-[9px]"
+              style={{
+                background: 'linear-gradient(160deg, #6b4a2e, #4b3120 55%, #5d3f27)',
+                boxShadow: '0 18px 40px rgba(28,13,12,0.35), inset 0 0 0 1.5px rgba(227,180,76,0.45), inset 0 2px 5px rgba(255,255,255,0.12)',
+              }}
+            >
+              <div
+                className="rounded-[4px] px-4 py-6 flex flex-row lg:flex-col flex-wrap items-center justify-center gap-x-5 gap-y-[14px] lg:gap-y-[18px]"
+                style={{
+                  background:
+                    'radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,0.05), transparent 60%), linear-gradient(160deg, #263229 0%, #1d2622 55%, #222e28 100%)',
+                  boxShadow: 'inset 0 0 0 1.5px rgba(28,13,12,0.6), inset 0 0 24px rgba(0,0,0,0.35)',
+                }}
+              >
+                {NAV.map((item, i) => (
+                  <a
+                    key={item.label}
+                    href={hrefFor(item.target)}
+                    onClick={(e) => handleNav(e, item.target)}
+                    className="nav-link transition-colors text-center focus-visible:outline-none focus-visible:text-[var(--gold-hi)]"
+                    style={{
+                      fontFamily: i === 0 ? 'var(--font-sans)' : i % 2 === 0 ? 'var(--font-script-alt)' : 'var(--font-sans)',
+                      fontSize: i === 0 ? 15 : i % 2 === 0 ? 20 : 14,
+                      letterSpacing: i % 2 === 0 && i !== 0 ? '0.5px' : '2px',
+                      textTransform: i % 2 === 0 && i !== 0 ? 'none' : 'uppercase',
+                      fontWeight: 700,
+                      color: i === 0 ? '#f3ead6' : i % 3 === 0 ? 'var(--pink)' : i % 2 === 0 ? 'var(--gold-hi)' : '#e9e0cc',
+                      textShadow: '0 0 10px rgba(243,234,214,0.15)',
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </nav>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[clamp(12px,1.6vw,20px)]">
           {panels.map((p) => {
             const t = TONES[p.tone];
             return (
@@ -381,6 +411,7 @@ export default function Postcard() {
               </a>
             );
           })}
+          </div>
         </div>
 
         {/* bottom ribbon */}
