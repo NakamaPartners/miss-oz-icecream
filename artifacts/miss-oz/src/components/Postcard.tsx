@@ -1,4 +1,39 @@
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Bunting } from './Decor';
+
+/* Full-width homepage slideshow — real storefront photos with short brand slogans */
+const SLIDES: { src: string; alt: string; slogan: string; pos?: string }[] = [
+  {
+    src: '/images/storefront-photo-wide2.webp',
+    alt: "The Miss Oz storefront in Portland's Pearl District — a corner shop with a neon Open sign in the window, lantern lights glowing inside, and a bike parked out front",
+    slogan: 'Small Batch, Big Heart',
+  },
+  {
+    src: '/images/slide-corner.webp',
+    alt: 'The brick corner of the shop at dusk, with a glowing ice cream cone sculpture of string lights above the awning and the pink Miss Oz sidewalk sign out front',
+    slogan: 'On the Corner Since 2007',
+    pos: 'center 62%',
+  },
+  {
+    src: '/images/slide-counter.webp',
+    alt: 'Inside the parlor — the glowing MISS OZ marquee letters above the chalkboard flavor menu and the striped ice cream counter',
+    slogan: 'Made On-Site, All Natural',
+    pos: 'center 38%',
+  },
+  {
+    src: '/images/slide-cones.webp',
+    alt: 'Two hand-dipped waffle cones with scoops of marionberry and ube ice cream, held up under the string lights by the pick-up sign',
+    slogan: 'Hand-Dipped to Order',
+    pos: 'center 55%',
+  },
+  {
+    src: '/images/slide-sidewalk.webp',
+    alt: 'The tree-lined Pearl District sidewalk outside the cafe, with the pink Miss Oz sign and Ice Cream & Coffee painted on the window',
+    slogan: 'Come Slow Down With Us',
+    pos: 'center 60%',
+  },
+];
 
 const NAV = [
   { label: 'Home', target: 'home' },
@@ -44,6 +79,17 @@ const HERO_MASK =
   'linear-gradient(to bottom, transparent 0%, black 7%, black 88%, transparent 100%), linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)';
 
 export default function Postcard() {
+  const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const t = setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), 5500);
+    return () => clearInterval(t);
+  }, [paused, slide]);
+
+  const current = SLIDES[slide];
+
   return (
     <section
       id="home"
@@ -88,7 +134,7 @@ export default function Postcard() {
           fading softly into the page on all four edges */}
       <div className="relative w-full z-0 pointer-events-none -mt-2 sm:-mt-4">
         <div
-          className="w-full relative max-w-[1000px] mx-auto"
+          className="w-full relative max-w-[1440px] mx-auto"
           style={{
             maskImage: HERO_MASK,
             WebkitMaskImage: HERO_MASK,
@@ -100,11 +146,69 @@ export default function Postcard() {
             WebkitMaskRepeat: 'no-repeat',
           }}
         >
-          <img
-            src="/images/storefront-photo-wide2.webp"
-            alt="The real Miss Oz storefront in Portland's Pearl District — a corner shop with a neon Open sign in the window, lantern lights glowing inside, a plant-filled balcony above, and a bike parked out front"
-            className="w-full h-auto mix-blend-multiply sepia-[12%] saturate-[0.92] contrast-[1.04] opacity-95"
-          />
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden">
+            <AnimatePresence initial={false}>
+              <motion.img
+                key={current.src}
+                src={current.src}
+                alt={current.alt}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.95 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.1, ease: 'easeInOut' }}
+                className="absolute inset-0 w-full h-full object-cover mix-blend-multiply sepia-[12%] saturate-[0.92] contrast-[1.04]"
+                style={{ objectPosition: current.pos ?? 'center' }}
+              />
+            </AnimatePresence>
+
+            {/* Slogan over the lower part of each photo */}
+            <div className="absolute left-0 right-0 bottom-[clamp(30px,5vw,58px)] flex justify-center px-6" aria-hidden="true">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={current.slogan}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.7, ease: 'easeOut' }}
+                  className="text-center text-[var(--cream-hi)]"
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(24px, 3.4vw, 44px)',
+                    letterSpacing: '0.01em',
+                    textShadow: '0 2px 4px rgba(20,10,8,0.85), 0 8px 28px rgba(20,10,8,0.65)',
+                  }}
+                >
+                  {current.slogan}
+                </motion.span>
+              </AnimatePresence>
+            </div>
+
+            {/* slide dots */}
+            <div
+              className="absolute left-0 right-0 bottom-[clamp(12px,2vw,24px)] flex justify-center gap-[7px] pointer-events-auto"
+              aria-label="Storefront slideshow controls"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onFocus={() => setPaused(true)}
+              onBlur={() => setPaused(false)}
+            >
+              {SLIDES.map((s, i) => (
+                <button
+                  key={s.src}
+                  type="button"
+                  aria-current={i === slide}
+                  aria-label={`Show slide ${i + 1} of ${SLIDES.length}`}
+                  onClick={() => setSlide(i)}
+                  className="w-[9px] h-[9px] rounded-full border border-[var(--cream-hi)] transition-opacity"
+                  style={{
+                    background: i === slide ? 'var(--cream-hi)' : 'transparent',
+                    opacity: i === slide ? 1 : 0.55,
+                    boxShadow: '0 1px 3px rgba(20,10,8,0.6)',
+                  }}
+                />
+              ))}
+            </div>
+          </div>
           {/* Soft color wash linking the ink to the paper tone */}
           <div className="absolute inset-0 bg-[var(--gold)] opacity-[0.12] mix-blend-color pointer-events-none" aria-hidden="true" />
 

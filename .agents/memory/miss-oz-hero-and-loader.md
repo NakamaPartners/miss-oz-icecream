@@ -138,3 +138,6 @@ when it changes." The torn color matched the shadow color exactly (white for Mar
 
 **How to apply:** in Hero.tsx the h1 style must keep a static `textShadow` but its `transition` must
 list `color` only, never `text-shadow`. Animating text-shadow is a known repaint-artifact source.
+
+## Hero slideshow (client-requested)
+Hero is now a full-width crossfading photo slideshow (5 real storefront/interior photos, rotating slogans, dots, static wordmark plaque on top). Client asked for this via Instagram DM; keep the plaque and slogans — they're the branding overlay she wanted. Auto-advance pauses on dot hover/focus and is disabled under reduced motion.
