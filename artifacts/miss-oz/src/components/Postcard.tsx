@@ -370,47 +370,62 @@ export default function Postcard() {
             </div>
           </nav>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[clamp(12px,1.6vw,20px)]">
-          {panels.map((p) => {
-            const t = TONES[p.tone];
-            return (
-              <a
-                key={p.title}
-                href={hrefFor(p.target)}
-                onClick={(e) => handleNav(e, p.target)}
-                aria-label={`${p.title} — go to the ${p.target} section`}
-                className="group relative flex items-stretch gap-3 rounded-[7px] border-2 p-[clamp(15px,1.7vw,20px)] min-h-[168px] transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"
+          {/* Big wood-framed board: photo on the left, chalkboard welcome panel on the right */}
+          <div
+            className="relative rounded-[10px] p-[10px] md:p-[12px]"
+            style={{
+              background: 'linear-gradient(160deg, #6b4a2e, #4b3120 55%, #5d3f27)',
+              boxShadow:
+                '0 26px 60px rgba(28,13,12,0.4), inset 0 0 0 2px rgba(227,180,76,0.5), inset 0 2px 6px rgba(255,255,255,0.12), inset 0 -3px 8px rgba(0,0,0,0.4)',
+            }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] rounded-[5px] overflow-hidden" style={{ boxShadow: 'inset 0 0 0 1.5px rgba(28,13,12,0.6)' }}>
+              {/* LEFT — big photo of the counter and menu board */}
+              <div className="relative min-h-[280px] md:min-h-[420px]">
+                <img
+                  src="/images/slide-counter.webp"
+                  alt="Inside Miss Oz — the counter and hand-lettered menu board"
+                  className="absolute inset-0 w-full h-full object-cover sepia-[10%] saturate-[0.95] contrast-[1.04]"
+                />
+                <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 44px rgba(28,13,12,0.4)' }} />
+              </div>
+
+              {/* RIGHT — chalkboard welcome panel */}
+              <div
+                className="flex flex-col items-center justify-center text-center px-[26px] md:px-[34px] py-[38px] md:py-[46px]"
                 style={{
-                  backgroundColor: t.bg,
-                  backgroundImage: `linear-gradient(${t.scrim}, ${t.scrim}), url(${t.bgimg})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  borderColor: t.border,
-                  boxShadow: 'inset 0 0 0 2px rgba(255,244,214,0.35), 0 6px 16px rgba(28,13,12,0.2)',
+                  background:
+                    'radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,0.05), transparent 60%), linear-gradient(160deg, #263229 0%, #1d2622 55%, #222e28 100%)',
+                  boxShadow: 'inset 0 0 24px rgba(0,0,0,0.35)',
                 }}
               >
-                <div className="tape-strip tape-peel top-[-8px] left-1/2 -translate-x-1/2 rotate-2" aria-hidden="true" />
-                <div className="flex flex-col justify-between flex-1 min-w-0 pt-2">
-                  <div>
-                    <span className="block text-[10.5px] tracking-[3px] uppercase font-bold mb-1.5" style={{ color: t.eyebrow, fontFamily: 'var(--font-sans)' }}>{p.sub}</span>
-                    <span className="block leading-[1.03] text-[clamp(21px,1.9vw,26px)]" style={{ color: t.title, fontFamily: 'var(--font-display)' }}>{p.title}</span>
-                  </div>
-                  <span className="mt-4 flex items-center gap-1.5 italic text-[12.5px] opacity-90" style={{ color: t.desc, fontFamily: 'var(--font-sans)' }}>
-                    {p.desc}
-                    <span aria-hidden="true" className="not-italic inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-                  </span>
+                <div
+                  className="text-[var(--gold-hi)] leading-[1.06]"
+                  style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px,2.4vw,32px)', textShadow: '0 0 12px rgba(227,180,76,0.25)' }}
+                >
+                  ~ Come Slow Down ~
+                  <br />
+                  With Us!
                 </div>
-                <img
-                  src={p.img}
-                  alt=""
-                  aria-hidden="true"
-                  className="shrink-0 self-center w-[clamp(92px,11vw,128px)] h-auto object-contain transition-transform duration-200 group-hover:scale-105 group-hover:-rotate-2"
-                  style={{ filter: 'drop-shadow(0 4px 6px rgba(28,13,12,0.35))' }}
-                />
-              </a>
-            );
-          })}
+                <p className="mt-5 text-[15px] leading-relaxed text-[#e9e0cc] max-w-[320px]" style={{ fontFamily: 'var(--font-sans)' }}>
+                  Handmade ice cream in small batches — classic recipes, real flavor. Pickup or delivery on Uber&nbsp;Eats, DoorDash &amp; Grubhub, or come vote the next flavor.
+                </p>
+                <div className="mt-5 text-[var(--pink)]" style={{ fontFamily: 'var(--font-script-alt)', fontSize: 21, textShadow: '0 0 10px rgba(240,170,190,0.25)' }}>
+                  Miss Oz Ice Cream &amp; Dessert Cafe
+                </div>
+                <div className="mt-4 text-[13px] tracking-[2px] uppercase font-bold text-[#f3ead6] opacity-80" style={{ fontFamily: 'var(--font-sans)' }}>
+                  ~ Est. 2007 ~
+                </div>
+                <a
+                  href="#menu"
+                  onClick={(e) => handleNav(e, 'menu')}
+                  className="mt-7 inline-flex items-center gap-2 rounded-full px-7 py-[12px] text-[13px] font-bold tracking-[1.5px] uppercase text-[var(--berry-deep)] bg-[var(--cream-hi)] transition-transform duration-200 mech-btn hover:bg-[var(--gold-hi)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d2622]"
+                >
+                  Place an Order
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
