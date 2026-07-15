@@ -322,15 +322,38 @@ export default function Postcard() {
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[230px_1fr] gap-[clamp(16px,2vw,26px)] items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[210px_1fr] lg:grid-cols-[230px_1fr] gap-[clamp(16px,2vw,26px)] items-start">
           {/* Chalkboard easel navigation — like the old parlor sign by the door */}
           <nav
             aria-label="Site sections"
-            className="relative mx-auto w-full max-w-[300px] lg:max-w-none lg:sticky lg:top-[20px]"
+            className="relative mx-auto w-full max-w-[300px] md:max-w-none md:sticky md:top-[20px]"
           >
             {/* easel legs */}
-            <div aria-hidden="true" className="hidden lg:block absolute -bottom-[26px] left-[24px] w-[10px] h-[44px] rotate-[9deg] rounded-[2px]" style={{ background: 'linear-gradient(160deg, #8a3030, #5f1f1f)' }} />
-            <div aria-hidden="true" className="hidden lg:block absolute -bottom-[26px] right-[24px] w-[10px] h-[44px] -rotate-[9deg] rounded-[2px]" style={{ background: 'linear-gradient(160deg, #8a3030, #5f1f1f)' }} />
+            <div aria-hidden="true" className="hidden md:block absolute -bottom-[26px] left-[24px] w-[10px] h-[44px] rotate-[9deg] rounded-[2px]" style={{ background: 'linear-gradient(160deg, #8a3030, #5f1f1f)' }} />
+            <div aria-hidden="true" className="hidden md:block absolute -bottom-[26px] right-[24px] w-[10px] h-[44px] -rotate-[9deg] rounded-[2px]" style={{ background: 'linear-gradient(160deg, #8a3030, #5f1f1f)' }} />
+            {/* little striped parlor awning over the sign */}
+            <div aria-hidden="true" className="relative z-10 mx-[6px] -mb-[3px]">
+              <div
+                className="h-[14px] rounded-t-[6px]"
+                style={{
+                  background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)',
+                  boxShadow: 'inset 0 -4px 8px rgba(28,13,12,0.28), 0 3px 8px rgba(0,0,0,0.3)',
+                }}
+              />
+              <div
+                className="h-[9px]"
+                style={{
+                  background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)',
+                  WebkitMaskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)',
+                  maskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)',
+                  WebkitMaskSize: '22px 100%',
+                  maskSize: '22px 100%',
+                  WebkitMaskRepeat: 'repeat-x',
+                  maskRepeat: 'repeat-x',
+                  filter: 'drop-shadow(0 3px 4px rgba(0,0,0,0.25))',
+                }}
+              />
+            </div>
             {/* wooden frame */}
             <div
               className="relative rounded-[8px] p-[9px]"
@@ -340,7 +363,7 @@ export default function Postcard() {
               }}
             >
               <div
-                className="rounded-[4px] px-4 py-6 flex flex-row lg:flex-col flex-wrap items-center justify-center gap-x-5 gap-y-[14px] lg:gap-y-[18px]"
+                className="rounded-[4px] px-4 py-6 flex flex-row md:flex-col flex-wrap items-center justify-center gap-x-5 gap-y-[14px] md:gap-y-[18px]"
                 style={{
                   background:
                     'radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,0.05), transparent 60%), linear-gradient(160deg, #263229 0%, #1d2622 55%, #222e28 100%)',
@@ -370,9 +393,33 @@ export default function Postcard() {
             </div>
           </nav>
 
-          {/* Big wood-framed board: photo on the left, chalkboard welcome panel on the right */}
+          {/* Big wood-framed board: menu board in the middle, chalkboard welcome panel on the right */}
+          <div className="relative">
+          {/* striped parlor awning over the big board */}
+          <div aria-hidden="true" className="relative z-10 mx-[8px] -mb-[3px]">
+            <div
+              className="h-[22px] md:h-[26px] rounded-t-[8px]"
+              style={{
+                background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 36px, var(--berry-deep) 36px 72px)',
+                boxShadow: 'inset 0 -6px 11px rgba(28,13,12,0.28), 0 4px 10px rgba(0,0,0,0.32)',
+              }}
+            />
+            <div
+              className="h-[12px] md:h-[14px]"
+              style={{
+                background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 36px, var(--berry-deep) 36px 72px)',
+                WebkitMaskImage: 'radial-gradient(18px at 50% 0, #000 98%, transparent 100%)',
+                maskImage: 'radial-gradient(18px at 50% 0, #000 98%, transparent 100%)',
+                WebkitMaskSize: '36px 100%',
+                maskSize: '36px 100%',
+                WebkitMaskRepeat: 'repeat-x',
+                maskRepeat: 'repeat-x',
+                filter: 'drop-shadow(0 4px 5px rgba(0,0,0,0.28))',
+              }}
+            />
+          </div>
           <div
-            className="relative rounded-[10px] p-[10px] md:p-[12px]"
+            className="relative rounded-b-[10px] p-[10px] md:p-[12px]"
             style={{
               background: 'linear-gradient(160deg, #6b4a2e, #4b3120 55%, #5d3f27)',
               boxShadow:
@@ -492,6 +539,7 @@ export default function Postcard() {
                 </a>
               </div>
             </div>
+          </div>
           </div>
         </div>
 
