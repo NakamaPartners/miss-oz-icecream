@@ -45,11 +45,39 @@ const NAV = [
   { label: 'Contact', target: 'contact' },
 ];
 
-const panels: { title: string; sub: string; desc: string; target: string; img: string }[] = [
-  { title: 'Handmade Ice Cream', sub: 'Small batch, big heart', desc: 'Classic recipes, real flavor', target: 'menu', img: '/images/panel-icecream.png' },
-  { title: 'Pickup or Delivery', sub: "We've got you", desc: 'Uber Eats · DoorDash · Grubhub', target: 'menu', img: '/images/panel-delivery.png' },
-  { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what’s next', target: 'vote', img: '/images/panel-vote.png' },
-  { title: 'Vintage Vibes', sub: 'Sweet times', desc: 'Slow down, stay awhile', target: 'about', img: '/images/panel-vibes.png' },
+type Tone = 'cream' | 'teal' | 'pink' | 'gold';
+
+const TONES: Record<Tone, { bg: string; border: string; title: string; desc: string; eyebrow: string; scrim: string; bgimg: string }> = {
+  cream: { bg: 'var(--paper)', border: 'var(--teal-deep)', title: 'var(--cocoa)', desc: 'var(--cocoa)', eyebrow: 'var(--teal-deep)', scrim: 'rgba(239,226,196,0.42)', bgimg: '/images/panelbg-cream.webp' },
+  teal: { bg: 'var(--teal-deep)', border: 'var(--gold)', title: 'var(--cream-hi)', desc: 'var(--gold-hi)', eyebrow: 'var(--gold-hi)', scrim: 'rgba(23,63,60,0.5)', bgimg: '/images/panelbg-teal.webp' },
+  pink: { bg: 'var(--pink)', border: 'var(--berry)', title: 'var(--berry-deep)', desc: 'var(--cocoa)', eyebrow: 'var(--berry)', scrim: 'rgba(234,184,206,0.4)', bgimg: '/images/panelbg-pink.webp' },
+  gold: { bg: 'var(--gold)', border: 'var(--brick)', title: 'var(--cocoa)', desc: 'var(--cocoa)', eyebrow: 'var(--cocoa)', scrim: 'rgba(199,154,59,0.48)', bgimg: '/images/panelbg-gold.webp' },
+};
+
+const panels: { title: string; sub: string; desc: string; target: string; tone: Tone; img: string }[] = [
+  { title: 'Handmade Ice Cream', sub: 'Small batch, big heart', desc: 'Classic recipes, real flavor', target: 'menu', tone: 'cream', img: '/images/panel-icecream.png' },
+  { title: 'Pickup or Delivery', sub: "We've got you", desc: 'Uber Eats · DoorDash · Grubhub', target: 'menu', tone: 'teal', img: '/images/panel-delivery.png' },
+  { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what’s next', target: 'vote', tone: 'pink', img: '/images/panel-vote.png' },
+  { title: 'Vintage Vibes', sub: 'Sweet times', desc: 'Slow down, stay awhile', target: 'about', tone: 'gold', img: '/images/panel-vibes.png' },
+];
+
+const FLAVORS = [
+  'Mexican Vanilla',
+  'Mint Chip',
+  'Horchata Cookie',
+  'Coffee Crackle',
+  'Matcha',
+  'Fresh Banana',
+  'Salty Caramel',
+  'Honey',
+  'Kulfi',
+  'Belgian Chocolate',
+  'Birthday Cake',
+  'Cookies & Cream',
+  'Thai Iced Tea',
+  'Peanut Butter Fudge',
+  'Butter Pecan',
+  'Marionberry',
 ];
 
 const hrefFor = (t: string) => (t === 'home' ? '#home' : `#${t}`);
@@ -448,52 +476,30 @@ export default function Postcard() {
                     Ice Cream &amp; Sorbet
                   </div>
                   <div className="mt-[4px] text-[var(--pink)]" style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(17px,1.7vw,21px)', textShadow: '0 0 10px rgba(240,170,190,0.25)' }}>
-                    step inside
+                    homemade flavors
                   </div>
                 </div>
 
-                {/* chalk menu of the parlor's specialties */}
-                <div className="mt-[20px] w-full max-w-[460px] flex-1 flex flex-col justify-center gap-y-[6px]">
-                  {panels.map((p, i) => (
-                    <a
-                      key={p.title}
-                      href={hrefFor(p.target)}
-                      onClick={(e) => handleNav(e, p.target)}
-                      aria-label={`${p.title} — go to the ${p.target} section`}
-                      className="group flex items-center gap-4 rounded-[6px] px-3 py-[10px] transition-colors hover:bg-[rgba(243,234,214,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)]"
+                {/* chalk flavor list — copied from the flavor boards in the shop photos */}
+                <ul className="mt-[22px] w-full max-w-[430px] flex-1 content-center grid grid-cols-2 gap-x-[26px] gap-y-[10px] text-left">
+                  {FLAVORS.map((f, i) => (
+                    <li
+                      key={f}
+                      className="leading-snug"
+                      style={{
+                        fontFamily: i % 5 === 2 ? 'var(--font-script-alt)' : 'var(--font-sans)',
+                        fontSize: i % 5 === 2 ? 17 : 13.5,
+                        letterSpacing: i % 5 === 2 ? '0.4px' : '1.6px',
+                        textTransform: i % 5 === 2 ? 'none' : 'uppercase',
+                        fontWeight: 600,
+                        color: i % 4 === 1 ? 'var(--gold-hi)' : i % 4 === 3 ? 'var(--pink)' : '#ece3cd',
+                        textShadow: '0 0 8px rgba(243,234,214,0.12)',
+                      }}
                     >
-                      <img
-                        src={p.img}
-                        alt=""
-                        aria-hidden="true"
-                        className="shrink-0 w-[54px] h-[54px] object-contain transition-transform duration-200 group-hover:scale-110 group-hover:-rotate-3"
-                        style={{ filter: 'drop-shadow(0 0 8px rgba(243,234,214,0.28)) drop-shadow(0 3px 5px rgba(0,0,0,0.5))' }}
-                      />
-                      <span className="flex flex-col text-left min-w-0">
-                        <span className="text-[10px] tracking-[3px] uppercase font-bold opacity-75" style={{ fontFamily: 'var(--font-sans)', color: i % 2 === 0 ? 'var(--pink)' : '#e9e0cc' }}>
-                          {p.sub}
-                        </span>
-                        <span
-                          className="leading-[1.08]"
-                          style={{
-                            fontFamily: 'var(--font-display)',
-                            fontSize: 'clamp(18px,1.7vw,23px)',
-                            color: i % 2 === 0 ? 'var(--gold-hi)' : '#f3ead6',
-                            textShadow: '0 0 10px rgba(243,234,214,0.15)',
-                          }}
-                        >
-                          {p.title}
-                        </span>
-                        <span className="mt-[2px] italic text-[12.5px] text-[#cfc6ae]" style={{ fontFamily: 'var(--font-sans)' }}>
-                          {p.desc}
-                          <span aria-hidden="true" className="not-italic inline-block ml-1.5 transition-transform duration-200 group-hover:translate-x-1 text-[var(--gold-hi)]">→</span>
-                        </span>
-                      </span>
-                      {/* dotted chalk leader line */}
-                      <span aria-hidden="true" className="flex-1 border-b border-dotted border-[rgba(233,224,204,0.3)] mx-1 hidden sm:block" />
-                    </a>
+                      {f}
+                    </li>
                   ))}
-                </div>
+                </ul>
 
                 <div className="mt-[14px] flex items-center gap-3 text-[var(--gold-hi)] opacity-80" aria-hidden="true">
                   <span className="h-px w-12" style={{ background: 'currentColor' }} />
@@ -543,6 +549,50 @@ export default function Postcard() {
             </div>
           </div>
           </div>
+        </div>
+
+        {/* original Step Inside poster cards */}
+        <div className="mt-[clamp(16px,2.2vw,26px)] grid grid-cols-1 sm:grid-cols-2 gap-[clamp(12px,1.6vw,20px)]">
+          {panels.map((p) => {
+            const t = TONES[p.tone];
+            return (
+              <a
+                key={p.title}
+                href={hrefFor(p.target)}
+                onClick={(e) => handleNav(e, p.target)}
+                aria-label={`${p.title} — go to the ${p.target} section`}
+                className="group relative flex items-stretch gap-3 rounded-[7px] border-2 p-[clamp(15px,1.7vw,20px)] min-h-[168px] transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"
+                style={{
+                  backgroundColor: t.bg,
+                  backgroundImage: `linear-gradient(${t.scrim}, ${t.scrim}), url(${t.bgimg})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                  borderColor: t.border,
+                  boxShadow: 'inset 0 0 0 2px rgba(255,244,214,0.35), 0 6px 16px rgba(28,13,12,0.2)',
+                }}
+              >
+                <div className="tape-strip tape-peel top-[-8px] left-1/2 -translate-x-1/2 rotate-2" aria-hidden="true" />
+                <div className="flex flex-col justify-between flex-1 min-w-0 pt-2">
+                  <div>
+                    <span className="block text-[10.5px] tracking-[3px] uppercase font-bold mb-1.5" style={{ color: t.eyebrow, fontFamily: 'var(--font-sans)' }}>{p.sub}</span>
+                    <span className="block leading-[1.03] text-[clamp(21px,1.9vw,26px)]" style={{ color: t.title, fontFamily: 'var(--font-display)' }}>{p.title}</span>
+                  </div>
+                  <span className="mt-4 flex items-center gap-1.5 italic text-[12.5px] opacity-90" style={{ color: t.desc, fontFamily: 'var(--font-sans)' }}>
+                    {p.desc}
+                    <span aria-hidden="true" className="not-italic inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  </span>
+                </div>
+                <img
+                  src={p.img}
+                  alt=""
+                  aria-hidden="true"
+                  className="shrink-0 self-center w-[clamp(92px,11vw,128px)] h-auto object-contain transition-transform duration-200 group-hover:scale-105 group-hover:-rotate-2"
+                  style={{ filter: 'drop-shadow(0 4px 6px rgba(28,13,12,0.35))' }}
+                />
+              </a>
+            );
+          })}
         </div>
 
         {/* bottom ribbon */}
