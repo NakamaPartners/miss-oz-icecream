@@ -223,7 +223,7 @@ export default function Postcard() {
       {/* HERO SCENE — storefront photos, slightly inset so the branding above stays the lead */}
       <div className="relative w-full z-0 pointer-events-none">
         <div
-          className="w-full relative max-w-[920px] mx-auto px-[4vw] sm:px-0"
+          className="w-full relative max-w-[800px] mx-auto px-[4vw] sm:px-0"
           style={{
             maskImage: HERO_MASK,
             WebkitMaskImage: HERO_MASK,
