@@ -137,11 +137,93 @@ export default function Postcard() {
         </div>
       </div>
 
-      {/* HERO SCENE — the full, uncropped illustration printed straight onto the paper,
-          fading softly into the page on all four edges */}
-      <div className="relative w-full z-0 pointer-events-none -mt-2 sm:-mt-4">
+      {/* BRANDING — logo + wordmark plaque sits above the photos so it always reads first */}
+      <div className="relative z-20 flex flex-col items-center px-[4vw] -mt-2 sm:-mt-4 mb-[clamp(18px,2.6vw,32px)]">
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+          className="relative rounded-[10px] p-[5px]"
+          style={{
+            background: 'linear-gradient(160deg, #6e2246 0%, var(--berry-deep) 45%, #45102b 100%)',
+            boxShadow: '0 10px 30px rgba(20,10,8,0.35), 0 2px 6px rgba(20,10,8,0.25), inset 0 1px 0 rgba(255,244,214,0.25)',
+          }}
+        >
+          <div
+            className="relative text-center leading-none rounded-[7px] px-[clamp(28px,4.4vw,58px)] py-[clamp(14px,1.8vw,20px)]"
+            style={{
+              background:
+                'radial-gradient(ellipse at 50% 0%, #fdf3dd 0%, var(--cream-hi) 60%, #f0dfbc 100%)',
+              border: '1.5px dotted var(--gold)',
+              outline: '1px solid rgba(93,26,58,0.35)',
+              outlineOffset: '-4px',
+            }}
+          >
+            {/* EST row — engraved-ticket style */}
+            <span
+              className="flex items-center justify-center gap-[10px] text-[8px] sm:text-[9px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--berry-deep)] opacity-85"
+              style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
+            >
+              <span className="inline-block w-[26px] h-px bg-[var(--gold)] opacity-80" />
+              <span className="text-[var(--gold)] text-[8px] leading-none rotate-45 inline-block">◆</span>
+              Est<span className="lowercase -mx-1">.</span> 2007
+              <span className="text-[var(--gold)] text-[8px] leading-none rotate-45 inline-block">◆</span>
+              <span className="inline-block w-[26px] h-px bg-[var(--gold)] opacity-80" />
+            </span>
+
+            <div className="mt-[8px] flex items-center justify-center gap-[clamp(10px,1.4vw,16px)]">
+              <img
+                src="/images/logo-icon.png"
+                alt=""
+                aria-hidden="true"
+                className="w-[clamp(40px,5vw,62px)] h-[clamp(40px,5vw,62px)] rounded-full object-contain shrink-0"
+                style={{ boxShadow: '0 2px 6px rgba(93,26,58,0.25)' }}
+              />
+              <h1
+                className="text-[var(--berry-deep)]"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(34px, 4.6vw, 58px)',
+                  letterSpacing: '0.01em',
+                  textShadow:
+                    '0 1px 0 rgba(255,248,230,0.95), 0 -1px 0 rgba(93,26,58,0.14), 0 3px 3px rgba(93,26,58,0.2)',
+                }}
+              >
+                Miss Oz
+              </h1>
+            </div>
+
+            {/* script flourish */}
+            <span
+              className="block mt-[4px] text-[var(--berry)] text-[clamp(13px,1.5vw,17px)]"
+              style={{ fontFamily: 'var(--font-script)' }}
+            >
+              Portland, Oregon
+            </span>
+
+            {/* divider */}
+            <span className="mt-[7px] mb-[7px] flex items-center justify-center gap-2" aria-hidden="true">
+              <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
+              <span className="text-[var(--gold)] text-[11px] leading-none">✦</span>
+              <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
+            </span>
+
+            <span
+              className="flex items-center justify-center gap-[8px] text-[9px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase text-[var(--cocoa)]"
+              style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
+            >
+              Ice Cream
+              <span className="text-[var(--berry)] text-[8px] leading-none rotate-45 inline-block">◆</span>
+              Dessert Cafe
+            </span>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* HERO SCENE — storefront photos, slightly inset so the branding above stays the lead */}
+      <div className="relative w-full z-0 pointer-events-none">
         <div
-          className="w-full relative max-w-[1440px] mx-auto"
+          className="w-full relative max-w-[1080px] mx-auto px-[4vw] sm:px-0"
           style={{
             maskImage: HERO_MASK,
             WebkitMaskImage: HERO_MASK,
@@ -258,85 +340,7 @@ export default function Postcard() {
           </div>
           {/* Soft color wash linking the ink to the paper tone */}
           <div className="absolute inset-0 bg-[var(--gold)] opacity-[0.12] mix-blend-color pointer-events-none" aria-hidden="true" />
-
-          {/* Wordmark plaque over the top of the photo */}
-          <div
-            aria-hidden="true"
-            className="absolute left-0 right-0 top-[clamp(14px,2.4vw,32px)] flex justify-center"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: -16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-              className="relative rounded-[10px] p-[5px]"
-              style={{
-                background: 'linear-gradient(160deg, #6e2246 0%, var(--berry-deep) 45%, #45102b 100%)',
-                boxShadow: '0 10px 30px rgba(20,10,8,0.5), 0 2px 6px rgba(20,10,8,0.35), inset 0 1px 0 rgba(255,244,214,0.25)',
-              }}
-            >
-              <div
-                className="relative text-center leading-none rounded-[7px] px-[clamp(24px,3.6vw,48px)] py-[clamp(12px,1.6vw,18px)]"
-                style={{
-                  background:
-                    'radial-gradient(ellipse at 50% 0%, #fdf3dd 0%, var(--cream-hi) 60%, #f0dfbc 100%)',
-                  border: '1.5px dotted var(--gold)',
-                  outline: '1px solid rgba(93,26,58,0.35)',
-                  outlineOffset: '-4px',
-                }}
-              >
-                {/* EST row — engraved-ticket style */}
-                <span
-                  className="flex items-center justify-center gap-[10px] text-[8px] sm:text-[9px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--berry-deep)] opacity-85"
-                  style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
-                >
-                  <span className="inline-block w-[26px] h-px bg-[var(--gold)] opacity-80" />
-                  <span className="text-[var(--gold)] text-[8px] leading-none rotate-45 inline-block">◆</span>
-                  Est<span className="lowercase -mx-1">.</span> 2007
-                  <span className="text-[var(--gold)] text-[8px] leading-none rotate-45 inline-block">◆</span>
-                  <span className="inline-block w-[26px] h-px bg-[var(--gold)] opacity-80" />
-                </span>
-
-                <span
-                  className="block mt-[7px] text-[var(--berry-deep)]"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(30px, 4.2vw, 52px)',
-                    letterSpacing: '0.01em',
-                    textShadow:
-                      '0 1px 0 rgba(255,248,230,0.95), 0 -1px 0 rgba(93,26,58,0.14), 0 3px 3px rgba(93,26,58,0.2)',
-                  }}
-                >
-                  Miss Oz
-                </span>
-
-                {/* script flourish */}
-                <span
-                  className="block mt-[4px] text-[var(--berry)] text-[clamp(13px,1.5vw,17px)]"
-                  style={{ fontFamily: 'var(--font-script)' }}
-                >
-                  Portland, Oregon
-                </span>
-
-                {/* divider */}
-                <span className="mt-[7px] mb-[7px] flex items-center justify-center gap-2" aria-hidden="true">
-                  <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
-                  <span className="text-[var(--gold)] text-[11px] leading-none">✦</span>
-                  <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
-                </span>
-
-                <span
-                  className="flex items-center justify-center gap-[8px] text-[9px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase text-[var(--cocoa)]"
-                  style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
-                >
-                  Ice Cream
-                  <span className="text-[var(--berry)] text-[8px] leading-none rotate-45 inline-block">◆</span>
-                  Dessert Cafe
-                </span>
-              </div>
-            </motion.div>
-          </div>
         </div>
-        <h1 className="sr-only">Miss Oz — Ice Cream &amp; Dessert Cafe</h1>
       </div>
 
       {/* SECTION PANELS — poster-like taped cards, click to explore */}
