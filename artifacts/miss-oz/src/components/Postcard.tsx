@@ -176,14 +176,14 @@ export default function Postcard() {
                 src="/images/logo-icon.png"
                 alt=""
                 aria-hidden="true"
-                className="w-[clamp(40px,5vw,62px)] h-[clamp(40px,5vw,62px)] rounded-full object-contain shrink-0"
+                className="w-[clamp(56px,7vw,88px)] h-[clamp(56px,7vw,88px)] rounded-full object-contain shrink-0"
                 style={{ boxShadow: '0 2px 6px rgba(93,26,58,0.25)' }}
               />
               <h1
                 className="text-[var(--berry-deep)]"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(34px, 4.6vw, 58px)',
+                  fontSize: 'clamp(38px, 5.2vw, 66px)',
                   letterSpacing: '0.01em',
                   textShadow:
                     '0 1px 0 rgba(255,248,230,0.95), 0 -1px 0 rgba(93,26,58,0.14), 0 3px 3px rgba(93,26,58,0.2)',
@@ -223,7 +223,7 @@ export default function Postcard() {
       {/* HERO SCENE — storefront photos, slightly inset so the branding above stays the lead */}
       <div className="relative w-full z-0 pointer-events-none">
         <div
-          className="w-full relative max-w-[1080px] mx-auto px-[4vw] sm:px-0"
+          className="w-full relative max-w-[920px] mx-auto px-[4vw] sm:px-0"
           style={{
             maskImage: HERO_MASK,
             WebkitMaskImage: HERO_MASK,
