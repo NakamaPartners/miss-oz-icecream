@@ -274,16 +274,11 @@ export default function Postcard() {
                   <span
                     style={{
                       fontFamily: 'var(--font-display)',
-                      fontSize: 'clamp(28px, 4vw, 54px)',
-                      letterSpacing: '0.015em',
-                      lineHeight: 1.08,
-                      background:
-                        'linear-gradient(180deg, #fdf6e3 0%, #f7e8c4 55%, #e8c98c 100%)',
-                      WebkitBackgroundClip: 'text',
-                      backgroundClip: 'text',
-                      color: 'transparent',
-                      filter:
-                        'drop-shadow(0 2px 0 rgba(74,26,36,0.55)) drop-shadow(0 4px 10px rgba(20,10,8,0.75)) drop-shadow(0 12px 34px rgba(20,10,8,0.55))',
+                      fontSize: 'clamp(16px, 1.9vw, 26px)',
+                      letterSpacing: '0.04em',
+                      lineHeight: 1.15,
+                      color: '#f7ecd2',
+                      textShadow: '0 1px 2px rgba(20,10,8,0.75), 0 3px 10px rgba(20,10,8,0.5)',
                     }}
                   >
                     {current.slogan}

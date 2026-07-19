@@ -81,7 +81,7 @@ export default function Loader() {
           {/* script wordmark */}
           <motion.div
             className="text-[var(--pink)] text-[clamp(44px,8vw,68px)] leading-none mt-6"
-            style={{ fontFamily: 'var(--font-groovy)', fontStyle: 'italic', textShadow: '2px 2px 0 rgba(0,0,0,0.25)' }}
+            style={{ fontFamily: 'var(--font-accent)', fontStyle: 'italic', textShadow: '2px 2px 0 rgba(0,0,0,0.25)' }}
             initial={{ opacity: 0, y: reduce ? 0 : 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: reduce ? 0.2 : 0.6 }}

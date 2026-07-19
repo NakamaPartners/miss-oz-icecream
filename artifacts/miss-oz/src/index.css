@@ -135,13 +135,17 @@
   --input: 3 39% 8%;
   --ring: 41 57% 51%;
 
-  --app-font-sans: 'EB Garamond', serif;
+  /* Typography per client direction (Jul 2026):
+     Lemongrass = signature/display font · Kaleidos = body, navigation & supporting content
+     Higante = reserved for a few special moments only (via --font-accent) */
+  --app-font-sans: 'Kaleidos', 'EB Garamond', serif;
   --app-font-serif: 'Playfair Display', serif;
   --app-font-mono: Menlo, monospace;
-  --font-display: 'Higante', 'Shrikhand', cursive;
-  --font-script: 'Kaleidos', 'Pacifico', cursive;
+  --font-display: 'Lemongrass', 'Shrikhand', cursive;
+  --font-script: 'Lemongrass', 'Pacifico', cursive;
   --font-script-alt: 'Lemongrass', 'Pacifico', cursive;
-  --font-groovy: 'Higante', 'Bagel Fat One', 'Shrikhand', cursive;
+  --font-groovy: 'Lemongrass', 'Bagel Fat One', 'Shrikhand', cursive;
+  --font-accent: 'Higante', 'Shrikhand', cursive;
 
   --radius: 0.5rem;
 }

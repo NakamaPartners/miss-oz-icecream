@@ -141,3 +141,6 @@ list `color` only, never `text-shadow`. Animating text-shadow is a known repaint
 
 ## Hero slideshow (client-requested)
 Hero is now a full-width crossfading photo slideshow (5 real storefront/interior photos, rotating slogans, dots, static wordmark plaque on top). Client asked for this via Instagram DM; keep the plaque and slogans — they're the branding overlay she wanted. Auto-advance pauses on dot hover/focus and is disabled under reduced motion.
+
+## Typography (client-locked, Jul 2026)
+Lemongrass = signature/display font; Kaleidos = body, nav & supporting text; Higante reserved for special moments only (currently just the Loader splash, via --font-accent). All mapped through CSS vars in src/index.css — change the vars, not per-component fonts. Hero slogan over photos must stay small/subtle (client complaint about it dominating).
