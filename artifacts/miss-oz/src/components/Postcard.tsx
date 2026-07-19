@@ -130,95 +130,83 @@ export default function Postcard() {
         <Bunting />
       </div>
 
-      <div className="relative z-20 mx-auto max-w-[1200px] px-[4vw]">
-        {/* Editorial double rule where the masthead nav used to sit (nav now lives on the chalkboard easel below) */}
-        <div className="flex flex-col items-center mt-[10px] sm:mt-[20px] mb-[20px] sm:mb-[30px] relative z-20">
-          <div className="w-full border-t-[2.5px] border-b-[1px] border-[var(--cocoa)] h-[5px] sm:h-[7px] opacity-70" aria-hidden="true" />
-        </div>
-      </div>
+      {/* MASTHEAD — official logo centered, supporting text + navigation integrated around it */}
+      <header className="relative z-20 mx-auto max-w-[1200px] px-[4vw] mt-[10px] sm:mt-[20px] mb-[clamp(18px,2.6vw,32px)]">
+        {/* top double rule */}
+        <div className="w-full border-t-[2.5px] border-b-[1px] border-[var(--cocoa)] h-[5px] sm:h-[7px] opacity-70 mb-[clamp(14px,2vw,24px)]" aria-hidden="true" />
 
-      {/* BRANDING — logo + wordmark plaque sits above the photos so it always reads first */}
-      <div className="relative z-20 flex flex-col items-center px-[4vw] -mt-2 sm:-mt-4 mb-[clamp(18px,2.6vw,32px)]">
         <motion.div
-          initial={{ opacity: 0, y: -16 }}
+          initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-          className="relative rounded-[10px] p-[5px]"
-          style={{
-            background: 'linear-gradient(160deg, #6e2246 0%, var(--berry-deep) 45%, #45102b 100%)',
-            boxShadow: '0 10px 30px rgba(20,10,8,0.35), 0 2px 6px rgba(20,10,8,0.25), inset 0 1px 0 rgba(255,244,214,0.25)',
-          }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-x-[clamp(20px,3vw,44px)] gap-y-4"
         >
-          <div
-            className="relative text-center leading-none rounded-[7px] px-[clamp(28px,4.4vw,58px)] py-[clamp(14px,1.8vw,20px)]"
-            style={{
-              background:
-                'radial-gradient(ellipse at 50% 0%, #fdf3dd 0%, var(--cream-hi) 60%, #f0dfbc 100%)',
-              border: '1.5px dotted var(--gold)',
-              outline: '1px solid rgba(93,26,58,0.35)',
-              outlineOffset: '-4px',
-            }}
-          >
-            {/* EST row — engraved-ticket style */}
+          {/* left — supporting text + first half of the nav */}
+          <div className="order-2 md:order-1 flex flex-col items-center md:items-end text-center md:text-right gap-[10px]">
             <span
-              className="flex items-center justify-center gap-[10px] text-[8px] sm:text-[9px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--berry-deep)] opacity-85"
+              className="text-[9px] sm:text-[10px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--berry-deep)] opacity-80"
               style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
             >
-              <span className="inline-block w-[26px] h-px bg-[var(--gold)] opacity-80" />
-              <span className="text-[var(--gold)] text-[8px] leading-none rotate-45 inline-block">◆</span>
-              Est<span className="lowercase -mx-1">.</span> 2007
-              <span className="text-[var(--gold)] text-[8px] leading-none rotate-45 inline-block">◆</span>
-              <span className="inline-block w-[26px] h-px bg-[var(--gold)] opacity-80" />
+              Est. 2007 · Portland, Oregon
             </span>
+            <span className="hidden md:inline-block w-[110px] h-px bg-[var(--cocoa)] opacity-35" aria-hidden="true" />
+            <nav aria-label="Primary" className="flex flex-wrap justify-center md:justify-end items-center gap-x-[clamp(14px,1.6vw,24px)] gap-y-2">
+              {NAV.slice(0, 3).map((n) => (
+                <a
+                  key={n.label}
+                  href={hrefFor(n.target)}
+                  onClick={(e) => handleNav(e, n.target)}
+                  className="text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  {n.label}
+                </a>
+              ))}
+            </nav>
+          </div>
 
-            <div className="mt-[8px] flex items-center justify-center gap-[clamp(10px,1.4vw,16px)]">
+          {/* center — the official logo */}
+          <div className="order-1 md:order-2 flex justify-center">
+            <h1 className="m-0">
               <img
-                src="/images/logo-icon.png"
-                alt=""
-                aria-hidden="true"
-                className="w-[clamp(56px,7vw,88px)] h-[clamp(56px,7vw,88px)] rounded-full object-contain shrink-0"
-                style={{ boxShadow: '0 2px 6px rgba(93,26,58,0.25)' }}
+                src="/images/logo-official.png"
+                alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
+                className="w-[clamp(170px,22vw,250px)] h-auto"
+                style={{ filter: 'drop-shadow(0 3px 8px rgba(93,26,58,0.18))' }}
               />
-              <h1
-                className="text-[var(--berry-deep)]"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(38px, 5.2vw, 66px)',
-                  letterSpacing: '0.01em',
-                  textShadow:
-                    '0 1px 0 rgba(255,248,230,0.95), 0 -1px 0 rgba(93,26,58,0.14), 0 3px 3px rgba(93,26,58,0.2)',
-                }}
-              >
-                Miss Oz
-              </h1>
-            </div>
+            </h1>
+          </div>
 
-            {/* script flourish */}
+          {/* right — supporting text + second half of the nav */}
+          <div className="order-3 flex flex-col items-center md:items-start text-center md:text-left gap-[10px]">
             <span
-              className="block mt-[4px] text-[var(--berry)] text-[clamp(13px,1.5vw,17px)]"
-              style={{ fontFamily: 'var(--font-script)' }}
-            >
-              Portland, Oregon
-            </span>
-
-            {/* divider */}
-            <span className="mt-[7px] mb-[7px] flex items-center justify-center gap-2" aria-hidden="true">
-              <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
-              <span className="text-[var(--gold)] text-[11px] leading-none">✦</span>
-              <span className="inline-block w-[52px] h-px bg-[var(--berry-deep)] opacity-45" />
-            </span>
-
-            <span
-              className="flex items-center justify-center gap-[8px] text-[9px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase text-[var(--cocoa)]"
+              className="flex items-center gap-[8px] text-[9px] sm:text-[10px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--cocoa)]"
               style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
             >
               Ice Cream
-              <span className="text-[var(--berry)] text-[8px] leading-none rotate-45 inline-block">◆</span>
+              <span className="text-[var(--berry)] text-[8px] leading-none rotate-45 inline-block" aria-hidden="true">◆</span>
               Dessert Cafe
             </span>
+            <span className="hidden md:inline-block w-[110px] h-px bg-[var(--cocoa)] opacity-35" aria-hidden="true" />
+            <nav aria-label="Primary continued" className="flex flex-wrap justify-center md:justify-start items-center gap-x-[clamp(14px,1.6vw,24px)] gap-y-2">
+              {NAV.slice(3).map((n) => (
+                <a
+                  key={n.label}
+                  href={hrefFor(n.target)}
+                  onClick={(e) => handleNav(e, n.target)}
+                  className="text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  {n.label}
+                </a>
+              ))}
+            </nav>
           </div>
         </motion.div>
-      </div>
+
+        {/* bottom hairline */}
+        <div className="w-full border-t border-[var(--cocoa)] opacity-35 mt-[clamp(14px,2vw,24px)]" aria-hidden="true" />
+      </header>
 
       {/* HERO SCENE — storefront photos, slightly inset so the branding above stays the lead */}
       <div className="relative w-full z-0 pointer-events-none">
