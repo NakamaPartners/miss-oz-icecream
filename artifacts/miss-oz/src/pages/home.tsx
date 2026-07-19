@@ -25,13 +25,12 @@ function GlobalMarqueeBorder() {
       {/* Outer gold ring */}
       <div className="absolute inset-0 border-[3px] border-[var(--gold)] opacity-80" />
       
-      {/* Main marionberry frame */}
+      {/* Main marionberry frame — color sampled directly from the official Miss Oz logo */}
       <div 
-        className="absolute inset-[3px] border-[var(--berry-deep)]" 
+        className="absolute inset-[3px] border-[var(--marionberry)]" 
         style={{ 
           borderWidth: frameWidth, 
           boxShadow: 'inset 0 0 0 2px var(--gold)',
-          opacity: 0.95
         }} 
       />
       
