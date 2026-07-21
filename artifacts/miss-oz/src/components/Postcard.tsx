@@ -168,14 +168,14 @@ export default function Postcard() {
 
           {/* center — the official logo */}
           <div className="order-1 md:order-2 flex justify-center">
-            <h1 className="m-0">
+            <div className="m-0">
               <img
                 src="/images/logo-official.png"
                 alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
                 className="w-[clamp(170px,22vw,250px)] h-auto"
                 style={{ filter: 'drop-shadow(0 3px 8px rgba(93,26,58,0.18))' }}
               />
-            </h1>
+            </div>
           </div>
 
           {/* right — supporting text + second half of the nav */}
