@@ -20,12 +20,16 @@ const memVotes = new Map<string, number>(
   FLAVOR_NAMES.map((f) => [f, 0]),
 );
 
+const kvUrl = process.env.KV_REST_API_URL ?? "";
 const kvAvailable = Boolean(
-  process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN,
+  kvUrl.startsWith("https://") && process.env.KV_REST_API_TOKEN,
 );
 
 if (!kvAvailable) {
-  logger.warn("Vercel KV env vars not set — using in-memory vote counts (resets on restart)");
+  logger.warn(
+    { kvUrlPrefix: kvUrl.slice(0, 12) || "(empty)" },
+    "Vercel KV not configured — using in-memory vote counts (resets on restart)",
+  );
 }
 
 /* ── GET /api/results ─────────────────────────────────────────────────────── */

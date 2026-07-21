@@ -5,15 +5,22 @@ export type InquiryType = 'wholesale' | 'event' | 'general';
 
 interface Props {
   type: InquiryType;
-  /** Label for the submit button, e.g. "Open a wholesale account" */
+  /** Label for the trigger button */
   submitLabel?: string;
-  /** Tailwind/CSS classes for the submit button */
+  /** Tailwind/CSS classes for the trigger button */
   buttonClassName?: string;
+  /** When true, renders form fields with light text/borders for dark backgrounds */
+  darkBg?: boolean;
 }
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
-export default function InquireForm({ type, submitLabel = 'Send inquiry', buttonClassName = '' }: Props) {
+export default function InquireForm({
+  type,
+  submitLabel = 'Send inquiry',
+  buttonClassName = '',
+  darkBg = false,
+}: Props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -26,7 +33,9 @@ export default function InquireForm({ type, submitLabel = 'Send inquiry', button
     if (!name.trim() || !email.trim() || !message.trim()) return;
     setStatus('sending');
     try {
-      const res = await fetch('/api/inquire', {
+      // Use BASE_URL so the path is correct in both Replit dev and Vercel deploy
+      const base = import.meta.env.BASE_URL?.replace(/\/$/, '') ?? '';
+      const res = await fetch(`${base}/api/inquire`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone: phone || undefined, type, message }),
@@ -44,10 +53,22 @@ export default function InquireForm({ type, submitLabel = 'Send inquiry', button
     setOpen(false);
   }
 
-  const inputClass =
-    'w-full bg-transparent border-b-2 border-[rgba(28,13,12,0.25)] pb-[5px] text-[17px] text-[var(--cocoa)] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic focus:outline-none focus:border-[var(--berry)] transition-colors px-1 py-1 rounded-sm';
-  const labelClass =
-    'block text-[11px] tracking-[3px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-1';
+  // Light-on-dark vs dark-on-light field styles
+  const inputClass = darkBg
+    ? 'w-full bg-transparent border-b-2 border-[rgba(243,234,214,0.35)] pb-[5px] text-[17px] text-[#f3ead6] placeholder:text-[rgba(243,234,214,0.4)] placeholder:italic focus:outline-none focus:border-[var(--gold-hi)] transition-colors px-1 py-1 rounded-sm'
+    : 'w-full bg-transparent border-b-2 border-[rgba(28,13,12,0.25)] pb-[5px] text-[17px] text-[var(--cocoa)] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic focus:outline-none focus:border-[var(--berry)] transition-colors px-1 py-1 rounded-sm';
+
+  const labelClass = darkBg
+    ? 'block text-[11px] tracking-[3px] uppercase font-bold text-[#f3ead6] opacity-70 mb-1'
+    : 'block text-[11px] tracking-[3px] uppercase font-bold text-[var(--cocoa)] opacity-60 mb-1';
+
+  const textareaClass = darkBg
+    ? 'w-full bg-transparent border border-[rgba(243,234,214,0.28)] rounded-[6px] px-3 py-2 text-[16px] leading-[1.6] text-[#f3ead6] placeholder:text-[rgba(243,234,214,0.4)] placeholder:italic focus:outline-none focus:border-[var(--gold-hi)] transition-colors resize-none'
+    : 'w-full bg-transparent border border-[rgba(28,13,12,0.2)] rounded-[6px] px-3 py-2 text-[16px] leading-[1.6] text-[var(--cocoa)] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic focus:outline-none focus:border-[var(--berry)] transition-colors resize-none';
+
+  const cancelClass = darkBg
+    ? 'text-[12px] tracking-[2px] uppercase underline text-[#f3ead6] opacity-50 hover:opacity-90 transition-opacity'
+    : 'text-[12px] tracking-[2px] uppercase underline opacity-50 hover:opacity-90 transition-opacity';
 
   return (
     <div className="mt-6">
@@ -72,16 +93,29 @@ export default function InquireForm({ type, submitLabel = 'Send inquiry', button
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <div className="text-[22px] mb-2" aria-live="polite" style={{ fontFamily: 'var(--font-script)' }}>
+            <div
+              className="text-[22px] mb-2"
+              aria-live="polite"
+              style={{
+                fontFamily: 'var(--font-script)',
+                color: darkBg ? '#f3ead6' : 'var(--berry)',
+              }}
+            >
               Message received ♥
             </div>
-            <p className="text-[14px] italic opacity-70 mb-4" style={{ fontFamily: 'var(--font-sans)' }}>
+            <p
+              className="text-[14px] italic mb-4"
+              style={{
+                fontFamily: 'var(--font-sans)',
+                color: darkBg ? 'rgba(243,234,214,0.7)' : 'rgba(28,13,12,0.6)',
+              }}
+            >
               We'll be in touch soon.
             </p>
             <button
               type="button"
               onClick={reset}
-              className="text-[12px] tracking-[2px] uppercase underline opacity-60 hover:opacity-100 transition-opacity"
+              className={cancelClass}
               style={{ fontFamily: 'var(--font-sans)' }}
             >
               Close
@@ -121,7 +155,15 @@ export default function InquireForm({ type, submitLabel = 'Send inquiry', button
               />
             </div>
             <div className="mb-5">
-              <label className={labelClass}>Phone <span className="normal-case font-normal opacity-60">(optional)</span></label>
+              <label className={labelClass}>
+                Phone{' '}
+                <span
+                  className="normal-case font-normal"
+                  style={{ opacity: 0.6 }}
+                >
+                  (optional)
+                </span>
+              </label>
               <input
                 type="tel"
                 value={phone}
@@ -146,12 +188,12 @@ export default function InquireForm({ type, submitLabel = 'Send inquiry', button
                     ? 'Date, number of guests, type of event…'
                     : 'How can we help?'
                 }
-                className="w-full bg-transparent border border-[rgba(28,13,12,0.2)] rounded-[6px] px-3 py-2 text-[16px] leading-[1.6] text-[var(--cocoa)] placeholder:text-[rgba(28,13,12,0.35)] placeholder:italic focus:outline-none focus:border-[var(--berry)] transition-colors resize-none"
+                className={textareaClass}
               />
             </div>
 
             {status === 'error' && (
-              <p className="text-[13px] text-red-600 mb-4 italic" role="alert">
+              <p className="text-[13px] text-red-400 mb-4 italic" role="alert">
                 Something went wrong. Please try again or email us directly.
               </p>
             )}
@@ -167,7 +209,7 @@ export default function InquireForm({ type, submitLabel = 'Send inquiry', button
               <button
                 type="button"
                 onClick={reset}
-                className="text-[12px] tracking-[2px] uppercase underline opacity-50 hover:opacity-90 transition-opacity"
+                className={cancelClass}
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
                 Cancel
