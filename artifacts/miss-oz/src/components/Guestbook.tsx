@@ -12,17 +12,6 @@ const SEED: Entry[] = [
   { id: 'seed-3', name: 'Margot from 12th Ave', note: 'The record was playing Ella. I stayed for a second scoop. No regrets.', when: 'March 2026' },
 ];
 
-const STORAGE_KEY = 'missoz_guestbook_v1';
-
-function makeId(): string {
-  try {
-    if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) return crypto.randomUUID();
-  } catch {
-    /* fall through */
-  }
-  return `gb-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-}
-
 function sanitizeEntries(raw: unknown): Entry[] | null {
   if (!Array.isArray(raw)) return null;
   const clean: Entry[] = [];
@@ -32,64 +21,70 @@ function sanitizeEntries(raw: unknown): Entry[] | null {
     const name = typeof rec.name === 'string' ? rec.name.trim() : '';
     const note = typeof rec.note === 'string' ? rec.note.trim() : '';
     const when = typeof rec.when === 'string' ? rec.when.trim() : '';
+    const id = typeof rec.id === 'string' && rec.id ? rec.id : `gb-${Math.random().toString(36).slice(2)}`;
     if (!name || !note) continue;
-    const id = typeof rec.id === 'string' && rec.id ? rec.id : makeId();
     clean.push({ id, name: name.slice(0, 40), note: note.slice(0, 180), when: when || '—' });
   }
   return clean.length ? clean : null;
 }
 
-function loadEntries(): Entry[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return SEED;
-    return sanitizeEntries(JSON.parse(raw)) ?? SEED;
-  } catch {
-    return SEED;
-  }
-}
-
 export default function Guestbook() {
   const [entries, setEntries] = useState<Entry[]>(SEED);
+  const [loading, setLoading] = useState(true);
   const [name, setName] = useState('');
   const [note, setNote] = useState('');
   const [justSigned, setJustSigned] = useState(false);
   const liveRef = useRef<HTMLParagraphElement | null>(null);
 
+  // Fetch shared entries from the database on mount
   useEffect(() => {
-    setEntries(loadEntries());
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+    fetch(`${base}/api/guestbook`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        const fetched = sanitizeEntries(data?.entries);
+        setEntries(fetched && fetched.length > 0 ? fetched : SEED);
+      })
+      .catch(() => {
+        /* offline / API down — keep seed entries */
+      })
+      .finally(() => setLoading(false));
   }, []);
-
-  function persist(next: Entry[]) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next.slice(0, 50)));
-    } catch {
-      /* storage unavailable — keep it in memory for this visit */
-    }
-  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const cleanName = name.trim();
     const cleanNote = note.trim();
     if (!cleanName || !cleanNote) return;
+
     const when = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-    const next: Entry[] = [{ id: makeId(), name: cleanName, note: cleanNote, when }, ...entries];
-    setEntries(next);
-    persist(next);
+    const tempId = `local-${Date.now()}`;
+    const optimistic: Entry = { id: tempId, name: cleanName, note: cleanNote, when };
+
+    // Optimistically prepend
+    setEntries((prev) => [optimistic, ...prev]);
     setName('');
     setNote('');
     setJustSigned(true);
     if (liveRef.current) liveRef.current.textContent = 'Thank you — your note is in the book.';
     window.setTimeout(() => setJustSigned(false), 2600);
 
-    // Notify the shop by email (fire-and-forget — the local book is the source of truth for the visitor)
+    // Persist to server (replaces temp entry with the server-assigned one)
     const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     fetch(`${base}/api/guestbook`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: cleanName, note: cleanNote }),
-    }).catch(() => { /* silent — signing the book still works offline */ });
+    })
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (data?.entry) {
+          setEntries((prev) =>
+            prev.map((e) => (e.id === tempId ? (data.entry as Entry) : e))
+          );
+        }
+      })
+      .catch(() => { /* signing still showed — entry may appear after reload */ });
   }
 
   return (
@@ -219,7 +214,7 @@ export default function Guestbook() {
                   Signatures
                 </div>
                 <span className="text-[11px] tracking-[2px] uppercase font-bold text-[var(--cocoa)] opacity-45" style={{ fontFamily: 'var(--font-sans)' }}>
-                  {entries.length} {entries.length === 1 ? 'entry' : 'entries'}
+                  {loading ? '…' : `${entries.length} ${entries.length === 1 ? 'entry' : 'entries'}`}
                 </span>
               </div>
 
@@ -235,7 +230,7 @@ export default function Guestbook() {
                       <span aria-hidden="true" className="flex-1 self-end mb-[5px] border-b border-dotted border-[rgba(28,13,12,0.28)]" />
                       <span className="text-[11px] tracking-[1px] uppercase text-[var(--cocoa)] opacity-50 shrink-0 whitespace-nowrap" style={{ fontFamily: 'var(--font-sans)' }}>{entry.when}</span>
                     </div>
-                    <p className="text-[14.5px] leading-[1.55] italic text-[#1d0e0d] opacity-85 mt-1" style={{ fontFamily: 'var(--font-sans)' }}>“{entry.note}”</p>
+                    <p className="text-[14.5px] leading-[1.55] italic text-[#1d0e0d] opacity-85 mt-1" style={{ fontFamily: 'var(--font-sans)' }}>"{entry.note}"</p>
                   </motion.li>
                 ))}
               </ul>
