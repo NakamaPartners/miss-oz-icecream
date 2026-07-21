@@ -8,7 +8,7 @@ const FLAVORS = [
     sub: 'Deep Oregon berry, churned in small batches right in the shop.',
     bg: '#EAB8CE',
     blob: '#8C2A54',
-    photo: '/images/cone-marionberry.png',
+    photo: '/images/cone-marionberry.webp',
     ink: '#241110',
     shadow: 'rgba(255,255,255,0.4)',
     tag: 'the OG',
@@ -19,7 +19,7 @@ const FLAVORS = [
     sub: 'Sweet, spiced, and impossible to have just once.',
     bg: '#E3B44C',
     blob: '#5E1735',
-    photo: '/images/cone-orange.png',
+    photo: '/images/cone-orange.webp',
     ink: '#241110',
     shadow: 'rgba(251,242,223,0.5)',
     tag: 'sells out. often.',
@@ -30,7 +30,7 @@ const FLAVORS = [
     sub: 'Croissant-waffle, cookies, cream — the neighborhood legend.',
     bg: '#8C2A54',
     blob: '#EAB8CE',
-    photo: '/images/cone-strawberry.png',
+    photo: '/images/cone-strawberry.webp',
     ink: '#F2E1C2',
     shadow: 'rgba(36,17,16,0.45)',
     tag: 'neighborhood legend',
@@ -186,10 +186,11 @@ export default function Hero() {
             }}
           />
 
-          {/* Ice cream cone photo */}
+          {/* Ice cream cone photo — LCP candidate, load with high priority */}
           <img
             src={f.photo}
             alt={f.title}
+            fetchPriority="high"
             className="absolute z-20"
             style={{
               inset: '4%',

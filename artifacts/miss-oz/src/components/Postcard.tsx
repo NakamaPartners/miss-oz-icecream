@@ -56,10 +56,10 @@ const TONES: Record<Tone, { bg: string; border: string; title: string; desc: str
 };
 
 const panels: { title: string; sub: string; desc: string; target: string; tone: Tone; img: string }[] = [
-  { title: 'Handmade Ice Cream', sub: 'Small batch, big heart', desc: 'Classic recipes, real flavor', target: 'menu', tone: 'cream', img: '/images/panel-icecream.png' },
-  { title: 'Pickup or Delivery', sub: "We've got you", desc: 'Uber Eats · DoorDash · Grubhub', target: 'menu', tone: 'teal', img: '/images/panel-delivery.png' },
-  { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what’s next', target: 'vote', tone: 'pink', img: '/images/panel-vote.png' },
-  { title: 'Vintage Vibes', sub: 'Sweet times', desc: 'Slow down, stay awhile', target: 'about', tone: 'gold', img: '/images/panel-vibes.png' },
+  { title: 'Handmade Ice Cream', sub: 'Small batch, big heart', desc: 'Classic recipes, real flavor', target: 'menu', tone: 'cream', img: '/images/panel-icecream.webp' },
+  { title: 'Pickup or Delivery', sub: "We've got you", desc: 'Uber Eats · DoorDash · Grubhub', target: 'menu', tone: 'teal', img: '/images/panel-delivery.webp' },
+  { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what’s next', target: 'vote', tone: 'pink', img: '/images/panel-vote.webp' },
+  { title: 'Vintage Vibes', sub: 'Sweet times', desc: 'Slow down, stay awhile', target: 'about', tone: 'gold', img: '/images/panel-vibes.webp' },
 ];
 
 const FLAVORS = [
@@ -170,7 +170,7 @@ export default function Postcard() {
           <div className="order-1 md:order-2 flex justify-center">
             <div className="m-0">
               <img
-                src="/images/logo-official.png"
+                src="/images/logo-official.webp"
                 alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
                 className="w-[clamp(170px,22vw,250px)] h-auto"
                 style={{ filter: 'drop-shadow(0 3px 8px rgba(93,26,58,0.18))' }}

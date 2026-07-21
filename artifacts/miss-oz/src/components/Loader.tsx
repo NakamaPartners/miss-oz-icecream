@@ -62,7 +62,7 @@ export default function Loader() {
 
             {/* the logo icon springs in */}
             <motion.img
-              src="/images/logo-icon.png"
+              src="/images/logo-icon.webp"
               alt="Miss Oz"
               width={150}
               height={150}

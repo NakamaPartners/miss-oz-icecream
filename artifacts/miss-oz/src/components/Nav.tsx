@@ -15,7 +15,7 @@ export default function Nav() {
       <nav className="sticky top-0 z-[500] flex items-center justify-between px-[5vw] py-3 bg-[rgba(242,225,194,0.96)] backdrop-blur-[10px] border-b border-[rgba(28,13,12,0.1)]">
         <a href="/" className="flex items-center gap-3">
           <img
-            src="/images/logo-icon.png"
+            src="/images/logo-icon.webp"
             alt="Miss Oz Ice Cream"
             className="h-[52px] w-[52px] object-contain"
             style={{ mixBlendMode: 'multiply' }}
