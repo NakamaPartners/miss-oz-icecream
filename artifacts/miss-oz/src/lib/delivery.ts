@@ -8,12 +8,12 @@ export const DELIVERY_PLATFORMS = [
   {
     id: 'grubhub' as const,
     name: 'GrubHub',
-    url: 'https://www.grubhub.com/restaurant/miss-oz-ice-cream--dessert-cafe-portland/', // ← REPLACE with full URL
+    url: 'https://www.grubhub.com/restaurant/miss-oz-ice-cream--dessert-1105-nw-johnson-st-portland/5707432?utm_source=grubhub_iosapp&utm_medium=content_owned&utm_campaign=menushare&utm_content=share-link',
   },
   {
     id: 'ubereats' as const,
     name: 'Uber Eats',
-    url: 'https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka/', // ← REPLACE with full URL
+    url: 'https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-cool-moon-ice-cream/YEfj7ZgZS2m7Wm2og7PphQ?diningMode=DELIVERY',
   },
 ] as const;
 
