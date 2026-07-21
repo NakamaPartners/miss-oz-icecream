@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import OrderChooser from './OrderChooser';
 
 export default function Newsletter() {
   const [email, setEmail] = useState('');
@@ -69,11 +70,7 @@ export default function Newsletter() {
         <span className="block text-[12px] md:text-[13px] tracking-[5px] uppercase font-bold text-[var(--cocoa)] mb-[18px]">
           Order Miss Oz on
         </span>
-        <div className="flex gap-[44px] justify-center flex-wrap font-display text-[22px] text-[var(--cocoa)] opacity-85">
-          <span>UberEats</span>
-          <span>GrubHub</span>
-          <span>DoorDash</span>
-        </div>
+        <OrderChooser variant="light" label="Order for Delivery" />
       </div>
     </>
   );

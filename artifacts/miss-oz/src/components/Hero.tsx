@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import OrderChooser from './OrderChooser';
 
 const FLAVORS = [
   {
@@ -216,12 +217,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <button
-          type="button"
-          className="inline-block bg-[var(--cocoa)] text-[var(--cream)] py-4 px-10 rounded-[30px] text-[17px] tracking-[1.5px] font-semibold uppercase border-2 border-transparent hover:bg-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--cream)] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-        >
-          Order Online
-        </button>
+        <OrderChooser variant="dark" label="Order Online" />
 
         {/* Dots */}
         <div className="flex gap-[10px] justify-center mt-6">

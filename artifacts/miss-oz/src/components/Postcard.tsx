@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bunting } from './Decor';
+import OrderChooser from './OrderChooser';
 
 /* Full-width homepage slideshow — real storefront photos with short brand slogans */
 const SLIDES: { src: string; alt: string; slogan: string; pos?: string }[] = [
@@ -524,14 +525,11 @@ export default function Postcard() {
                 <div className="mt-4 text-[13px] tracking-[2px] uppercase font-bold text-[#f3ead6] opacity-80" style={{ fontFamily: 'var(--font-sans)' }}>
                   ~ Est. 2007 ~
                 </div>
-                <a
-                  href="#menu"
-                  onClick={(e) => handleNav(e, 'menu')}
-                  className="mt-7 inline-flex items-center gap-2 rounded-full px-7 py-[12px] text-[13px] font-bold tracking-[1.5px] uppercase text-[var(--berry-deep)] bg-[var(--cream-hi)] transition-transform duration-200 mech-btn hover:bg-[var(--gold-hi)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d2622]"
-                >
-                  Place an Order
-                  <span aria-hidden="true">→</span>
-                </a>
+                <OrderChooser
+                  variant="cream"
+                  label="Place an Order"
+                  className="mt-7"
+                />
               </div>
             </div>
           </div>
