@@ -5,6 +5,12 @@ import { Bunting } from './Decor';
 /* Full-width homepage slideshow — real storefront photos with short brand slogans */
 const SLIDES: { src: string; alt: string; slogan: string; pos?: string }[] = [
   {
+    src: '/images/slide-cones.webp',
+    alt: 'Two hand-dipped waffle cones with scoops of marionberry and ube ice cream, held up under the string lights by the pick-up sign',
+    slogan: 'Hand-Dipped to Order',
+    pos: 'center 55%',
+  },
+  {
     src: '/images/storefront-photo-wide2.webp',
     alt: "The Miss Oz storefront in Portland's Pearl District — a corner shop with a neon Open sign in the window, lantern lights glowing inside, and a bike parked out front",
     slogan: 'Small Batch, Big Heart',
@@ -20,12 +26,6 @@ const SLIDES: { src: string; alt: string; slogan: string; pos?: string }[] = [
     alt: 'Inside the parlor — the glowing MISS OZ marquee letters above the chalkboard flavor menu and the striped ice cream counter',
     slogan: 'Made On-Site, All Natural',
     pos: 'center 38%',
-  },
-  {
-    src: '/images/slide-cones.webp',
-    alt: 'Two hand-dipped waffle cones with scoops of marionberry and ube ice cream, held up under the string lights by the pick-up sign',
-    slogan: 'Hand-Dipped to Order',
-    pos: 'center 55%',
   },
   {
     src: '/images/slide-sidewalk.webp',
@@ -311,11 +311,11 @@ export default function Postcard() {
                   aria-current={i === slide}
                   aria-label={`Show slide ${i + 1} of ${SLIDES.length}`}
                   onClick={() => setSlide(i)}
-                  className="w-[9px] h-[9px] rounded-full border border-[var(--cream-hi)] transition-opacity"
+                  className="w-[9px] h-[9px] rounded-full border border-[var(--marionberry)] transition-opacity"
                   style={{
-                    background: i === slide ? 'var(--cream-hi)' : 'transparent',
-                    opacity: i === slide ? 1 : 0.55,
-                    boxShadow: '0 1px 3px rgba(20,10,8,0.6)',
+                    background: i === slide ? 'var(--marionberry)' : 'rgba(247,236,210,0.55)',
+                    opacity: i === slide ? 1 : 0.8,
+                    boxShadow: '0 1px 3px rgba(20,10,8,0.5)',
                   }}
                 />
               ))}
