@@ -2,13 +2,28 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import OrderChooser from './OrderChooser';
 
+type Status = 'idle' | 'sending' | 'success' | 'error';
+
 export default function Newsletter() {
   const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    if (!email) return;
+    setStatus('sending');
+    try {
+      const base = import.meta.env.BASE_URL?.replace(/\/$/, '') ?? '';
+      const res = await fetch(`${base}/api/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error('server error');
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -44,7 +59,7 @@ export default function Newsletter() {
             onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.4 }}
           >
-            {submitted ? (
+            {status === 'success' ? (
               <div className="font-script text-[28px] text-[var(--berry)]">Thanks for joining us!</div>
             ) : (
               <>
@@ -54,10 +69,18 @@ export default function Newsletter() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email here*"
                   required
-                  className="font-sans w-full p-[17px_20px] border-[2.5px] border-[var(--cocoa)] bg-white rounded-[12px] text-[17px] mb-[16px] text-[var(--cocoa)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] cursor-auto"
+                  disabled={status === 'sending'}
+                  className="font-sans w-full p-[17px_20px] border-[2.5px] border-[var(--cocoa)] bg-white rounded-[12px] text-[17px] mb-[16px] text-[var(--cocoa)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] cursor-auto disabled:opacity-60"
                 />
-                <button type="submit" className="inline-block bg-[var(--berry)] text-[var(--cream)] py-[16px] px-[46px] rounded-[30px] text-[16px] tracking-[2px] uppercase font-semibold shadow-[5px_5px_0_var(--cocoa)] hover:translate-y-[2px] hover:shadow-[3px_3px_0_var(--cocoa)] transition-all">
-                  Subscribe
+                {status === 'error' && (
+                  <p className="text-[13px] italic text-red-600 mb-3 -mt-2">Something went wrong — please try again.</p>
+                )}
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="inline-block bg-[var(--berry)] text-[var(--cream)] py-[16px] px-[46px] rounded-[30px] text-[16px] tracking-[2px] uppercase font-semibold shadow-[5px_5px_0_var(--cocoa)] hover:translate-y-[2px] hover:shadow-[3px_3px_0_var(--cocoa)] transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-[5px_5px_0_var(--cocoa)]"
+                >
+                  {status === 'sending' ? 'Subscribing…' : 'Subscribe'}
                 </button>
               </>
             )}
