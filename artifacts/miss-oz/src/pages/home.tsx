@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 import FlavorDrop from '../components/FlavorDrop';
 import MeetOz from '../components/MeetOz';
 import Reels from '../components/Reels';
+import PawTrail from '../components/PawTrail';
 import { MotionConfig } from 'framer-motion';
 
 const CheckerRule = () => (
@@ -60,6 +61,7 @@ export default function Home() {
       <div className="grain-overlay" aria-hidden="true" />
       
       <GlobalMarqueeBorder />
+      <PawTrail />
       
       <Postcard />
       <Marquee />
