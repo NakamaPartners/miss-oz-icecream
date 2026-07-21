@@ -82,6 +82,14 @@ export default function Guestbook() {
     setJustSigned(true);
     if (liveRef.current) liveRef.current.textContent = 'Thank you — your note is in the book.';
     window.setTimeout(() => setJustSigned(false), 2600);
+
+    // Notify the shop by email (fire-and-forget — the local book is the source of truth for the visitor)
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+    fetch(`${base}/api/guestbook`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: cleanName, note: cleanNote }),
+    }).catch(() => { /* silent — signing the book still works offline */ });
   }
 
   return (
