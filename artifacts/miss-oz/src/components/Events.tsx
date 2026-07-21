@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Bunting, Starburst } from './Decor';
+import InquireForm from './InquireForm';
 
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' };
 
@@ -65,6 +66,17 @@ export default function Events() {
           </motion.div>
         ))}
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }}
+        className="mt-[48px] text-center"
+      >
+        <InquireForm
+          type="event"
+          submitLabel="Inquire about your event"
+          buttonClassName="inline-flex items-center gap-2 rounded-full px-7 py-[13px] text-[14px] font-bold tracking-[1px] uppercase text-[var(--cream-hi)] bg-[var(--cocoa)] transition-transform duration-200 mech-btn hover:bg-[var(--berry-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--pink)]"
+        />
+      </motion.div>
     </section>
   );
 }

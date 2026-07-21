@@ -25,11 +25,30 @@ function CountUp({ to, reduce, suffix = '' }: { to: number; reduce: boolean; suf
   return <>{val}{suffix}</>;
 }
 
-const VOTE_KEY = 'missoz-flavor-vote';
+const VOTE_KEY = 'missoz-flavor-vote-v2'; // v2 = API-backed; v1 was localStorage-only
+
+async function fetchResults(): Promise<Record<string, number>> {
+  const res = await fetch('/api/results');
+  if (!res.ok) throw new Error('fetch failed');
+  const data = await res.json() as { votes: Record<string, number> };
+  return data.votes;
+}
+
+async function postVote(flavor: string): Promise<void> {
+  const res = await fetch('/api/vote', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ flavor }),
+  });
+  if (!res.ok) throw new Error('vote failed');
+}
+
+/** Seed counts used before the API responds (or if it fails) */
+const SEED_VOTES = [84, 121, 63];
 
 export default function VoteFlavor() {
   const reduce = !!useReducedMotion();
-  const [votes, setVotes] = useState([84, 121, 63]);
+  const [votes, setVotes] = useState<number[]>(SEED_VOTES);
   const [choice, setChoice] = useState<number | null>(null);
   const [burst, setBurst] = useState<number | null>(null);
   const burstTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -40,15 +59,12 @@ export default function VoteFlavor() {
 
   useEffect(() => () => { if (burstTimer.current) clearTimeout(burstTimer.current); }, []);
 
-  // Restore a previous vote ("one vote each") from this browser
+  // Restore previous vote from localStorage (one vote per browser)
   useEffect(() => {
     try {
       const raw = localStorage.getItem(VOTE_KEY);
       if (!raw) return;
-      const saved = JSON.parse(raw) as { votes?: unknown; choice?: unknown };
-      if (Array.isArray(saved.votes) && saved.votes.length === 3 && saved.votes.every((v) => typeof v === 'number')) {
-        setVotes(saved.votes as number[]);
-      }
+      const saved = JSON.parse(raw) as { choice?: unknown };
       if (typeof saved.choice === 'number' && saved.choice >= 0 && saved.choice <= 2) {
         setChoice(saved.choice);
       }
@@ -57,21 +73,41 @@ export default function VoteFlavor() {
     }
   }, []);
 
-  function handleVote(i: number) {
+  // Load live counts from the API
+  useEffect(() => {
+    fetchResults()
+      .then((apiVotes) => {
+        const counts = CARDS.map((c) => apiVotes[c.name] ?? 0);
+        // Only replace if the API has at least some votes recorded
+        if (counts.some((v) => v > 0)) {
+          setVotes(counts);
+        }
+      })
+      .catch(() => {
+        // API unavailable — keep seed counts, voting still works locally
+      });
+  }, []);
+
+  async function handleVote(i: number) {
     if (revealed) return;
+
+    // Optimistic update
     const next = votes.map((v, idx) => (idx === i ? v + 1 : v));
     setVotes(next);
     setChoice(i);
     try {
-      localStorage.setItem(VOTE_KEY, JSON.stringify({ votes: next, choice: i }));
+      localStorage.setItem(VOTE_KEY, JSON.stringify({ choice: i }));
     } catch {
-      // storage unavailable (private mode) — vote still counts for this visit
+      // storage unavailable — vote counts for this visit anyway
     }
     setBurst(i);
     if (!reduce) {
       if (burstTimer.current) clearTimeout(burstTimer.current);
       burstTimer.current = setTimeout(() => setBurst(null), 900);
     }
+
+    // Persist to API (best effort)
+    postVote(CARDS[i].name).catch(() => {/* silent — optimistic update already shown */});
   }
 
   return (

@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Bunting, Starburst } from './Decor';
+import InquireForm from './InquireForm';
 
 const items = [
   { price: '$130', name: '2.5 gal ice cream', note: 'Any flavor on the case list · churned to order' },
@@ -185,13 +186,11 @@ export default function Wholesale() {
                 </div>
 
                 <div className="mt-7 text-center">
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-2 rounded-full px-7 py-[13px] text-[14px] font-bold tracking-[1px] uppercase text-[var(--berry-deep)] bg-[var(--cream-hi)] transition-transform duration-200 mech-btn hover:bg-[var(--gold-hi)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d2622]"
-                  >
-                    Open a wholesale account
-                    <span aria-hidden="true">→</span>
-                  </button>
+                  <InquireForm
+                    type="wholesale"
+                    submitLabel="Open a wholesale account"
+                    buttonClassName="inline-flex items-center gap-2 rounded-full px-7 py-[13px] text-[14px] font-bold tracking-[1px] uppercase text-[var(--berry-deep)] bg-[var(--cream-hi)] transition-transform duration-200 mech-btn hover:bg-[var(--gold-hi)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d2622]"
+                  />
                   <div className="mt-4 text-[12.5px] italic text-[#e9e0cc] opacity-60" style={{ fontFamily: 'var(--font-sans)' }}>
                     Or say hello at @missozicecreamcafe
                   </div>
