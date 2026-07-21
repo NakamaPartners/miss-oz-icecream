@@ -312,11 +312,14 @@ export default function Postcard() {
                   aria-current={i === slide}
                   aria-label={`Show slide ${i + 1} of ${SLIDES.length}`}
                   onClick={() => setSlide(i)}
-                  className="w-[9px] h-[9px] rounded-full border border-[var(--marionberry)] transition-opacity"
+                  className="w-[12px] h-[12px] rounded-full border-2 border-[var(--marionberry)] transition-all duration-300"
                   style={{
-                    background: i === slide ? 'var(--marionberry)' : 'rgba(247,236,210,0.55)',
-                    opacity: i === slide ? 1 : 0.8,
-                    boxShadow: '0 1px 3px rgba(20,10,8,0.5)',
+                    background: i === slide ? 'var(--marionberry)' : 'rgba(178,78,121,0.35)',
+                    opacity: 1,
+                    transform: i === slide ? 'scale(1.25)' : 'scale(1)',
+                    boxShadow: i === slide
+                      ? '0 0 0 3px rgba(178,78,121,0.3), 0 1px 3px rgba(20,10,8,0.5)'
+                      : '0 1px 3px rgba(20,10,8,0.5)',
                   }}
                 />
               ))}

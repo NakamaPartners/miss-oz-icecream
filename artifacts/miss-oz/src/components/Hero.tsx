@@ -228,8 +228,13 @@ export default function Hero() {
               aria-label={`Show ${FLAVORS[i].title}`}
               aria-current={i === idx}
               onClick={() => { if (autoRef.current) clearInterval(autoRef.current); idxRef.current = i; setIdx(i); setArtOpacity(1); setArtRotate(i % 2 === 0 ? -3 : 3); setArtScale(1); }}
-              className="w-[11px] h-[11px] rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cocoa)] focus-visible:ring-offset-2"
-              style={{ background: i === idx ? 'var(--cocoa)' : 'rgba(36,17,16,0.25)', transform: i === idx ? 'scale(1.3)' : 'scale(1)' }}
+              className="w-[13px] h-[13px] rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--marionberry)] focus-visible:ring-offset-2"
+              style={{
+                background: i === idx ? 'var(--marionberry)' : 'rgba(178,78,121,0.3)',
+                border: '1.5px solid var(--marionberry)',
+                boxShadow: i === idx ? '0 0 0 3px rgba(178,78,121,0.25)' : 'none',
+                transform: i === idx ? 'scale(1.35)' : 'scale(1)',
+              }}
             />
           ))}
         </div>
