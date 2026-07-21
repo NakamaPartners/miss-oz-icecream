@@ -60,7 +60,7 @@ export default function Events() {
                 <span className="text-[12px]">✦</span>
                 <span className="h-px w-8" style={{ background: 'currentColor', opacity: 0.6 }} />
               </div>
-              <h4 className="font-display font-normal text-[24px] mb-[10px] text-[var(--cocoa)]">{card.title}</h4>
+              <h3 className="font-display font-normal text-[24px] mb-[10px] text-[var(--cocoa)]">{card.title}</h3>
               <p className="italic text-[17px] text-[#1d0e0d] leading-relaxed opacity-80">{card.body}</p>
             </div>
           </motion.div>

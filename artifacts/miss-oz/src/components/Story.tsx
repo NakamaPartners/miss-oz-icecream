@@ -32,6 +32,7 @@ export default function Story() {
               key={`${rep}-${i}`}
               src={src}
               alt=""
+              aria-hidden="true"
               loading="lazy"
               className="h-full w-auto shrink-0"
             />

@@ -117,8 +117,11 @@ export default function Hero() {
           className="mt-2 flex items-center justify-center min-h-[2.12em] sm:min-h-[1.06em]"
           style={{ fontSize: 'clamp(40px, 8.2vw, 100px)' }}
         >
-          <h1
+          {/* Visually hidden h1 for crawlers — the business name is the true page title */}
+          <h1 className="sr-only">Miss Oz Ice Cream &amp; Dessert Cafe — Portland, Oregon</h1>
+          <div
             className="max-w-[94vw]"
+            aria-hidden="true"
             style={{
               fontFamily: 'var(--font-groovy)',
               fontWeight: 400,
@@ -132,7 +135,7 @@ export default function Hero() {
             }}
           >
             {f.title}
-          </h1>
+          </div>
         </div>
 
         {/* Flavor tag — a little ticket, safely below the title */}
