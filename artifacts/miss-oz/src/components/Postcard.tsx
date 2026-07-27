@@ -57,9 +57,7 @@ const TONES: Record<Tone, { bg: string; border: string; title: string; desc: str
 
 const panels: { title: string; sub: string; desc: string; target: string; tone: Tone; img: string }[] = [
   { title: 'Handmade Ice Cream', sub: 'Small batch, big heart', desc: 'Classic recipes, real flavor', target: 'menu', tone: 'cream', img: '/images/panel-icecream.webp' },
-  { title: 'Pickup or Delivery', sub: "We've got you", desc: 'Uber Eats · DoorDash · Grubhub', target: 'menu', tone: 'teal', img: '/images/panel-delivery.webp' },
-  { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what’s next', target: 'vote', tone: 'pink', img: '/images/panel-vote.webp' },
-  { title: 'Vintage Vibes', sub: 'Sweet times', desc: 'Slow down, stay awhile', target: 'about', tone: 'gold', img: '/images/panel-vibes.webp' },
+  { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what\'s next', target: 'vote', tone: 'pink', img: '/images/panel-vote.webp' },
 ];
 
 const FLAVORS = [
@@ -110,7 +108,7 @@ export default function Postcard() {
 
   useEffect(() => {
     if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const t = setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), 5500);
+    const t = setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), 7500);
     return () => clearInterval(t);
   }, [paused, slide]);
 
@@ -142,15 +140,8 @@ export default function Postcard() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-x-[clamp(20px,3vw,44px)] gap-y-4"
         >
-          {/* left — supporting text + first half of the nav */}
+          {/* left — first half of the nav */}
           <div className="order-2 md:order-1 flex flex-col items-center md:items-end text-center md:text-right gap-[10px]">
-            <span
-              className="text-[9px] sm:text-[10px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--berry-deep)] opacity-80"
-              style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
-            >
-              Est. 2007 · Portland, Oregon
-            </span>
-            <span className="hidden md:inline-block w-[110px] h-px bg-[var(--cocoa)] opacity-35" aria-hidden="true" />
             <nav aria-label="Primary" className="flex flex-wrap justify-center md:justify-end items-center gap-x-[clamp(14px,1.6vw,24px)] gap-y-2">
               {NAV.slice(0, 3).map((n) => (
                 <a
@@ -172,23 +163,14 @@ export default function Postcard() {
               <img
                 src="/images/logo-official.webp"
                 alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
-                className="w-[clamp(170px,22vw,250px)] h-auto"
-                style={{ filter: 'drop-shadow(0 3px 8px rgba(93,26,58,0.18))' }}
+                className="w-[clamp(210px,28vw,340px)] h-auto"
+                style={{ filter: 'drop-shadow(0 3px 10px rgba(93,26,58,0.22))' }}
               />
             </div>
           </div>
 
-          {/* right — supporting text + second half of the nav */}
+          {/* right — second half of the nav */}
           <div className="order-3 flex flex-col items-center md:items-start text-center md:text-left gap-[10px]">
-            <span
-              className="flex items-center gap-[8px] text-[9px] sm:text-[10px] tracking-[3px] sm:tracking-[4px] uppercase text-[var(--cocoa)]"
-              style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
-            >
-              Ice Cream
-              <span className="text-[var(--berry)] text-[8px] leading-none rotate-45 inline-block" aria-hidden="true">◆</span>
-              Dessert Cafe
-            </span>
-            <span className="hidden md:inline-block w-[110px] h-px bg-[var(--cocoa)] opacity-35" aria-hidden="true" />
             <nav aria-label="Primary continued" className="flex flex-wrap justify-center md:justify-start items-center gap-x-[clamp(14px,1.6vw,24px)] gap-y-2">
               {NAV.slice(3).map((n) => (
                 <a
@@ -209,10 +191,10 @@ export default function Postcard() {
         <div className="w-full border-t border-[var(--cocoa)] opacity-35 mt-[clamp(14px,2vw,24px)]" aria-hidden="true" />
       </header>
 
-      {/* HERO SCENE — storefront photos, slightly inset so the branding above stays the lead */}
+      {/* HERO SCENE — storefront photos, full-width to match the masthead */}
       <div className="relative w-full z-0 pointer-events-none">
         <div
-          className="w-full relative max-w-[800px] mx-auto px-[4vw] sm:px-0"
+          className="w-full relative max-w-[1200px] mx-auto px-[4vw] sm:px-[4vw]"
           style={{
             maskImage: HERO_MASK,
             WebkitMaskImage: HERO_MASK,
@@ -242,58 +224,77 @@ export default function Postcard() {
               />
             </AnimatePresence>
 
-            {/* Soft vignette so the slogan reads against any photo */}
+            {/* Deep vignette so the brand text reads crisply over any photo */}
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-[42%] pointer-events-none"
+              className="absolute inset-x-0 bottom-0 h-[70%] pointer-events-none"
               style={{
                 background:
-                  'linear-gradient(to top, rgba(24,10,14,0.72) 0%, rgba(24,10,14,0.42) 42%, rgba(24,10,14,0) 100%)',
+                  'linear-gradient(to top, rgba(20,8,12,0.82) 0%, rgba(20,8,12,0.55) 38%, rgba(20,8,12,0.18) 65%, transparent 100%)',
               }}
             />
 
-            {/* Slogan over the lower part of each photo */}
-            <div className="absolute left-0 right-0 bottom-[clamp(30px,5vw,58px)] flex justify-center px-6" aria-hidden="true">
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={current.slogan}
-                  initial={{ opacity: 0, y: 22, filter: 'blur(5px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: -14, filter: 'blur(4px)' }}
-                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
-                  className="flex flex-col items-center text-center"
+            {/* Static brand message overlaid on the hero photo */}
+            <div className="absolute inset-x-0 bottom-[clamp(42px,6vw,72px)] flex flex-col items-center text-center px-4 pointer-events-none">
+              {/* Miss Oz — Higante */}
+              <div
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(56px,8.5vw,120px)',
+                  lineHeight: 0.95,
+                  color: '#f7ecd2',
+                  textShadow: '0 2px 24px rgba(20,8,12,0.7), 0 4px 6px rgba(20,8,12,0.5)',
+                  letterSpacing: '0.01em',
+                }}
+              >
+                Miss Oz
+              </div>
+              {/* Tagline — Lemongrass */}
+              <div
+                style={{
+                  fontFamily: 'var(--font-script)',
+                  fontSize: 'clamp(20px,2.6vw,36px)',
+                  color: '#f7ecd2',
+                  textShadow: '0 1px 10px rgba(20,8,12,0.7)',
+                  marginTop: 'clamp(6px,0.8vw,12px)',
+                }}
+              >
+                Sweet Memories Start Here.
+              </div>
+              {/* Subtext — small caps tracking */}
+              <div
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: 'clamp(9px,0.85vw,12px)',
+                  letterSpacing: '3px',
+                  textTransform: 'uppercase',
+                  fontWeight: 700,
+                  color: 'rgba(247,236,210,0.78)',
+                  textShadow: '0 1px 5px rgba(20,8,12,0.8)',
+                  marginTop: 'clamp(8px,1vw,14px)',
+                }}
+              >
+                Small Batch Ice Cream &amp; Handmade Desserts &nbsp;·&nbsp; Since 2007
+              </div>
+              {/* CTA buttons */}
+              <div className="flex gap-[clamp(8px,1vw,14px)] mt-[clamp(14px,1.8vw,24px)] pointer-events-auto">
+                <a
+                  href="#menu"
+                  onClick={(e) => handleNav(e, 'menu')}
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-[rgba(247,236,210,0.85)] text-[#f7ecd2] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[rgba(247,236,210,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{ fontSize: 'clamp(10px,0.9vw,13px)', padding: 'clamp(8px,0.9vw,12px) clamp(18px,2vw,28px)' }}
                 >
-                  {/* small gold eyebrow */}
-                  <span
-                    className="mb-[8px] flex items-center gap-[10px] text-[var(--gold-hi)]"
-                    style={{ textShadow: '0 1px 3px rgba(20,10,8,0.8)' }}
-                  >
-                    <span className="inline-block w-[30px] h-px bg-[var(--gold-hi)] opacity-70" />
-                    <span className="text-[9px] leading-none rotate-45 inline-block">◆</span>
-                    <span className="inline-block w-[30px] h-px bg-[var(--gold-hi)] opacity-70" />
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: 'clamp(16px, 1.9vw, 26px)',
-                      letterSpacing: '0.04em',
-                      lineHeight: 1.15,
-                      color: '#f7ecd2',
-                      textShadow: '0 1px 2px rgba(20,10,8,0.75), 0 3px 10px rgba(20,10,8,0.5)',
-                    }}
-                  >
-                    {current.slogan}
-                  </span>
-                  <span
-                    className="mt-[9px] flex items-center gap-2 text-[var(--gold-hi)]"
-                    style={{ textShadow: '0 1px 3px rgba(20,10,8,0.8)' }}
-                  >
-                    <span className="inline-block w-[56px] h-px bg-gradient-to-r from-transparent to-[var(--gold-hi)] opacity-90" />
-                    <span className="text-[12px] leading-none">✦</span>
-                    <span className="inline-block w-[56px] h-px bg-gradient-to-l from-transparent to-[var(--gold-hi)] opacity-90" />
-                  </span>
-                </motion.span>
-              </AnimatePresence>
+                  View Menu
+                </a>
+                <button
+                  type="button"
+                  onClick={() => { window.open('https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-cool-moon-ice-cream/YEfj7ZgZS2m7Wm2og7PphQ', '_blank', 'noopener'); }}
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--berry)] border-2 border-[var(--berry)] text-[#f7ecd2] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry-deep)] hover:border-[var(--berry-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{ fontSize: 'clamp(10px,0.9vw,13px)', padding: 'clamp(8px,0.9vw,12px) clamp(18px,2vw,28px)' }}
+                >
+                  Order Online
+                </button>
+              </div>
             </div>
 
             {/* slide dots */}
