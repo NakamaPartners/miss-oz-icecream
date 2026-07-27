@@ -4,34 +4,25 @@ import { Bunting } from './Decor';
 import OrderChooser from './OrderChooser';
 
 /* Full-width homepage slideshow — real storefront photos with short brand slogans */
-const SLIDES: { src: string; alt: string; slogan: string; pos?: string }[] = [
+// Background café slides — cone photo is a fixed left-foreground overlay, not in rotation
+const SLIDES: { src: string; alt: string; pos?: string }[] = [
   {
-    src: '/images/slide-cones.webp',
-    alt: 'Two hand-dipped waffle cones with scoops of marionberry and ube ice cream, held up under the string lights by the pick-up sign',
-    slogan: 'Hand-Dipped to Order',
-    pos: 'center 55%',
+    src: '/images/slide-counter.webp',
+    alt: 'Inside the parlor — the glowing MISS OZ marquee letters above the chalkboard flavor menu and the striped ice cream counter',
+    pos: 'center 38%',
   },
   {
     src: '/images/storefront-photo-wide2.webp',
     alt: "The Miss Oz storefront in Portland's Pearl District — a corner shop with a neon Open sign in the window, lantern lights glowing inside, and a bike parked out front",
-    slogan: 'Small Batch, Big Heart',
   },
   {
     src: '/images/slide-corner.webp',
     alt: 'The brick corner of the shop at dusk, with a glowing ice cream cone sculpture of string lights above the awning and the pink Miss Oz sidewalk sign out front',
-    slogan: 'On the Corner Since 2007',
     pos: 'center 62%',
-  },
-  {
-    src: '/images/slide-counter.webp',
-    alt: 'Inside the parlor — the glowing MISS OZ marquee letters above the chalkboard flavor menu and the striped ice cream counter',
-    slogan: 'Made On-Site, All Natural',
-    pos: 'center 38%',
   },
   {
     src: '/images/slide-sidewalk.webp',
     alt: 'The tree-lined Pearl District sidewalk outside the cafe, with the pink Miss Oz sign and Ice Cream & Coffee painted on the window',
-    slogan: 'Come Slow Down With Us',
     pos: 'center 60%',
   },
 ];
@@ -140,8 +131,15 @@ export default function Postcard() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-x-[clamp(20px,3vw,44px)] gap-y-4"
         >
-          {/* left — first half of the nav */}
-          <div className="order-2 md:order-1 flex flex-col items-center md:items-end text-center md:text-right gap-[10px]">
+          {/* left — supporting text + first half of the nav */}
+          <div className="order-2 md:order-1 flex flex-col items-center md:items-end text-center md:text-right gap-[8px]">
+            <span
+              className="text-[8.5px] sm:text-[9.5px] tracking-[3px] sm:tracking-[3.5px] uppercase text-[var(--berry-deep)] opacity-75"
+              style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
+            >
+              Est. 2007 · Portland, Oregon
+            </span>
+            <span className="hidden md:inline-block w-[90px] h-px bg-[var(--cocoa)] opacity-30" aria-hidden="true" />
             <nav aria-label="Primary" className="flex flex-wrap justify-center md:justify-end items-center gap-x-[clamp(14px,1.6vw,24px)] gap-y-2">
               {NAV.slice(0, 3).map((n) => (
                 <a
@@ -169,8 +167,17 @@ export default function Postcard() {
             </div>
           </div>
 
-          {/* right — second half of the nav */}
-          <div className="order-3 flex flex-col items-center md:items-start text-center md:text-left gap-[10px]">
+          {/* right — supporting text + second half of the nav */}
+          <div className="order-3 flex flex-col items-center md:items-start text-center md:text-left gap-[8px]">
+            <span
+              className="flex items-center gap-[6px] text-[8.5px] sm:text-[9.5px] tracking-[3px] sm:tracking-[3.5px] uppercase text-[var(--cocoa)] opacity-75"
+              style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
+            >
+              Ice Cream
+              <span className="text-[var(--berry)] text-[7px] leading-none rotate-45 inline-block" aria-hidden="true">◆</span>
+              Dessert Cafe
+            </span>
+            <span className="hidden md:inline-block w-[90px] h-px bg-[var(--cocoa)] opacity-30" aria-hidden="true" />
             <nav aria-label="Primary continued" className="flex flex-wrap justify-center md:justify-start items-center gap-x-[clamp(14px,1.6vw,24px)] gap-y-2">
               {NAV.slice(3).map((n) => (
                 <a
@@ -191,7 +198,7 @@ export default function Postcard() {
         <div className="w-full border-t border-[var(--cocoa)] opacity-35 mt-[clamp(14px,2vw,24px)]" aria-hidden="true" />
       </header>
 
-      {/* HERO SCENE — storefront photos, full-width to match the masthead */}
+      {/* HERO SCENE — composite: cone foreground left + rotating café backdrop right */}
       <div className="relative w-full z-0 pointer-events-none">
         <div
           className="w-full relative max-w-[1200px] mx-auto px-[4vw] sm:px-[4vw]"
@@ -206,44 +213,78 @@ export default function Postcard() {
             WebkitMaskRepeat: 'no-repeat',
           }}
         >
-          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden">
+          {/* 16:7 aspect mirrors the wide-cinema feel of the reference */}
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/7] overflow-hidden">
+
+            {/* ── LAYER 1: rotating café backdrop ── */}
             <AnimatePresence initial={false}>
               <motion.img
                 key={current.src}
                 src={current.src}
                 alt={current.alt}
                 initial={{ opacity: 0, scale: 1 }}
-                animate={{ opacity: 0.95, scale: 1.06 }}
+                animate={{ opacity: 1, scale: 1.06 }}
                 exit={{ opacity: 0, scale: 1.07 }}
                 transition={{
                   opacity: { duration: 1.4, ease: [0.4, 0, 0.2, 1] },
-                  scale: { duration: 7, ease: 'linear' },
+                  scale: { duration: 8, ease: 'linear' },
                 }}
-                className="absolute inset-0 w-full h-full object-cover mix-blend-multiply sepia-[12%] saturate-[0.92] contrast-[1.04]"
+                className="absolute inset-0 w-full h-full object-cover sepia-[15%] saturate-[0.88] contrast-[1.05] brightness-[0.78]"
                 style={{ objectPosition: current.pos ?? 'center' }}
               />
             </AnimatePresence>
 
-            {/* Deep vignette so the brand text reads crisply over any photo */}
+            {/* ── LAYER 2: cone photo — left foreground, fades right ── */}
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-[70%] pointer-events-none"
+              className="absolute left-0 top-0 h-full pointer-events-none"
               style={{
-                background:
-                  'linear-gradient(to top, rgba(20,8,12,0.82) 0%, rgba(20,8,12,0.55) 38%, rgba(20,8,12,0.18) 65%, transparent 100%)',
+                width: 'clamp(200px, 42%, 520px)',
+                maskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
+              }}
+            >
+              <img
+                src="/images/slide-cones.webp"
+                alt=""
+                className="w-full h-full object-cover"
+                style={{ objectPosition: 'center 20%' }}
+              />
+            </div>
+
+            {/* ── LAYER 3: vignettes ── */}
+            {/* bottom-up dark gradient so text reads */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 bottom-0 h-[65%] pointer-events-none"
+              style={{
+                background: 'linear-gradient(to top, rgba(14,5,8,0.88) 0%, rgba(14,5,8,0.6) 36%, rgba(14,5,8,0.18) 65%, transparent 100%)',
               }}
             />
+            {/* right-edge subtle fade to prevent hard crop */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-y-0 right-0 w-[18%] pointer-events-none"
+              style={{ background: 'linear-gradient(to left, rgba(14,5,8,0.4) 0%, transparent 100%)' }}
+            />
 
-            {/* Static brand message overlaid on the hero photo */}
-            <div className="absolute inset-x-0 bottom-[clamp(42px,6vw,72px)] flex flex-col items-center text-center px-4 pointer-events-none">
+            {/* ── LAYER 4: brand text — over the right/centre half ── */}
+            <div
+              className="absolute flex flex-col items-start text-left pointer-events-none"
+              style={{
+                left: 'clamp(52%, 44%, 50%)',
+                bottom: 'clamp(48px, 8vw, 88px)',
+                maxWidth: 'clamp(260px, 48%, 560px)',
+              }}
+            >
               {/* Miss Oz — Higante */}
               <div
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(56px,8.5vw,120px)',
+                  fontSize: 'clamp(44px,7vw,100px)',
                   lineHeight: 0.95,
                   color: '#f7ecd2',
-                  textShadow: '0 2px 24px rgba(20,8,12,0.7), 0 4px 6px rgba(20,8,12,0.5)',
+                  textShadow: '0 2px 28px rgba(14,5,8,0.75), 0 4px 8px rgba(14,5,8,0.55)',
                   letterSpacing: '0.01em',
                 }}
               >
@@ -253,53 +294,56 @@ export default function Postcard() {
               <div
                 style={{
                   fontFamily: 'var(--font-script)',
-                  fontSize: 'clamp(20px,2.6vw,36px)',
+                  fontSize: 'clamp(16px,2.2vw,30px)',
                   color: '#f7ecd2',
-                  textShadow: '0 1px 10px rgba(20,8,12,0.7)',
-                  marginTop: 'clamp(6px,0.8vw,12px)',
+                  textShadow: '0 1px 10px rgba(14,5,8,0.75)',
+                  marginTop: 'clamp(4px,0.5vw,8px)',
                 }}
               >
                 Sweet Memories Start Here.
               </div>
-              {/* Subtext — small caps tracking */}
+              {/* Subtext — two lines */}
               <div
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: 'clamp(9px,0.85vw,12px)',
-                  letterSpacing: '3px',
+                  fontSize: 'clamp(7px,0.72vw,10px)',
+                  letterSpacing: '2.5px',
                   textTransform: 'uppercase',
                   fontWeight: 700,
-                  color: 'rgba(247,236,210,0.78)',
-                  textShadow: '0 1px 5px rgba(20,8,12,0.8)',
+                  color: 'rgba(247,236,210,0.72)',
+                  textShadow: '0 1px 5px rgba(14,5,8,0.85)',
                   marginTop: 'clamp(8px,1vw,14px)',
+                  lineHeight: 1.9,
                 }}
               >
-                Small Batch Ice Cream &amp; Handmade Desserts &nbsp;·&nbsp; Since 2007
+                Small Batch Ice Cream &amp; Handmade Desserts.
+                <br />
+                Since 2007
               </div>
               {/* CTA buttons */}
-              <div className="flex gap-[clamp(8px,1vw,14px)] mt-[clamp(14px,1.8vw,24px)] pointer-events-auto">
+              <div className="flex gap-[clamp(7px,0.8vw,12px)] mt-[clamp(12px,1.6vw,20px)] pointer-events-auto">
                 <a
                   href="#menu"
                   onClick={(e) => handleNav(e, 'menu')}
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-[rgba(247,236,210,0.85)] text-[#f7ecd2] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[rgba(247,236,210,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-                  style={{ fontSize: 'clamp(10px,0.9vw,13px)', padding: 'clamp(8px,0.9vw,12px) clamp(18px,2vw,28px)' }}
+                  className="inline-flex items-center rounded-sm bg-[var(--cocoa)] text-[#f7ecd2] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{ fontSize: 'clamp(8px,0.78vw,11px)', padding: 'clamp(7px,0.8vw,10px) clamp(14px,1.6vw,22px)' }}
                 >
                   View Menu
                 </a>
                 <button
                   type="button"
                   onClick={() => { window.open('https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-cool-moon-ice-cream/YEfj7ZgZS2m7Wm2og7PphQ', '_blank', 'noopener'); }}
-                  className="inline-flex items-center gap-2 rounded-full bg-[var(--berry)] border-2 border-[var(--berry)] text-[#f7ecd2] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry-deep)] hover:border-[var(--berry-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-                  style={{ fontSize: 'clamp(10px,0.9vw,13px)', padding: 'clamp(8px,0.9vw,12px) clamp(18px,2vw,28px)' }}
+                  className="inline-flex items-center rounded-sm bg-[var(--cocoa)] text-[#f7ecd2] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{ fontSize: 'clamp(8px,0.78vw,11px)', padding: 'clamp(7px,0.8vw,10px) clamp(14px,1.6vw,22px)' }}
                 >
                   Order Online
                 </button>
               </div>
             </div>
 
-            {/* slide dots */}
+            {/* ── slide dots — right side, vertical stack ── */}
             <div
-              className="absolute left-0 right-0 bottom-[clamp(12px,2vw,24px)] flex justify-center gap-[7px] pointer-events-auto"
+              className="absolute right-[clamp(12px,2vw,28px)] bottom-[clamp(16px,3vw,36px)] flex flex-col gap-[6px] pointer-events-auto"
               aria-label="Storefront slideshow controls"
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
@@ -313,21 +357,39 @@ export default function Postcard() {
                   aria-current={i === slide}
                   aria-label={`Show slide ${i + 1} of ${SLIDES.length}`}
                   onClick={() => setSlide(i)}
-                  className="w-[12px] h-[12px] rounded-full border-2 border-[var(--marionberry)] transition-all duration-300"
+                  className="w-[9px] h-[9px] rounded-full border border-[rgba(247,236,210,0.7)] transition-all duration-300"
                   style={{
-                    background: i === slide ? 'var(--marionberry)' : 'rgba(178,78,121,0.35)',
-                    opacity: 1,
-                    transform: i === slide ? 'scale(1.25)' : 'scale(1)',
-                    boxShadow: i === slide
-                      ? '0 0 0 3px rgba(178,78,121,0.3), 0 1px 3px rgba(20,10,8,0.5)'
-                      : '0 1px 3px rgba(20,10,8,0.5)',
+                    background: i === slide ? '#f7ecd2' : 'rgba(247,236,210,0.25)',
+                    transform: i === slide ? 'scale(1.3)' : 'scale(1)',
+                    boxShadow: i === slide ? '0 0 0 2px rgba(247,236,210,0.3)' : 'none',
                   }}
                 />
               ))}
             </div>
           </div>
-          {/* Soft color wash linking the ink to the paper tone */}
-          <div className="absolute inset-0 bg-[var(--gold)] opacity-[0.12] mix-blend-color pointer-events-none" aria-hidden="true" />
+
+          {/* Soft gold wash */}
+          <div className="absolute inset-0 bg-[var(--gold)] opacity-[0.08] mix-blend-color pointer-events-none" aria-hidden="true" />
+        </div>
+
+        {/* "PORTLAND'S HOMEGROWN ICE CREAM CAFE" — dark ribbon below the hero photo */}
+        <div
+          className="mx-auto max-w-[1200px] px-[4vw] sm:px-[4vw]"
+          aria-hidden="true"
+        >
+          <div
+            className="flex items-center justify-center gap-[clamp(10px,2vw,24px)] py-[10px]"
+            style={{ background: 'var(--cocoa)' }}
+          >
+            <span className="w-6 sm:w-10 h-px bg-[var(--gold-hi)] opacity-50" />
+            <span
+              className="text-[var(--cream-hi)] tracking-[3.5px] sm:tracking-[5px] uppercase font-bold"
+              style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(8px,0.85vw,11px)' }}
+            >
+              Portland's Homegrown Ice Cream Cafe
+            </span>
+            <span className="w-6 sm:w-10 h-px bg-[var(--gold-hi)] opacity-50" />
+          </div>
         </div>
       </div>
 
