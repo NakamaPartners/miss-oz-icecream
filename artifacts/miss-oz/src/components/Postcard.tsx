@@ -255,13 +255,11 @@ export default function Postcard() {
                 transform: 'translateY(-50%)',
               }}
             >
-              {/* Miss Oz — Cormorant (closest free match to Fitzgerald), gold */}
+              {/* Miss Oz — Higante display, gold, matching the logo lettering */}
               <div
                 style={{
-                  fontFamily: "'Cormorant', 'Playfair Display', serif",
-                  fontStyle: 'italic',
-                  fontWeight: 700,
-                  fontSize: 'clamp(48px,7.6vw,110px)',
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(44px,6.8vw,96px)',
                   lineHeight: 1,
                   color: '#EBC77F',
                   textShadow: '0 2px 22px rgba(20,8,12,0.6), 0 3px 6px rgba(20,8,12,0.45)',
