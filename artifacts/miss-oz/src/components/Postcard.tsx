@@ -255,14 +255,13 @@ export default function Postcard() {
                 transform: 'translateY(-50%)',
               }}
             >
-              {/* Miss Oz — Macklin Display, gold, matching the logo lettering */}
+              {/* Miss Oz — Cormorant (closest free match to Fitzgerald), gold */}
               <div
                 style={{
-                  fontFamily: "'Fraunces', 'Playfair Display', serif",
+                  fontFamily: "'Cormorant', 'Playfair Display', serif",
                   fontStyle: 'italic',
                   fontWeight: 700,
-                  fontVariationSettings: "'opsz' 144, 'SOFT' 100, 'WONK' 0",
-                  fontSize: 'clamp(46px,7.2vw,104px)',
+                  fontSize: 'clamp(48px,7.6vw,110px)',
                   lineHeight: 1,
                   color: '#EBC77F',
                   textShadow: '0 2px 22px rgba(20,8,12,0.6), 0 3px 6px rgba(20,8,12,0.45)',

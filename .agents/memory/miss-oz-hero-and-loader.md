@@ -147,4 +147,4 @@ Lemongrass = signature/display font; Kaleidos = body, nav & supporting text; Hig
 
 ## Hero photo brightness & z-order (July 2026)
 Page-wide fixed overlays (paper-overlay z-940 @0.55 multiply, grain-overlay z-950) muddy photos into an amber cast. The hero sits at z-[955] — above both, below the marquee frame (z-960) — to stay bright/natural. Don't reuse 960 (paint-order races with the frame).
-**Client-approved hero look:** gold Fraunces italic 700 (opsz 144, SOFT 100) "Miss Oz" (#EBC77F) — client rejected Macklin/Playfair look as "not the same font", pink Lemongrass tagline (#F4A9C7), centered text over the frame, plum rounded-full CTAs. Hero is a plain slideshow (cones photo first) — client rejected the fixed cone-foreground composite as "weird".
+**Client-approved hero look:** gold Cormorant italic 700 "Miss Oz" (#EBC77F) — client wanted Fitzgerald (commercial, no license); Cormorant is the agreed free lookalike; Macklin/Playfair/Fraunces all rejected earlier, pink Lemongrass tagline (#F4A9C7), centered text over the frame, plum rounded-full CTAs. Hero is a plain slideshow (cones photo first) — client rejected the fixed cone-foreground composite as "weird".
