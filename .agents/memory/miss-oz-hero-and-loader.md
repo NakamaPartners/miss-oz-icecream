@@ -144,3 +144,7 @@ Hero is now a full-width crossfading photo slideshow (5 real storefront/interior
 
 ## Typography (client-locked, Jul 2026)
 Lemongrass = signature/display font; Kaleidos = body, nav & supporting text; Higante reserved for special moments only (currently just the Loader splash, via --font-accent). All mapped through CSS vars in src/index.css — change the vars, not per-component fonts. Hero slogan over photos must stay small/subtle (client complaint about it dominating).
+
+## Hero photo brightness & z-order (July 2026)
+Page-wide fixed overlays (paper-overlay z-940 @0.55 multiply, grain-overlay z-950) muddy photos into an amber cast. The hero sits at z-[955] — above both, below the marquee frame (z-960) — to stay bright/natural. Don't reuse 960 (paint-order races with the frame).
+**Client-approved hero look:** gold `Macklin Display` italic "Miss Oz" (#EBC77F), pink Lemongrass tagline (#F4A9C7), centered text over right half, plum rounded-full CTAs, cone foreground hidden below `sm`.
