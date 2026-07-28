@@ -3,9 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Bunting } from './Decor';
 import OrderChooser from './OrderChooser';
 
-/* Full-width homepage slideshow — real storefront photos with short brand slogans */
-// Background café slides — cone photo is a fixed left-foreground overlay, not in rotation
+/* Full-width homepage slideshow — real storefront photos */
 const SLIDES: { src: string; alt: string; pos?: string }[] = [
+  {
+    src: '/images/slide-cones.webp',
+    alt: 'Two waffle cones with scoops of marionberry ice cream held up inside the shop',
+    pos: 'center 55%',
+  },
   {
     src: '/images/slide-counter.webp',
     alt: 'Inside the parlor — the glowing MISS OZ marquee letters above the chalkboard flavor menu and the striped ice cream counter',
@@ -51,24 +55,22 @@ const panels: { title: string; sub: string; desc: string; target: string; tone: 
   { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what\'s next', target: 'vote', tone: 'pink', img: '/images/panel-vote.webp' },
 ];
 
-const FLAVORS = [
-  'Mexican Vanilla',
-  'Mint Chip',
-  'Horchata Cookie',
-  'Coffee Crackle',
-  'Matcha',
-  'Fresh Banana',
-  'Salty Caramel',
-  'Honey',
-  'Kulfi',
-  'Belgian Chocolate',
-  'Birthday Cake',
-  'Cookies & Cream',
-  'Thai Iced Tea',
-  'Peanut Butter Fudge',
-  'Butter Pecan',
-  'Marionberry',
+const FLAVORS: { name: string; desc: string }[] = [
+  { name: 'Mexican Vanilla', desc: 'Creamy classic with real vanilla' },
+  { name: 'Matcha', desc: 'Premium green tea, earthy & smooth' },
+  { name: 'Kulfi', desc: 'Traditional Indian cardamom & pistachio' },
+  { name: 'Birthday Cake', desc: 'Sweet cake batter with rainbow sprinkles' },
+  { name: 'Butter Pecan', desc: 'Toasted pecans in buttery cream' },
+  { name: 'Salty Caramel', desc: 'Buttery caramel with sea salt' },
+  { name: 'Mint Chip', desc: 'Cool mint with dark chocolate chips' },
+  { name: 'Coffee Crackle', desc: 'Coffee ice cream with chocolate crackle' },
+  { name: 'Fresh Banana', desc: 'Real banana. Naturally sweet' },
+  { name: 'Belgian Chocolate', desc: 'Smooth & rich Belgian chocolate' },
+  { name: 'Cookies & Cream', desc: 'Chocolate cookies in sweet cream' },
+  { name: 'Marionberry', desc: 'Oregon marionberries in creamy goodness' },
 ];
+
+const MENU_CATEGORIES = ['Ice Cream', 'Sorbet', 'Sundaes', 'Croffle & Dessert', 'Drinks', 'Whole Cakes', 'Wholesale'];
 
 const hrefFor = (t: string) => (t === 'home' ? '#home' : `#${t}`);
 
@@ -236,36 +238,18 @@ export default function Postcard() {
               />
             </AnimatePresence>
 
-            {/* ── LAYER 2: cone photo — left foreground, fades right (hidden on phones where it would collide with the text) ── */}
-            <div
-              aria-hidden="true"
-              className="absolute left-0 top-0 h-full pointer-events-none hidden sm:block"
-              style={{
-                width: 'clamp(220px, 46%, 560px)',
-                maskImage: 'linear-gradient(to right, black 55%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to right, black 55%, transparent 100%)',
-              }}
-            >
-              <img
-                src="/images/slide-cones.webp"
-                alt=""
-                className="w-full h-full object-cover"
-                style={{ objectPosition: '35% 72%' }}
-              />
-            </div>
-
-            {/* ── LAYER 3: soft darkening behind the text only ── */}
+            {/* ── LAYER 2: soft darkening behind the text ── */}
             <div
               aria-hidden="true"
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'radial-gradient(ellipse 46% 68% at 63% 52%, rgba(20,8,12,0.6) 0%, rgba(20,8,12,0.34) 55%, transparent 100%)',
+                background: 'radial-gradient(ellipse 55% 70% at 50% 52%, rgba(20,8,12,0.6) 0%, rgba(20,8,12,0.34) 55%, transparent 100%)',
               }}
             />
 
-            {/* ── LAYER 4: brand text — centered over the café backdrop ── */}
+            {/* ── LAYER 3: brand text — centered over the slideshow ── */}
             <div
-              className="absolute flex flex-col items-center text-center pointer-events-none left-[8%] right-[8%] sm:left-[40%] sm:right-[8%]"
+              className="absolute flex flex-col items-center text-center pointer-events-none left-[8%] right-[8%] sm:left-[18%] sm:right-[18%]"
               style={{
                 top: '50%',
                 transform: 'translateY(-50%)',
@@ -274,9 +258,10 @@ export default function Postcard() {
               {/* Miss Oz — Macklin Display, gold, matching the logo lettering */}
               <div
                 style={{
-                  fontFamily: "'Macklin Display', 'Playfair Display', serif",
+                  fontFamily: "'Fraunces', 'Playfair Display', serif",
                   fontStyle: 'italic',
                   fontWeight: 700,
+                  fontVariationSettings: "'opsz' 144, 'SOFT' 100, 'WONK' 0",
                   fontSize: 'clamp(46px,7.2vw,104px)',
                   lineHeight: 1,
                   color: '#EBC77F',
@@ -394,205 +379,189 @@ export default function Postcard() {
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[210px_1fr] lg:grid-cols-[230px_1fr] gap-[clamp(16px,2vw,26px)] items-stretch">
-          {/* Chalkboard easel navigation — like the old parlor sign by the door */}
-          <nav
-            aria-label="Site sections"
-            className="relative mx-auto w-full max-w-[300px] md:max-w-none md:flex md:flex-col md:pb-[26px]"
-          >
-            {/* easel legs */}
-            <div aria-hidden="true" className="hidden md:block absolute -bottom-[26px] left-[24px] w-[10px] h-[44px] rotate-[9deg] rounded-[2px]" style={{ background: 'linear-gradient(160deg, #8a3030, #5f1f1f)' }} />
-            <div aria-hidden="true" className="hidden md:block absolute -bottom-[26px] right-[24px] w-[10px] h-[44px] -rotate-[9deg] rounded-[2px]" style={{ background: 'linear-gradient(160deg, #8a3030, #5f1f1f)' }} />
-            {/* little striped parlor awning over the sign */}
-            <div aria-hidden="true" className="relative z-10 mx-[6px] -mb-[3px]">
-              <div
-                className="h-[14px] rounded-t-[6px]"
-                style={{
-                  background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--teal-deep) 22px 44px)',
-                  boxShadow: 'inset 0 -4px 8px rgba(28,13,12,0.28), 0 3px 8px rgba(0,0,0,0.3)',
-                }}
-              />
-              <div
-                className="h-[9px]"
-                style={{
-                  background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--teal-deep) 22px 44px)',
-                  WebkitMaskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)',
-                  maskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)',
-                  WebkitMaskSize: '22px 100%',
-                  maskSize: '22px 100%',
-                  WebkitMaskRepeat: 'repeat-x',
-                  maskRepeat: 'repeat-x',
-                  filter: 'drop-shadow(0 3px 4px rgba(0,0,0,0.25))',
-                }}
-              />
+        <div className="grid grid-cols-1 md:grid-cols-[200px_1fr_250px] lg:grid-cols-[220px_1fr_280px] gap-[clamp(14px,1.8vw,22px)] items-stretch">
+
+          {/* LEFT — forest-green menu category card with striped awning (decorative list, like a painted parlor sign) */}
+          <aside aria-label="Menu categories" className="relative mx-auto w-full max-w-[320px] md:max-w-none flex flex-col">
+            {/* striped awning — cream + forest green */}
+            <div aria-hidden="true" className="relative z-10 -mb-[2px]">
+              <div className="h-[14px] rounded-t-[10px]" style={{ background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, #1F4A3D 22px 44px)', boxShadow: 'inset 0 -4px 8px rgba(28,13,12,0.2), 0 3px 8px rgba(0,0,0,0.18)' }} />
+              <div className="h-[9px]" style={{ background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, #1F4A3D 22px 44px)', WebkitMaskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)', maskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)', WebkitMaskSize: '22px 100%', maskSize: '22px 100%', WebkitMaskRepeat: 'repeat-x', maskRepeat: 'repeat-x', filter: 'drop-shadow(0 3px 4px rgba(0,0,0,0.18))' }} />
             </div>
-            {/* wooden frame */}
             <div
-              className="relative rounded-[8px] p-[9px] md:flex-1 md:flex"
+              className="flex-1 flex flex-col items-center rounded-b-[12px] px-5 py-[clamp(24px,2.6vw,36px)]"
               style={{
-                background: 'linear-gradient(160deg, #6b4a2e, #4b3120 55%, #5d3f27)',
-                boxShadow: '0 18px 40px rgba(28,13,12,0.35), inset 0 0 0 1.5px rgba(227,180,76,0.45), inset 0 2px 5px rgba(255,255,255,0.12)',
+                background: 'radial-gradient(120% 90% at 30% 15%, rgba(255,255,255,0.06), transparent 60%), linear-gradient(165deg, #245445 0%, #1B4136 55%, #1F4A3D 100%)',
+                boxShadow: '0 14px 34px rgba(28,13,12,0.25), inset 0 0 0 1.5px rgba(242,225,194,0.28)',
               }}
             >
-              <div
-                className="rounded-[4px] px-4 py-6 md:flex-1 flex flex-row md:flex-col flex-wrap items-center justify-center gap-x-5 gap-y-[14px] md:gap-y-[22px]"
-                style={{
-                  background:
-                    'radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,0.06), transparent 60%), linear-gradient(160deg, #1c4a46 0%, #143633 55%, #1a423e 100%)',
-                  boxShadow: 'inset 0 0 0 1.5px rgba(28,13,12,0.6), inset 0 0 24px rgba(0,0,0,0.35)',
-                }}
-              >
-                {NAV.map((item, i) => (
-                  <a
-                    key={item.label}
-                    href={hrefFor(item.target)}
-                    onClick={(e) => handleNav(e, item.target)}
-                    className="nav-link transition-colors text-center focus-visible:outline-none focus-visible:text-[var(--gold-hi)]"
-                    style={{
-                      fontFamily: i === 0 ? 'var(--font-sans)' : i % 2 === 0 ? 'var(--font-script-alt)' : 'var(--font-sans)',
-                      fontSize: i === 0 ? 15 : i % 2 === 0 ? 20 : 14,
-                      letterSpacing: i % 2 === 0 && i !== 0 ? '0.5px' : '2px',
-                      textTransform: i % 2 === 0 && i !== 0 ? 'none' : 'uppercase',
-                      fontWeight: 700,
-                      color: i === 0 ? '#f3ead6' : i % 3 === 0 ? 'var(--pink)' : i % 2 === 0 ? 'var(--gold-hi)' : '#e9e0cc',
-                      textShadow: '0 0 10px rgba(243,234,214,0.15)',
-                    }}
-                  >
-                    {item.label}
-                  </a>
+              {/* inner hairline frame like the reference */}
+              <div className="flex-1 w-full flex flex-col items-center justify-center gap-[clamp(10px,1.2vw,16px)] rounded-[8px] px-3 py-6" style={{ boxShadow: 'inset 0 0 0 1px rgba(242,225,194,0.35)' }}>
+                {MENU_CATEGORIES.map((c, i) => (
+                  <div key={c} className="flex flex-col items-center gap-[clamp(10px,1.2vw,16px)]">
+                    {i > 0 && <span aria-hidden="true" className="text-[8px] text-[var(--pink)] opacity-80">◆</span>}
+                    <span
+                      className="text-center font-bold uppercase tracking-[2.5px] text-[#F2E1C2]"
+                      style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11px,0.95vw,13px)' }}
+                    >
+                      {c}
+                    </span>
+                  </div>
                 ))}
+                {/* little cone icon */}
+                <svg aria-hidden="true" width="20" height="30" viewBox="0 0 20 30" className="mt-[clamp(8px,1vw,14px)] opacity-90">
+                  <circle cx="10" cy="8" r="6.5" fill="none" stroke="#F4A9C7" strokeWidth="1.4" />
+                  <path d="M3.8 13 L10 28.5 L16.2 13" fill="none" stroke="#F2E1C2" strokeWidth="1.4" strokeLinejoin="round" />
+                  <path d="M5.5 16.5 L14.5 16.5 M7 20 L13 20" stroke="#F2E1C2" strokeWidth="1" />
+                </svg>
+                <div className="text-center leading-snug text-[var(--pink)]" style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(17px,1.5vw,21px)' }}>
+                  Small Batch
+                  <br />
+                  Big Heart
+                </div>
               </div>
             </div>
-          </nav>
+          </aside>
 
-          {/* Big wood-framed board: menu board in the middle, chalkboard welcome panel on the right */}
-          <div className="relative">
-          {/* striped parlor awning over the big board */}
-          <div aria-hidden="true" className="relative z-10 mx-[8px] -mb-[3px]">
-            <div
-              className="h-[22px] md:h-[26px] rounded-t-[8px]"
-              style={{
-                background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 36px, var(--berry-deep) 36px 72px)',
-                boxShadow: 'inset 0 -6px 11px rgba(28,13,12,0.28), 0 4px 10px rgba(0,0,0,0.32)',
-              }}
-            />
-            <div
-              className="h-[12px] md:h-[14px]"
-              style={{
-                background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 36px, var(--berry-deep) 36px 72px)',
-                WebkitMaskImage: 'radial-gradient(18px at 50% 0, #000 98%, transparent 100%)',
-                maskImage: 'radial-gradient(18px at 50% 0, #000 98%, transparent 100%)',
-                WebkitMaskSize: '36px 100%',
-                maskSize: '36px 100%',
-                WebkitMaskRepeat: 'repeat-x',
-                maskRepeat: 'repeat-x',
-                filter: 'drop-shadow(0 4px 5px rgba(0,0,0,0.28))',
-              }}
-            />
-          </div>
-          <div
-            className="relative rounded-b-[10px] p-[10px] md:p-[12px]"
+          {/* CENTER — cream "Ice Cream Flavors" panel */}
+          <section
+            aria-label="Ice cream flavors"
+            className="relative flex flex-col rounded-[10px] px-[clamp(18px,2.6vw,42px)] py-[clamp(22px,2.6vw,36px)]"
             style={{
-              background: 'linear-gradient(160deg, #6b4a2e, #4b3120 55%, #5d3f27)',
-              boxShadow:
-                '0 26px 60px rgba(28,13,12,0.4), inset 0 0 0 2px rgba(227,180,76,0.5), inset 0 2px 6px rgba(255,255,255,0.12), inset 0 -3px 8px rgba(0,0,0,0.4)',
+              background: 'linear-gradient(180deg, #FBF4E6, #F7EDDA)',
+              boxShadow: '0 14px 34px rgba(28,13,12,0.18), inset 0 0 0 1px rgba(94,23,53,0.25), inset 0 0 0 5px rgba(251,244,230,1), inset 0 0 0 6px rgba(94,23,53,0.15)',
             }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] rounded-[5px] overflow-hidden" style={{ boxShadow: 'inset 0 0 0 1.5px rgba(28,13,12,0.6)' }}>
-              {/* MIDDLE — big chalkboard menu board */}
-              <div
-                className="relative flex flex-col items-center px-[24px] md:px-[36px] py-[34px] md:py-[42px]"
-                style={{
-                  background:
-                    'radial-gradient(120% 90% at 35% 15%, rgba(255,255,255,0.05), transparent 60%), linear-gradient(160deg, #24302a 0%, #1c2521 55%, #212c26 100%)',
-                  boxShadow: 'inset 0 0 28px rgba(0,0,0,0.4)',
-                }}
-              >
-                {/* arched board header */}
-                <div
-                  className="w-full max-w-[430px] text-center pt-[22px] pb-[16px] px-4"
-                  style={{
-                    borderRadius: '50% 50% 6px 6px / 42% 42% 6px 6px',
-                    boxShadow: 'inset 0 0 0 2px rgba(227,180,76,0.55), inset 0 0 22px rgba(0,0,0,0.3)',
-                  }}
-                >
-                  <div className="text-[var(--gold-hi)] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,2.6vw,36px)', textShadow: '0 0 14px rgba(227,180,76,0.3)' }}>
-                    Miss Oz
-                  </div>
-                  <div className="mt-[6px] text-[11px] tracking-[4px] uppercase font-bold text-[#f3ead6] opacity-85" style={{ fontFamily: 'var(--font-sans)' }}>
-                    Ice Cream &amp; Sorbet
-                  </div>
-                  <div className="mt-[4px] text-[var(--pink)]" style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(17px,1.7vw,21px)', textShadow: '0 0 10px rgba(240,170,190,0.25)' }}>
-                    homemade flavors
+            {/* header */}
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-3">
+                <span aria-hidden="true" className="text-[11px] text-[var(--pink)]">✦</span>
+                <h3 className="uppercase font-bold tracking-[4px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(16px,1.7vw,24px)' }}>
+                  Ice Cream Flavors
+                </h3>
+                <span aria-hidden="true" className="text-[11px] text-[var(--pink)]">✦</span>
+              </div>
+              <div className="mt-[4px] text-[var(--marionberry)]" style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(15px,1.4vw,19px)' }}>
+                Handmade in Small Batches
+              </div>
+            </div>
+
+            {/* two-column flavor list */}
+            <div className="mt-[clamp(16px,2vw,26px)] flex-1 grid grid-cols-1 lg:grid-cols-2 gap-x-[clamp(20px,3vw,48px)] gap-y-[clamp(11px,1.3vw,17px)] content-start">
+              {FLAVORS.map((f) => (
+                <div key={f.name} className="flex items-start gap-[9px]">
+                  <span aria-hidden="true" className="text-[8px] text-[var(--marionberry)] mt-[3px]">◆</span>
+                  <div>
+                    <div className="uppercase font-bold tracking-[1.8px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>
+                      {f.name}
+                    </div>
+                    <div className="mt-[2px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.8vw,11.5px)' }}>
+                      {f.desc}
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
 
-                {/* chalk flavor list — copied from the flavor boards in the shop photos */}
-                <ul className="mt-[22px] w-full max-w-[430px] flex-1 content-center grid grid-cols-2 gap-x-[26px] gap-y-[10px] text-left">
-                  {FLAVORS.map((f, i) => (
-                    <li
-                      key={f}
-                      className="leading-snug"
-                      style={{
-                        fontFamily: i % 5 === 2 ? 'var(--font-script-alt)' : 'var(--font-sans)',
-                        fontSize: i % 5 === 2 ? 17 : 13.5,
-                        letterSpacing: i % 5 === 2 ? '0.4px' : '1.6px',
-                        textTransform: i % 5 === 2 ? 'none' : 'uppercase',
-                        fontWeight: 600,
-                        color: i % 4 === 1 ? 'var(--gold-hi)' : i % 4 === 3 ? 'var(--pink)' : '#ece3cd',
-                        textShadow: '0 0 8px rgba(243,234,214,0.12)',
-                      }}
-                    >
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+            {/* dotted divider */}
+            <div aria-hidden="true" className="mt-[clamp(16px,2vw,24px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
 
-                <div className="mt-[14px] flex items-center gap-3 text-[var(--gold-hi)] opacity-80" aria-hidden="true">
-                  <span className="h-px w-12" style={{ background: 'currentColor' }} />
-                  <span className="text-[11px]">✦</span>
-                  <span className="h-px w-12" style={{ background: 'currentColor' }} />
-                </div>
-                <div className="mt-[10px] text-[11px] tracking-[3px] uppercase font-bold text-[#e9e0cc] opacity-70 text-center" style={{ fontFamily: 'var(--font-sans)' }}>
-                  Churned fresh · rotating case
+            {/* bottom callouts */}
+            <div className="mt-[clamp(14px,1.8vw,22px)] grid grid-cols-1 sm:grid-cols-2 gap-[clamp(14px,2vw,28px)]">
+              <div className="flex items-start gap-3">
+                <svg aria-hidden="true" width="30" height="34" viewBox="0 0 30 34" className="shrink-0 mt-[2px]">
+                  <rect x="6" y="9" width="18" height="22" rx="3" fill="none" stroke="var(--marionberry)" strokeWidth="1.5" />
+                  <path d="M9 9 V6 a3 3 0 0 1 3-3 h6 a3 3 0 0 1 3 3 V9" fill="none" stroke="var(--marionberry)" strokeWidth="1.5" />
+                  <path d="M15 17.5 c-1.8-2.4-5.4-.6-4.2 2 c.9 1.9 4.2 3.8 4.2 3.8 s3.3-1.9 4.2-3.8 c1.2-2.6-2.4-4.4-4.2-2Z" fill="none" stroke="var(--pink)" strokeWidth="1.3" />
+                </svg>
+                <div>
+                  <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>Churned Fresh</div>
+                  <div className="mt-[2px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.8vw,11.5px)' }}>
+                    We make our ice cream in small batches every week for the best flavor and texture.
+                  </div>
                 </div>
               </div>
+              <div className="flex items-start gap-3">
+                <svg aria-hidden="true" width="32" height="34" viewBox="0 0 32 34" className="shrink-0 mt-[2px]">
+                  <rect x="3" y="8" width="26" height="20" rx="2.5" fill="none" stroke="var(--marionberry)" strokeWidth="1.5" />
+                  <path d="M3 16 h26" stroke="var(--marionberry)" strokeWidth="1.3" />
+                  <circle cx="10" cy="22" r="2.2" fill="none" stroke="var(--pink)" strokeWidth="1.2" />
+                  <circle cx="16" cy="22" r="2.2" fill="none" stroke="var(--pink)" strokeWidth="1.2" />
+                  <circle cx="22" cy="22" r="2.2" fill="none" stroke="var(--pink)" strokeWidth="1.2" />
+                </svg>
+                <div>
+                  <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>Rotating Case</div>
+                  <div className="mt-[2px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.8vw,11.5px)' }}>
+                    Seasonal flavors rotate throughout the year. Ask what's new!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-              {/* RIGHT — berry-painted welcome panel */}
-              <div
-                className="flex flex-col items-center justify-center text-center px-[26px] md:px-[34px] py-[38px] md:py-[46px]"
-                style={{
-                  background:
-                    'radial-gradient(120% 90% at 30% 20%, rgba(255,255,255,0.07), transparent 60%), linear-gradient(160deg, #5e2334 0%, #491a29 55%, #55202f 100%)',
-                  boxShadow: 'inset 0 0 24px rgba(0,0,0,0.35), inset 1.5px 0 0 rgba(227,180,76,0.35)',
-                }}
-              >
+          {/* RIGHT — plum "Come Slow Down" card with striped awning */}
+          <div className="relative mx-auto w-full max-w-[340px] md:max-w-none flex flex-col">
+            {/* striped awning — cream + deep berry */}
+            <div aria-hidden="true" className="relative z-10 -mb-[2px]">
+              <div className="h-[14px] rounded-t-[10px]" style={{ background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)', boxShadow: 'inset 0 -4px 8px rgba(28,13,12,0.2), 0 3px 8px rgba(0,0,0,0.18)' }} />
+              <div className="h-[9px]" style={{ background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)', WebkitMaskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)', maskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)', WebkitMaskSize: '22px 100%', maskSize: '22px 100%', WebkitMaskRepeat: 'repeat-x', maskRepeat: 'repeat-x', filter: 'drop-shadow(0 3px 4px rgba(0,0,0,0.18))' }} />
+            </div>
+            <div
+              className="flex-1 flex flex-col items-center text-center rounded-b-[12px] px-[clamp(18px,1.8vw,26px)] py-[clamp(24px,2.6vw,36px)]"
+              style={{
+                background: 'radial-gradient(120% 90% at 30% 15%, rgba(255,255,255,0.06), transparent 60%), linear-gradient(165deg, #5E1735 0%, #471027 55%, #55142F 100%)',
+                boxShadow: '0 14px 34px rgba(28,13,12,0.3), inset 0 0 0 1.5px rgba(242,225,194,0.3)',
+              }}
+            >
+              <div className="flex-1 w-full flex flex-col items-center justify-center gap-[clamp(12px,1.4vw,18px)] rounded-[8px] px-4 py-6" style={{ boxShadow: 'inset 0 0 0 1px rgba(242,225,194,0.35)' }}>
                 <div
-                  className="text-[var(--gold-hi)] leading-[1.06]"
-                  style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px,2.4vw,32px)', textShadow: '0 0 12px rgba(227,180,76,0.25)' }}
+                  className="leading-[1.15] text-[#F2E1C2]"
+                  style={{ fontFamily: "'Fraunces', 'Playfair Display', serif", fontStyle: 'italic', fontWeight: 700, fontVariationSettings: "'opsz' 100, 'SOFT' 100, 'WONK' 0", fontSize: 'clamp(22px,1.9vw,27px)' }}
                 >
-                  ~ Come Slow Down ~
+                  ~ Come Slow
+                  <br />
+                  Down ~
                   <br />
                   With Us!
                 </div>
-                <p className="mt-5 text-[15px] leading-relaxed text-[#e9e0cc] max-w-[320px]" style={{ fontFamily: 'var(--font-sans)' }}>
-                  Handmade ice cream in small batches — classic recipes, real flavor. Pickup or delivery on Uber&nbsp;Eats, DoorDash &amp; Grubhub, or come vote the next flavor.
+                <span aria-hidden="true" className="text-[var(--pink)] text-[14px]">♥</span>
+                <p className="leading-relaxed text-[#EFD9C9]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11.5px,0.9vw,13px)' }}>
+                  Handmade ice cream in small batches using classic recipes and real ingredients.
                 </p>
-                <div className="mt-5 text-[var(--pink)]" style={{ fontFamily: 'var(--font-script-alt)', fontSize: 21, textShadow: '0 0 10px rgba(240,170,190,0.25)' }}>
-                  Miss Oz Ice Cream &amp; Dessert Cafe
-                </div>
-                <div className="mt-4 text-[13px] tracking-[2px] uppercase font-bold text-[#f3ead6] opacity-80" style={{ fontFamily: 'var(--font-sans)' }}>
-                  ~ Est. 2007 ~
-                </div>
-                <OrderChooser
-                  variant="cream"
-                  label="Place an Order"
-                  className="mt-7"
-                />
+                <span aria-hidden="true" className="h-px w-[70%]" style={{ background: 'rgba(242,225,194,0.3)' }} />
+                <p className="leading-relaxed text-[#EFD9C9]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11.5px,0.9vw,13px)' }}>
+                  Pickup or delivery available on Uber&nbsp;Eats, DoorDash &amp; Grubhub.
+                </p>
+                <span aria-hidden="true" className="h-px w-[70%]" style={{ background: 'rgba(242,225,194,0.3)' }} />
+                <p className="leading-relaxed text-[#EFD9C9]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11.5px,0.9vw,13px)' }}>
+                  We love our community and your suggestions!
+                </p>
+                <OrderChooser variant="cream" label="Place an Order" className="mt-[clamp(6px,0.8vw,12px)]" />
               </div>
             </div>
           </div>
+
+        </div>
+
+        {/* footer strip — "Sweet Memories Start Here." */}
+        <div className="mt-[clamp(18px,2.2vw,28px)] flex items-center justify-center gap-4 text-center">
+          <svg aria-hidden="true" width="22" height="32" viewBox="0 0 20 30" className="opacity-80 shrink-0">
+            <circle cx="10" cy="8" r="6.5" fill="none" stroke="var(--marionberry)" strokeWidth="1.4" />
+            <path d="M3.8 13 L10 28.5 L16.2 13" fill="none" stroke="var(--marionberry)" strokeWidth="1.4" strokeLinejoin="round" />
+          </svg>
+          <div>
+            <div className="uppercase font-bold tracking-[3px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11px,1vw,14px)' }}>
+              Sweet Memories Start Here.
+            </div>
+            <div className="mt-[3px] text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.85vw,12px)' }}>
+              Thank you for supporting our family-run shop since 2007.
+            </div>
           </div>
+          <svg aria-hidden="true" width="30" height="30" viewBox="0 0 32 32" className="opacity-80 shrink-0">
+            <path d="M4 12 h24 M6 12 v14 h20 v-14" fill="none" stroke="var(--marionberry)" strokeWidth="1.4" />
+            <path d="M4 12 L7 6 h18 l3 6" fill="none" stroke="var(--marionberry)" strokeWidth="1.4" strokeLinejoin="round" />
+            <path d="M12 26 v-8 h8 v8" fill="none" stroke="var(--pink)" strokeWidth="1.3" />
+          </svg>
         </div>
 
         {/* original Step Inside poster cards */}
