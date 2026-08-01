@@ -122,100 +122,61 @@ export default function Postcard() {
         <Bunting />
       </div>
 
-      {/* MASTHEAD — official logo centered, supporting text + navigation integrated around it */}
-      <header className="relative z-20 mx-auto max-w-[1200px] px-[4vw] mt-[10px] sm:mt-[20px] mb-[clamp(18px,2.6vw,32px)]">
+      {/* MASTHEAD — logo centered large, all nav on one horizontal line */}
+      <header className="relative z-20 mx-auto max-w-[1200px] px-[4vw] mt-[6px] sm:mt-[12px] mb-[clamp(14px,2vw,24px)]">
         {/* top double rule */}
-        <div className="w-full border-t-[2.5px] border-b-[1px] border-[var(--cocoa)] h-[5px] sm:h-[7px] opacity-70 mb-[clamp(14px,2vw,24px)]" aria-hidden="true" />
+        <div className="w-full border-t-[2.5px] border-b-[1px] border-[var(--cocoa)] h-[5px] sm:h-[7px] opacity-70" aria-hidden="true" />
 
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-x-[clamp(24px,3.5vw,52px)] gap-y-4"
+          className="grid items-center"
+          style={{ minHeight: 'clamp(120px,16vw,200px)', gridTemplateColumns: '1fr auto 1fr' }}
         >
-          {/* left — HOME ABOUT MENU in a single centered row */}
-          <div className="order-2 md:order-1 flex justify-center md:justify-end">
-            <nav aria-label="Primary" className="flex items-center gap-x-[clamp(16px,1.8vw,28px)]">
-              {NAV.slice(0, 3).map((n) => (
-                <a
-                  key={n.label}
-                  href={hrefFor(n.target)}
-                  onClick={(e) => handleNav(e, n.target)}
-                  className="text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {n.label}
-                </a>
-              ))}
-            </nav>
-          </div>
+          {/* left nav — HOME ABOUT MENU */}
+          <nav aria-label="Primary" className="flex items-center justify-between gap-x-[clamp(18px,2.2vw,36px)] z-10">
+            {NAV.slice(0, 3).map((n) => (
+              <a
+                key={n.label}
+                href={hrefFor(n.target)}
+                onClick={(e) => handleNav(e, n.target)}
+                className="whitespace-nowrap text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                {n.label}
+              </a>
+            ))}
+          </nav>
 
-          {/* center — the official logo only */}
-          <div className="order-1 md:order-2 flex flex-col items-center">
+          {/* center — logo in normal flow so it can't overlap nav items */}
+          <div className="flex-none z-10 px-[clamp(12px,2vw,32px)]">
             <img
               src="/images/logo-official.webp"
               alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
-              className="w-[clamp(220px,30vw,360px)] h-auto"
-              style={{ filter: 'drop-shadow(0 3px 10px rgba(93,26,58,0.22))' }}
+              className="w-[clamp(140px,16vw,210px)] h-auto"
+              style={{ filter: 'drop-shadow(0 2px 8px rgba(93,26,58,0.18))' }}
             />
           </div>
 
-          {/* right — tagline + nav links stacked vertically */}
-          <div className="order-3 flex justify-center md:justify-start">
-            <div className="flex flex-col items-center md:items-start gap-y-[clamp(6px,0.9vw,11px)]">
-              {/* tagline above the nav */}
-              <span
-                className="flex items-center gap-[6px] text-[8.5px] sm:text-[9.5px] tracking-[3px] sm:tracking-[3.5px] uppercase text-[var(--cocoa)] opacity-70"
-                style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
+          {/* right nav — ORDER ONLINE WHOLESALE EVENT CONTACT all on one line */}
+          <nav aria-label="Primary continued" className="flex items-center justify-between gap-x-[clamp(18px,2.2vw,36px)] z-10">
+            {NAV.slice(3).map((n) => (
+              <a
+                key={n.label}
+                href={hrefFor(n.target)}
+                onClick={(e) => handleNav(e, n.target)}
+                className="whitespace-nowrap text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+                style={{ fontFamily: 'var(--font-sans)' }}
               >
-                Ice Cream
-                <span className="text-[var(--berry)] text-[7px] leading-none rotate-45 inline-block" aria-hidden="true">◆</span>
-                Dessert Cafe
-              </span>
-              {/* ORDER ONLINE on its own line */}
-              {NAV.slice(3, 4).map((n) => (
-                <a
-                  key={n.label}
-                  href={hrefFor(n.target)}
-                  onClick={(e) => handleNav(e, n.target)}
-                  className="text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {n.label}
-                </a>
-              ))}
-              {/* WHOLESALE + EVENT on one line */}
-              <div className="flex items-center gap-x-[clamp(14px,1.6vw,24px)]">
-                {NAV.slice(4, 6).map((n) => (
-                  <a
-                    key={n.label}
-                    href={hrefFor(n.target)}
-                    onClick={(e) => handleNav(e, n.target)}
-                    className="text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    {n.label}
-                  </a>
-                ))}
-              </div>
-              {/* CONTACT on its own line */}
-              {NAV.slice(6).map((n) => (
-                <a
-                  key={n.label}
-                  href={hrefFor(n.target)}
-                  onClick={(e) => handleNav(e, n.target)}
-                  className="text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {n.label}
-                </a>
-              ))}
-            </div>
-          </div>
+                {n.label}
+              </a>
+            ))}
+          </nav>
         </motion.div>
 
         {/* bottom hairline */}
-        <div className="w-full border-t border-[var(--cocoa)] opacity-35 mt-[clamp(14px,2vw,24px)]" aria-hidden="true" />
+        <div className="w-full border-t border-[var(--cocoa)] opacity-35" aria-hidden="true" />
       </header>
 
       {/* HERO SCENE — composite: cone foreground left + rotating café backdrop right.
@@ -411,25 +372,30 @@ export default function Postcard() {
               }}
             >
               {/* inner hairline frame like the reference */}
-              <div className="flex-1 w-full flex flex-col items-center justify-center gap-[clamp(10px,1.2vw,16px)] rounded-[8px] px-3 py-6" style={{ boxShadow: 'inset 0 0 0 1px rgba(242,225,194,0.35)' }}>
+              <div className="flex-1 w-full flex flex-col items-center justify-center rounded-[6px] px-4 py-[clamp(20px,2.2vw,30px)]"
+                style={{ boxShadow: 'inset 0 0 0 1.5px rgba(242,225,194,0.45)' }}>
                 {MENU_CATEGORIES.map((c, i) => (
-                  <div key={c} className="flex flex-col items-center gap-[clamp(10px,1.2vw,16px)]">
-                    {i > 0 && <span aria-hidden="true" className="text-[8px] text-[var(--pink)] opacity-80">◆</span>}
+                  <div key={c} className="flex flex-col items-center w-full">
+                    {i > 0 && (
+                      <span aria-hidden="true" className="text-[var(--pink)] opacity-70 my-[clamp(6px,0.7vw,10px)]" style={{ fontSize: 9 }}>✦</span>
+                    )}
                     <span
-                      className="text-center font-bold uppercase tracking-[2.5px] text-[#F2E1C2]"
-                      style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11px,0.95vw,13px)' }}
+                      className="text-center font-bold uppercase tracking-[3px] text-[#F2E1C2]"
+                      style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,1.05vw,14px)' }}
                     >
                       {c}
                     </span>
                   </div>
                 ))}
-                {/* little cone icon */}
-                <svg aria-hidden="true" width="20" height="30" viewBox="0 0 20 30" className="mt-[clamp(8px,1vw,14px)] opacity-90">
-                  <circle cx="10" cy="8" r="6.5" fill="none" stroke="#F4A9C7" strokeWidth="1.4" />
-                  <path d="M3.8 13 L10 28.5 L16.2 13" fill="none" stroke="#F2E1C2" strokeWidth="1.4" strokeLinejoin="round" />
-                  <path d="M5.5 16.5 L14.5 16.5 M7 20 L13 20" stroke="#F2E1C2" strokeWidth="1" />
+                {/* cone icon */}
+                <svg aria-hidden="true" width="26" height="38" viewBox="0 0 26 38" className="mt-[clamp(12px,1.4vw,20px)] opacity-90">
+                  <path d="M5 14 Q5 4 13 4 Q21 4 21 14" fill="none" stroke="#F4A9C7" strokeWidth="1.4" />
+                  <path d="M5 14 Q7 12 9 14 Q11 12 13 14 Q15 12 17 14 Q19 12 21 14" fill="none" stroke="#F4A9C7" strokeWidth="1.2" />
+                  <path d="M5 14 L13 36 L21 14 Z" fill="none" stroke="#F2E1C2" strokeWidth="1.4" strokeLinejoin="round" />
+                  <path d="M7.5 19 L18.5 19 M9.5 24 L16.5 24" stroke="#F2E1C2" strokeWidth="1" opacity="0.7" />
                 </svg>
-                <div className="text-center leading-snug text-[var(--pink)]" style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(17px,1.5vw,21px)' }}>
+                <div className="mt-[clamp(8px,0.9vw,12px)] text-center leading-snug text-[var(--pink)]"
+                  style={{ fontFamily: "'Lemongrass', cursive", fontSize: 'clamp(19px,1.7vw,24px)' }}>
                   Small Batch
                   <br />
                   Big Heart
@@ -449,31 +415,38 @@ export default function Postcard() {
           >
             {/* header */}
             <div className="text-center">
-              <div className="flex items-center justify-center gap-3">
-                <span aria-hidden="true" className="text-[11px] text-[var(--pink)]">✦</span>
-                <h3 className="uppercase font-bold tracking-[4px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(16px,1.7vw,24px)' }}>
+              <div className="flex items-center justify-center gap-2">
+                <h3 className="uppercase font-bold tracking-[4px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(15px,1.6vw,22px)' }}>
                   Ice Cream Flavors
                 </h3>
-                <span aria-hidden="true" className="text-[11px] text-[var(--pink)]">✦</span>
+                <span aria-hidden="true" className="text-[10px] text-[var(--pink)]">✦</span>
               </div>
-              <div className="mt-[4px] text-[var(--marionberry)]" style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(15px,1.4vw,19px)' }}>
+              <div className="mt-[5px] text-[var(--marionberry)]" style={{ fontFamily: "'Lemongrass', cursive", fontStyle: 'italic', fontSize: 'clamp(18px,1.7vw,24px)' }}>
                 Handmade in Small Batches
               </div>
             </div>
 
-            {/* two-column flavor list */}
-            <div className="mt-[clamp(16px,2vw,26px)] flex-1 grid grid-cols-1 lg:grid-cols-2 gap-x-[clamp(20px,3vw,48px)] gap-y-[clamp(11px,1.3vw,17px)] content-start">
-              {FLAVORS.map((f) => (
-                <div key={f.name} className="flex items-start gap-[9px]">
-                  <span aria-hidden="true" className="text-[8px] text-[var(--marionberry)] mt-[3px]">◆</span>
-                  <div>
-                    <div className="uppercase font-bold tracking-[1.8px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>
-                      {f.name}
+            {/* two-column flavor list — each column has hairline dividers between items */}
+            <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex flex-col md:flex-row gap-x-[clamp(20px,3vw,40px)] gap-y-0">
+              {[FLAVORS.slice(0, 6), FLAVORS.slice(6)].map((col, ci) => (
+                <div key={ci} className="flex-1 flex flex-col">
+                  {col.map((f, i) => (
+                    <div
+                      key={f.name}
+                      className="flex items-start gap-[10px] py-[clamp(10px,1.1vw,15px)]"
+                      style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}
+                    >
+                      <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 8 }}>●</span>
+                      <div>
+                        <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11px,0.95vw,13px)' }}>
+                          {f.name}
+                        </div>
+                        <div className="mt-[3px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>
+                          {f.desc}
+                        </div>
+                      </div>
                     </div>
-                    <div className="mt-[2px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.8vw,11.5px)' }}>
-                      {f.desc}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               ))}
             </div>
