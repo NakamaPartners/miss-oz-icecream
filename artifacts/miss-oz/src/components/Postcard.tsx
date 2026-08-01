@@ -135,12 +135,6 @@ export default function Postcard() {
         >
           {/* left — supporting text + first half of the nav */}
           <div className="order-2 md:order-1 flex flex-col items-center md:items-end text-center md:text-right gap-[8px]">
-            <span
-              className="text-[8.5px] sm:text-[9.5px] tracking-[3px] sm:tracking-[3.5px] uppercase text-[var(--berry-deep)] opacity-75"
-              style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
-            >
-              Est. 2007 · Portland, Oregon
-            </span>
             <span className="hidden md:inline-block w-[90px] h-px bg-[var(--cocoa)] opacity-30" aria-hidden="true" />
             <nav aria-label="Primary" className="flex flex-wrap justify-center md:justify-end items-center gap-x-[clamp(14px,1.6vw,24px)] gap-y-2">
               {NAV.slice(0, 3).map((n) => (
