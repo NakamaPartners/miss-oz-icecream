@@ -381,7 +381,7 @@ export default function Postcard() {
                     )}
                     <span
                       className="text-center font-bold uppercase tracking-[3px] text-[#F2E1C2]"
-                      style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,1.05vw,14px)' }}
+                      style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(12px,1.05vw,14px)' }}
                     >
                       {c}
                     </span>
@@ -438,7 +438,7 @@ export default function Postcard() {
                     >
                       <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 8 }}>●</span>
                       <div>
-                        <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11px,0.95vw,13px)' }}>
+                        <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(11px,0.95vw,13px)' }}>
                           {f.name}
                         </div>
                         <div className="mt-[3px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>
@@ -501,30 +501,78 @@ export default function Postcard() {
                 boxShadow: '0 14px 34px rgba(28,13,12,0.3), inset 0 0 0 1.5px rgba(242,225,194,0.3)',
               }}
             >
-              <div className="flex-1 w-full flex flex-col items-center justify-center gap-[clamp(12px,1.4vw,18px)] rounded-[8px] px-4 py-6" style={{ boxShadow: 'inset 0 0 0 1px rgba(242,225,194,0.35)' }}>
+              <div className="flex-1 w-full flex flex-col items-center justify-center rounded-[6px] px-[clamp(14px,1.6vw,22px)] py-[clamp(22px,2.4vw,32px)]"
+                style={{ boxShadow: 'inset 0 0 0 1.5px rgba(242,225,194,0.4)' }}>
+
+                {/* title */}
                 <div
-                  className="leading-[1.15] text-[#F2E1C2]"
-                  style={{ fontFamily: 'var(--font-groovy)', fontStyle: 'italic', fontWeight: 600, fontSize: 'clamp(22px,1.9vw,27px)' }}
+                  className="text-center leading-[1.2] text-[#F2E1C2]"
+                  style={{ fontFamily: "'DM Serif Display', serif", fontStyle: 'italic', fontSize: 'clamp(28px,2.6vw,38px)' }}
                 >
                   ~ Come Slow
-                  <br />
-                  Down ~
-                  <br />
-                  With Us!
+                  <br />Down ~
+                  <br />With Us!
                 </div>
-                <span aria-hidden="true" className="text-[var(--pink)] text-[14px]">♥</span>
-                <p className="leading-relaxed text-[#EFD9C9]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11.5px,0.9vw,13px)' }}>
+
+                {/* heart */}
+                <span aria-hidden="true" className="mt-[clamp(10px,1.1vw,16px)] text-[var(--pink)]" style={{ fontSize: 16 }}>♥</span>
+
+                {/* block 1 */}
+                <p className="mt-[clamp(10px,1.1vw,16px)] text-center leading-relaxed text-[#EFD9C9]"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.95vw,14px)' }}>
                   Handmade ice cream in small batches using classic recipes and real ingredients.
                 </p>
-                <span aria-hidden="true" className="h-px w-[70%]" style={{ background: 'rgba(242,225,194,0.3)' }} />
-                <p className="leading-relaxed text-[#EFD9C9]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11.5px,0.9vw,13px)' }}>
+
+                {/* diamond divider */}
+                <div aria-hidden="true" className="my-[clamp(10px,1.1vw,16px)] flex items-center gap-2 w-[75%]">
+                  <span className="flex-1 h-px" style={{ background: 'rgba(242,225,194,0.35)' }} />
+                  <span className="text-[#F2E1C2] opacity-60" style={{ fontSize: 8 }}>✦</span>
+                  <span className="flex-1 h-px" style={{ background: 'rgba(242,225,194,0.35)' }} />
+                </div>
+
+                {/* block 2 */}
+                <p className="text-center leading-relaxed text-[#EFD9C9]"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.95vw,14px)' }}>
                   Pickup or delivery available on Uber&nbsp;Eats, DoorDash &amp; Grubhub.
                 </p>
-                <span aria-hidden="true" className="h-px w-[70%]" style={{ background: 'rgba(242,225,194,0.3)' }} />
-                <p className="leading-relaxed text-[#EFD9C9]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11.5px,0.9vw,13px)' }}>
+
+                {/* diamond divider */}
+                <div aria-hidden="true" className="my-[clamp(10px,1.1vw,16px)] flex items-center gap-2 w-[75%]">
+                  <span className="flex-1 h-px" style={{ background: 'rgba(242,225,194,0.35)' }} />
+                  <span className="text-[#F2E1C2] opacity-60" style={{ fontSize: 8 }}>✦</span>
+                  <span className="flex-1 h-px" style={{ background: 'rgba(242,225,194,0.35)' }} />
+                </div>
+
+                {/* block 3 */}
+                <p className="text-center leading-relaxed text-[#EFD9C9]"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.95vw,14px)' }}>
                   We love our community and your suggestions!
                 </p>
-                <OrderChooser variant="cream" label="Place an Order" className="mt-[clamp(6px,0.8vw,12px)]" />
+
+                {/* notched-corner "ticket" button */}
+                <a
+                  href="#order"
+                  onClick={(e) => { e.preventDefault(); document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  className="mt-[clamp(16px,1.8vw,24px)] w-full block group"
+                  style={{ clipPath: 'polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px)', background: 'rgba(93,26,58,0.85)', padding: 2 }}
+                >
+                  <div
+                    className="flex items-center justify-center gap-3 whitespace-nowrap uppercase"
+                    style={{
+                      clipPath: 'polygon(8px 0%,calc(100% - 8px) 0%,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0% calc(100% - 8px),0% 8px)',
+                      background: '#F5EADA',
+                      padding: '11px 20px',
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: 'clamp(10px,0.82vw,12px)',
+                      fontWeight: 700,
+                      letterSpacing: '3px',
+                      color: '#3B1327',
+                    }}
+                  >
+                    Place an Order
+                    <span aria-hidden="true">→</span>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
