@@ -134,9 +134,9 @@ export default function Postcard() {
           className="grid items-center"
           style={{ minHeight: 'clamp(120px,16vw,200px)', gridTemplateColumns: '1fr auto 1fr' }}
         >
-          {/* left nav — HOME ABOUT MENU */}
+          {/* left nav — HOME ABOUT MENU ORDER ONLINE */}
           <nav aria-label="Primary" className="flex items-center justify-between gap-x-[clamp(18px,2.2vw,36px)] z-10">
-            {NAV.slice(0, 3).map((n) => (
+            {NAV.slice(0, 4).map((n) => (
               <a
                 key={n.label}
                 href={hrefFor(n.target)}
@@ -159,9 +159,9 @@ export default function Postcard() {
             />
           </div>
 
-          {/* right nav — ORDER ONLINE WHOLESALE EVENT CONTACT all on one line */}
+          {/* right nav — WHOLESALE EVENT CONTACT */}
           <nav aria-label="Primary continued" className="flex items-center justify-between gap-x-[clamp(18px,2.2vw,36px)] z-10">
-            {NAV.slice(3).map((n) => (
+            {NAV.slice(4).map((n) => (
               <a
                 key={n.label}
                 href={hrefFor(n.target)}
