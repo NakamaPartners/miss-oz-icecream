@@ -131,12 +131,11 @@ export default function Postcard() {
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-x-[clamp(20px,3vw,44px)] gap-y-4"
+          className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-x-[clamp(24px,3.5vw,52px)] gap-y-4"
         >
-          {/* left — supporting text + first half of the nav */}
-          <div className="order-2 md:order-1 flex flex-col items-center md:items-end text-center md:text-right gap-[8px]">
-            <span className="hidden md:inline-block w-[90px] h-px bg-[var(--cocoa)] opacity-30" aria-hidden="true" />
-            <nav aria-label="Primary" className="flex flex-wrap justify-center md:justify-end items-center gap-x-[clamp(14px,1.6vw,24px)] gap-y-2">
+          {/* left — HOME ABOUT MENU in a single centered row */}
+          <div className="order-2 md:order-1 flex justify-center md:justify-end">
+            <nav aria-label="Primary" className="flex items-center gap-x-[clamp(16px,1.8vw,28px)]">
               {NAV.slice(0, 3).map((n) => (
                 <a
                   key={n.label}
@@ -151,31 +150,30 @@ export default function Postcard() {
             </nav>
           </div>
 
-          {/* center — the official logo */}
-          <div className="order-1 md:order-2 flex justify-center">
-            <div className="m-0">
-              <img
-                src="/images/logo-official.webp"
-                alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
-                className="w-[clamp(210px,28vw,340px)] h-auto"
-                style={{ filter: 'drop-shadow(0 3px 10px rgba(93,26,58,0.22))' }}
-              />
-            </div>
+          {/* center — the official logo only */}
+          <div className="order-1 md:order-2 flex flex-col items-center">
+            <img
+              src="/images/logo-official.webp"
+              alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
+              className="w-[clamp(220px,30vw,360px)] h-auto"
+              style={{ filter: 'drop-shadow(0 3px 10px rgba(93,26,58,0.22))' }}
+            />
           </div>
 
-          {/* right — supporting text + second half of the nav */}
-          <div className="order-3 flex flex-col items-center md:items-start text-center md:text-left gap-[8px]">
-            <span
-              className="flex items-center gap-[6px] text-[8.5px] sm:text-[9.5px] tracking-[3px] sm:tracking-[3.5px] uppercase text-[var(--cocoa)] opacity-75"
-              style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
-            >
-              Ice Cream
-              <span className="text-[var(--berry)] text-[7px] leading-none rotate-45 inline-block" aria-hidden="true">◆</span>
-              Dessert Cafe
-            </span>
-            <span className="hidden md:inline-block w-[90px] h-px bg-[var(--cocoa)] opacity-30" aria-hidden="true" />
-            <nav aria-label="Primary continued" className="flex flex-wrap justify-center md:justify-start items-center gap-x-[clamp(14px,1.6vw,24px)] gap-y-2">
-              {NAV.slice(3).map((n) => (
+          {/* right — tagline + nav links stacked vertically */}
+          <div className="order-3 flex justify-center md:justify-start">
+            <div className="flex flex-col items-center md:items-start gap-y-[clamp(6px,0.9vw,11px)]">
+              {/* tagline above the nav */}
+              <span
+                className="flex items-center gap-[6px] text-[8.5px] sm:text-[9.5px] tracking-[3px] sm:tracking-[3.5px] uppercase text-[var(--cocoa)] opacity-70"
+                style={{ fontFamily: 'var(--font-sans)', fontWeight: 700 }}
+              >
+                Ice Cream
+                <span className="text-[var(--berry)] text-[7px] leading-none rotate-45 inline-block" aria-hidden="true">◆</span>
+                Dessert Cafe
+              </span>
+              {/* ORDER ONLINE on its own line */}
+              {NAV.slice(3, 4).map((n) => (
                 <a
                   key={n.label}
                   href={hrefFor(n.target)}
@@ -186,7 +184,33 @@ export default function Postcard() {
                   {n.label}
                 </a>
               ))}
-            </nav>
+              {/* WHOLESALE + EVENT on one line */}
+              <div className="flex items-center gap-x-[clamp(14px,1.6vw,24px)]">
+                {NAV.slice(4, 6).map((n) => (
+                  <a
+                    key={n.label}
+                    href={hrefFor(n.target)}
+                    onClick={(e) => handleNav(e, n.target)}
+                    className="text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+                    style={{ fontFamily: 'var(--font-sans)' }}
+                  >
+                    {n.label}
+                  </a>
+                ))}
+              </div>
+              {/* CONTACT on its own line */}
+              {NAV.slice(6).map((n) => (
+                <a
+                  key={n.label}
+                  href={hrefFor(n.target)}
+                  onClick={(e) => handleNav(e, n.target)}
+                  className="text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  {n.label}
+                </a>
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -199,7 +223,7 @@ export default function Postcard() {
           bright and natural, while staying below the marquee frame (960). */}
       <div className="relative w-full z-[955] pointer-events-none">
         <div
-          className="w-full relative max-w-[1200px] mx-auto px-[4vw] sm:px-[4vw]"
+          className="w-full relative max-w-[1200px] mx-auto px-[4vw]"
           style={{
             maskImage: HERO_MASK,
             WebkitMaskImage: HERO_MASK,
