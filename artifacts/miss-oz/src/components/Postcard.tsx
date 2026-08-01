@@ -549,30 +549,43 @@ export default function Postcard() {
                   We love our community and your suggestions!
                 </p>
 
-                {/* notched-corner "ticket" button */}
-                <a
-                  href="#order"
-                  onClick={(e) => { e.preventDefault(); document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="mt-[clamp(16px,1.8vw,24px)] w-full block group"
-                  style={{ clipPath: 'polygon(10px 0%,calc(100% - 10px) 0%,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0% calc(100% - 10px),0% 10px)', background: 'rgba(93,26,58,0.85)', padding: 2 }}
-                >
-                  <div
-                    className="flex items-center justify-center gap-3 whitespace-nowrap uppercase"
-                    style={{
-                      clipPath: 'polygon(8px 0%,calc(100% - 8px) 0%,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0% calc(100% - 8px),0% 8px)',
-                      background: '#F5EADA',
-                      padding: '11px 20px',
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: 'clamp(10px,0.82vw,12px)',
-                      fontWeight: 700,
-                      letterSpacing: '3px',
-                      color: '#3B1327',
-                    }}
-                  >
-                    Place an Order
-                    <span aria-hidden="true">→</span>
-                  </div>
-                </a>
+                {/* notched "ticket" button — double border frame */}
+                {(() => {
+                  const notch = (n: number) =>
+                    `polygon(${n}px 0%,calc(100% - ${n}px) 0%,100% ${n}px,100% calc(100% - ${n}px),calc(100% - ${n}px) 100%,${n}px 100%,0% calc(100% - ${n}px),0% ${n}px)`;
+                  return (
+                    <a
+                      href="#order"
+                      onClick={(e) => { e.preventDefault(); document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' }); }}
+                      className="mt-[clamp(16px,1.8vw,24px)] w-full block"
+                      style={{ clipPath: notch(7), background: '#3B1020', padding: '1.5px' }}
+                    >
+                      {/* cream gap */}
+                      <div style={{ clipPath: notch(5), background: '#F5EADA', padding: '4px' }}>
+                        {/* inner border */}
+                        <div style={{ clipPath: notch(3), background: '#3B1020', padding: '1.5px' }}>
+                          {/* cream fill + text */}
+                          <div
+                            className="flex items-center justify-center gap-3 whitespace-nowrap uppercase"
+                            style={{
+                              clipPath: notch(2),
+                              background: '#F5EADA',
+                              padding: '11px 16px',
+                              fontFamily: 'var(--font-sans)',
+                              fontSize: 'clamp(10px,0.82vw,12px)',
+                              fontWeight: 700,
+                              letterSpacing: '3px',
+                              color: '#3B1020',
+                            }}
+                          >
+                            Place an Order
+                            <span aria-hidden="true">→</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })()}
               </div>
             </div>
           </div>
