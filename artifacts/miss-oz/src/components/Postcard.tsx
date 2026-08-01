@@ -101,7 +101,7 @@ export default function Postcard() {
 
   useEffect(() => {
     if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const t = setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), 7500);
+    const t = setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), 11000);
     return () => clearInterval(t);
   }, [paused, slide]);
 
@@ -285,12 +285,12 @@ export default function Postcard() {
               >
                 Miss Oz
               </div>
-              {/* Tagline — pink script */}
+              {/* Tagline — cream script */}
               <div
                 style={{
                   fontFamily: 'var(--font-script)',
                   fontSize: 'clamp(17px,2.3vw,32px)',
-                  color: '#F4A9C7',
+                  color: 'var(--cream-hi)',
                   textShadow: '0 1px 10px rgba(20,8,12,0.65)',
                   marginTop: 'clamp(2px,0.4vw,6px)',
                 }}
@@ -531,7 +531,7 @@ export default function Postcard() {
               <div className="flex-1 w-full flex flex-col items-center justify-center gap-[clamp(12px,1.4vw,18px)] rounded-[8px] px-4 py-6" style={{ boxShadow: 'inset 0 0 0 1px rgba(242,225,194,0.35)' }}>
                 <div
                   className="leading-[1.15] text-[#F2E1C2]"
-                  style={{ fontFamily: "'Fraunces', 'Playfair Display', serif", fontStyle: 'italic', fontWeight: 700, fontVariationSettings: "'opsz' 100, 'SOFT' 100, 'WONK' 0", fontSize: 'clamp(22px,1.9vw,27px)' }}
+                  style={{ fontFamily: 'var(--font-groovy)', fontStyle: 'italic', fontWeight: 600, fontSize: 'clamp(22px,1.9vw,27px)' }}
                 >
                   ~ Come Slow
                   <br />

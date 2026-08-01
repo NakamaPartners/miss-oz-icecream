@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Shrikhand&family=Playfair+Display:ital,wght@1,600;1,700&family=Fraunces:ital,opsz,wght@1,9..144,600;1,9..144,700;1,9..144,900&family=Cormorant:ital,wght@0,600;0,700;1,600;1,700&family=Pacifico&family=Bagel+Fat+One&family=EB+Garamond:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Shrikhand&family=Playfair+Display:ital,wght@1,600;1,700&family=Fraunces:ital,opsz,wght@1,9..144,600;1,9..144,700;1,9..144,900&family=Cormorant:ital,wght@0,600;0,700;1,600;1,700&family=Pacifico&family=Bagel+Fat+One&family=EB+Garamond:wght@400;500;600&display=swap');
 
 @font-face {
   font-family: 'Kaleidos';
@@ -136,17 +136,18 @@
   --input: 3 39% 8%;
   --ring: 41 57% 51%;
 
-  /* Typography per client direction (Jul 2026, readability revision):
-     Body, navigation & supporting content = EB Garamond (clean, highly legible, vintage character)
-     Section headlines = Playfair Display italic (elegant vintage serif)
-     Higante & scripts = reserved for a few special accent moments only */
-  --app-font-sans: 'EB Garamond', serif;
-  --app-font-serif: 'Playfair Display', serif;
+  /* Typography (Aug 2026, client-approved stack):
+     Miss Oz headline      = Higante (var(--font-display))
+     Taglines / scripts    = DM Serif Display (var(--font-script)) — replaced Lemongrass per client direction
+     Nav, labels, body     = Montserrat — free Gotham substitute (var(--font-sans))
+     Editorial / display   = DM Serif Display — free Citizen Semibold substitute (var(--font-groovy)) */
+  --app-font-sans: 'Montserrat', sans-serif;
+  --app-font-serif: 'DM Serif Display', serif;
   --app-font-mono: Menlo, monospace;
   --font-display: 'Higante', 'Shrikhand', cursive;
-  --font-script: 'Lemongrass', 'Pacifico', cursive;
-  --font-script-alt: 'Lemongrass', 'Pacifico', cursive;
-  --font-groovy: 'Playfair Display', serif;
+  --font-script: 'DM Serif Display', serif;
+  --font-script-alt: 'DM Serif Display', serif;
+  --font-groovy: 'DM Serif Display', serif;
   --font-accent: 'Higante', 'Shrikhand', cursive;
 
   --radius: 0.5rem;
