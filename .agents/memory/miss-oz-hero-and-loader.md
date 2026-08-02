@@ -148,3 +148,6 @@ Lemongrass = signature/display font; Kaleidos = body, nav & supporting text; Hig
 ## Hero photo brightness & z-order (July 2026)
 Page-wide fixed overlays (paper-overlay z-940 @0.55 multiply, grain-overlay z-950) muddy photos into an amber cast. The hero sits at z-[955] — above both, below the marquee frame (z-960) — to stay bright/natural. Don't reuse 960 (paint-order races with the frame).
 **Client-approved hero look:** gold Higante (var(--font-display), same as logo) "Miss Oz" (#EBC77F) — Macklin, Playfair, Fraunces, Cormorant-for-Fitzgerald all rejected earlier; final choice matches the logo lettering, pink Lemongrass tagline (#F4A9C7), centered text over the frame, plum rounded-full CTAs. Hero is a plain slideshow (cones photo first) — client rejected the fixed cone-foreground composite as "weird".
+
+## Header logo centering
+The official logo file (`logo-official.webp`, 1080px) has its artwork ~23.5px right of the image center. The header compensates with `translate(-52.18%, -50%)` instead of -50%. If the logo asset is ever replaced, re-measure trim offset (`convert logo.webp -fuzz 5% -trim info:`) and adjust.

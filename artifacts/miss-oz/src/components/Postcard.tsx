@@ -130,21 +130,21 @@ export default function Postcard() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="relative grid items-stretch"
           style={{
-            gridTemplateColumns: '1fr clamp(200px,22vw,260px) 1fr',
+            gridTemplateColumns: 'minmax(0,1fr) clamp(200px,22vw,260px) minmax(0,1fr)',
             minHeight: 'clamp(110px,13vw,150px)',
             overflow: 'visible',
           }}
         >
           {/* LEFT — rules stop before the logo; nav vertically centered between them */}
           <div className="flex flex-col justify-center py-[clamp(14px,1.6vw,20px)]" style={{ borderTop: '1px solid rgba(74,44,42,0.5)', borderBottom: '1px solid rgba(74,44,42,0.4)' }}>
-            <nav aria-label="Primary" className="flex items-center justify-evenly">
+            <nav aria-label="Primary" className="flex items-center justify-center gap-[clamp(14px,2.6vw,44px)]">
               {NAV.slice(0, 3).map((n) => (
                 <a
                   key={n.label}
                   href={hrefFor(n.target)}
                   onClick={(e) => handleNav(e, n.target)}
-                  className="whitespace-nowrap text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
+                  className="whitespace-nowrap uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.95vw,12px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
                 >
                   {n.label}
                 </a>
@@ -157,14 +157,14 @@ export default function Postcard() {
 
           {/* RIGHT — rules stop before the logo; nav vertically centered between them */}
           <div className="flex flex-col justify-center py-[clamp(14px,1.6vw,20px)]" style={{ borderTop: '1px solid rgba(74,44,42,0.5)', borderBottom: '1px solid rgba(74,44,42,0.4)' }}>
-            <nav aria-label="Primary continued" className="flex items-center justify-evenly">
+            <nav aria-label="Primary continued" className="flex items-center justify-center gap-[clamp(10px,1.8vw,30px)]">
               {NAV.slice(3).map((n) => (
                 <a
                   key={n.label}
                   href={hrefFor(n.target)}
                   onClick={(e) => handleNav(e, n.target)}
-                  className="whitespace-nowrap text-[11px] sm:text-[12px] tracking-[2.5px] uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
+                  className="whitespace-nowrap uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.95vw,12px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
                 >
                   {n.label}
                 </a>
@@ -175,7 +175,7 @@ export default function Postcard() {
           {/* LOGO + TAGLINE — absolutely centered, filling the open middle gap */}
           <div
             className="absolute left-1/2 top-1/2 z-20 flex flex-col items-center"
-            style={{ transform: 'translate(-50%, -50%)', overflow: 'visible' }}
+            style={{ transform: 'translate(-52.18%, -50%)', overflow: 'visible' }}
           >
             <img
               src="/images/logo-official.webp"
@@ -450,7 +450,7 @@ export default function Postcard() {
                 </h3>
                 <span aria-hidden="true" className="text-[10px] text-[var(--pink)]">✦</span>
               </div>
-              <div className="mt-[5px] text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontStyle: 'normal', fontSize: 'clamp(26px,2.4vw,36px)' }}>
+              <div className="mt-0 text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontStyle: 'normal', fontSize: 'clamp(26px,2.4vw,36px)', lineHeight: 1, marginTop: '-2px' }}>
                 Handmade in Small Batches
               </div>
             </div>
