@@ -129,50 +129,40 @@ export default function Postcard() {
       </div>
 
       {/* MASTHEAD */}
-      <header className="relative z-20 mx-auto max-w-[1400px] px-[4vw] mt-[6px] sm:mt-[12px] mb-[clamp(48px,8.5vw,116px)]">
+      <header className="relative z-20 mx-auto max-w-[1400px] px-[4vw] mt-[6px] sm:mt-[12px] mb-3 md:mb-[clamp(64px,8.5vw,116px)]">
 
         {/* ── MOBILE HEADER (hidden md+) ── */}
-        <div className="flex md:hidden items-center justify-between py-3">
-          {/* hamburger */}
-          <button
-            type="button"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((o) => !o)}
-            className="flex flex-col justify-center gap-[5px] w-[36px] h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-          >
-            <span
-              className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center"
-              style={{ transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }}
-            />
-            <span
-              className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300"
-              style={{ opacity: menuOpen ? 0 : 1 }}
-            />
-            <span
-              className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center"
-              style={{ transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }}
-            />
-          </button>
-
-          {/* centered logo */}
+        <div className="flex md:hidden flex-col items-center gap-0 pb-3">
+          {/* top bar: hamburger left, order right */}
+          <div className="w-full flex items-center justify-between py-1">
+            <button
+              type="button"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((o) => !o)}
+              className="flex flex-col justify-center gap-[5px] w-[38px] h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+            >
+              <span className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
+              <span className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300" style={{ opacity: menuOpen ? 0 : 1 }} />
+              <span className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
+            </button>
+            <a
+              href={UBEREATS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[1.5px] text-[10px] px-4 py-2 transition-colors hover:bg-[var(--berry)]"
+              style={{ fontFamily: 'var(--font-sans)' }}
+            >
+              Order Online
+            </a>
+          </div>
+          {/* logo row — in flow, no absolute positioning */}
           <img
             src="/images/logo-official.webp"
             alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
-            className="h-auto absolute left-1/2 -translate-x-[52%]"
-            style={{ width: 'clamp(130px,38vw,180px)', filter: 'drop-shadow(0 2px 8px rgba(93,26,58,0.18))', top: '2px' }}
+            className="h-auto"
+            style={{ width: 'clamp(140px,40vw,190px)', filter: 'drop-shadow(0 2px 8px rgba(93,26,58,0.18))' }}
           />
-
-          {/* order CTA */}
-          <a
-            href={UBEREATS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[1px] text-[10px] px-3 py-2 transition-colors hover:bg-[var(--berry)]"
-            style={{ fontFamily: 'var(--font-sans)' }}
-          >
-            Order
-          </a>
         </div>
 
         {/* ── MOBILE SLIDE-DOWN MENU ── */}
@@ -397,8 +387,9 @@ export default function Postcard() {
               >
                 Sweet Memories Start Here.
               </div>
-              {/* Subtext — two lines, cream small caps */}
+              {/* Subtext — hidden on mobile (too long to fit), shown sm+ */}
               <div
+                className="hidden sm:block"
                 style={{
                   fontFamily: "'Libertinus Math', serif",
                   fontSize: 'clamp(12px,1.15vw,17px)',
