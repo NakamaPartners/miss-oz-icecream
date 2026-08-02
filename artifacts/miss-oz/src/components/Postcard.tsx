@@ -281,7 +281,11 @@ export default function Postcard() {
                   textShadow: '0 2px 22px rgba(20,8,12,0.6), 0 3px 6px rgba(20,8,12,0.45)',
                 }}
               >
-                <span style={{ fontSize: '1.18em' }}>M</span>iss <span style={{ fontSize: '1.18em' }}>O</span>z
+                <span style={{ fontSize: '1.18em', position: 'relative', zIndex: 2, display: 'inline-block', verticalAlign: 'baseline' }}>M</span>
+                <span style={{ position: 'relative', zIndex: 1, display: 'inline-block' }}>iss</span>
+                {' '}
+                <span style={{ fontSize: '1.18em', position: 'relative', zIndex: 2, display: 'inline-block', verticalAlign: 'baseline' }}>O</span>
+                <span style={{ position: 'relative', zIndex: 1, display: 'inline-block' }}>z</span>
               </div>
               {/* Tagline — cream script */}
               <div
