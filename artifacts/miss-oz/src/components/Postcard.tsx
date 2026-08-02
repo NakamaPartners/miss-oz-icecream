@@ -400,16 +400,16 @@ export default function Postcard() {
               <div className="h-[9px]" style={{ background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)', WebkitMaskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)', maskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)', WebkitMaskSize: '22px 100%', maskSize: '22px 100%', WebkitMaskRepeat: 'repeat-x', maskRepeat: 'repeat-x', filter: 'drop-shadow(0 3px 4px rgba(0,0,0,0.18))' }} />
             </div>
             <div
-              className="flex-1 flex flex-col items-center rounded-b-[12px] px-5 py-[clamp(24px,2.6vw,36px)]"
+              className="flex-1 flex flex-col items-center rounded-b-[12px] px-3 py-[clamp(14px,1.6vw,20px)]"
               style={{
                 background: 'linear-gradient(165deg, #17352B 0%, #122B23 55%, #16332A 100%)',
                 boxShadow: '0 14px 34px rgba(28,13,12,0.3), inset 0 0 0 1.5px rgba(242,225,194,0.3)',
               }}
             >
-              {/* inner frame — double marion-pink lines with chamfered "dent" corners, lighter green inside */}
-              <div className="flex-1 w-full flex flex-col" style={{ background: 'rgba(228,146,170,0.55)', clipPath: 'polygon(22px 0, calc(100% - 22px) 0, 100% 22px, 100% calc(100% - 22px), calc(100% - 22px) 100%, 22px 100%, 0 calc(100% - 22px), 0 22px)', padding: '1px' }}>
+              {/* inner frame — double tan lines with chamfered "dent" corners, lighter green inside */}
+              <div className="flex-1 w-full flex flex-col" style={{ background: 'rgba(242,225,194,0.55)', clipPath: 'polygon(22px 0, calc(100% - 22px) 0, 100% 22px, 100% calc(100% - 22px), calc(100% - 22px) 100%, 22px 100%, 0 calc(100% - 22px), 0 22px)', padding: '1px' }}>
                 <div className="flex-1 flex flex-col" style={{ background: '#152F26', clipPath: 'polygon(21px 0, calc(100% - 21px) 0, 100% 21px, 100% calc(100% - 21px), calc(100% - 21px) 100%, 21px 100%, 0 calc(100% - 21px), 0 21px)', padding: '3px' }}>
-                  <div className="flex-1 flex flex-col" style={{ background: 'rgba(228,146,170,0.8)', clipPath: 'polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px)', padding: '1px' }}>
+                  <div className="flex-1 flex flex-col" style={{ background: 'rgba(242,225,194,0.8)', clipPath: 'polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px)', padding: '1px' }}>
               <div className="flex-1 w-full flex flex-col items-center justify-center px-4 py-[clamp(18px,2vw,28px)]"
                 style={{
                   background: 'radial-gradient(120% 90% at 30% 15%, rgba(255,255,255,0.07), transparent 60%), linear-gradient(165deg, #2B5D4C 0%, #224C3E 55%, #275544 100%)',
