@@ -395,7 +395,7 @@ export default function Postcard() {
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[200px_1fr_250px] lg:grid-cols-[220px_1fr_280px] gap-[clamp(14px,1.8vw,22px)] items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-[225px_1fr_225px] lg:grid-cols-[252px_1fr_252px] gap-[clamp(14px,1.8vw,22px)] items-stretch">
 
           {/* LEFT — forest-green menu category card with striped awning (decorative list, like a painted parlor sign) */}
           <aside aria-label="Menu categories" className="relative mx-auto w-full max-w-[320px] md:max-w-none flex flex-col">
@@ -600,13 +600,14 @@ export default function Postcard() {
 
                 {/* vintage admission-ticket CTA — side notches + perforated inner line */}
                 <a
-                  href="#order"
-                  onClick={(e) => { e.preventDefault(); document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  className="group mt-[clamp(16px,1.8vw,24px)] w-full block transition-transform duration-150 hover:-translate-y-[2px]"
+                  href={UBEREATS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-[clamp(16px,1.8vw,24px)] w-full block transition-transform duration-200 hover:-translate-y-[3px] hover:scale-[1.03] active:scale-[0.98]"
                   style={{ filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.3))' }}
                 >
                   <span
-                    className="block"
+                    className="block relative overflow-hidden ticket-shine motion-safe:animate-[ticketFloat_4s_ease-in-out_infinite]"
                     style={{
                       background: 'linear-gradient(180deg, #F7EDDD 0%, #F2E4CC 100%)',
                       borderRadius: '6px',

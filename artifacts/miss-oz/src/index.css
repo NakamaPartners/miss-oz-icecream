@@ -844,3 +844,28 @@
   0%, 100% { transform: rotate(-12deg); }
   50% { transform: rotate(-6deg); }
 }
+
+/* Ticket CTA — gentle float + periodic shine sweep */
+@keyframes ticketFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-2px) rotate(-0.4deg); }
+  60% { transform: translateY(0.5px) rotate(0.4deg); }
+}
+.ticket-shine::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 40%;
+  left: -60%;
+  background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  transform: skewX(-18deg);
+  animation: ticketShine 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes ticketShine {
+  0%, 55% { left: -60%; }
+  75%, 100% { left: 130%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticket-shine::after { animation: none; }
+}
