@@ -464,7 +464,7 @@ export default function Postcard() {
                     style={{ width: 'clamp(46px,5vw,66px)', height: 'auto' }}
                   />
                   <div className="mt-[clamp(7px,0.8vw,11px)] text-center text-[var(--pink)]"
-                    style={{ fontFamily: "'Courgette', cursive", fontSize: 'clamp(24px,2.2vw,32px)', lineHeight: 0.95 }}>
+                    style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(24px,2.2vw,32px)', lineHeight: 0.95 }}>
                     Small Batch
                     <br />
                     Big Heart
@@ -496,7 +496,7 @@ export default function Postcard() {
                 </h3>
                 <span aria-hidden="true" className="text-[10px] text-[var(--pink)]">✦</span>
               </div>
-              <div className="mt-0 text-[var(--marionberry)]" style={{ fontFamily: "'Courgette', cursive", fontStyle: 'normal', fontSize: 'clamp(23px,2.1vw,31px)', lineHeight: 1, marginTop: '-2px' }}>
+              <div className="mt-0 text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontStyle: 'normal', fontSize: 'clamp(23px,2.1vw,31px)', lineHeight: 1, marginTop: '-2px' }}>
                 Handmade in Small Batches
               </div>
             </div>
