@@ -273,7 +273,7 @@ export default function Postcard() {
               <div
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(50px,7.8vw,110px)',
+                  fontSize: 'clamp(56px,8.8vw,126px)',
                   lineHeight: 1,
                   color: '#EBC77F',
                   WebkitTextStroke: 'clamp(6px,0.8vw,12px) var(--berry)',
@@ -281,7 +281,7 @@ export default function Postcard() {
                   textShadow: '0 2px 22px rgba(20,8,12,0.6), 0 3px 6px rgba(20,8,12,0.45)',
                 }}
               >
-                Miss Oz
+                <span style={{ fontSize: '1.18em' }}>M</span>iss <span style={{ fontSize: '1.18em' }}>O</span>z
               </div>
               {/* Tagline — cream script */}
               <div
