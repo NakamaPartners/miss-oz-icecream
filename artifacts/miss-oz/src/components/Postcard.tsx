@@ -131,12 +131,13 @@ export default function Postcard() {
           className="relative grid items-stretch"
           style={{
             gridTemplateColumns: 'minmax(0,1fr) clamp(200px,22vw,260px) minmax(0,1fr)',
-            minHeight: 'clamp(110px,13vw,150px)',
+            minHeight: 'clamp(84px,9.5vw,112px)',
             overflow: 'visible',
           }}
         >
           {/* LEFT — rules stop before the logo; nav vertically centered between them */}
-          <div className="flex flex-col justify-center py-[clamp(14px,1.6vw,20px)]" style={{ borderTop: '1px solid rgba(74,44,42,0.5)', borderBottom: '1px solid rgba(74,44,42,0.4)' }}>
+          <div className="flex flex-col justify-center py-[clamp(10px,1.1vw,14px)]" style={{ borderTop: '1.5px solid var(--marionberry)', borderBottom: '1.5px solid var(--marionberry)' }}>
+            <div className="flex items-center justify-center gap-[clamp(14px,2.6vw,44px)]">
             <nav aria-label="Primary" className="flex items-center justify-center gap-[clamp(14px,2.6vw,44px)]">
               {NAV.slice(0, 3).map((n) => (
                 <a
@@ -150,13 +151,29 @@ export default function Postcard() {
                 </a>
               ))}
             </nav>
+            <div
+              className="text-center leading-snug hidden md:block"
+              style={{
+                fontFamily: 'var(--font-sans)',
+                color: 'var(--gold, #B8860B)',
+                letterSpacing: '2px',
+                fontSize: 'clamp(7.5px,0.6vw,9px)',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+              }}
+            >
+              Est. 2007
+              <br />
+              Portland, Oregon
+            </div>
+            </div>
           </div>
 
-          {/* CENTER — open gap; logo + tagline absolutely anchored */}
+          {/* CENTER — open gap; logo absolutely anchored */}
           <div aria-hidden="true" />
 
           {/* RIGHT — rules stop before the logo; nav vertically centered between them */}
-          <div className="flex flex-col justify-center py-[clamp(14px,1.6vw,20px)]" style={{ borderTop: '1px solid rgba(74,44,42,0.5)', borderBottom: '1px solid rgba(74,44,42,0.4)' }}>
+          <div className="flex flex-col justify-center py-[clamp(10px,1.1vw,14px)]" style={{ borderTop: '1.5px solid var(--marionberry)', borderBottom: '1.5px solid var(--marionberry)' }}>
             <nav aria-label="Primary continued" className="flex items-center justify-center gap-[clamp(10px,1.8vw,30px)]">
               {NAV.slice(3).map((n) => (
                 <a
@@ -183,19 +200,6 @@ export default function Postcard() {
               className="h-auto"
               style={{ width: 'clamp(175px,19.5vw,240px)', filter: 'drop-shadow(0 2px 10px rgba(93,26,58,0.18))' }}
             />
-            <div
-              className="text-center leading-tight mt-[5px]"
-              style={{
-                fontFamily: 'var(--font-sans)',
-                color: 'var(--berry)',
-                letterSpacing: '2.5px',
-                fontSize: 'clamp(8px,0.65vw,10px)',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-              }}
-            >
-              Small Batch · Big Heart
-            </div>
           </div>
         </motion.div>
       </header>
