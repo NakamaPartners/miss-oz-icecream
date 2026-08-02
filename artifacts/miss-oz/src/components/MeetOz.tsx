@@ -46,10 +46,10 @@ function Snapshot({
       />
       <div className="aspect-[4/5] overflow-hidden rounded-[2px] bg-[rgba(28,13,12,0.05)]">
         {src ? (
-          <img
+          <img loading="lazy" decoding="async"
             src={src}
             alt={alt}
-            loading="lazy"
+           
             className="w-full h-full object-cover sepia-[10%] saturate-[0.94] contrast-[1.03]"
           />
         ) : (

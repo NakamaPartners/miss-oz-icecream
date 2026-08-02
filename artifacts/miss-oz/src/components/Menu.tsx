@@ -84,12 +84,12 @@ export default function Menu() {
                   <div className="relative w-full h-full menu-card-img-inner">
                     {/* Front: Image */}
                     <div className="absolute inset-0 card-front">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={card.image}
                         alt={card.title}
                         className="w-full h-full object-cover"
                         style={{ filter: 'sepia(0.22) saturate(1.05) contrast(0.98)' }}
-                        loading="lazy"
+                       
                       />
                       {/* vintage warm wash + vignette */}
                       <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(120% 90% at 50% 20%, transparent 55%, rgba(94,23,53,0.28) 100%)', mixBlendMode: 'multiply' }} />

@@ -187,7 +187,7 @@ export default function VoteFlavor() {
                 <div className="absolute top-2 bottom-2 left-[6px] w-[14px] punch-holes opacity-60" aria-hidden="true" />
                 <div className="absolute top-2 bottom-2 right-[6px] w-[14px] punch-holes opacity-60" aria-hidden="true" />
 
-                <img
+                <img loading="lazy" decoding="async"
                   src={card.img}
                   alt=""
                   aria-hidden="true"

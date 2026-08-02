@@ -61,7 +61,7 @@ export default function FlavorDrop() {
             <div className="tape-strip tape-peel top-[-10px] right-[10%] rotate-3" aria-hidden="true" />
             <div className="tape-strip tape-peel top-[-6px] left-[10%] -rotate-6" aria-hidden="true" />
             <div className="rounded-[4px] p-[6px]" style={{ background: 'var(--cream-hi)' }}>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/seasonal-pumpkin-poster.webp"
                 alt="Seasonal flavor poster — housemade small-batch pumpkin ice cream at Miss Oz"
                 className="block w-full h-auto rounded-[2px]"

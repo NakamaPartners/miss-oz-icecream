@@ -278,7 +278,7 @@ export default function Postcard() {
               <div
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(44px,6.8vw,96px)',
+                  fontSize: 'clamp(50px,7.8vw,110px)',
                   lineHeight: 1,
                   color: '#EBC77F',
                   textShadow: '0 2px 22px rgba(20,8,12,0.6), 0 3px 6px rgba(20,8,12,0.45)',
@@ -423,7 +423,7 @@ export default function Postcard() {
                 }}>
 
                 {/* category list */}
-                <div className="w-full flex flex-col items-center">
+                <div className="w-full flex flex-col items-center pt-[clamp(14px,1.6vw,22px)]">
                   {MENU_CATEGORIES.map((c, i) => (
                     <div key={c} className="flex flex-col items-center w-full">
                       {i > 0 && (
@@ -626,7 +626,7 @@ export default function Postcard() {
                     >
                       <span
                         className="uppercase whitespace-nowrap"
-                        style={{ fontFamily: 'var(--font-sans)', fontSize: '8px', letterSpacing: '1.5px', fontWeight: 700, color: 'rgba(59,16,32,0.55)' }}
+                        style={{ fontFamily: 'var(--font-sans)', fontSize: '7px', letterSpacing: '1px', fontWeight: 700, color: 'rgba(59,16,32,0.55)' }}
                       >
                         ✦ Admit One Sweet Tooth ✦
                       </span>
@@ -634,8 +634,8 @@ export default function Postcard() {
                         className="flex items-center gap-2 whitespace-nowrap uppercase"
                         style={{
                           fontFamily: "'DM Serif Display', serif",
-                          fontSize: 'clamp(12px,0.95vw,14px)',
-                          letterSpacing: '2px',
+                          fontSize: 'clamp(11px,0.85vw,13px)',
+                          letterSpacing: '1.5px',
                           color: '#3B1020',
                           lineHeight: 1.3,
                         }}
@@ -663,7 +663,7 @@ export default function Postcard() {
               Thank you for supporting our family-run shop since 2007.
             </div>
           </div>
-          <img src="/images/icon-cafe-shop.png" alt="" aria-hidden="true" className="shrink-0" style={{ width: 'clamp(34px,3vw,42px)', height: 'auto' }} />
+          <img src="/images/icon-icecream-cart.png" alt="" aria-hidden="true" className="shrink-0" style={{ width: 'clamp(34px,3vw,42px)', height: 'auto' }} />
         </div>
 
         {/* original Step Inside poster cards */}

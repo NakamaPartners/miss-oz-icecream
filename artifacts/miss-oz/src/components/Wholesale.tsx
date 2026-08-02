@@ -134,7 +134,15 @@ export default function Wholesale() {
                       <textPath href="#wholeseal">· trade counter · est. 2007 ·</textPath>
                     </text>
                   </svg>
-                  <img src="/images/icon-icecream-outline.png" alt="" aria-hidden="true" style={{ width: 28, height: 28, filter: 'brightness(0) invert(0.93) sepia(0.25)' }} />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/icon-icecream-cone.png"
+                    alt=""
+                    aria-hidden="true"
+                    className="motion-safe:animate-[sealBob_3s_ease-in-out_infinite]"
+                    style={{ width: 38, height: 38, filter: 'drop-shadow(0 0 8px rgba(243,234,214,0.45))' }}
+                  />
                 </div>
               </div>
 

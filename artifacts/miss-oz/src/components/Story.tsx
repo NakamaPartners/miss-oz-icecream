@@ -28,13 +28,13 @@ export default function Story() {
       >
         {[...Array(4)].map((_, rep) =>
           ['/images/ice-cream-mascot.webp', '/images/mascot-shake.webp', '/images/mascot-popsicle.webp', '/images/mascot-sundae.webp', '/images/mascot-croffle.webp'].map((src, i) => (
-            <img
+            <img loading="lazy" decoding="async"
               key={`${rep}-${i}`}
               src={src}
               alt=""
               aria-hidden="true"
-              loading="lazy"
               className="h-full w-auto shrink-0"
+              style={src.includes('croffle') ? { margin: '0 clamp(-18px,-1.2vw,-9px)' } : undefined}
             />
           ))
         )}
@@ -69,7 +69,7 @@ export default function Story() {
               </text>
             </svg>
             {/* little cone glyph */}
-            <img src="/images/icon-icecream-outline.png" alt="" aria-hidden="true" className="relative z-10" style={{ width: 30, height: 30, filter: 'brightness(0) invert(0.93) sepia(0.25)' }} />
+            <img loading="lazy" decoding="async" src="/images/icon-icecream-outline.png" alt="" aria-hidden="true" className="relative z-10" style={{ width: 30, height: 30, filter: 'brightness(0) invert(0.93) sepia(0.25)' }} />
           </div>
         </div>
 
