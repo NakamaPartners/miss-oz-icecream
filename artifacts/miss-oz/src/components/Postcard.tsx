@@ -124,8 +124,8 @@ export default function Postcard() {
 
       {/* MASTHEAD — logo centered large, all nav on one horizontal line */}
       <header className="relative z-20 mx-auto max-w-[1200px] px-[4vw] mt-[6px] sm:mt-[12px] mb-[clamp(14px,2vw,24px)]">
-        {/* top double rule */}
-        <div className="w-full border-t-[2.5px] border-b-[1px] border-[var(--cocoa)] h-[5px] sm:h-[7px] opacity-70" aria-hidden="true" />
+        {/* top rule */}
+        <div className="w-full border-t border-[var(--cocoa)] opacity-50" aria-hidden="true" />
 
         <motion.div
           initial={{ opacity: 0, y: -12 }}
@@ -149,14 +149,18 @@ export default function Postcard() {
             ))}
           </nav>
 
-          {/* center — logo in normal flow so it can't overlap nav items */}
-          <div className="flex-none z-10 px-[clamp(12px,2vw,32px)]">
+          {/* center — logo + tagline */}
+          <div className="flex-none z-10 px-[clamp(12px,2vw,32px)] flex flex-col items-center gap-[5px]">
             <img
               src="/images/logo-official.webp"
               alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
               className="w-[clamp(140px,16vw,210px)] h-auto"
               style={{ filter: 'drop-shadow(0 2px 8px rgba(93,26,58,0.18))' }}
             />
+            <div className="text-center leading-tight" style={{ fontFamily: 'var(--font-sans)', color: 'var(--berry)', letterSpacing: '2.5px' }}>
+              <div style={{ fontSize: 'clamp(7px,0.58vw,9px)', fontWeight: 700, textTransform: 'uppercase' }}>Small Batch</div>
+              <div style={{ fontSize: 'clamp(7px,0.58vw,9px)', fontWeight: 700, textTransform: 'uppercase' }}>Big Heart</div>
+            </div>
           </div>
 
           {/* right nav — WHOLESALE EVENT CONTACT */}
@@ -281,16 +285,16 @@ export default function Postcard() {
                 <a
                   href="#menu"
                   onClick={(e) => handleNav(e, 'menu')}
-                  className="inline-flex items-center justify-center min-h-[44px] rounded-full bg-[var(--berry-deep)] text-[#fbf2df] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-                  style={{ fontSize: 'clamp(10px,0.82vw,11px)', padding: 'clamp(9px,0.9vw,11px) clamp(18px,1.8vw,26px)', border: '1px solid rgba(251,242,223,0.35)' }}
+                  className="inline-flex items-center justify-center rounded-full bg-[var(--berry-deep)] text-[#fbf2df] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(9px,0.72vw,10px)', padding: '8px clamp(16px,1.5vw,22px)', border: '1px solid rgba(251,242,223,0.25)' }}
                 >
                   View Menu
                 </a>
                 <button
                   type="button"
                   onClick={() => { window.open('https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-cool-moon-ice-cream/YEfj7ZgZS2m7Wm2og7PphQ', '_blank', 'noopener'); }}
-                  className="inline-flex items-center justify-center min-h-[44px] rounded-full bg-[var(--berry-deep)] text-[#fbf2df] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-                  style={{ fontSize: 'clamp(10px,0.82vw,11px)', padding: 'clamp(9px,0.9vw,11px) clamp(18px,1.8vw,26px)', border: '1px solid rgba(251,242,223,0.35)' }}
+                  className="inline-flex items-center justify-center rounded-full text-[#fbf2df] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[rgba(251,242,223,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(9px,0.72vw,10px)', padding: '8px clamp(16px,1.5vw,22px)', border: '1.5px solid rgba(251,242,223,0.7)' }}
                 >
                   Order Online
                 </button>
@@ -371,35 +375,47 @@ export default function Postcard() {
                 boxShadow: '0 14px 34px rgba(28,13,12,0.25), inset 0 0 0 1.5px rgba(242,225,194,0.28)',
               }}
             >
-              {/* inner hairline frame like the reference */}
-              <div className="flex-1 w-full flex flex-col items-center justify-center rounded-[6px] px-4 py-[clamp(20px,2.2vw,30px)]"
-                style={{ boxShadow: 'inset 0 0 0 1.5px rgba(242,225,194,0.45)' }}>
-                {MENU_CATEGORIES.map((c, i) => (
-                  <div key={c} className="flex flex-col items-center w-full">
-                    {i > 0 && (
-                      <span aria-hidden="true" className="text-[var(--pink)] opacity-70 my-[clamp(6px,0.7vw,10px)]" style={{ fontSize: 9 }}>✦</span>
-                    )}
-                    <span
-                      className="text-center font-bold uppercase tracking-[3px] text-[#F2E1C2]"
-                      style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(12px,1.05vw,14px)' }}
-                    >
-                      {c}
-                    </span>
-                  </div>
-                ))}
-                {/* cone icon */}
-                <svg aria-hidden="true" width="26" height="38" viewBox="0 0 26 38" className="mt-[clamp(12px,1.4vw,20px)] opacity-90">
-                  <path d="M5 14 Q5 4 13 4 Q21 4 21 14" fill="none" stroke="#F4A9C7" strokeWidth="1.4" />
-                  <path d="M5 14 Q7 12 9 14 Q11 12 13 14 Q15 12 17 14 Q19 12 21 14" fill="none" stroke="#F4A9C7" strokeWidth="1.2" />
-                  <path d="M5 14 L13 36 L21 14 Z" fill="none" stroke="#F2E1C2" strokeWidth="1.4" strokeLinejoin="round" />
-                  <path d="M7.5 19 L18.5 19 M9.5 24 L16.5 24" stroke="#F2E1C2" strokeWidth="1" opacity="0.7" />
-                </svg>
-                <div className="mt-[clamp(8px,0.9vw,12px)] text-center leading-snug text-[var(--pink)]"
-                  style={{ fontFamily: "'Lemongrass', cursive", fontSize: 'clamp(19px,1.7vw,24px)' }}>
-                  Small Batch
-                  <br />
-                  Big Heart
+              {/* inner frame — matches reference */}
+              <div className="flex-1 w-full flex flex-col items-center justify-between rounded-[6px] px-4 py-[clamp(18px,2vw,28px)]"
+                style={{ boxShadow: 'inset 0 0 0 1.5px rgba(242,225,194,0.55)' }}>
+
+                {/* category list */}
+                <div className="w-full flex flex-col items-center">
+                  {MENU_CATEGORIES.map((c, i) => (
+                    <div key={c} className="flex flex-col items-center w-full">
+                      {i > 0 && (
+                        <span aria-hidden="true" className="text-[var(--pink)] opacity-75 my-[clamp(7px,0.8vw,11px)]" style={{ fontSize: 8 }}>✦</span>
+                      )}
+                      <span
+                        className="text-center font-bold uppercase tracking-[3px] text-[#F2E1C2]"
+                        style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(13px,1.1vw,15px)' }}
+                      >
+                        {c}
+                      </span>
+                    </div>
+                  ))}
                 </div>
+
+                {/* cone icon + tagline */}
+                <div className="flex flex-col items-center mt-[clamp(14px,1.6vw,22px)]">
+                  <svg aria-hidden="true" width="28" height="40" viewBox="0 0 28 40">
+                    {/* scoop circle */}
+                    <circle cx="14" cy="11" r="8" fill="none" stroke="#F4A9C7" strokeWidth="1.4" />
+                    {/* wavy scoop bottom where it meets cone */}
+                    <path d="M6 17 Q8 15 10 17 Q12 15 14 17 Q16 15 18 17 Q20 15 22 17" fill="none" stroke="#F4A9C7" strokeWidth="1.2" />
+                    {/* cone body */}
+                    <path d="M6 17 L14 39 L22 17 Z" fill="none" stroke="#F4A9C7" strokeWidth="1.4" strokeLinejoin="round" />
+                    {/* waffle hatching */}
+                    <path d="M8 21 L20 21 M9.5 25.5 L18.5 25.5 M11 30 L17 30" stroke="#F4A9C7" strokeWidth="1" opacity="0.7" />
+                  </svg>
+                  <div className="mt-[clamp(7px,0.8vw,11px)] text-center leading-snug text-[var(--pink)]"
+                    style={{ fontFamily: "'Lemongrass', cursive", fontSize: 'clamp(19px,1.7vw,24px)' }}>
+                    Small Batch
+                    <br />
+                    Big Heart
+                  </div>
+                </div>
+
               </div>
             </div>
           </aside>
