@@ -298,28 +298,43 @@ export default function Postcard() {
               {/* Subtext — two lines, cream small caps */}
               <div
                 style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: 'clamp(9px,0.72vw,10px)',
-                  letterSpacing: '2.5px',
+                  fontFamily: "'Libertinus Math', serif",
+                  fontSize: 'clamp(12px,1.15vw,17px)',
+                  letterSpacing: '2px',
                   textTransform: 'uppercase',
                   fontWeight: 700,
-                  color: 'rgba(251,242,223,0.92)',
+                  color: '#EBC77F',
                   textShadow: '0 1px 6px rgba(20,8,12,0.75)',
                   marginTop: 'clamp(8px,1vw,14px)',
-                  lineHeight: 1.9,
                 }}
               >
                 Small Batch Ice Cream &amp; Handmade Desserts
-                <br />
-                Since 2007
               </div>
+              <div
+                className="flex items-center justify-center gap-[clamp(10px,1vw,16px)]"
+                style={{
+                  fontFamily: "'Libertinus Math', serif",
+                  fontSize: 'clamp(11px,1vw,15px)',
+                  letterSpacing: '2.5px',
+                  textTransform: 'uppercase',
+                  fontWeight: 700,
+                  color: 'rgba(251,242,223,0.95)',
+                  textShadow: '0 1px 6px rgba(20,8,12,0.75)',
+                  marginTop: 'clamp(6px,0.7vw,10px)',
+                }}
+              >
+                <span aria-hidden="true" className="inline-block h-px w-[clamp(24px,3vw,48px)]" style={{ background: 'rgba(251,242,223,0.6)' }} />
+                Since 2007
+                <span aria-hidden="true" className="inline-block h-px w-[clamp(24px,3vw,48px)]" style={{ background: 'rgba(251,242,223,0.6)' }} />
+              </div>
+              <div aria-hidden="true" style={{ color: '#F4A9C7', fontSize: 'clamp(11px,1vw,15px)', marginTop: 'clamp(6px,0.7vw,10px)', textShadow: '0 1px 6px rgba(20,8,12,0.6)' }}>♥</div>
               {/* CTA buttons */}
               <div className="flex flex-wrap justify-center gap-[clamp(8px,0.8vw,12px)] mt-[clamp(12px,1.6vw,20px)] pointer-events-auto">
                 <a
                   href="#menu"
                   onClick={(e) => handleNav(e, 'menu')}
                   className="inline-flex items-center justify-center rounded-full bg-[var(--berry-deep)] text-[#fbf2df] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(9px,0.72vw,10px)', padding: '8px clamp(16px,1.5vw,22px)', border: '1px solid rgba(251,242,223,0.25)' }}
+                  style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,14px)', padding: '9px clamp(20px,1.9vw,30px)', border: '1px solid rgba(251,242,223,0.25)' }}
                 >
                   View Menu
                 </a>
@@ -327,7 +342,7 @@ export default function Postcard() {
                   type="button"
                   onClick={() => { window.open('https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-cool-moon-ice-cream/YEfj7ZgZS2m7Wm2og7PphQ', '_blank', 'noopener'); }}
                   className="inline-flex items-center justify-center rounded-full text-[#fbf2df] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[rgba(251,242,223,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(9px,0.72vw,10px)', padding: '8px clamp(16px,1.5vw,22px)', border: '1.5px solid rgba(251,242,223,0.7)' }}
+                  style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,14px)', padding: '9px clamp(20px,1.9vw,30px)', border: '1.5px solid rgba(251,242,223,0.7)' }}
                 >
                   Order Online
                 </button>
