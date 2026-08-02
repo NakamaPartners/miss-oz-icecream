@@ -34,8 +34,8 @@ const SLIDES: { src: string; alt: string; pos?: string }[] = [
 const NAV = [
   { label: 'Home', target: 'home' },
   { label: 'About', target: 'about' },
-  { label: 'Menu', target: 'menu' },
-  { label: 'Order Online', target: 'menu' },
+  { label: 'Menu', target: 'step-inside' },
+  { label: 'Order Online', target: 'ubereats' },
   { label: 'Wholesale', target: 'wholesale' },
   { label: 'Event', target: 'events' },
   { label: 'Contact', target: 'contact' },
@@ -72,9 +72,12 @@ const FLAVORS: { name: string; desc: string }[] = [
 
 const MENU_CATEGORIES = ['Ice Cream', 'Sorbet', 'Sundaes', 'Croffle & Dessert', 'Drinks', 'Whole Cakes', 'Wholesale'];
 
-const hrefFor = (t: string) => (t === 'home' ? '#home' : `#${t}`);
+const UBEREATS_URL = 'https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-cool-moon-ice-creams/YEfj7ZgZS2m7Wm2og7PphQ';
+
+const hrefFor = (t: string) => (t === 'ubereats' ? UBEREATS_URL : t === 'home' ? '#home' : `#${t}`);
 
 function handleNav(e: React.MouseEvent<HTMLAnchorElement>, target: string) {
+  if (target === 'ubereats') return; // let the browser open the external link
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const behavior: ScrollBehavior = reduce ? 'auto' : 'smooth';
   e.preventDefault();
@@ -123,7 +126,7 @@ export default function Postcard() {
       </div>
 
       {/* MASTHEAD — logo centered large, all nav on one horizontal line */}
-      <header className="relative z-20 mx-auto max-w-[1200px] px-[4vw] mt-[6px] sm:mt-[12px] mb-[clamp(14px,2vw,24px)]">
+      <header className="relative z-20 mx-auto max-w-[1200px] px-[4vw] mt-[6px] sm:mt-[12px] mb-[clamp(64px,8.5vw,116px)]">
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -151,8 +154,10 @@ export default function Postcard() {
                 </a>
               ))}
             </nav>
-            <div
-              className="text-center leading-snug hidden md:block"
+            <a
+              href="#oz"
+              onClick={(e) => handleNav(e, 'oz')}
+              className="group text-center leading-snug hidden md:block cursor-pointer transition-transform duration-200 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
               style={{
                 fontFamily: 'var(--font-sans)',
                 color: 'var(--gold, #B8860B)',
@@ -162,10 +167,14 @@ export default function Postcard() {
                 textTransform: 'uppercase',
               }}
             >
-              Est. 2007
-              <br />
-              Portland, Oregon
-            </div>
+              <span className="block transition-colors group-hover:text-[var(--berry)]">
+                Small Batch Big Heart
+                <br />
+                <span className="inline-block mt-[2px] tracking-[1.5px] text-[var(--berry)] group-hover:text-[var(--gold,#B8860B)]">
+                  — Meet Oz! →
+                </span>
+              </span>
+            </a>
             </div>
           </div>
 
@@ -179,6 +188,7 @@ export default function Postcard() {
                 <a
                   key={n.label}
                   href={hrefFor(n.target)}
+                  {...(n.target === 'ubereats' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   onClick={(e) => handleNav(e, n.target)}
                   className="whitespace-nowrap uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.95vw,12px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
@@ -198,7 +208,7 @@ export default function Postcard() {
               src="/images/logo-official.webp"
               alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
               className="h-auto"
-              style={{ width: 'clamp(175px,19.5vw,240px)', filter: 'drop-shadow(0 2px 10px rgba(93,26,58,0.18))' }}
+              style={{ width: 'clamp(220px,23.5vw,290px)', filter: 'drop-shadow(0 2px 10px rgba(93,26,58,0.18))' }}
             />
           </div>
         </motion.div>
@@ -373,7 +383,7 @@ export default function Postcard() {
       </div>
 
       {/* SECTION PANELS — poster-like taped cards, click to explore */}
-      <div className="relative z-20 mx-auto max-w-[1080px] px-[4vw] sm:px-0 mt-[clamp(18px,2.4vw,30px)]">
+      <div id="step-inside" className="relative z-20 mx-auto max-w-[1080px] px-[4vw] sm:px-0 mt-[clamp(18px,2.4vw,30px)]" style={{ scrollMarginTop: '24px' }}>
         <div className="flex items-center justify-center gap-3 mb-[clamp(14px,1.8vw,22px)]">
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
           <span className="text-[var(--berry-deep)] text-[12px] tracking-[4px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>Step Inside</span>
@@ -392,13 +402,20 @@ export default function Postcard() {
             <div
               className="flex-1 flex flex-col items-center rounded-b-[12px] px-5 py-[clamp(24px,2.6vw,36px)]"
               style={{
-                background: 'radial-gradient(120% 90% at 30% 15%, rgba(255,255,255,0.06), transparent 60%), linear-gradient(165deg, #245445 0%, #1B4136 55%, #1F4A3D 100%)',
-                boxShadow: '0 14px 34px rgba(28,13,12,0.25), inset 0 0 0 1.5px rgba(242,225,194,0.28)',
+                background: 'linear-gradient(165deg, #17352B 0%, #122B23 55%, #16332A 100%)',
+                boxShadow: '0 14px 34px rgba(28,13,12,0.3), inset 0 0 0 1.5px rgba(242,225,194,0.3)',
               }}
             >
-              {/* inner frame — matches reference */}
-              <div className="flex-1 w-full flex flex-col items-center justify-center rounded-[6px] px-4 py-[clamp(18px,2vw,28px)]"
-                style={{ boxShadow: 'inset 0 0 0 1.5px rgba(242,225,194,0.55)', gap: 'clamp(18px,2.2vw,30px)' }}>
+              {/* inner frame — double marion-pink lines with chamfered "dent" corners, lighter green inside */}
+              <div className="flex-1 w-full flex flex-col" style={{ background: 'rgba(228,146,170,0.55)', clipPath: 'polygon(22px 0, calc(100% - 22px) 0, 100% 22px, 100% calc(100% - 22px), calc(100% - 22px) 100%, 22px 100%, 0 calc(100% - 22px), 0 22px)', padding: '1px' }}>
+                <div className="flex-1 flex flex-col" style={{ background: '#152F26', clipPath: 'polygon(21px 0, calc(100% - 21px) 0, 100% 21px, 100% calc(100% - 21px), calc(100% - 21px) 100%, 21px 100%, 0 calc(100% - 21px), 0 21px)', padding: '3px' }}>
+                  <div className="flex-1 flex flex-col" style={{ background: 'rgba(228,146,170,0.8)', clipPath: 'polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px)', padding: '1px' }}>
+              <div className="flex-1 w-full flex flex-col items-center justify-center px-4 py-[clamp(18px,2vw,28px)]"
+                style={{
+                  background: 'radial-gradient(120% 90% at 30% 15%, rgba(255,255,255,0.07), transparent 60%), linear-gradient(165deg, #2B5D4C 0%, #224C3E 55%, #275544 100%)',
+                  clipPath: 'polygon(17px 0, calc(100% - 17px) 0, 100% 17px, 100% calc(100% - 17px), calc(100% - 17px) 100%, 17px 100%, 0 calc(100% - 17px), 0 17px)',
+                  gap: 'clamp(18px,2.2vw,30px)',
+                }}>
 
                 {/* category list */}
                 <div className="w-full flex flex-col items-center">
@@ -420,19 +437,22 @@ export default function Postcard() {
                 {/* cone icon + tagline */}
                 <div className="flex flex-col items-center mt-[clamp(14px,1.6vw,22px)]">
                   <img
-                    src="/images/icon-icecream-cone.png"
+                    src="/images/icon-icecream-outline.png"
                     alt=""
                     aria-hidden="true"
-                    style={{ width: 'clamp(38px,4vw,52px)', height: 'auto' }}
+                    style={{ width: 'clamp(38px,4vw,52px)', height: 'auto', filter: 'brightness(0) invert(0.93) sepia(0.35)' }}
                   />
                   <div className="mt-[clamp(7px,0.8vw,11px)] text-center text-[var(--pink)]"
-                    style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(24px,2.1vw,30px)', lineHeight: 0.95 }}>
+                    style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 0.95 }}>
                     Small Batch
                     <br />
                     Big Heart
                   </div>
                 </div>
 
+              </div>
+                  </div>
+                </div>
               </div>
             </div>
           </aside>
@@ -454,7 +474,7 @@ export default function Postcard() {
                 </h3>
                 <span aria-hidden="true" className="text-[10px] text-[var(--pink)]">✦</span>
               </div>
-              <div className="mt-0 text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontStyle: 'normal', fontSize: 'clamp(26px,2.4vw,36px)', lineHeight: 1, marginTop: '-2px' }}>
+              <div className="mt-0 text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontStyle: 'normal', fontSize: 'clamp(23px,2.1vw,31px)', lineHeight: 1, marginTop: '-2px' }}>
                 Handmade in Small Batches
               </div>
             </div>
