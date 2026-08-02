@@ -96,6 +96,7 @@ const HERO_MASK =
 export default function Postcard() {
   const [slide, setSlide] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -120,20 +121,110 @@ export default function Postcard() {
         <Bunting />
       </div>
 
-      {/* MASTHEAD — logo centered large, all nav on one horizontal line */}
-      <header className="relative z-20 mx-auto max-w-[1400px] px-[4vw] mt-[6px] sm:mt-[12px] mb-[clamp(64px,8.5vw,116px)]">
+      {/* MASTHEAD */}
+      <header className="relative z-20 mx-auto max-w-[1400px] px-[4vw] mt-[6px] sm:mt-[12px] mb-[clamp(48px,8.5vw,116px)]">
+
+        {/* ── MOBILE HEADER (hidden md+) ── */}
+        <div className="flex md:hidden items-center justify-between py-3">
+          {/* hamburger */}
+          <button
+            type="button"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((o) => !o)}
+            className="flex flex-col justify-center gap-[5px] w-[36px] h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+          >
+            <span
+              className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center"
+              style={{ transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }}
+            />
+            <span
+              className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300"
+              style={{ opacity: menuOpen ? 0 : 1 }}
+            />
+            <span
+              className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center"
+              style={{ transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }}
+            />
+          </button>
+
+          {/* centered logo */}
+          <img
+            src="/images/logo-official.webp"
+            alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
+            className="h-auto absolute left-1/2 -translate-x-[52%]"
+            style={{ width: 'clamp(130px,38vw,180px)', filter: 'drop-shadow(0 2px 8px rgba(93,26,58,0.18))', top: '2px' }}
+          />
+
+          {/* order CTA */}
+          <a
+            href={UBEREATS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[1px] text-[10px] px-3 py-2 transition-colors hover:bg-[var(--berry)]"
+            style={{ fontFamily: 'var(--font-sans)' }}
+          >
+            Order
+          </a>
+        </div>
+
+        {/* ── MOBILE SLIDE-DOWN MENU ── */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.nav
+              key="mobile-menu"
+              aria-label="Mobile navigation"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+              className="overflow-hidden md:hidden"
+            >
+              <div
+                className="flex flex-col items-center gap-1 py-5 rounded-[10px] mb-4"
+                style={{ background: 'rgba(242,225,194,0.97)', boxShadow: '0 8px 24px rgba(28,13,12,0.14)', border: '1.5px solid var(--marionberry)' }}
+              >
+                {NAV.map((n) => (
+                  <a
+                    key={n.label}
+                    href={hrefFor(n.target)}
+                    {...(n.target === 'ubereats' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    onClick={(e) => { handleNav(e, n.target); setMenuOpen(false); }}
+                    className="w-full text-center py-3 uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] hover:bg-[rgba(178,78,121,0.06)] transition-colors rounded-md"
+                    style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', letterSpacing: '2px' }}
+                  >
+                    {n.label}
+                  </a>
+                ))}
+                <div aria-hidden="true" className="w-12 h-px bg-[var(--marionberry)] opacity-30 my-1" />
+                <a
+                  href={UBEREATS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[2px] text-[11px] px-7 py-3 transition-colors hover:bg-[var(--berry)]"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Order Online
+                </a>
+              </div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+
+        {/* ── DESKTOP HEADER (hidden below md) ── */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          className="relative grid items-stretch"
+          className="relative hidden md:grid items-stretch"
           style={{
             gridTemplateColumns: 'minmax(0,1fr) clamp(200px,22vw,260px) minmax(0,1fr)',
             minHeight: 'clamp(84px,9.5vw,112px)',
             overflow: 'visible',
           }}
         >
-          {/* LEFT — rules stop before the logo; nav vertically centered between them */}
+          {/* LEFT */}
           <div className="flex flex-col justify-center py-[clamp(10px,1.1vw,14px)]" style={{ borderTop: '1.5px solid var(--marionberry)', borderBottom: '1.5px solid var(--marionberry)' }}>
             <div className="flex items-center justify-center gap-[clamp(14px,2.6vw,44px)]">
             <nav aria-label="Primary" className="flex items-center justify-center gap-[clamp(14px,2.6vw,44px)]">
@@ -178,10 +269,10 @@ export default function Postcard() {
             </div>
           </div>
 
-          {/* CENTER — open gap; logo absolutely anchored */}
+          {/* CENTER — open gap */}
           <div aria-hidden="true" />
 
-          {/* RIGHT — rules stop before the logo; nav vertically centered between them */}
+          {/* RIGHT */}
           <div className="flex flex-col justify-center py-[clamp(10px,1.1vw,14px)]" style={{ borderTop: '1.5px solid var(--marionberry)', borderBottom: '1.5px solid var(--marionberry)' }}>
             <nav aria-label="Primary continued" className="flex items-center justify-center gap-[clamp(10px,1.8vw,30px)]">
               {NAV.slice(3).map((n) => (
@@ -199,7 +290,7 @@ export default function Postcard() {
             </nav>
           </div>
 
-          {/* LOGO + TAGLINE — absolutely centered, filling the open middle gap */}
+          {/* LOGO — absolutely centered */}
           <div
             className="absolute left-1/2 top-1/2 z-20 flex flex-col items-center"
             style={{ transform: 'translate(-52.18%, -50%)', overflow: 'visible' }}
@@ -263,7 +354,7 @@ export default function Postcard() {
 
             {/* ── LAYER 3: brand text — centered over the slideshow ── */}
             <div
-              className="absolute flex flex-col items-center text-center pointer-events-none left-[8%] right-[8%] sm:left-[18%] sm:right-[18%]"
+              className="absolute flex flex-col items-center text-center pointer-events-none left-[4%] right-[4%] sm:left-[18%] sm:right-[18%]"
               style={{
                 top: '50%',
                 transform: 'translateY(-50%)',
@@ -393,7 +484,7 @@ export default function Postcard() {
           >
             <span className="w-6 sm:w-10 h-px bg-[var(--gold-hi)] opacity-50" />
             <span
-              className="text-[var(--cream-hi)] tracking-[3.5px] sm:tracking-[5px] uppercase font-bold"
+              className="text-[var(--cream-hi)] tracking-[1.5px] sm:tracking-[5px] uppercase font-bold whitespace-nowrap"
               style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(8px,0.85vw,11px)' }}
             >
               Portland's Homegrown Ice Cream Cafe
