@@ -286,9 +286,9 @@ export default function Postcard() {
               {/* Tagline — cream script */}
               <div
                 style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontWeight: 600,
-                  fontSize: 'clamp(15px,1.9vw,26px)',
+                  fontFamily: "'Libertinus Math', serif",
+                  fontWeight: 400,
+                  fontSize: 'clamp(17px,2.3vw,32px)',
                   letterSpacing: '0.5px',
                   color: 'var(--cream-hi)',
                   textShadow: '0 1px 10px rgba(20,8,12,0.65)',
