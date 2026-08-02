@@ -813,3 +813,34 @@
   transform: translateY(-6px) rotate(1.5deg);
   box-shadow: 0 34px 64px rgba(28,13,12,0.5), inset 0 0 0 1px rgba(255,244,214,0.14) !important;
 }
+
+/* Meet Oz header link — playful attention animation */
+@keyframes meetOzWiggle {
+  0%, 86%, 100% { transform: rotate(0deg); }
+  88% { transform: rotate(-2.5deg); }
+  90% { transform: rotate(2.5deg); }
+  92% { transform: rotate(-2deg); }
+  94% { transform: rotate(1.5deg); }
+  96% { transform: rotate(-1deg); }
+  98% { transform: rotate(0.5deg); }
+}
+@keyframes meetOzHeart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+}
+@keyframes meetOzArrow {
+  0%, 60%, 100% { transform: translateX(0); }
+  75% { transform: translateX(3px); }
+}
+.meet-oz-wiggle { animation: meetOzWiggle 4s ease-in-out infinite; transform-origin: 50% 50%; }
+.meet-oz-heart { animation: meetOzHeart 1.6s ease-in-out infinite; }
+.meet-oz-arrow { animation: meetOzArrow 2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .meet-oz-wiggle, .meet-oz-heart, .meet-oz-arrow { animation: none; }
+}
+
+/* NEW! starburst sticker gentle swing */
+@keyframes newBadgeSwing {
+  0%, 100% { transform: rotate(-12deg); }
+  50% { transform: rotate(-6deg); }
+}

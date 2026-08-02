@@ -3,6 +3,13 @@ import { motion } from 'framer-motion';
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
 const PUMPKIN = '#C0512A';
 
+// 16-point starburst polygon for the "NEW!" sticker
+const BURST = `polygon(${Array.from({ length: 32 }, (_, i) => {
+  const a = (Math.PI * 2 * i) / 32;
+  const r = i % 2 === 0 ? 50 : 41;
+  return `${(50 + r * Math.cos(a)).toFixed(2)}% ${(50 + r * Math.sin(a)).toFixed(2)}%`;
+}).join(',')})`;
+
 function Sparkle({ size = 22, color = PUMPKIN, delay = 0, className = '', style = {} as React.CSSProperties }) {
   return (
     <svg
@@ -63,14 +70,27 @@ export default function FlavorDrop() {
             </div>
           </div>
 
-          {/* hanging SEASONAL enamel tab */}
-          <div
-            className="absolute z-20 -top-5 left-3 flex items-center justify-center w-[72px] h-[72px] rounded-full text-[11px] font-bold uppercase tracking-[2px] text-[var(--cream-hi)] leading-none text-center -rotate-12"
-            style={{ background: PUMPKIN, boxShadow: '0 6px 16px rgba(28,13,12,0.4)', fontFamily: 'var(--font-sans)', border: '2px dashed var(--cream-hi)' }}
-          >
-            <div className="flex flex-col items-center justify-center gap-1">
-              <span className="w-[6px] h-[6px] rounded-full bg-[var(--cream-hi)] motion-safe:animate-pulse" />
-              New!
+          {/* vintage starburst "NEW!" sticker */}
+          <div className="absolute z-20 -top-7 left-1 -rotate-12 motion-safe:animate-[newBadgeSwing_3.5s_ease-in-out_infinite]" style={{ filter: 'drop-shadow(0 6px 12px rgba(28,13,12,0.4))' }}>
+            <div
+              className="relative flex items-center justify-center w-[92px] h-[92px]"
+              style={{ background: `radial-gradient(circle at 38% 32%, #E08A4C 0%, ${PUMPKIN} 45%, #A44C22 100%)`, clipPath: BURST }}
+            >
+              <div
+                className="flex flex-col items-center justify-center w-[62px] h-[62px] rounded-full text-center leading-none"
+                style={{ border: '1.5px dashed var(--cream-hi)' }}
+              >
+                <span aria-hidden="true" className="text-[var(--gold-hi)] text-[10px] leading-none">★</span>
+                <span
+                  className="uppercase text-[var(--cream-hi)] mt-[3px]"
+                  style={{ fontFamily: 'var(--font-display)', fontSize: '17px', letterSpacing: '1px', textShadow: '1px 1px 0 rgba(28,13,12,0.35)' }}
+                >
+                  New!
+                </span>
+                <span className="uppercase text-[var(--cream-hi)] opacity-80 mt-[2px] tracking-[1.5px]" style={{ fontFamily: 'var(--font-sans)', fontSize: '6.5px', fontWeight: 700 }}>
+                  This Season
+                </span>
+              </div>
             </div>
           </div>
 

@@ -134,10 +134,7 @@ export default function Wholesale() {
                       <textPath href="#wholeseal">· trade counter · est. 2007 ·</textPath>
                     </text>
                   </svg>
-                  <svg width="24" height="28" viewBox="0 0 26 30" aria-hidden="true">
-                    <circle cx="13" cy="9" r="7" fill="none" stroke="#f3ead6" strokeWidth="2" />
-                    <path d="M6 15 L20 15 L13 29 Z" fill="none" stroke="#f3ead6" strokeWidth="2" strokeLinejoin="round" />
-                  </svg>
+                  <img src="/images/icon-icecream-outline.png" alt="" aria-hidden="true" style={{ width: 28, height: 28, filter: 'brightness(0) invert(0.93) sepia(0.25)' }} />
                 </div>
               </div>
 

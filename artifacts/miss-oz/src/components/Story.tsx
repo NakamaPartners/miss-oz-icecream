@@ -69,10 +69,7 @@ export default function Story() {
               </text>
             </svg>
             {/* little cone glyph */}
-            <svg width="26" height="30" viewBox="0 0 26 30" aria-hidden="true" className="relative z-10">
-              <circle cx="13" cy="9" r="7" fill="none" stroke="var(--cream)" strokeWidth="2" />
-              <path d="M6 15 L20 15 L13 29 Z" fill="none" stroke="var(--cream)" strokeWidth="2" strokeLinejoin="round" />
-            </svg>
+            <img src="/images/icon-icecream-outline.png" alt="" aria-hidden="true" className="relative z-10" style={{ width: 30, height: 30, filter: 'brightness(0) invert(0.93) sepia(0.25)' }} />
           </div>
         </div>
 

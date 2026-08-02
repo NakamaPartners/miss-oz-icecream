@@ -157,21 +157,26 @@ export default function Postcard() {
             <a
               href="#oz"
               onClick={(e) => handleNav(e, 'oz')}
-              className="group text-center leading-snug hidden md:block cursor-pointer transition-transform duration-200 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
+              className="group relative text-center leading-snug hidden md:block cursor-pointer transition-transform duration-200 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
               style={{
                 fontFamily: 'var(--font-sans)',
-                color: 'var(--gold, #B8860B)',
+                color: '#9A6E0B',
                 letterSpacing: '2px',
-                fontSize: 'clamp(7.5px,0.6vw,9px)',
-                fontWeight: 700,
+                fontSize: 'clamp(9px,0.75vw,11px)',
+                fontWeight: 800,
                 textTransform: 'uppercase',
               }}
             >
-              <span className="block transition-colors group-hover:text-[var(--berry)]">
+              <span aria-hidden="true" className="absolute -top-[10px] -left-[12px] text-[9px] text-[var(--gold,#B8860B)]" style={{ animation: 'twinkle 2.6s 0s infinite' }}>✦</span>
+              <span aria-hidden="true" className="absolute -bottom-[9px] -right-[10px] text-[8px] text-[var(--berry)]" style={{ animation: 'twinkle 2.6s 0.9s infinite' }}>✦</span>
+              <span aria-hidden="true" className="absolute -top-[8px] -right-[16px] text-[7px] text-[var(--gold,#B8860B)]" style={{ animation: 'twinkle 2.6s 1.7s infinite' }}>✦</span>
+              <span className="block transition-colors group-hover:text-[var(--berry)] meet-oz-wiggle">
                 Small Batch Big Heart
                 <br />
                 <span className="inline-block mt-[2px] tracking-[1.5px] text-[var(--berry)] group-hover:text-[var(--gold,#B8860B)]">
-                  — Meet Oz! →
+                  <span aria-hidden="true" className="inline-block mr-[3px] meet-oz-heart">♥</span>
+                  Meet Oz!
+                  <span aria-hidden="true" className="inline-block ml-[3px] meet-oz-arrow">→</span>
                 </span>
               </span>
             </a>
@@ -437,10 +442,10 @@ export default function Postcard() {
                 {/* cone icon + tagline */}
                 <div className="flex flex-col items-center mt-[clamp(14px,1.6vw,22px)]">
                   <img
-                    src="/images/icon-icecream-outline.png"
+                    src="/images/icon-icecream-cone.png"
                     alt=""
                     aria-hidden="true"
-                    style={{ width: 'clamp(38px,4vw,52px)', height: 'auto', filter: 'brightness(0) invert(0.93) sepia(0.35)' }}
+                    style={{ width: 'clamp(38px,4vw,52px)', height: 'auto' }}
                   />
                   <div className="mt-[clamp(7px,0.8vw,11px)] text-center text-[var(--pink)]"
                     style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 0.95 }}>
@@ -469,6 +474,7 @@ export default function Postcard() {
             {/* header */}
             <div className="text-center">
               <div className="flex items-center justify-center gap-2">
+                <span aria-hidden="true" className="text-[10px] text-[var(--pink)]">✦</span>
                 <h3 className="uppercase font-bold tracking-[4px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(17px,1.9vw,26px)' }}>
                   Ice Cream Flavors
                 </h3>
@@ -576,7 +582,7 @@ export default function Postcard() {
                 {/* block 2 */}
                 <p className="text-center leading-relaxed text-[#EFD9C9]"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.95vw,14px)' }}>
-                  Pickup or delivery available on Uber&nbsp;Eats, DoorDash &amp; Grubhub.
+                  Pickup or delivery available on Uber&nbsp;Eats &amp; Grubhub.
                 </p>
 
                 {/* diamond divider */}
@@ -592,43 +598,53 @@ export default function Postcard() {
                   We love our community and your suggestions!
                 </p>
 
-                {/* notched "ticket" button — double border frame */}
-                {(() => {
-                  const notch = (n: number) =>
-                    `polygon(${n}px 0%,calc(100% - ${n}px) 0%,100% ${n}px,100% calc(100% - ${n}px),calc(100% - ${n}px) 100%,${n}px 100%,0% calc(100% - ${n}px),0% ${n}px)`;
-                  return (
-                    <a
-                      href="#order"
-                      onClick={(e) => { e.preventDefault(); document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' }); }}
-                      className="mt-[clamp(16px,1.8vw,24px)] w-full block"
-                      style={{ clipPath: notch(7), background: '#3B1020', padding: '1.5px' }}
+                {/* vintage admission-ticket CTA — side notches + perforated inner line */}
+                <a
+                  href="#order"
+                  onClick={(e) => { e.preventDefault(); document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  className="group mt-[clamp(16px,1.8vw,24px)] w-full block transition-transform duration-150 hover:-translate-y-[2px]"
+                  style={{ filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.3))' }}
+                >
+                  <span
+                    className="block"
+                    style={{
+                      background: 'linear-gradient(180deg, #F7EDDD 0%, #F2E4CC 100%)',
+                      borderRadius: '6px',
+                      padding: '5px',
+                      WebkitMaskImage:
+                        'radial-gradient(circle 8px at 0 50%, transparent 96%, #000 100%), radial-gradient(circle 8px at 100% 50%, transparent 96%, #000 100%)',
+                      maskImage:
+                        'radial-gradient(circle 8px at 0 50%, transparent 96%, #000 100%), radial-gradient(circle 8px at 100% 50%, transparent 96%, #000 100%)',
+                      WebkitMaskComposite: 'source-in',
+                      maskComposite: 'intersect',
+                    }}
+                  >
+                    <span
+                      className="flex flex-col items-center justify-center"
+                      style={{ border: '1.5px dashed rgba(59,16,32,0.55)', borderRadius: '4px', padding: '11px 22px 12px' }}
                     >
-                      {/* cream gap */}
-                      <div style={{ clipPath: notch(5), background: '#F5EADA', padding: '4px' }}>
-                        {/* inner border */}
-                        <div style={{ clipPath: notch(3), background: '#3B1020', padding: '1.5px' }}>
-                          {/* cream fill + text */}
-                          <div
-                            className="flex items-center justify-center gap-3 whitespace-nowrap uppercase"
-                            style={{
-                              clipPath: notch(2),
-                              background: '#F5EADA',
-                              padding: '11px 16px',
-                              fontFamily: 'var(--font-sans)',
-                              fontSize: 'clamp(10px,0.82vw,12px)',
-                              fontWeight: 700,
-                              letterSpacing: '3px',
-                              color: '#3B1020',
-                            }}
-                          >
-                            Place an Order
-                            <span aria-hidden="true">→</span>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  );
-                })()}
+                      <span
+                        className="uppercase whitespace-nowrap"
+                        style={{ fontFamily: 'var(--font-sans)', fontSize: '8px', letterSpacing: '1.5px', fontWeight: 700, color: 'rgba(59,16,32,0.55)' }}
+                      >
+                        ✦ Admit One Sweet Tooth ✦
+                      </span>
+                      <span
+                        className="flex items-center gap-2 whitespace-nowrap uppercase"
+                        style={{
+                          fontFamily: "'DM Serif Display', serif",
+                          fontSize: 'clamp(12px,0.95vw,14px)',
+                          letterSpacing: '2px',
+                          color: '#3B1020',
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        Place an Order
+                        <span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-1">→</span>
+                      </span>
+                    </span>
+                  </span>
+                </a>
               </div>
             </div>
           </div>
