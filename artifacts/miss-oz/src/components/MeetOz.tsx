@@ -91,21 +91,31 @@ export default function MeetOz() {
           >
             The namesake
           </motion.span>
-          <motion.span
-            {...rise}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="block font-script text-[var(--berry-deep)] text-[clamp(30px,3.6vw,44px)] mb-1"
-          >
-            meet Miss Oz
-          </motion.span>
           <motion.h2
             {...rise}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="relative inline-block leading-[1.02] mb-2"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(44px,6.4vw,92px)',
+              color: 'var(--berry)',
+              WebkitTextStroke: 'clamp(3px,0.4vw,6px) var(--cream-hi)',
+              paintOrder: 'stroke fill',
+              filter: 'drop-shadow(0 4px 0 rgba(178,78,121,0.35)) drop-shadow(0 8px 14px rgba(28,13,12,0.14))',
+            }}
+          >
+            <span aria-hidden="true" className="absolute -top-[0.25em] -left-[0.7em] text-[0.32em] text-[var(--gold)]" style={{ WebkitTextStroke: 0, filter: 'none' }}>✦</span>
+            Meet Miss Oz
+            <span aria-hidden="true" className="absolute -bottom-[0.05em] -right-[0.75em] text-[0.26em] text-[var(--marionberry)]" style={{ WebkitTextStroke: 0, filter: 'none' }}>✦</span>
+          </motion.h2>
+          <motion.p
+            {...rise}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="text-[clamp(34px,5vw,64px)] leading-[1.04] text-[var(--cocoa)]"
+            className="text-[clamp(24px,3vw,40px)] leading-[1.1] text-[var(--cocoa)]"
             style={macklin}
           >
-            The real flavor tester
-          </motion.h2>
+            The <span className="text-[var(--marionberry)]">real</span> flavor tester
+          </motion.p>
         </div>
 
         {/* Ornamental divider */}
