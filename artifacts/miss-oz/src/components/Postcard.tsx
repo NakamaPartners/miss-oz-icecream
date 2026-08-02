@@ -99,6 +99,13 @@ export default function Postcard() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const close = (e: MediaQueryListEvent) => { if (e.matches) setMenuOpen(false); };
+    mq.addEventListener('change', close);
+    return () => mq.removeEventListener('change', close);
+  }, []);
+
+  useEffect(() => {
     if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const t = setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), 11000);
     return () => clearInterval(t);
