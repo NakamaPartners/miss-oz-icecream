@@ -426,11 +426,11 @@ export default function Postcard() {
                   {MENU_CATEGORIES.map((c, i) => (
                     <div key={c} className="flex flex-col items-center w-full">
                       {i > 0 && (
-                        <span aria-hidden="true" className="text-[var(--pink)] opacity-75 my-[clamp(7px,0.8vw,11px)]" style={{ fontSize: 8 }}>✦</span>
+                        <span aria-hidden="true" className="text-[var(--pink)] opacity-75 my-[clamp(9px,1vw,14px)]" style={{ fontSize: 10 }}>✦</span>
                       )}
                       <span
-                        className="text-center font-bold uppercase tracking-[3px] text-[#F2E1C2]"
-                        style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(13px,1.1vw,15px)' }}
+                        className="text-center font-bold uppercase tracking-[3.5px] text-[#F2E1C2]"
+                        style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(15px,1.35vw,19px)' }}
                       >
                         {c}
                       </span>
@@ -444,10 +444,10 @@ export default function Postcard() {
                     src="/images/icon-icecream-cone.png"
                     alt=""
                     aria-hidden="true"
-                    style={{ width: 'clamp(38px,4vw,52px)', height: 'auto' }}
+                    style={{ width: 'clamp(46px,5vw,66px)', height: 'auto' }}
                   />
                   <div className="mt-[clamp(7px,0.8vw,11px)] text-center text-[var(--pink)]"
-                    style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 0.95 }}>
+                    style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(24px,2.2vw,32px)', lineHeight: 0.95 }}>
                     Small Batch
                     <br />
                     Big Heart
