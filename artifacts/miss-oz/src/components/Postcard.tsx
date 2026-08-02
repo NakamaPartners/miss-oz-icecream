@@ -143,7 +143,7 @@ export default function Postcard() {
                   href={hrefFor(n.target)}
                   onClick={(e) => handleNav(e, n.target)}
                   className="whitespace-nowrap uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                  style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(12px,1.05vw,14px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.95vw,12px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
                 >
                   {n.label}
                 </a>
@@ -191,7 +191,7 @@ export default function Postcard() {
                   {...(n.target === 'ubereats' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   onClick={(e) => handleNav(e, n.target)}
                   className="whitespace-nowrap uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                  style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(12px,1.05vw,14px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.95vw,12px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
                 >
                   {n.label}
                 </a>
@@ -276,7 +276,7 @@ export default function Postcard() {
                   fontSize: 'clamp(50px,7.8vw,110px)',
                   lineHeight: 1,
                   color: '#EBC77F',
-                  WebkitTextStroke: 'clamp(4px,0.55vw,8px) var(--marionberry)',
+                  WebkitTextStroke: 'clamp(6px,0.8vw,12px) var(--berry)',
                   paintOrder: 'stroke fill',
                   textShadow: '0 2px 22px rgba(20,8,12,0.6), 0 3px 6px rgba(20,8,12,0.45)',
                 }}
