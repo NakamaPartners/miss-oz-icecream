@@ -111,7 +111,7 @@ function Reel({
 export default function Reels() {
   return (
     <section className="parlour-paper relative py-[80px] md:py-[110px] px-[6vw] bg-[var(--cream)] overflow-hidden">
-      <div className="max-w-[1080px] mx-auto">
+      <div className="max-w-[1300px] mx-auto">
         <motion.div {...rise} transition={{ duration: 0.7 }} className="text-center mb-[52px]">
           <span className="flex items-center justify-center gap-[10px] text-[var(--gold)] mb-[14px]" aria-hidden="true">
             <span className="inline-block w-[42px] h-px bg-[var(--gold)] opacity-70" />

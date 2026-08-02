@@ -141,7 +141,7 @@ export default function VoteFlavor() {
           : 'Every couple of months, the neighborhood picks what we churn next. One vote each.'}
       </motion.p>
 
-      <div className="flex gap-[22px] flex-wrap justify-center items-stretch max-w-[1000px] mx-auto mt-[46px]">
+      <div className="flex gap-[22px] flex-wrap justify-center items-stretch max-w-[1160px] mx-auto mt-[46px]">
         {CARDS.map((card, i) => {
           const pct = total ? Math.round((votes[i] / total) * 100) : 0;
           const isChoice = choice === i;

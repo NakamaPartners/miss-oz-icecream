@@ -81,7 +81,7 @@ export default function MeetOz() {
         <PawPrint size={22} className="absolute bottom-[9%] right-[14%] opacity-[0.08] -rotate-[10deg]" />
       </div>
 
-      <div className="relative z-10 max-w-[1040px] mx-auto">
+      <div className="relative z-10 max-w-[1220px] mx-auto">
         {/* Header */}
         <div className="text-center">
           <motion.span

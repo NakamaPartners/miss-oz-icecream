@@ -59,7 +59,7 @@ export default function Menu() {
           Every flavor made in-house. Ask for a sample — we insist.
         </motion.p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[28px] max-w-[900px] mx-auto mt-[52px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[28px] max-w-[1060px] mx-auto mt-[52px]">
           {CARDS.map((card, i) => (
             <motion.div
               key={i}

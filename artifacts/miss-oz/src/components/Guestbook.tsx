@@ -129,7 +129,7 @@ export default function Guestbook() {
       {/* ===== Open guest ledger ===== */}
       <motion.div
         initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
-        className="relative mx-auto max-w-[900px]"
+        className="relative mx-auto max-w-[1060px]"
       >
         {/* GUESTBOOK tab */}
         <div

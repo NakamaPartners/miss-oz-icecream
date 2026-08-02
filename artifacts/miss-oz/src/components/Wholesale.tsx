@@ -80,7 +80,7 @@ export default function Wholesale() {
         </motion.span>
 
         {/* ===== Awning + chalkboard trade board ===== */}
-        <motion.div {...rise} transition={{ duration: 0.7, delay: 0.1 }} className="relative mx-auto max-w-[840px]">
+        <motion.div {...rise} transition={{ duration: 0.7, delay: 0.1 }} className="relative mx-auto max-w-[980px]">
           <Awning />
 
           {/* wooden frame */}

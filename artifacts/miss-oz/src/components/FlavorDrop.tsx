@@ -34,7 +34,7 @@ export default function FlavorDrop() {
         backgroundRepeat: 'repeat',
       }}
     >
-      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,360px)_1fr] gap-12 md:gap-[72px] items-center max-w-[1060px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,360px)_1fr] gap-12 md:gap-[72px] items-center max-w-[1240px] mx-auto">
         {/* Framed seasonal poster — a lit lobby card */}
         <motion.div
           initial={{ opacity: 0, y: 30, rotate: -4 }}

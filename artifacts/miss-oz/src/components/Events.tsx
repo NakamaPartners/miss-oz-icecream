@@ -30,7 +30,7 @@ export default function Events() {
         Parties & Weddings
       </motion.h2>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-[20px] max-w-[940px] mx-auto mt-[40px]">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-[20px] max-w-[1100px] mx-auto mt-[40px]">
         {[
           {
             title: 'Private Parties',

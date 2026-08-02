@@ -11,11 +11,6 @@ const SLIDES: { src: string; alt: string; pos?: string }[] = [
     pos: 'center 55%',
   },
   {
-    src: '/images/slide-counter.webp',
-    alt: 'Inside the parlor — the glowing MISS OZ marquee letters above the chalkboard flavor menu and the striped ice cream counter',
-    pos: 'center 62%',
-  },
-  {
     src: '/images/storefront-photo-wide2.webp',
     alt: "The Miss Oz storefront in Portland's Pearl District — a corner shop with a neon Open sign in the window, lantern lights glowing inside, and a bike parked out front",
   },
@@ -126,7 +121,7 @@ export default function Postcard() {
       </div>
 
       {/* MASTHEAD — logo centered large, all nav on one horizontal line */}
-      <header className="relative z-20 mx-auto max-w-[1200px] px-[4vw] mt-[6px] sm:mt-[12px] mb-[clamp(64px,8.5vw,116px)]">
+      <header className="relative z-20 mx-auto max-w-[1400px] px-[4vw] mt-[6px] sm:mt-[12px] mb-[clamp(64px,8.5vw,116px)]">
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -224,7 +219,7 @@ export default function Postcard() {
           bright and natural, while staying below the marquee frame (960). */}
       <div className="relative w-full z-[955] pointer-events-none">
         <div
-          className="w-full relative max-w-[1200px] mx-auto px-[4vw]"
+          className="w-full relative max-w-[1400px] mx-auto px-[4vw]"
           style={{
             maskImage: HERO_MASK,
             WebkitMaskImage: HERO_MASK,
@@ -368,7 +363,7 @@ export default function Postcard() {
 
         {/* "PORTLAND'S HOMEGROWN ICE CREAM CAFE" — dark ribbon below the hero photo */}
         <div
-          className="mx-auto max-w-[1200px] px-[4vw] sm:px-[4vw]"
+          className="mx-auto max-w-[1400px] px-[4vw] sm:px-[4vw]"
           aria-hidden="true"
         >
           <div
@@ -388,7 +383,7 @@ export default function Postcard() {
       </div>
 
       {/* SECTION PANELS — poster-like taped cards, click to explore */}
-      <div id="step-inside" className="relative z-20 mx-auto max-w-[1080px] px-[4vw] sm:px-0 mt-[clamp(18px,2.4vw,30px)]" style={{ scrollMarginTop: '24px' }}>
+      <div id="step-inside" className="relative z-20 mx-auto max-w-[1300px] px-[4vw] sm:px-0 mt-[clamp(18px,2.4vw,30px)]" style={{ scrollMarginTop: '24px' }}>
         <div className="flex items-center justify-center gap-3 mb-[clamp(14px,1.8vw,22px)]">
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
           <span className="text-[var(--berry-deep)] text-[12px] tracking-[4px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>Step Inside</span>

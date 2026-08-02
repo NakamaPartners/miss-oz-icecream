@@ -44,7 +44,7 @@ export default function Story() {
       <motion.div
         {...rise}
         transition={{ duration: 0.7 }}
-        className="relative z-10 max-w-[860px] mx-auto rounded-[6px] px-[8vw] py-[64px] md:px-[80px] md:pt-[92px] md:pb-[76px]"
+        className="relative z-10 max-w-[1000px] mx-auto rounded-[6px] px-[8vw] py-[64px] md:px-[80px] md:pt-[92px] md:pb-[76px]"
         style={{
           background: 'var(--cream-hi)',
           boxShadow: '0 24px 60px rgba(28,13,12,0.12), inset 0 0 90px rgba(199,154,59,0.10)',

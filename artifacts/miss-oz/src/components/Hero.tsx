@@ -93,7 +93,7 @@ export default function Hero() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-[19px] md:inset-[26px] z-[35] rounded-[3px] border" style={{ borderColor: frameColorSoft }} />
 
       {/* Content column with clean vertical rhythm */}
-      <div className="relative z-20 flex flex-col items-center w-full max-w-[880px] mx-auto">
+      <div className="relative z-20 flex flex-col items-center w-full max-w-[1000px] mx-auto">
         <span className="block text-[12px] tracking-[5px] uppercase font-bold mb-2.5" style={{ color: f.ink, opacity: 0.85 }}>
           Small batch · Portland, Oregon
         </span>
