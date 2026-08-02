@@ -276,9 +276,9 @@ export default function Postcard() {
                   fontSize: 'clamp(56px,8.8vw,126px)',
                   lineHeight: 1,
                   color: '#EBC77F',
-                  WebkitTextStroke: 'clamp(4px,0.6vw,9px) var(--berry)',
+                  WebkitTextStroke: 'clamp(3px,0.45vw,7px) var(--berry)',
                   paintOrder: 'stroke fill',
-                  filter: 'drop-shadow(0 3px 3px rgba(20,8,12,0.3))',
+                  filter: 'drop-shadow(0 4px 5px rgba(20,8,12,0.45))',
                 }}
               >
                 <span style={{ fontSize: '1.18em', position: 'relative', zIndex: 2, display: 'inline-block', verticalAlign: 'baseline' }}>M</span>
