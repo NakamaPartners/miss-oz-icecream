@@ -278,7 +278,7 @@ export default function Postcard() {
                   color: '#EBC77F',
                   WebkitTextStroke: 'clamp(6px,0.8vw,12px) var(--berry)',
                   paintOrder: 'stroke fill',
-                  textShadow: '0 2px 22px rgba(20,8,12,0.6), 0 3px 6px rgba(20,8,12,0.45)',
+                  textShadow: '0 2px 18px rgba(20,8,12,0.3)',
                 }}
               >
                 <span style={{ fontSize: '1.18em', position: 'relative', zIndex: 2, display: 'inline-block', verticalAlign: 'baseline' }}>M</span>
