@@ -143,7 +143,7 @@ export default function Postcard() {
                   href={hrefFor(n.target)}
                   onClick={(e) => handleNav(e, n.target)}
                   className="whitespace-nowrap uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.95vw,12px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
+                  style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(12px,1.05vw,14px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
                 >
                   {n.label}
                 </a>
@@ -191,7 +191,7 @@ export default function Postcard() {
                   {...(n.target === 'ubereats' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   onClick={(e) => handleNav(e, n.target)}
                   className="whitespace-nowrap uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.95vw,12px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
+                  style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(12px,1.05vw,14px)', letterSpacing: 'clamp(1.5px,0.2vw,2.5px)' }}
                 >
                   {n.label}
                 </a>
@@ -286,10 +286,8 @@ export default function Postcard() {
               {/* Tagline — cream script */}
               <div
                 style={{
-                  fontFamily: "'Libertinus Math', serif",
-                  fontWeight: 400,
+                  fontFamily: 'var(--font-script)',
                   fontSize: 'clamp(17px,2.3vw,32px)',
-                  letterSpacing: '0.5px',
                   color: 'var(--cream-hi)',
                   textShadow: '0 1px 10px rgba(20,8,12,0.65)',
                   marginTop: 'clamp(2px,0.4vw,6px)',
