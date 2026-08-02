@@ -276,6 +276,8 @@ export default function Postcard() {
                   fontSize: 'clamp(50px,7.8vw,110px)',
                   lineHeight: 1,
                   color: '#EBC77F',
+                  WebkitTextStroke: 'clamp(4px,0.55vw,8px) var(--marionberry)',
+                  paintOrder: 'stroke fill',
                   textShadow: '0 2px 22px rgba(20,8,12,0.6), 0 3px 6px rgba(20,8,12,0.45)',
                 }}
               >
