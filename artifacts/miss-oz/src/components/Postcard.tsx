@@ -116,7 +116,7 @@ export default function Postcard() {
   return (
     <section
       id="home"
-      className="relative pt-[clamp(40px,6vw,80px)] pb-[clamp(30px,5vw,60px)] overflow-hidden"
+      className="relative pt-[clamp(56px,7.5vw,100px)] pb-[clamp(30px,5vw,60px)] overflow-hidden"
       aria-label="Miss Oz Ice Cream & Dessert Cafe"
     >
       {/* Bunting hanging below the global border */}
