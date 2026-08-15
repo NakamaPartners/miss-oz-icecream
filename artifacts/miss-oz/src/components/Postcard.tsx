@@ -518,6 +518,14 @@ export default function Postcard() {
                   {n.label}
                 </a>
               ))}
+              <a
+                href={hrefFor('oz')}
+                onClick={(e) => { handleNav(e, 'oz'); setMenuOpen(false); }}
+                className="w-full text-center py-3.5 font-bold hover:bg-[rgba(178,78,121,0.06)] transition-colors rounded-md"
+                style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--berry)', letterSpacing: '1.5px' }}
+              >
+                ♥ Meet Oz!
+              </a>
               <div aria-hidden="true" className="w-12 h-px bg-[var(--marionberry)] opacity-30 my-3" />
               <a
                 href={UBEREATS_URL}
