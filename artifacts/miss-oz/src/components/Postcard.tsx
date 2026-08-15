@@ -11,6 +11,11 @@ const SLIDES: { src: string; alt: string; pos?: string }[] = [
     pos: 'center 55%',
   },
   {
+    src: '/images/slide-interior-bar.png',
+    alt: 'The Miss Oz interior — chalkboard menus, colorful bunting, pendant lights, and a full display case of flavors behind the counter',
+    pos: 'center 58%',
+  },
+  {
     src: '/images/slide-counter.png',
     alt: 'The Miss Oz counter — chalkboard menu boards covering the back wall listing ice cream flavors, sundaes, and drinks, with bunting and string lights above',
     pos: 'center 38%',
