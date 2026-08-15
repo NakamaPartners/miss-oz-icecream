@@ -24,8 +24,7 @@ const FLAVOR = {
     { label: 'Dairy-free' },
     { label: 'Coconut milk & cream' },
   ],
-  // ← Replace '' with the product photo path once it's ready:
-  poster:      '' as string,
+  poster:      '/images/coconut-sorbet-poster.jpg',
   accent:      '#2B8A84',
   badgeFrom:   '#6ECBC4',
   badgeTo:     '#1A6460',
