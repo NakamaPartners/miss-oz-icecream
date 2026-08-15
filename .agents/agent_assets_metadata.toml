@@ -1,0 +1,9 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "wOLhwB1xsX8D5jT7ZSdjU"
+uri = "file://artifacts/miss-oz/public/images/seasonal-pumpkin-poster.webp"
+type = "image"
+title = "Seasonal Pumpkin Poster"
+description = "The pumpkin flavor poster used in the FlavorDrop section"
