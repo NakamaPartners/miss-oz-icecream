@@ -11,6 +11,11 @@ const SLIDES: { src: string; alt: string; pos?: string }[] = [
     pos: 'center 55%',
   },
   {
+    src: '/images/slide-counter.png',
+    alt: 'The Miss Oz counter — chalkboard menu boards covering the back wall listing ice cream flavors, sundaes, and drinks, with bunting and string lights above',
+    pos: 'center 38%',
+  },
+  {
     src: '/images/storefront-photo-wide2.webp',
     alt: "The Miss Oz storefront in Portland's Pearl District — a corner shop with a neon Open sign in the window, lantern lights glowing inside, and a bike parked out front",
   },
