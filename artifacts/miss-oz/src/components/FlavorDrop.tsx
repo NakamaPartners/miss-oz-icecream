@@ -1,16 +1,53 @@
 import { motion } from 'framer-motion';
 
-const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
-const PUMPKIN = '#C0512A';
+// ─── Featured Flavor Config ───────────────────────────────────────────────────
+// To swap the featured flavor, update only this object.
+//
+// status:  'new'          → badge reads "New! / This Season"
+//          'coming-soon'  → badge reads "Soon! / Coming"
+//
+// poster:  path to the product or seasonal photo.
+//          Leave as '' to show a styled text-teaser card instead — useful when
+//          the photo isn't ready yet (e.g. a "Coming Soon" tease).
+//
+// accent / badgeFrom / badgeTo: adjust the color palette to match the flavor.
+//   Current palette → teal/coconut.
+//   For fall pumpkin, try: accent '#C0512A', badgeFrom '#E08A4C', badgeTo '#A44C22'
+// ─────────────────────────────────────────────────────────────────────────────
+const FLAVOR = {
+  name:        'Coconut Sorbet',
+  status:      'coming-soon' as 'new' | 'coming-soon',
+  script:      'something fresh is coming',
+  headline:    'Pure Coconut',
+  description: 'Smooth and creamy dairy-free sorbet made with natural coconut milk and coconut cream.',
+  tags: [
+    { label: 'Dairy-free' },
+    { label: 'Coconut milk & cream' },
+  ],
+  // ← Replace '' with the product photo path once it's ready:
+  poster:      '' as string,
+  accent:      '#2B8A84',
+  badgeFrom:   '#6ECBC4',
+  badgeTo:     '#1A6460',
+  glow:        'rgba(43,138,132,0.35)',
+  bgOverlay:   'rgba(234,248,246,0.76)',
+};
+// ─────────────────────────────────────────────────────────────────────────────
 
-// 16-point starburst polygon for the "NEW!" sticker
+// 16-point starburst polygon for the badge
 const BURST = `polygon(${Array.from({ length: 32 }, (_, i) => {
   const a = (Math.PI * 2 * i) / 32;
   const r = i % 2 === 0 ? 50 : 41;
   return `${(50 + r * Math.cos(a)).toFixed(2)}% ${(50 + r * Math.sin(a)).toFixed(2)}%`;
 }).join(',')})`;
 
-function Sparkle({ size = 22, color = PUMPKIN, delay = 0, className = '', style = {} as React.CSSProperties }) {
+function Sparkle({
+  size = 22,
+  color = FLAVOR.accent,
+  delay = 0,
+  className = '',
+  style = {} as React.CSSProperties,
+}) {
   return (
     <svg
       width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"
@@ -23,19 +60,24 @@ function Sparkle({ size = 22, color = PUMPKIN, delay = 0, className = '', style 
 }
 
 export default function FlavorDrop() {
+  const badge =
+    FLAVOR.status === 'new'
+      ? { top: 'New!', bottom: 'This Season' }
+      : { top: 'Soon!', bottom: 'Coming' };
+
   return (
     <section
       className="parlour-paper relative overflow-hidden py-[84px] md:py-[128px] px-[6vw]"
       style={{
         backgroundColor: 'var(--cream-hi)',
-        backgroundImage:
-          'linear-gradient(rgba(243,235,215,0.72), rgba(243,235,215,0.72)), url(/images/seasonbg-autumn.webp)',
+        backgroundImage: `linear-gradient(${FLAVOR.bgOverlay}, ${FLAVOR.bgOverlay}), url(/images/seasonbg-autumn.webp)`,
         backgroundSize: 'auto, 640px',
         backgroundRepeat: 'repeat',
       }}
     >
       <div className="grid grid-cols-1 md:grid-cols-[minmax(0,360px)_1fr] gap-12 md:gap-[72px] items-center max-w-[1240px] mx-auto">
-        {/* Framed seasonal poster — a lit lobby card */}
+
+        {/* ── Framed seasonal poster ── */}
         <motion.div
           initial={{ opacity: 0, y: 30, rotate: -4 }}
           whileInView={{ opacity: 1, y: 0, rotate: -1.6 }}
@@ -43,14 +85,14 @@ export default function FlavorDrop() {
           transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-[min(340px,84vw)]"
         >
-          {/* warm glow, as if the frame is lit */}
+          {/* warm glow behind the frame */}
           <div
             className="absolute -inset-6 rounded-[30px] blur-2xl -z-0"
-            style={{ background: 'radial-gradient(60% 55% at 50% 42%, rgba(216,124,58,0.42), transparent 70%)' }}
+            style={{ background: `radial-gradient(60% 55% at 50% 42%, ${FLAVOR.glow}, transparent 70%)` }}
             aria-hidden="true"
           />
 
-          {/* the frame */}
+          {/* dark wood frame */}
           <div
             className="poster-lift group relative z-10 rounded-[8px] p-[9px]"
             style={{
@@ -58,23 +100,66 @@ export default function FlavorDrop() {
               boxShadow: '0 24px 54px rgba(28,13,12,0.4), inset 0 0 0 1px rgba(255,244,214,0.14)',
             }}
           >
-            <div className="tape-strip tape-peel top-[-10px] right-[10%] rotate-3" aria-hidden="true" />
-            <div className="tape-strip tape-peel top-[-6px] left-[10%] -rotate-6" aria-hidden="true" />
+            <div className="tape-strip tape-peel top-[-10px] right-[10%] rotate-3"  aria-hidden="true" />
+            <div className="tape-strip tape-peel top-[-6px]  left-[10%] -rotate-6" aria-hidden="true" />
+
             <div className="rounded-[4px] p-[6px]" style={{ background: 'var(--cream-hi)' }}>
-              <img loading="lazy" decoding="async"
-                src="/images/seasonal-pumpkin-poster.webp"
-                alt="Seasonal flavor poster — housemade small-batch pumpkin ice cream at Miss Oz"
-                className="block w-full h-auto rounded-[2px]"
-                style={{ boxShadow: 'inset 0 0 0 1px rgba(28,13,12,0.12)' }}
-              />
+              {FLAVOR.poster ? (
+                /* Product photo — swap in the path via FLAVOR.poster above */
+                <img
+                  loading="lazy" decoding="async"
+                  src={FLAVOR.poster}
+                  alt={`${FLAVOR.name} — seasonal flavor at Miss Oz`}
+                  className="block w-full h-auto rounded-[2px]"
+                  style={{ boxShadow: 'inset 0 0 0 1px rgba(28,13,12,0.12)' }}
+                />
+              ) : (
+                /* Text-teaser card — displayed until a product photo is set */
+                <div
+                  className="w-full rounded-[2px] flex flex-col items-center justify-center gap-6 py-16 px-8"
+                  style={{
+                    minHeight: '320px',
+                    background: `linear-gradient(165deg, ${FLAVOR.accent}28 0%, #152F26 65%)`,
+                    boxShadow: 'inset 0 0 0 1px rgba(28,13,12,0.12)',
+                  }}
+                >
+                  <div
+                    className="text-center leading-[1.1]"
+                    style={{
+                      fontFamily: "'Cookie', cursive",
+                      fontSize: 'clamp(28px, 8vw, 42px)',
+                      color: 'var(--cream-hi)',
+                    }}
+                  >
+                    {FLAVOR.name}
+                  </div>
+                  <div
+                    className="text-center tracking-[4px] uppercase"
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '9px',
+                      fontWeight: 700,
+                      color: FLAVOR.accent,
+                    }}
+                  >
+                    ✦&nbsp;{FLAVOR.status === 'coming-soon' ? 'Coming Soon' : 'Now Available'}&nbsp;✦
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* vintage starburst "NEW!" sticker */}
-          <div className="absolute z-20 -top-7 left-1 -rotate-12 motion-safe:animate-[newBadgeSwing_3.5s_ease-in-out_infinite]" style={{ filter: 'drop-shadow(0 6px 12px rgba(28,13,12,0.4))' }}>
+          {/* starburst badge */}
+          <div
+            className="absolute z-20 -top-7 left-1 -rotate-12 motion-safe:animate-[newBadgeSwing_3.5s_ease-in-out_infinite]"
+            style={{ filter: 'drop-shadow(0 6px 12px rgba(28,13,12,0.4))' }}
+          >
             <div
               className="relative flex items-center justify-center w-[92px] h-[92px]"
-              style={{ background: `radial-gradient(circle at 38% 32%, #E08A4C 0%, ${PUMPKIN} 45%, #A44C22 100%)`, clipPath: BURST }}
+              style={{
+                background: `radial-gradient(circle at 38% 32%, ${FLAVOR.badgeFrom} 0%, ${FLAVOR.badgeTo} 100%)`,
+                clipPath: BURST,
+              }}
             >
               <div
                 className="flex flex-col items-center justify-center w-[62px] h-[62px] rounded-full text-center leading-none"
@@ -85,10 +170,13 @@ export default function FlavorDrop() {
                   className="uppercase text-[var(--cream-hi)] mt-[3px]"
                   style={{ fontFamily: 'var(--font-display)', fontSize: '17px', letterSpacing: '1px', textShadow: '1px 1px 0 rgba(28,13,12,0.35)' }}
                 >
-                  New!
+                  {badge.top}
                 </span>
-                <span className="uppercase text-[var(--cream-hi)] opacity-80 mt-[2px] tracking-[1.5px]" style={{ fontFamily: 'var(--font-sans)', fontSize: '6.5px', fontWeight: 700 }}>
-                  This Season
+                <span
+                  className="uppercase text-[var(--cream-hi)] opacity-80 mt-[2px] tracking-[1.5px]"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: '6.5px', fontWeight: 700 }}
+                >
+                  {badge.bottom}
                 </span>
               </div>
             </div>
@@ -102,18 +190,19 @@ export default function FlavorDrop() {
           >
             Yum! Yum!
           </div>
+
           <Sparkle size={26} color="var(--gold-hi)" delay={0.4} className="absolute z-20 -left-4 top-8" />
         </motion.div>
 
-        {/* Copy */}
+        {/* ── Copy block ── */}
         <div className="relative text-center md:text-left">
-          <Sparkle size={20} delay={0} className="hidden md:block absolute -top-4 right-10" />
+          <Sparkle size={20} delay={0}   className="hidden md:block absolute -top-4 right-10" />
           <Sparkle size={16} color="var(--berry)" delay={0.8} className="hidden md:block absolute top-8 -right-2" />
 
           <motion.span
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 text-[12px] tracking-[4px] uppercase font-bold mb-3"
-            style={{ color: PUMPKIN }}
+            style={{ color: FLAVOR.accent }}
           >
             <Sparkle size={15} delay={0.2} /> New Flavor Alert <Sparkle size={15} delay={0.6} />
           </motion.span>
@@ -122,41 +211,43 @@ export default function FlavorDrop() {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.08 }}
             className="block font-script text-[var(--berry-deep)] text-[clamp(28px,3.4vw,40px)] mb-1"
           >
-            fresh from the churn
+            {FLAVOR.script}
           </motion.span>
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.14 }}
             className="text-[clamp(40px,5.6vw,74px)] leading-[0.98] mb-5 text-[var(--cocoa)]"
-            style={macklin}
+            style={{ fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' }}
           >
-            Pumpkin, officially
+            {FLAVOR.headline}
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="italic text-[18px] leading-relaxed text-[#1d0e0d] opacity-85 max-w-[440px] mx-auto md:mx-0"
           >
-            Housemade pumpkin ice cream, churned in small batches — with a pumpkin puréed latte to match. Here for the season, gone when the leaves are.
+            {FLAVOR.description}
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.28 }}
             className="mt-7 flex flex-wrap gap-3 justify-center md:justify-start"
           >
-            <span className="py-2 px-4 rounded-full text-[14px] font-semibold text-[var(--cream-hi)] flex items-center gap-2 border-[1.5px] border-[var(--cocoa)] shadow-sm" style={{ background: 'var(--cocoa)' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2c-2 0-3 3-3 3s1 1 3 1 3-1 3-1-1-3-3-3z" /><path d="M5 10c-1.5 2-2 5-1 8 1.5 4 6 5 8 5s6.5-1 8-5c1-3 .5-6-1-8-2-3-5-4-8-4s-6 1-8 4z" /><path d="M8 14s1-1 2 0" /><path d="M16 14s-1-1-2 0" /><path d="M10 18s1-1 2 0" /></svg>
-              Pumpkin ice cream
-            </span>
-            <span className="py-2 px-4 rounded-full text-[14px] font-semibold text-[var(--cocoa)] flex items-center gap-2 border-[1.5px] border-[var(--gold-hi)] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.4)]" style={{ background: 'var(--gold-hi)' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1" /><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" /><line x1="6" y1="2" x2="6" y2="4" /><line x1="10" y1="2" x2="10" y2="4" /><line x1="14" y1="2" x2="14" y2="4" /></svg>
-              Pumpkin latte
-            </span>
+            {FLAVOR.tags.map((tag) => (
+              <span
+                key={tag.label}
+                className="py-2 px-4 rounded-full text-[14px] font-semibold text-[var(--cream-hi)] border-[1.5px] shadow-sm"
+                style={{ background: FLAVOR.accent, borderColor: FLAVOR.badgeTo }}
+              >
+                {tag.label}
+              </span>
+            ))}
           </motion.div>
         </div>
+
       </div>
 
-      {/* Checkerboard strip — a nod to the parlour floor */}
+      {/* Checkerboard parlour-floor strip */}
       <div className="checker-strip absolute bottom-0 left-0 right-0 h-[22px]" aria-hidden="true" />
     </section>
   );
