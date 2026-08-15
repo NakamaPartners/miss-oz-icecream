@@ -374,10 +374,28 @@ export default function Postcard() {
                 <a
                   href="#step-inside"
                   onClick={(e) => handleNav(e, 'step-inside')}
-                  className="inline-flex items-center justify-center rounded-full bg-[var(--berry-deep)] text-[#fbf2df] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-                  style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,14px)', padding: '9px clamp(20px,1.9vw,30px)', border: '1px solid rgba(251,242,223,0.25)' }}
+                  className="group relative inline-flex items-center justify-center gap-[clamp(6px,0.6vw,9px)] rounded-full overflow-hidden font-bold uppercase tracking-[2.5px] text-[#FBF2DF] transition-all duration-300 hover:scale-[1.06] hover:-translate-y-[2px] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{
+                    fontFamily: "'Libertinus Math', serif",
+                    fontSize: 'clamp(11px,0.95vw,14px)',
+                    padding: 'clamp(10px,1vw,13px) clamp(26px,2.4vw,40px)',
+                    background: 'linear-gradient(145deg, #943260 0%, #5E1735 52%, #481027 100%)',
+                    border: '1.5px solid rgba(251,242,223,0.38)',
+                    boxShadow: '0 8px 28px rgba(94,23,53,0.55), 0 2px 8px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,244,214,0.18)',
+                  }}
                 >
+                  {/* shine sweep on hover */}
+                  <span
+                    className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none"
+                    style={{ background: 'linear-gradient(90deg, transparent, rgba(255,244,214,0.14), transparent)' }}
+                    aria-hidden="true"
+                  />
                   View Menu
+                  <span
+                    aria-hidden="true"
+                    className="inline-block not-italic transition-transform duration-200 group-hover:translate-x-[3px]"
+                    style={{ color: 'var(--gold-hi)', fontSize: '0.88em', marginLeft: '-2px' }}
+                  >→</span>
                 </a>
               </div>
             </div>
