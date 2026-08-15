@@ -112,12 +112,18 @@ export default function Postcard() {
     return () => clearInterval(t);
   }, [paused, slide]);
 
+  // Prevent page scrolling behind the fixed mobile menu overlay
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
   const current = SLIDES[slide];
 
   return (
     <section
       id="home"
-      className="relative pt-[clamp(56px,7.5vw,100px)] pb-[clamp(30px,5vw,60px)] overflow-hidden"
+      className="relative pt-0 md:pt-[clamp(56px,7.5vw,100px)] pb-[clamp(30px,5vw,60px)] overflow-hidden"
       aria-label="Miss Oz Ice Cream & Dessert Cafe"
     >
       {/* Bunting hanging below the global border */}
@@ -129,79 +135,10 @@ export default function Postcard() {
         <Bunting />
       </div>
 
-      {/* MASTHEAD */}
-      <header className="relative z-20 mx-auto max-w-[1400px] px-[4vw] mt-[6px] sm:mt-[12px] mb-3 md:mb-[clamp(64px,8.5vw,116px)]">
+      {/* MASTHEAD — desktop only; mobile nav overlays the hero photo */}
+      <header className="relative z-20 mx-auto max-w-[1400px] px-[4vw] mt-[12px] mb-[clamp(64px,8.5vw,116px)] hidden md:block">
 
-        {/* ── MOBILE HEADER (hidden md+) ── */}
-        <div className="flex md:hidden flex-col items-center gap-0 pb-3">
-          {/* top bar: hamburger left */}
-          <div className="w-full flex items-center py-1">
-            <button
-              type="button"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((o) => !o)}
-              className="flex flex-col justify-center gap-[5px] w-[38px] h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-sm"
-            >
-              <span className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
-              <span className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300" style={{ opacity: menuOpen ? 0 : 1 }} />
-              <span className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
-            </button>
-          </div>
-          {/* logo row — in flow, no absolute positioning */}
-          <img
-            src="/images/logo-official.webp"
-            alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
-            className="h-auto"
-            style={{ width: 'clamp(140px,40vw,190px)', filter: 'drop-shadow(0 2px 8px rgba(93,26,58,0.18))' }}
-          />
-        </div>
-
-        {/* ── MOBILE SLIDE-DOWN MENU ── */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.nav
-              key="mobile-menu"
-              aria-label="Mobile navigation"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-              className="overflow-hidden md:hidden"
-            >
-              <div
-                className="flex flex-col items-center gap-1 py-5 rounded-[10px] mb-4"
-                style={{ background: 'rgba(242,225,194,0.97)', boxShadow: '0 8px 24px rgba(28,13,12,0.14)', border: '1.5px solid var(--marionberry)' }}
-              >
-                {NAV.map((n) => (
-                  <a
-                    key={n.label}
-                    href={hrefFor(n.target)}
-                    {...(n.target === 'ubereats' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    onClick={(e) => { handleNav(e, n.target); setMenuOpen(false); }}
-                    className="w-full text-center py-3 uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] hover:bg-[rgba(178,78,121,0.06)] transition-colors rounded-md"
-                    style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', letterSpacing: '2px' }}
-                  >
-                    {n.label}
-                  </a>
-                ))}
-                <div aria-hidden="true" className="w-12 h-px bg-[var(--marionberry)] opacity-30 my-1" />
-                <a
-                  href={UBEREATS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1 rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[2px] text-[11px] px-7 py-3 transition-colors hover:bg-[var(--berry)]"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Order Online
-                </a>
-              </div>
-            </motion.nav>
-          )}
-        </AnimatePresence>
-
-        {/* ── DESKTOP HEADER (hidden below md) ── */}
+        {/* ── DESKTOP HEADER ── */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -312,7 +249,7 @@ export default function Postcard() {
           }}
         >
           {/* 16:7 aspect mirrors the wide-cinema feel of the reference */}
-          <div className="relative w-full aspect-[4/3] sm:aspect-[16/7] overflow-hidden">
+          <div className="relative w-full aspect-[5/8] sm:aspect-[4/3] md:aspect-[16/7] overflow-hidden">
 
             {/* ── LAYER 1: rotating café backdrop ── */}
             <AnimatePresence initial={false}>
@@ -451,6 +388,28 @@ export default function Postcard() {
                 />
               ))}
             </div>
+
+            {/* ── MOBILE: hamburger + logo overlaid on hero photo ── */}
+            <button
+              type="button"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((o) => !o)}
+              className="md:hidden absolute top-4 left-4 z-30 flex flex-col justify-center items-center gap-[5px] w-[42px] h-[42px] rounded-xl pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+              style={{ background: 'rgba(242,225,194,0.88)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
+            >
+              <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
+              <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300" style={{ opacity: menuOpen ? 0 : 1 }} />
+              <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
+            </button>
+            <div className="md:hidden absolute top-3 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+              <img
+                src="/images/logo-official.webp"
+                alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
+                className="h-auto"
+                style={{ width: '88px', filter: 'drop-shadow(0 2px 10px rgba(20,8,12,0.35))' }}
+              />
+            </div>
           </div>
 
         </div>
@@ -475,6 +434,69 @@ export default function Postcard() {
           </div>
         </div>
       </div>
+
+      {/* MOBILE MENU — fixed full-screen overlay, slides in from top */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="mobile-menu-overlay"
+            className="md:hidden fixed inset-0 z-[980] flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+          >
+            {/* Tap-outside-to-close backdrop */}
+            <div
+              className="absolute inset-0"
+              style={{ background: 'rgba(20,8,12,0.72)' }}
+              onClick={() => setMenuOpen(false)}
+            />
+            <motion.nav
+              aria-label="Mobile navigation"
+              initial={{ y: '-100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '-100%' }}
+              transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+              className="relative flex flex-col items-center gap-0 pt-14 pb-8 px-6 rounded-b-[24px]"
+              style={{ background: 'rgba(242,225,194,0.98)', boxShadow: '0 12px 40px rgba(20,8,12,0.28)' }}
+            >
+              {/* ✕ close */}
+              <button
+                type="button"
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close menu"
+                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full text-[var(--cocoa)] hover:bg-[rgba(178,78,121,0.08)] transition-colors text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+              >✕</button>
+              {/* small logo */}
+              <img src="/images/logo-official.webp" alt="" aria-hidden="true" className="h-auto mb-5" style={{ width: '68px', opacity: 0.88 }} />
+              {NAV.map((n) => (
+                <a
+                  key={n.label}
+                  href={hrefFor(n.target)}
+                  {...(n.target === 'ubereats' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  onClick={(e) => { handleNav(e, n.target); setMenuOpen(false); }}
+                  className="w-full text-center py-3.5 uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] hover:bg-[rgba(178,78,121,0.06)] transition-colors rounded-md"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', letterSpacing: '2.5px' }}
+                >
+                  {n.label}
+                </a>
+              ))}
+              <div aria-hidden="true" className="w-12 h-px bg-[var(--marionberry)] opacity-30 my-3" />
+              <a
+                href={UBEREATS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[2px] text-[11px] px-7 py-3 transition-colors hover:bg-[var(--berry)]"
+                style={{ fontFamily: 'var(--font-sans)' }}
+                onClick={() => setMenuOpen(false)}
+              >
+                Place an Order
+              </a>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* SECTION PANELS — poster-like taped cards, click to explore */}
       <div id="step-inside" className="relative z-20 mx-auto max-w-[1300px] px-[4vw] sm:px-0 mt-[clamp(18px,2.4vw,30px)]" style={{ scrollMarginTop: '32px' }}>
