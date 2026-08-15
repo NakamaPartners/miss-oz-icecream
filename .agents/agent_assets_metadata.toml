@@ -7,3 +7,10 @@ uri = "file://artifacts/miss-oz/public/images/seasonal-pumpkin-poster.webp"
 type = "image"
 title = "Seasonal Pumpkin Poster"
 description = "The pumpkin flavor poster used in the FlavorDrop section"
+
+[[outputs]]
+id = "z0YttmesZtnV1HLft8MOy"
+uri = "file://artifacts/miss-oz/public/images/coconut-sorbet-poster_2.jpg"
+type = "image"
+title = "Coconut Sorbet Poster"
+description = "Vintage parlour poster for coconut sorbet — same layout as the pumpkin seasonal poster"

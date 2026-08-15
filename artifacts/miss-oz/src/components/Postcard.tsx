@@ -562,38 +562,68 @@ export default function Postcard() {
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
         </div>
 
-        {/* MOBILE CATEGORY TABS — horizontal scrollable pill strip, replaces the tall green card on small screens */}
-        <div className="md:hidden mb-[clamp(12px,2vw,16px)] px-[4vw]">
+        {/* MOBILE: striped awning + green category strip — visible only on mobile */}
+        <div className="md:hidden">
+          {/* awning — same cream+berry alternating stripe + scalloped edge as desktop panels */}
+          <div aria-hidden="true" className="relative z-10 -mb-[2px]">
+            <div
+              className="h-[14px] rounded-t-[10px]"
+              style={{
+                background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)',
+                boxShadow: 'inset 0 -4px 8px rgba(28,13,12,0.2), 0 3px 8px rgba(0,0,0,0.18)',
+              }}
+            />
+            <div
+              className="h-[9px]"
+              style={{
+                background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)',
+                WebkitMaskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)',
+                maskImage: 'radial-gradient(11px at 50% 0, #000 98%, transparent 100%)',
+                WebkitMaskSize: '22px 100%',
+                maskSize: '22px 100%',
+                WebkitMaskRepeat: 'repeat-x',
+                maskRepeat: 'repeat-x',
+                filter: 'drop-shadow(0 3px 4px rgba(0,0,0,0.18))',
+              } as React.CSSProperties}
+            />
+          </div>
+          {/* forest-green bar with horizontally scrollable category buttons */}
           <div
-            className="flex gap-[8px] overflow-x-auto pb-1"
-            style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+            className="px-3 py-[10px]"
+            style={{ background: 'linear-gradient(180deg, #1D4234 0%, #152B23 100%)' }}
           >
-            {MENU_CATEGORIES.map((c) => {
-              const active = activeCategory === c;
-              return (
-                <button
-                  key={c}
-                  type="button"
-                  onClick={() => setActiveCategory(c)}
-                  className="shrink-0 font-bold uppercase transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-                  style={{
-                    fontFamily: "'Libertinus Math', serif",
-                    fontSize: '11px',
-                    letterSpacing: '2px',
-                    padding: '8px 16px',
-                    borderRadius: '999px',
-                    color: active ? '#152F26' : '#F2E1C2',
-                    background: active
-                      ? 'linear-gradient(135deg, #FFE099 0%, #FFD068 100%)'
-                      : 'linear-gradient(135deg, #1A3D32 0%, #152B23 100%)',
-                    border: active ? '1.5px solid rgba(255,217,138,0.7)' : '1.5px solid rgba(242,225,194,0.2)',
-                    boxShadow: active ? '0 2px 14px rgba(255,209,104,0.4)' : '0 1px 4px rgba(0,0,0,0.25)',
-                  }}
-                >
-                  {c}
-                </button>
-              );
-            })}
+            <div
+              className="flex gap-[7px] overflow-x-auto"
+              style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+            >
+              {MENU_CATEGORIES.map((c) => {
+                const active = activeCategory === c;
+                return (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setActiveCategory(c)}
+                    className="shrink-0 font-bold uppercase transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                    style={{
+                      fontFamily: "'Libertinus Math', serif",
+                      fontSize: '10px',
+                      letterSpacing: '2px',
+                      padding: '6px 13px',
+                      borderRadius: '999px',
+                      whiteSpace: 'nowrap',
+                      color: active ? '#152F26' : 'rgba(242,225,194,0.85)',
+                      background: active
+                        ? 'linear-gradient(135deg, #FFE099 0%, #FFD068 100%)'
+                        : 'rgba(255,255,255,0.06)',
+                      border: active ? '1.5px solid rgba(255,217,138,0.65)' : '1.5px solid rgba(242,225,194,0.15)',
+                      boxShadow: active ? '0 2px 12px rgba(255,209,104,0.35)' : 'none',
+                    }}
+                  >
+                    {c}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -687,7 +717,7 @@ export default function Postcard() {
           {/* CENTER — interactive menu panel, content driven by selected category */}
           <section
             aria-label={`${activeCategory} menu`}
-            className="relative flex flex-col rounded-[10px] overflow-hidden px-[clamp(18px,2.6vw,42px)] py-[clamp(22px,2.6vw,36px)]"
+            className="relative flex flex-col rounded-t-none rounded-b-[10px] md:rounded-[10px] overflow-hidden px-[clamp(18px,2.6vw,42px)] py-[clamp(22px,2.6vw,36px)]"
             style={{
               background: 'linear-gradient(180deg, #FBF4E6, #F7EDDA)',
               boxShadow: '0 14px 34px rgba(28,13,12,0.18), inset 0 0 0 1px rgba(94,23,53,0.25), inset 0 0 0 5px rgba(251,244,230,1), inset 0 0 0 6px rgba(94,23,53,0.15)',
