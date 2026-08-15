@@ -65,16 +65,16 @@ export default function Home() {
       
       <Postcard />
       <Marquee />
-      <div id="about"><Story /></div>
-      <div id="oz"><MeetOz /></div>
+      <div id="about" style={{ scrollMarginTop: '32px' }}><Story /></div>
+      <div id="oz" style={{ scrollMarginTop: '32px' }}><MeetOz /></div>
       <Reels />
       <CheckerRule />
-      <div id="menu"><FlavorDrop /></div>
-      <div id="wholesale"><Wholesale /></div>
-      <div id="events"><Events /></div>
+      <div id="menu" style={{ scrollMarginTop: '32px' }}><FlavorDrop /></div>
+      <div id="wholesale" style={{ scrollMarginTop: '32px' }}><Wholesale /></div>
+      <div id="events" style={{ scrollMarginTop: '32px' }}><Events /></div>
       <CheckerRule />
-      <Guestbook />
-      <div id="vote"><VoteFlavor /></div>
+      <div id="contact" style={{ scrollMarginTop: '32px' }}><Guestbook /></div>
+      <div id="vote" style={{ scrollMarginTop: '32px' }}><VoteFlavor /></div>
       <Footer />
     </main>
     </MotionConfig>

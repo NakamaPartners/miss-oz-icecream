@@ -74,19 +74,20 @@ const UBEREATS_URL = 'https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-
 
 const hrefFor = (t: string) => (t === 'ubereats' ? UBEREATS_URL : t === 'home' ? '#home' : `#${t}`);
 
-function handleNav(e: React.MouseEvent<HTMLAnchorElement>, target: string) {
-  if (target === 'ubereats') return; // let the browser open the external link
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const behavior: ScrollBehavior = reduce ? 'auto' : 'smooth';
-  e.preventDefault();
-  if (target === 'home') {
-    window.scrollTo({ top: 0, behavior });
-    return;
-  }
+function scrollToId(target: string, behavior: ScrollBehavior = 'smooth') {
+  if (target === 'home') { window.scrollTo({ top: 0, behavior }); return; }
   const el = document.getElementById(target);
-  if (el) {
-    el.scrollIntoView({ behavior });
-  }
+  if (!el) return;
+  // Capture position at click-time so mid-scroll layout shifts (framer-motion) can't redirect us
+  const top = Math.round(el.getBoundingClientRect().top + window.scrollY);
+  window.scrollTo({ top, behavior });
+}
+
+function handleNav(e: React.MouseEvent<HTMLAnchorElement>, target: string) {
+  if (target === 'ubereats') return;
+  e.preventDefault();
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  scrollToId(target, reduce ? 'auto' : 'smooth');
 }
 
 /* Soft ink-on-paper fade on all four edges of the hero scene */
@@ -476,7 +477,7 @@ export default function Postcard() {
       </div>
 
       {/* SECTION PANELS — poster-like taped cards, click to explore */}
-      <div id="step-inside" className="relative z-20 mx-auto max-w-[1300px] px-[4vw] sm:px-0 mt-[clamp(18px,2.4vw,30px)]" style={{ scrollMarginTop: '24px' }}>
+      <div id="step-inside" className="relative z-20 mx-auto max-w-[1300px] px-[4vw] sm:px-0 mt-[clamp(18px,2.4vw,30px)]" style={{ scrollMarginTop: '32px' }}>
         <div className="flex items-center justify-center gap-3 mb-[clamp(14px,1.8vw,22px)]">
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
           <span className="text-[var(--berry-deep)] text-[12px] tracking-[4px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>Step Inside</span>
