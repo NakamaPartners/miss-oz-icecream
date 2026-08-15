@@ -43,6 +43,7 @@ const NAV = [
   { label: 'Event', target: 'events' },
   { label: 'Contact', target: 'contact' },
 ];
+// Desktop header split: NAV.slice(0, 2) → left | NAV.slice(2) → right
 
 type Tone = 'cream' | 'teal' | 'pink' | 'gold';
 
@@ -173,7 +174,7 @@ export default function Postcard() {
           <div className="flex flex-col justify-center py-[clamp(10px,1.1vw,14px)]" style={{ borderTop: '1.5px solid var(--marionberry)', borderBottom: '1.5px solid var(--marionberry)' }}>
             <div className="flex items-center justify-center gap-[clamp(14px,2.6vw,44px)]">
             <nav aria-label="Primary" className="flex items-center justify-center gap-[clamp(14px,2.6vw,44px)]">
-              {NAV.slice(0, 3).map((n) => (
+              {NAV.slice(0, 2).map((n) => (
                 <a
                   key={n.label}
                   href={hrefFor(n.target)}
@@ -220,7 +221,7 @@ export default function Postcard() {
           {/* RIGHT */}
           <div className="flex flex-col justify-center py-[clamp(10px,1.1vw,14px)]" style={{ borderTop: '1.5px solid var(--marionberry)', borderBottom: '1.5px solid var(--marionberry)' }}>
             <nav aria-label="Primary continued" className="flex items-center justify-center gap-[clamp(10px,1.8vw,30px)]">
-              {NAV.slice(3).map((n) => (
+              {NAV.slice(2).map((n) => (
                 <a
                   key={n.label}
                   href={hrefFor(n.target)}
