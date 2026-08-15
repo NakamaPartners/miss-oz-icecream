@@ -50,7 +50,7 @@ const TONES: Record<Tone, { bg: string; border: string; title: string; desc: str
 };
 
 const panels: { title: string; sub: string; desc: string; target: string; tone: Tone; img: string }[] = [
-  { title: 'Handmade Ice Cream', sub: 'Small batch, big heart', desc: 'Classic recipes, real flavor', target: 'menu', tone: 'cream', img: '/images/panel-icecream.webp' },
+  { title: 'Handmade Ice Cream', sub: 'Made fresh every week', desc: 'Classic recipes, real flavor', target: 'menu', tone: 'cream', img: '/images/panel-icecream.webp' },
   { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what\'s next', target: 'vote', tone: 'pink', img: '/images/panel-vote.webp' },
 ];
 
@@ -87,9 +87,6 @@ function handleNav(e: React.MouseEvent<HTMLAnchorElement>, target: string) {
   const el = document.getElementById(target);
   if (el) {
     el.scrollIntoView({ behavior });
-    // keep keyboard/screen-reader focus in sync with the scroll destination
-    el.setAttribute('tabindex', '-1');
-    el.focus({ preventScroll: true });
   }
 }
 
@@ -396,7 +393,7 @@ export default function Postcard() {
                   marginTop: 'clamp(8px,1vw,14px)',
                 }}
               >
-                Small Batch Ice Cream &amp; Handmade Desserts
+                Ice Cream &amp; Handmade Desserts · Portland, Oregon
               </div>
               <div
                 className="flex items-center justify-center gap-[clamp(10px,1vw,16px)]"
@@ -541,9 +538,9 @@ export default function Postcard() {
                   />
                   <div className="mt-[clamp(7px,0.8vw,11px)] text-center text-[var(--pink)]"
                     style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(24px,2.2vw,32px)', lineHeight: 0.95 }}>
-                    Small Batch
+                    Made with
                     <br />
-                    Big Heart
+                    Love
                   </div>
                 </div>
 
@@ -661,7 +658,7 @@ export default function Postcard() {
                 {/* block 1 */}
                 <p className="mt-[clamp(10px,1.1vw,16px)] text-center leading-relaxed text-[#EFD9C9]"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,0.95vw,14px)' }}>
-                  Handmade ice cream in small batches using classic recipes and real ingredients.
+                  Churned fresh every week using classic recipes and real ingredients — no shortcuts.
                 </p>
 
                 {/* diamond divider */}
