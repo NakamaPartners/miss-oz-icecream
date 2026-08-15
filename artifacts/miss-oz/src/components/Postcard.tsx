@@ -562,10 +562,45 @@ export default function Postcard() {
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
         </div>
 
+        {/* MOBILE CATEGORY TABS — horizontal scrollable pill strip, replaces the tall green card on small screens */}
+        <div className="md:hidden mb-[clamp(12px,2vw,16px)] px-[4vw]">
+          <div
+            className="flex gap-[8px] overflow-x-auto pb-1"
+            style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+          >
+            {MENU_CATEGORIES.map((c) => {
+              const active = activeCategory === c;
+              return (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setActiveCategory(c)}
+                  className="shrink-0 font-bold uppercase transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{
+                    fontFamily: "'Libertinus Math', serif",
+                    fontSize: '11px',
+                    letterSpacing: '2px',
+                    padding: '8px 16px',
+                    borderRadius: '999px',
+                    color: active ? '#152F26' : '#F2E1C2',
+                    background: active
+                      ? 'linear-gradient(135deg, #FFE099 0%, #FFD068 100%)'
+                      : 'linear-gradient(135deg, #1A3D32 0%, #152B23 100%)',
+                    border: active ? '1.5px solid rgba(255,217,138,0.7)' : '1.5px solid rgba(242,225,194,0.2)',
+                    boxShadow: active ? '0 2px 14px rgba(255,209,104,0.4)' : '0 1px 4px rgba(0,0,0,0.25)',
+                  }}
+                >
+                  {c}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-[270px_1fr_270px] lg:grid-cols-[302px_1fr_302px] gap-[clamp(14px,1.8vw,22px)] items-stretch">
 
           {/* LEFT — forest-green menu category card with striped awning (decorative list, like a painted parlor sign) */}
-          <aside aria-label="Menu categories" className="relative mx-auto w-full max-w-[320px] md:max-w-none flex flex-col">
+          <aside aria-label="Menu categories" className="relative mx-auto w-full max-w-[320px] md:max-w-none hidden md:flex flex-col">
             {/* striped awning — cream + marionberry */}
             <div aria-hidden="true" className="relative z-10 -mb-[2px]">
               <div className="h-[14px] rounded-t-[10px]" style={{ background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)', boxShadow: 'inset 0 -4px 8px rgba(28,13,12,0.2), 0 3px 8px rgba(0,0,0,0.18)' }} />
@@ -828,7 +863,7 @@ export default function Postcard() {
           </section>
 
           {/* RIGHT — plum "Come Slow Down" card with striped awning */}
-          <div className="relative mx-auto w-full max-w-[340px] md:max-w-none flex flex-col">
+          <div className="relative mx-auto w-full max-w-[340px] md:max-w-none hidden md:flex flex-col">
             {/* striped awning — cream + deep berry */}
             <div aria-hidden="true" className="relative z-10 -mb-[2px]">
               <div className="h-[14px] rounded-t-[10px]" style={{ background: 'repeating-linear-gradient(90deg, var(--cream-hi) 0 22px, var(--berry-deep) 22px 44px)', boxShadow: 'inset 0 -4px 8px rgba(28,13,12,0.2), 0 3px 8px rgba(0,0,0,0.18)' }} />
