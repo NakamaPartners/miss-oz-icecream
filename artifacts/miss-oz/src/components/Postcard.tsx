@@ -24,13 +24,17 @@ const SLIDES: { src: string; alt: string; pos?: string }[] = [
     alt: 'The tree-lined Pearl District sidewalk outside the cafe, with the pink Miss Oz sign and Ice Cream & Coffee painted on the window',
     pos: 'center 60%',
   },
+  {
+    src: '/images/slide-interior.jpg',
+    alt: 'The Miss Oz ice cream counter — display case full of flavors, chalkboard menu on the wall, string lights, and colorful bunting overhead',
+    pos: 'center 40%',
+  },
 ];
 
 const NAV = [
   { label: 'Home', target: 'home' },
   { label: 'About', target: 'about' },
   { label: 'Menu', target: 'step-inside' },
-  { label: 'Order Online', target: 'ubereats' },
   { label: 'Wholesale', target: 'wholesale' },
   { label: 'Event', target: 'events' },
   { label: 'Contact', target: 'contact' },
@@ -133,8 +137,8 @@ export default function Postcard() {
 
         {/* ── MOBILE HEADER (hidden md+) ── */}
         <div className="flex md:hidden flex-col items-center gap-0 pb-3">
-          {/* top bar: hamburger left, order right */}
-          <div className="w-full flex items-center justify-between py-1">
+          {/* top bar: hamburger left */}
+          <div className="w-full flex items-center py-1">
             <button
               type="button"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -146,15 +150,6 @@ export default function Postcard() {
               <span className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300" style={{ opacity: menuOpen ? 0 : 1 }} />
               <span className="block h-[2px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
             </button>
-            <a
-              href={UBEREATS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[1.5px] text-[10px] px-4 py-2 transition-colors hover:bg-[var(--berry)]"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              Order Online
-            </a>
           </div>
           {/* logo row — in flow, no absolute positioning */}
           <img
@@ -421,24 +416,16 @@ export default function Postcard() {
                 <span aria-hidden="true" className="inline-block h-px w-[clamp(24px,3vw,48px)]" style={{ background: 'rgba(251,242,223,0.6)' }} />
               </div>
               <div aria-hidden="true" style={{ color: '#F4A9C7', fontSize: 'clamp(11px,1vw,15px)', marginTop: 'clamp(6px,0.7vw,10px)', textShadow: '0 1px 6px rgba(20,8,12,0.6)' }}>♥</div>
-              {/* CTA buttons */}
-              <div className="flex flex-wrap justify-center gap-[clamp(8px,0.8vw,12px)] mt-[clamp(12px,1.6vw,20px)] pointer-events-auto">
+              {/* CTA button */}
+              <div className="flex justify-center mt-[clamp(12px,1.6vw,20px)] pointer-events-auto">
                 <a
-                  href="#menu"
-                  onClick={(e) => handleNav(e, 'menu')}
+                  href="#step-inside"
+                  onClick={(e) => handleNav(e, 'step-inside')}
                   className="inline-flex items-center justify-center rounded-full bg-[var(--berry-deep)] text-[#fbf2df] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
                   style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,14px)', padding: '9px clamp(20px,1.9vw,30px)', border: '1px solid rgba(251,242,223,0.25)' }}
                 >
                   View Menu
                 </a>
-                <button
-                  type="button"
-                  onClick={() => { window.open('https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-cool-moon-ice-cream/YEfj7ZgZS2m7Wm2og7PphQ', '_blank', 'noopener'); }}
-                  className="inline-flex items-center justify-center rounded-full text-[#fbf2df] font-bold tracking-[2px] uppercase transition-all duration-200 hover:bg-[rgba(251,242,223,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-                  style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,14px)', padding: '9px clamp(20px,1.9vw,30px)', border: '1.5px solid rgba(251,242,223,0.7)' }}
-                >
-                  Order Online
-                </button>
               </div>
             </div>
 
