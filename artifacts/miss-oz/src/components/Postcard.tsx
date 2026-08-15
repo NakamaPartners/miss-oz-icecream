@@ -48,10 +48,6 @@ const TONES: Record<Tone, { bg: string; border: string; title: string; desc: str
   gold: { bg: 'var(--gold)', border: 'var(--brick)', title: 'var(--cocoa)', desc: 'var(--cocoa)', eyebrow: 'var(--cocoa)', scrim: 'rgba(199,154,59,0.48)', bgimg: '/images/panelbg-gold.webp' },
 };
 
-const panels: { title: string; sub: string; desc: string; target: string; tone: Tone; img: string }[] = [
-  { title: 'Handmade Ice Cream', sub: 'Made fresh every week', desc: 'Classic recipes, real flavor', target: 'menu', tone: 'cream', img: '/images/panel-icecream.webp' },
-  { title: 'Vote the Next Flavor', sub: 'Next flavor', desc: 'You decide what\'s next', target: 'vote', tone: 'pink', img: '/images/panel-vote.webp' },
-];
 
 const FLAVORS: { name: string; desc: string }[] = [
   { name: 'Mexican Vanilla', desc: 'Creamy classic with real vanilla' },
@@ -775,50 +771,6 @@ export default function Postcard() {
             </div>
           </div>
           <img src="/images/icon-icecream-cart.png" alt="" aria-hidden="true" className="shrink-0" style={{ width: 'clamp(34px,3vw,42px)', height: 'auto' }} />
-        </div>
-
-        {/* original Step Inside poster cards */}
-        <div className="mt-[clamp(16px,2.2vw,26px)] grid grid-cols-1 sm:grid-cols-2 gap-[clamp(12px,1.6vw,20px)]">
-          {panels.map((p) => {
-            const t = TONES[p.tone];
-            return (
-              <a
-                key={p.title}
-                href={hrefFor(p.target)}
-                onClick={(e) => handleNav(e, p.target)}
-                aria-label={`${p.title} — go to the ${p.target} section`}
-                className="group relative flex items-stretch gap-3 rounded-[7px] border-2 p-[clamp(15px,1.7vw,20px)] min-h-[168px] transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"
-                style={{
-                  backgroundColor: t.bg,
-                  backgroundImage: `linear-gradient(${t.scrim}, ${t.scrim}), url(${t.bgimg})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  borderColor: t.border,
-                  boxShadow: 'inset 0 0 0 2px rgba(255,244,214,0.35), 0 6px 16px rgba(28,13,12,0.2)',
-                }}
-              >
-                <div className="tape-strip tape-peel top-[-8px] left-1/2 -translate-x-1/2 rotate-2" aria-hidden="true" />
-                <div className="flex flex-col justify-between flex-1 min-w-0 pt-2">
-                  <div>
-                    <span className="block text-[10.5px] tracking-[3px] uppercase font-bold mb-1.5" style={{ color: t.eyebrow, fontFamily: 'var(--font-sans)' }}>{p.sub}</span>
-                    <span className="block leading-[1.03] text-[clamp(21px,1.9vw,26px)]" style={{ color: t.title, fontFamily: 'var(--font-display)' }}>{p.title}</span>
-                  </div>
-                  <span className="mt-4 flex items-center gap-1.5 italic text-[12.5px] opacity-90" style={{ color: t.desc, fontFamily: 'var(--font-sans)' }}>
-                    {p.desc}
-                    <span aria-hidden="true" className="not-italic inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-                  </span>
-                </div>
-                <img
-                  src={p.img}
-                  alt=""
-                  aria-hidden="true"
-                  className="shrink-0 self-center w-[clamp(92px,11vw,128px)] h-auto object-contain transition-transform duration-200 group-hover:scale-105 group-hover:-rotate-2"
-                  style={{ filter: 'drop-shadow(0 4px 6px rgba(28,13,12,0.35))' }}
-                />
-              </a>
-            );
-          })}
         </div>
 
         {/* bottom ribbon */}

@@ -70,11 +70,11 @@ export default function Home() {
       <Reels />
       <CheckerRule />
       <div id="menu" style={{ scrollMarginTop: '32px' }}><FlavorDrop /></div>
+      <div id="vote" style={{ scrollMarginTop: '32px' }}><VoteFlavor /></div>
       <div id="wholesale" style={{ scrollMarginTop: '32px' }}><Wholesale /></div>
       <div id="events" style={{ scrollMarginTop: '32px' }}><Events /></div>
       <CheckerRule />
       <div id="contact" style={{ scrollMarginTop: '32px' }}><Guestbook /></div>
-      <div id="vote" style={{ scrollMarginTop: '32px' }}><VoteFlavor /></div>
       <Footer />
     </main>
     </MotionConfig>
