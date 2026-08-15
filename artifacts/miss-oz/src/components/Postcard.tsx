@@ -34,7 +34,6 @@ const SLIDES: { src: string; alt: string; pos?: string }[] = [
 const NAV = [
   { label: 'Home', target: 'home' },
   { label: 'About', target: 'about' },
-  { label: 'Menu', target: 'step-inside' },
   { label: 'Wholesale', target: 'wholesale' },
   { label: 'Event', target: 'events' },
   { label: 'Contact', target: 'contact' },
