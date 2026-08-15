@@ -482,7 +482,7 @@ export default function Postcard() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
+            transition={{ duration: 0.24, ease: 'easeOut' }}
           >
             {/* Tap-outside-to-close backdrop */}
             <div
@@ -494,8 +494,8 @@ export default function Postcard() {
               aria-label="Mobile navigation"
               initial={{ y: '-100%' }}
               animate={{ y: 0 }}
-              exit={{ y: '-100%' }}
-              transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+              exit={{ y: '-110%' }}
+              transition={{ type: 'spring', stiffness: 360, damping: 36, mass: 0.85 }}
               className="relative flex flex-col items-center gap-0 pt-14 pb-8 px-6 rounded-b-[24px]"
               style={{ background: 'rgba(242,225,194,0.98)', boxShadow: '0 12px 40px rgba(20,8,12,0.28)' }}
             >
@@ -507,15 +507,25 @@ export default function Postcard() {
                 className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full text-[var(--cocoa)] hover:bg-[rgba(178,78,121,0.08)] transition-colors text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
               >✕</button>
               {/* small logo */}
-              <img src="/images/logo-official.webp" alt="" aria-hidden="true" className="h-auto mb-5" style={{ width: '68px', opacity: 0.88 }} />
-              {NAV.map((n) => (
-                <a
+              <motion.img
+                src="/images/logo-official.webp"
+                alt=""
+                aria-hidden="true"
+                className="h-auto mb-5"
+                style={{ width: '68px', opacity: 0.88 }}
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 0.88, scale: 1 }}
+                transition={{ delay: 0.06, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              />
+              {NAV.map((n, idx) => (
+                <motion.a
                   key={n.label}
                   href={hrefFor(n.target)}
                   {...(n.target === 'ubereats' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.09 + idx * 0.045, duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
                   onClick={(e) => {
-                    // Clear body overflow before scrolling — iOS Safari won't honour
-                    // window.scrollTo while overflow:hidden is still applied.
                     document.body.style.overflow = '';
                     handleNav(e, n.target);
                     setMenuOpen(false);
@@ -524,10 +534,13 @@ export default function Postcard() {
                   style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', letterSpacing: '2.5px' }}
                 >
                   {n.label}
-                </a>
+                </motion.a>
               ))}
-              <a
+              <motion.a
                 href={hrefFor('oz')}
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.09 + NAV.length * 0.045, duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
                 onClick={(e) => {
                   document.body.style.overflow = '';
                   handleNav(e, 'oz');
@@ -537,18 +550,27 @@ export default function Postcard() {
                 style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--berry)', letterSpacing: '1.5px' }}
               >
                 ♥ Meet Oz!
-              </a>
-              <div aria-hidden="true" className="w-12 h-px bg-[var(--marionberry)] opacity-30 my-3" />
-              <a
+              </motion.a>
+              <motion.div
+                aria-hidden="true"
+                className="w-12 h-px bg-[var(--marionberry)] opacity-30 my-3"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 0.3, scaleX: 1 }}
+                transition={{ delay: 0.09 + (NAV.length + 1) * 0.045, duration: 0.3 }}
+              />
+              <motion.a
                 href={UBEREATS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.09 + (NAV.length + 2) * 0.045, duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
                 className="rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[2px] text-[11px] px-7 py-3 transition-colors hover:bg-[var(--berry)]"
                 style={{ fontFamily: 'var(--font-sans)' }}
                 onClick={() => setMenuOpen(false)}
               >
                 Place an Order
-              </a>
+              </motion.a>
             </motion.nav>
           </motion.div>
         )}
@@ -599,11 +621,12 @@ export default function Postcard() {
               {MENU_CATEGORIES.map((c) => {
                 const active = activeCategory === c;
                 return (
-                  <button
+                  <motion.button
                     key={c}
                     type="button"
                     onClick={() => setActiveCategory(c)}
-                    className="shrink-0 font-bold uppercase transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                    whileTap={{ scale: 0.93 }}
+                    className="relative shrink-0 font-bold uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
                     style={{
                       fontFamily: "'Libertinus Math', serif",
                       fontSize: '10px',
@@ -612,15 +635,23 @@ export default function Postcard() {
                       borderRadius: '999px',
                       whiteSpace: 'nowrap',
                       color: active ? '#152F26' : 'rgba(242,225,194,0.85)',
-                      background: active
-                        ? 'linear-gradient(135deg, #FFE099 0%, #FFD068 100%)'
-                        : 'rgba(255,255,255,0.06)',
-                      border: active ? '1.5px solid rgba(255,217,138,0.65)' : '1.5px solid rgba(242,225,194,0.15)',
-                      boxShadow: active ? '0 2px 12px rgba(255,209,104,0.35)' : 'none',
+                      border: '1.5px solid transparent',
+                      transition: 'color 0.25s ease',
                     }}
                   >
-                    {c}
-                  </button>
+                    {active && (
+                      <motion.span
+                        layoutId="mobile-pill-active"
+                        className="absolute inset-0 rounded-full"
+                        style={{
+                          background: 'linear-gradient(135deg, #FFE099 0%, #FFD068 100%)',
+                          boxShadow: '0 2px 14px rgba(255,209,104,0.4)',
+                        }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                      />
+                    )}
+                    <span className="relative">{c}</span>
+                  </motion.button>
                 );
               })}
             </div>
@@ -663,29 +694,37 @@ export default function Postcard() {
                         {i > 0 && (
                           <span aria-hidden="true" className="text-[var(--pink)] opacity-75 my-[clamp(9px,1vw,14px)]" style={{ fontSize: 10 }}>✦</span>
                         )}
-                        <button
+                        <motion.button
                           type="button"
                           aria-pressed={active}
                           onClick={() => setActiveCategory(c)}
-                          className={`w-full text-center font-bold uppercase tracking-[3px] transition-all duration-200 rounded-[6px] px-2 py-[7px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] ${active ? '' : 'hover:bg-[rgba(255,217,138,0.08)] hover:opacity-100'}`}
+                          whileTap={{ scale: 0.95 }}
+                          className="relative w-full text-center font-bold uppercase tracking-[3px] rounded-[6px] px-2 py-[7px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
                           style={{
                             fontFamily: "'Libertinus Math', serif",
                             fontSize: 'clamp(14px,1.25vw,18px)',
-                            color: active ? '#FFD98A' : '#F2E1C2',
-                            opacity: active ? 1 : 0.8,
-                            background: active ? 'linear-gradient(135deg, rgba(255,217,138,0.18) 0%, rgba(255,217,138,0.07) 100%)' : undefined,
-                            boxShadow: active ? 'inset 0 0 0 1px rgba(255,217,138,0.32), 0 2px 10px rgba(0,0,0,0.15)' : undefined,
-                            textShadow: active ? '0 0 20px rgba(255,217,138,0.6)' : undefined,
+                            color: active ? '#FFD98A' : 'rgba(242,225,194,0.78)',
+                            textShadow: active ? '0 0 20px rgba(255,217,138,0.55)' : undefined,
+                            transition: 'color 0.28s ease, text-shadow 0.28s ease',
                           }}
                         >
-                          {active ? (
-                            <span className="inline-flex items-center justify-center gap-[6px]">
-                              <span aria-hidden="true" className="text-[8px] opacity-70">✦</span>
-                              {c}
-                              <span aria-hidden="true" className="text-[8px] opacity-70">✦</span>
-                            </span>
-                          ) : c}
-                        </button>
+                          {active && (
+                            <motion.span
+                              layoutId="desk-cat-active"
+                              className="absolute inset-0 rounded-[6px]"
+                              style={{
+                                background: 'linear-gradient(135deg, rgba(255,217,138,0.22) 0%, rgba(255,217,138,0.07) 100%)',
+                                boxShadow: 'inset 0 0 0 1px rgba(255,217,138,0.36)',
+                              }}
+                              transition={{ type: 'spring', stiffness: 420, damping: 36 }}
+                            />
+                          )}
+                          <span className="relative inline-flex items-center justify-center gap-[6px]">
+                            {active && <span aria-hidden="true" className="text-[8px] opacity-70">✦</span>}
+                            {c}
+                            {active && <span aria-hidden="true" className="text-[8px] opacity-70">✦</span>}
+                          </span>
+                        </motion.button>
                       </div>
                     );
                   })}
@@ -726,10 +765,9 @@ export default function Postcard() {
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={activeCategory}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10, transition: { duration: 0.14, ease: 'easeIn' } }}
-                transition={{ duration: 0.26, ease: [0.25, 0.46, 0.45, 0.94] }}
+                initial={{ opacity: 0, filter: 'blur(8px)', y: 10 }}
+                animate={{ opacity: 1, filter: 'blur(0px)', y: 0, transition: { duration: 0.46, ease: [0.16, 1, 0.3, 1] } }}
+                exit={{ opacity: 0, filter: 'blur(4px)', y: -4, transition: { duration: 0.09, ease: 'easeIn' } }}
                 className="flex-1 flex flex-col"
               >
                 {/* ── header ── */}
