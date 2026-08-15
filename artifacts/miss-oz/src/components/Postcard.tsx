@@ -511,7 +511,13 @@ export default function Postcard() {
                   key={n.label}
                   href={hrefFor(n.target)}
                   {...(n.target === 'ubereats' ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  onClick={(e) => { handleNav(e, n.target); setMenuOpen(false); }}
+                  onClick={(e) => {
+                    // Clear body overflow before scrolling — iOS Safari won't honour
+                    // window.scrollTo while overflow:hidden is still applied.
+                    document.body.style.overflow = '';
+                    handleNav(e, n.target);
+                    setMenuOpen(false);
+                  }}
                   className="w-full text-center py-3.5 uppercase font-bold text-[var(--cocoa)] hover:text-[var(--berry)] hover:bg-[rgba(178,78,121,0.06)] transition-colors rounded-md"
                   style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', letterSpacing: '2.5px' }}
                 >
@@ -520,7 +526,11 @@ export default function Postcard() {
               ))}
               <a
                 href={hrefFor('oz')}
-                onClick={(e) => { handleNav(e, 'oz'); setMenuOpen(false); }}
+                onClick={(e) => {
+                  document.body.style.overflow = '';
+                  handleNav(e, 'oz');
+                  setMenuOpen(false);
+                }}
                 className="w-full text-center py-3.5 font-bold hover:bg-[rgba(178,78,121,0.06)] transition-colors rounded-md"
                 style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--berry)', letterSpacing: '1.5px' }}
               >
