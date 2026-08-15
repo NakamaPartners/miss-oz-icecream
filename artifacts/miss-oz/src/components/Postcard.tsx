@@ -64,7 +64,24 @@ const FLAVORS: { name: string; desc: string }[] = [
   { name: 'Marionberry', desc: 'Oregon marionberries in creamy goodness' },
 ];
 
-const MENU_CATEGORIES = ['Ice Cream', 'Sorbet', 'Sundaes', 'Croffle & Dessert', 'Drinks', 'Whole Cakes', 'Wholesale'];
+const MENU_CATEGORIES = ['Flavors', 'Sundaes', 'Croffles & Desserts', 'Drinks', 'Whole Cakes'];
+
+type MenuItem = { name: string; note?: string };
+const MENU_ITEMS: Record<string, MenuItem[]> = {
+  Sundaes: [
+    { name: 'Miss Oz Cherry Crown Sundae' },
+    { name: 'Midnight Fudge Sundae' },
+    { name: 'Birthday Cup Sundae' },
+  ],
+  Drinks: [
+    { name: 'Root Beer Float' },
+    { name: 'Coke Float' },
+    { name: 'Milkshakes' },
+  ],
+  'Whole Cakes': [
+    { name: 'Basque Cheesecake', note: 'Requires ordering at least seven days in advance' },
+  ],
+};
 
 const UBEREATS_URL = 'https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-cool-moon-ice-creams/YEfj7ZgZS2m7Wm2og7PphQ';
 
@@ -94,6 +111,7 @@ export default function Postcard() {
   const [slide, setSlide] = useState(0);
   const [paused, setPaused] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('Flavors');
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
@@ -529,22 +547,35 @@ export default function Postcard() {
                   gap: 'clamp(18px,2.2vw,30px)',
                 }}>
 
-                {/* category list */}
-                <div className="w-full flex flex-col items-center pt-[clamp(14px,1.6vw,22px)]">
-                  {MENU_CATEGORIES.map((c, i) => (
-                    <div key={c} className="flex flex-col items-center w-full">
-                      {i > 0 && (
-                        <span aria-hidden="true" className="text-[var(--pink)] opacity-75 my-[clamp(9px,1vw,14px)]" style={{ fontSize: 10 }}>✦</span>
-                      )}
-                      <span
-                        className="text-center font-bold uppercase tracking-[3.5px] text-[#F2E1C2]"
-                        style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(15px,1.35vw,19px)' }}
-                      >
-                        {c}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                {/* category buttons */}
+                <nav aria-label="Menu categories" className="w-full flex flex-col items-center pt-[clamp(14px,1.6vw,22px)]">
+                  {MENU_CATEGORIES.map((c, i) => {
+                    const active = activeCategory === c;
+                    return (
+                      <div key={c} className="flex flex-col items-center w-full">
+                        {i > 0 && (
+                          <span aria-hidden="true" className="text-[var(--pink)] opacity-75 my-[clamp(9px,1vw,14px)]" style={{ fontSize: 10 }}>✦</span>
+                        )}
+                        <button
+                          type="button"
+                          aria-pressed={active}
+                          onClick={() => setActiveCategory(c)}
+                          className="w-full text-center font-bold uppercase tracking-[3.5px] transition-all duration-200 rounded-sm px-2 py-[3px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                          style={{
+                            fontFamily: "'Libertinus Math', serif",
+                            fontSize: 'clamp(15px,1.35vw,19px)',
+                            color: active ? '#FFD98A' : '#F2E1C2',
+                            opacity: active ? 1 : 0.62,
+                            background: active ? 'rgba(255,217,138,0.1)' : 'transparent',
+                            textShadow: active ? '0 0 14px rgba(255,217,138,0.35)' : 'none',
+                          }}
+                        >
+                          {c}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </nav>
 
                 {/* cone icon + tagline */}
                 <div className="flex flex-col items-center mt-[clamp(14px,1.6vw,22px)]">
@@ -569,78 +600,125 @@ export default function Postcard() {
             </div>
           </aside>
 
-          {/* CENTER — cream "Ice Cream Flavors" panel */}
+          {/* CENTER — interactive menu panel, content driven by selected category */}
           <section
-            aria-label="Ice cream flavors"
+            aria-label={`${activeCategory} menu`}
             className="relative flex flex-col rounded-[10px] px-[clamp(18px,2.6vw,42px)] py-[clamp(22px,2.6vw,36px)]"
             style={{
               background: 'linear-gradient(180deg, #FBF4E6, #F7EDDA)',
               boxShadow: '0 14px 34px rgba(28,13,12,0.18), inset 0 0 0 1px rgba(94,23,53,0.25), inset 0 0 0 5px rgba(251,244,230,1), inset 0 0 0 6px rgba(94,23,53,0.15)',
             }}
           >
-            {/* header */}
+            {/* ── header ── */}
             <div className="text-center">
               <div className="flex items-center justify-center gap-2">
                 <span aria-hidden="true" className="text-[10px] text-[var(--pink)]">✦</span>
                 <h3 className="uppercase font-bold tracking-[4px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(17px,1.9vw,26px)' }}>
-                  Ice Cream Flavors
+                  {activeCategory === 'Flavors' ? 'Ice Cream Flavors' : activeCategory}
                 </h3>
                 <span aria-hidden="true" className="text-[10px] text-[var(--pink)]">✦</span>
               </div>
-              <div className="mt-0 text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontStyle: 'normal', fontSize: 'clamp(23px,2.1vw,31px)', lineHeight: 1, marginTop: '-2px' }}>
-                Handmade in Small Batches
-              </div>
+              {activeCategory === 'Flavors' && (
+                <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(23px,2.1vw,31px)', lineHeight: 1, marginTop: '-2px' }}>
+                  Handmade in Small Batches
+                </div>
+              )}
             </div>
 
-            {/* two-column flavor list — each column has hairline dividers between items */}
-            <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex flex-col md:flex-row gap-x-[clamp(20px,3vw,40px)] gap-y-0">
-              {[FLAVORS.slice(0, 6), FLAVORS.slice(6)].map((col, ci) => (
-                <div key={ci} className="flex-1 flex flex-col">
-                  {col.map((f, i) => (
+            {/* ── FLAVORS ── */}
+            {activeCategory === 'Flavors' && (
+              <>
+                <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex flex-col md:flex-row gap-x-[clamp(20px,3vw,40px)] gap-y-0">
+                  {[FLAVORS.slice(0, 6), FLAVORS.slice(6)].map((col, ci) => (
+                    <div key={ci} className="flex-1 flex flex-col">
+                      {col.map((f, i) => (
+                        <div
+                          key={f.name}
+                          className="flex items-start gap-[10px] py-[clamp(10px,1.1vw,15px)]"
+                          style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}
+                        >
+                          <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 8 }}>●</span>
+                          <div>
+                            <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,13px)' }}>
+                              {f.name}
+                            </div>
+                            <div className="mt-[3px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>
+                              {f.desc}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+                <div aria-hidden="true" className="mt-[clamp(16px,2vw,24px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
+                <p className="mt-[clamp(10px,1.2vw,16px)] text-center text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
+                  We rotate approximately 20 flavors — selection changes with the season.
+                </p>
+                <a
+                  href={UBEREATS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-[clamp(10px,1.2vw,16px)] self-center inline-flex items-center gap-1.5 rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[2px] transition-colors hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.85vw,12px)', padding: '8px 22px' }}
+                >
+                  See full menu on Uber Eats →
+                </a>
+              </>
+            )}
+
+            {/* ── CROFFLES & DESSERTS ── */}
+            {activeCategory === 'Croffles & Desserts' && (
+              <div className="flex-1 flex flex-col items-center justify-center gap-[clamp(16px,2vw,26px)] py-[clamp(24px,4vw,52px)]">
+                <p className="text-center leading-relaxed text-[#6E5A54] max-w-[300px]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,1vw,14px)' }}>
+                  Our housemade croffles and rotating dessert specials change with the season. See the full current selection on Uber Eats.
+                </p>
+                <a
+                  href={UBEREATS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[2px] transition-colors hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.85vw,12px)', padding: '9px 26px' }}
+                >
+                  Browse on Uber Eats →
+                </a>
+              </div>
+            )}
+
+            {/* ── SUNDAES / DRINKS / WHOLE CAKES ── */}
+            {(activeCategory === 'Sundaes' || activeCategory === 'Drinks' || activeCategory === 'Whole Cakes') && (
+              <>
+                <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex flex-col">
+                  {(MENU_ITEMS[activeCategory] ?? []).map((item, i) => (
                     <div
-                      key={f.name}
-                      className="flex items-start gap-[10px] py-[clamp(10px,1.1vw,15px)]"
+                      key={item.name}
+                      className="flex items-start gap-[10px] py-[clamp(12px,1.4vw,20px)]"
                       style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}
                     >
-                      <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 8 }}>●</span>
+                      <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
                       <div>
-                        <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,13px)' }}>
-                          {f.name}
+                        <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.05vw,15px)' }}>
+                          {item.name}
                         </div>
-                        <div className="mt-[3px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>
-                          {f.desc}
-                        </div>
+                        {item.note && (
+                          <div className="mt-[4px] leading-snug text-[#6E5A54] italic" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>
+                            {item.note}
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
-              ))}
-            </div>
-
-            {/* dotted divider */}
-            <div aria-hidden="true" className="mt-[clamp(16px,2vw,24px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
-
-            {/* bottom callouts */}
-            <div className="mt-[clamp(14px,1.8vw,22px)] grid grid-cols-1 sm:grid-cols-2 gap-[clamp(14px,2vw,28px)]">
-              <div className="flex items-start gap-3">
-                <img src="/images/icon-milk.png" alt="" aria-hidden="true" className="shrink-0 mt-[2px]" style={{ width: 'clamp(30px,2.6vw,36px)', height: 'auto' }} />
-                <div>
-                  <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>Churned Fresh</div>
-                  <div className="mt-[2px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.8vw,11.5px)' }}>
-                    We make our ice cream in small batches every week for the best flavor and texture.
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <img src="/images/icon-seasons.png" alt="" aria-hidden="true" className="shrink-0 mt-[2px]" style={{ width: 'clamp(30px,2.6vw,36px)', height: 'auto' }} />
-                <div>
-                  <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>Rotating Case</div>
-                  <div className="mt-[2px] leading-snug text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.8vw,11.5px)' }}>
-                    Seasonal flavors rotate throughout the year. Ask what's new!
-                  </div>
-                </div>
-              </div>
-            </div>
+                {activeCategory === 'Sundaes' && (
+                  <>
+                    <div aria-hidden="true" className="mt-[clamp(16px,2vw,24px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
+                    <p className="mt-[clamp(10px,1.2vw,16px)] text-center text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
+                      Details and pricing coming soon — ask us in store!
+                    </p>
+                  </>
+                )}
+              </>
+            )}
           </section>
 
           {/* RIGHT — plum "Come Slow Down" card with striped awning */}
