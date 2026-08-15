@@ -65,12 +65,13 @@ export default function Home() {
       
       <Postcard />
       <Marquee />
+      {/* New Flavor Alert + Vote sit right below the Step Inside menu panel */}
+      <div id="menu" style={{ scrollMarginTop: '32px' }}><FlavorDrop /></div>
+      <div id="vote" style={{ scrollMarginTop: '32px' }}><VoteFlavor /></div>
+      <CheckerRule />
       <div id="about" style={{ scrollMarginTop: '32px' }}><Story /></div>
       <div id="oz" style={{ scrollMarginTop: '32px' }}><MeetOz /></div>
       <Reels />
-      <CheckerRule />
-      <div id="menu" style={{ scrollMarginTop: '32px' }}><FlavorDrop /></div>
-      <div id="vote" style={{ scrollMarginTop: '32px' }}><VoteFlavor /></div>
       <div id="wholesale" style={{ scrollMarginTop: '32px' }}><Wholesale /></div>
       <div id="events" style={{ scrollMarginTop: '32px' }}><Events /></div>
       <CheckerRule />
