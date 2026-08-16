@@ -772,7 +772,7 @@ export default function Postcard() {
                   <motion.div
                     key={cat}
                     className="flex flex-col"
-                    style={{ gridArea: '1 / 1', pointerEvents: isActive ? 'auto' : 'none' } as React.CSSProperties}
+                    style={{ gridArea: '1 / 1', height: '100%', pointerEvents: isActive ? 'auto' : 'none' } as React.CSSProperties}
                     initial={false}
                     animate={{
                       opacity: isActive ? 1 : 0,
