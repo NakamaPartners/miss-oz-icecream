@@ -123,7 +123,7 @@ export default function FlavorStation() {
           ══════════════════════════════════════ */}
           <div className="flex flex-col gap-0">
 
-            {/* Text block */}
+            {/* Eyebrow + script + headline */}
             <motion.div
               initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -147,40 +147,18 @@ export default function FlavorStation() {
 
               {/* Giant groovy headline */}
               <h2
-                className="text-[clamp(64px,8.5vw,118px)] leading-[0.9] mb-[20px]"
+                className="text-[clamp(64px,8.5vw,118px)] leading-[0.9] mb-[28px]"
                 style={{ ...macklin, color: 'var(--cream-hi)', letterSpacing: '-0.02em' }}
               >{FLAVOR.headline}</h2>
-
-              {/* Description */}
-              <p className="text-[16px] italic leading-relaxed mb-[20px] max-w-[440px]"
-                style={{ color: 'rgba(251,242,223,0.68)' }}>
-                {FLAVOR.description}
-              </p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-[10px]">
-                {FLAVOR.tags.map(tag => (
-                  <span key={tag}
-                    className="py-[6px] px-[16px] rounded-full text-[12px] font-semibold"
-                    style={{
-                      color: '#9FD4BE',
-                      background: 'rgba(159,212,190,0.1)',
-                      border: '1px solid rgba(159,212,190,0.35)',
-                      fontFamily: 'var(--font-sans)',
-                    }}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </motion.div>
 
-            {/* Poster — pushed to bottom of left column */}
+            {/* Poster — immediately below the headline */}
             <motion.div
               initial={{ opacity: 0, y: 36, rotate: -5 }}
               whileInView={{ opacity: 1, y: 0, rotate: -2 }}
               viewport={{ once: true }}
               transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="relative mt-[44px] self-end max-w-[360px]"
+              className="relative mb-[32px] max-w-[360px]"
             >
               {/* Glow — more vivid on dark bg */}
               <div className="absolute -inset-8 rounded-[40px] blur-3xl -z-0"
@@ -228,6 +206,31 @@ export default function FlavorStation() {
                 aria-hidden="true">Yum! Yum!</div>
 
               <Sparkle size={18} color="#E3B44C" delay={0.4} className="absolute z-20 -left-2 top-8" />
+            </motion.div>
+
+            {/* Description + tags — below the poster */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+            >
+              <p className="text-[16px] italic leading-relaxed mb-[18px] max-w-[420px]"
+                style={{ color: 'rgba(251,242,223,0.68)' }}>
+                {FLAVOR.description}
+              </p>
+              <div className="flex flex-wrap gap-[10px]">
+                {FLAVOR.tags.map(tag => (
+                  <span key={tag}
+                    className="py-[6px] px-[16px] rounded-full text-[12px] font-semibold"
+                    style={{
+                      color: '#9FD4BE',
+                      background: 'rgba(159,212,190,0.1)',
+                      border: '1px solid rgba(159,212,190,0.35)',
+                      fontFamily: 'var(--font-sans)',
+                    }}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           </div>
 
