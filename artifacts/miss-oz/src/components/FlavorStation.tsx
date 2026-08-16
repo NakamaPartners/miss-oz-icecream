@@ -247,23 +247,9 @@ export default function FlavorStation() {
             id="vote"
             style={{ scrollMarginTop: '32px' }}
           >
-            {/* Section label */}
-            <div className="inline-flex items-center gap-[10px] mb-[4px] self-start px-[12px] py-[5px] rounded-full"
-              style={{ background: 'rgba(227,180,76,0.1)', border: '1px solid rgba(227,180,76,0.28)' }}>
-              <span className="text-[9px] tracking-[4px] uppercase font-bold"
-                style={{ color: '#E3B44C', fontFamily: 'var(--font-sans)' }}>
-                Community Vote
-              </span>
-            </div>
-
-            {/* Display headline — mirrors "Pure Coconut" weight on the left */}
+            {/* Display headline */}
             <div className="mb-[18px]">
-              <div className="text-[10px] tracking-[4px] uppercase font-bold mb-[10px] flex items-center gap-[10px]"
-                style={{ color: 'rgba(227,180,76,0.5)', fontFamily: 'var(--font-sans)' }}>
-                <div className="h-px flex-1" style={{ background: 'rgba(227,180,76,0.2)' }} />
-                your vote counts
-                <div className="h-px flex-1" style={{ background: 'rgba(227,180,76,0.2)' }} />
-              </div>
+              <div />
 
               <div className="text-[clamp(56px,6.5vw,88px)] leading-[0.88] mb-[14px]"
                 style={{ fontFamily: 'var(--font-groovy)', fontStyle: 'italic', color: '#E3B44C', letterSpacing: '-0.02em' }}>
