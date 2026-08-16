@@ -129,16 +129,24 @@ export default function FlavorStation() {
               viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="w-full"
             >
-              {/* Eyebrow */}
-              <div className="inline-flex items-center gap-[10px] mb-[18px] px-[14px] py-[6px] rounded-full"
-                style={{ background: 'rgba(159,212,190,0.12)', border: '1px solid rgba(159,212,190,0.28)' }}>
-                <Sparkle size={9} color="#9FD4BE" delay={0} />
-                <span className="text-[9.5px] tracking-[4px] uppercase font-bold"
-                  style={{ color: '#9FD4BE', fontFamily: 'var(--font-sans)' }}>
-                  New Flavor Alert
+              {/* Eyebrow — heboh edition */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, type: 'spring', stiffness: 280, damping: 18 }}
+                className="inline-flex items-center gap-[10px] mb-[20px] px-[18px] py-[8px] rounded-full relative"
+                style={{
+                  background: '#E3B44C',
+                  boxShadow: '0 0 0 3px rgba(227,180,76,0.25), 0 8px 28px rgba(227,180,76,0.35)',
+                  animation: 'eyebrowPulse 2.8s ease-in-out infinite',
+                }}
+              >
+                <span className="text-[11px] tracking-[3px] uppercase font-bold"
+                  style={{ color: '#0d2f2b', fontFamily: 'var(--font-sans)' }}>
+                  ★ New Flavor Alert ★
                 </span>
-                <Sparkle size={9} color="#9FD4BE" delay={1.1} />
-              </div>
+              </motion.div>
 
               {/* Script lead */}
               <div
