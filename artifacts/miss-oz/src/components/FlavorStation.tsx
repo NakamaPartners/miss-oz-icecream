@@ -121,15 +121,16 @@ export default function FlavorStation() {
           {/* ══════════════════════════════════════
               LEFT — Flavor Reveal
           ══════════════════════════════════════ */}
-          <div className="flex flex-col gap-0">
+          <div className="flex flex-col gap-0 items-center text-center">
 
             {/* Eyebrow + script + headline */}
             <motion.div
               initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full"
             >
               {/* Eyebrow */}
-              <div className="inline-flex items-center gap-[10px] mb-[20px] px-[14px] py-[6px] rounded-full"
+              <div className="inline-flex items-center gap-[10px] mb-[18px] px-[14px] py-[6px] rounded-full"
                 style={{ background: 'rgba(159,212,190,0.12)', border: '1px solid rgba(159,212,190,0.28)' }}>
                 <Sparkle size={9} color="#9FD4BE" delay={0} />
                 <span className="text-[9.5px] tracking-[4px] uppercase font-bold"
@@ -141,24 +142,24 @@ export default function FlavorStation() {
 
               {/* Script lead */}
               <div
-                className="text-[clamp(26px,3vw,38px)] leading-[1.1] mb-[8px]"
+                className="text-[clamp(22px,2.6vw,34px)] leading-[1.1] mb-[6px]"
                 style={{ fontFamily: 'var(--font-script)', color: '#E3B44C' }}
               >{FLAVOR.script}</div>
 
-              {/* Giant groovy headline */}
+              {/* Groovy headline */}
               <h2
-                className="text-[clamp(64px,8.5vw,118px)] leading-[0.9] mb-[28px]"
+                className="text-[clamp(56px,7vw,96px)] leading-[0.92] mb-[24px]"
                 style={{ ...macklin, color: 'var(--cream-hi)', letterSpacing: '-0.02em' }}
               >{FLAVOR.headline}</h2>
             </motion.div>
 
-            {/* Poster — immediately below the headline */}
+            {/* Poster — centered below the headline */}
             <motion.div
               initial={{ opacity: 0, y: 36, rotate: -5 }}
               whileInView={{ opacity: 1, y: 0, rotate: -2 }}
               viewport={{ once: true }}
               transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="relative mb-[32px] max-w-[360px]"
+              className="relative mb-[28px] w-full max-w-[320px]"
             >
               {/* Glow — more vivid on dark bg */}
               <div className="absolute -inset-8 rounded-[40px] blur-3xl -z-0"
@@ -208,19 +209,20 @@ export default function FlavorStation() {
               <Sparkle size={18} color="#E3B44C" delay={0.4} className="absolute z-20 -left-2 top-8" />
             </motion.div>
 
-            {/* Description + tags — below the poster */}
+            {/* Description + tags — centered below the poster */}
             <motion.div
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+              className="w-full"
             >
-              <p className="text-[16px] italic leading-relaxed mb-[18px] max-w-[420px]"
-                style={{ color: 'rgba(251,242,223,0.68)' }}>
+              <p className="text-[15px] italic leading-relaxed mb-[16px] mx-auto max-w-[380px]"
+                style={{ color: 'rgba(251,242,223,0.65)' }}>
                 {FLAVOR.description}
               </p>
-              <div className="flex flex-wrap gap-[10px]">
+              <div className="flex flex-wrap gap-[9px] justify-center">
                 {FLAVOR.tags.map(tag => (
                   <span key={tag}
-                    className="py-[6px] px-[16px] rounded-full text-[12px] font-semibold"
+                    className="py-[5px] px-[14px] rounded-full text-[11.5px] font-semibold"
                     style={{
                       color: '#9FD4BE',
                       background: 'rgba(159,212,190,0.1)',
