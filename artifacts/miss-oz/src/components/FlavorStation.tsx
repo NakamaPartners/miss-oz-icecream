@@ -251,19 +251,27 @@ export default function FlavorStation() {
               </span>
             </div>
 
-            {/* Script heading */}
-            <div className="text-[clamp(32px,3.6vw,46px)] leading-[1.05] mb-[6px]"
-              style={{ fontFamily: 'var(--font-script)', color: 'var(--cream-hi)' }}>
-              you decide
-            </div>
+            {/* Display headline — mirrors "Pure Coconut" weight on the left */}
+            <div className="mb-[18px]">
+              <div className="text-[10px] tracking-[4px] uppercase font-bold mb-[10px] flex items-center gap-[10px]"
+                style={{ color: 'rgba(227,180,76,0.5)', fontFamily: 'var(--font-sans)' }}>
+                <div className="h-px flex-1" style={{ background: 'rgba(227,180,76,0.2)' }} />
+                your vote counts
+                <div className="h-px flex-1" style={{ background: 'rgba(227,180,76,0.2)' }} />
+              </div>
 
-            {/* Subtext */}
-            <p className="text-[14.5px] italic mb-[22px] leading-relaxed"
-              style={{ color: 'rgba(251,242,223,0.58)' }}>
-              {revealed
-                ? 'Tallied! We churn the winner next month.'
-                : "Every couple of months, the neighborhood picks what we churn next. One vote each."}
-            </p>
+              <div className="text-[clamp(56px,6.5vw,88px)] leading-[0.88] mb-[14px]"
+                style={{ fontFamily: 'var(--font-groovy)', fontStyle: 'italic', color: '#E3B44C', letterSpacing: '-0.02em' }}>
+                you decide.
+              </div>
+
+              <p className="text-[15px] italic leading-relaxed"
+                style={{ color: 'rgba(251,242,223,0.55)' }}>
+                {revealed
+                  ? 'Tallied — we churn the winner next month. ♥'
+                  : 'Every couple of months, the neighborhood picks what we churn next. One vote each.'}
+              </p>
+            </div>
 
             {/* ── Accordion ── */}
             <div className="rounded-[16px] overflow-hidden"
