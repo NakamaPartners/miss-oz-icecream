@@ -4,10 +4,9 @@ import Marquee from '../components/Marquee';
 import Story from '../components/Story';
 import Wholesale from '../components/Wholesale';
 import Events from '../components/Events';
-import VoteFlavor from '../components/VoteFlavor';
 import Guestbook from '../components/Guestbook';
 import Footer from '../components/Footer';
-import FlavorDrop from '../components/FlavorDrop';
+import FlavorStation from '../components/FlavorStation';
 import MeetOz from '../components/MeetOz';
 import Reels from '../components/Reels';
 import PawTrail from '../components/PawTrail';
@@ -65,9 +64,8 @@ export default function Home() {
       
       <Postcard />
       <Marquee />
-      {/* New Flavor Alert + Vote sit right below the Step Inside menu panel */}
-      <div id="menu" style={{ scrollMarginTop: '32px' }}><FlavorDrop /></div>
-      <div id="vote" style={{ scrollMarginTop: '32px' }}><VoteFlavor /></div>
+      {/* New Flavor Alert + Vote for Next Flavor — merged below the menu panel */}
+      <div id="menu" style={{ scrollMarginTop: '32px' }}><FlavorStation /></div>
       <CheckerRule />
       <div id="about" style={{ scrollMarginTop: '32px' }}><Story /></div>
       <div id="oz" style={{ scrollMarginTop: '32px' }}><MeetOz /></div>
