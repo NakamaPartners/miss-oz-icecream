@@ -1,18 +1,23 @@
 export default function Marquee() {
-  // "Small Batch, Big Heart" — the one place this slogan lives on the site.
-  // Alternates script gold + display cream for rhythm as it scrolls.
+  // Scrolling brand ribbon — Portland roots, handmade, est. 2007.
   const segment = (
     <>
       <span className="font-script text-[var(--gold-hi)] font-normal text-[28px] md:text-[38px] whitespace-nowrap"
         style={{ textShadow: '0 0 14px rgba(227,180,76,0.75), 0 0 28px rgba(227,180,76,0.4)' }}>
-        Small Batch
+        Portland's Own
       </span>
       <span className="text-[var(--gold-hi)] text-[16px] md:text-[20px]"
         style={{ textShadow: '0 0 8px rgba(227,180,76,0.8)' }}>✦</span>
       <span className="font-display font-normal uppercase text-[22px] md:text-[30px] text-[var(--cream)] tracking-[3px] whitespace-nowrap"
         style={{ textShadow: '0 0 12px rgba(242,225,194,0.55), 0 0 26px rgba(242,225,194,0.3)' }}>
-        Big Heart
+        Ice Cream Cafe
         <span className="ml-2 not-uppercase" style={{ color: 'var(--pink)', textShadow: '0 0 10px rgba(244,169,199,0.7)' }}>♥</span>
+      </span>
+      <span className="text-[var(--gold-hi)] text-[16px] md:text-[20px]"
+        style={{ textShadow: '0 0 8px rgba(227,180,76,0.8)' }}>✦</span>
+      <span className="font-display font-normal uppercase text-[18px] md:text-[24px] text-[var(--cream)] tracking-[4px] whitespace-nowrap"
+        style={{ textShadow: '0 0 10px rgba(242,225,194,0.4)' }}>
+        Est. 2007
       </span>
       <span className="text-[var(--gold-hi)] text-[16px] md:text-[20px]"
         style={{ textShadow: '0 0 8px rgba(227,180,76,0.8)' }}>✦</span>

@@ -205,7 +205,9 @@ export default function Postcard() {
               <span aria-hidden="true" className="absolute -bottom-[9px] -right-[10px] text-[8px] text-[var(--berry)]" style={{ animation: 'twinkle 2.6s 0.9s infinite' }}>✦</span>
               <span aria-hidden="true" className="absolute -top-[8px] -right-[16px] text-[7px] text-[var(--gold,#B8860B)]" style={{ animation: 'twinkle 2.6s 1.7s infinite' }}>✦</span>
               <span className="block transition-colors group-hover:text-[var(--berry)] meet-oz-wiggle">
-                <span className="inline-block tracking-[1.5px] text-[var(--berry)] group-hover:text-[var(--gold,#B8860B)]">
+                Small Batch, Big Heart
+                <br />
+                <span className="inline-block mt-[2px] tracking-[1.5px] text-[var(--berry)] group-hover:text-[var(--gold,#B8860B)]">
                   <span aria-hidden="true" className="inline-block mr-[3px] meet-oz-heart">♥</span>
                   Meet Oz!
                   <span aria-hidden="true" className="inline-block ml-[3px] meet-oz-arrow">→</span>
