@@ -67,9 +67,10 @@ export default function FlavorStation() {
   const reduce = !!useReducedMotion();
   const badge  = FLAVOR.status === 'new' ? { top: 'New!', bottom: 'This Season' } : { top: 'Soon!', bottom: 'Coming' };
 
-  const [votes, setVotes]   = useState<number[]>(SEED_VOTES);
-  const [choice, setChoice] = useState<number | null>(null);
-  const [burst,  setBurst]  = useState<number | null>(null);
+  const [votes,    setVotes]   = useState<number[]>(SEED_VOTES);
+  const [choice,   setChoice]  = useState<number | null>(null);
+  const [burst,    setBurst]   = useState<number | null>(null);
+  const [expanded, setExpanded] = useState<number | null>(null);
   const burstTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const total    = votes.reduce((a, b) => a + b, 0);
@@ -246,114 +247,173 @@ export default function FlavorStation() {
                 : 'Every couple of months, the neighborhood picks what we churn next.'}
             </p>
 
-            {/* Horizontal vote cards — compact, stack vertically */}
-            <div className="flex flex-col gap-[10px]">
+            {/* ── Accordion vote list ── */}
+            <div className="rounded-[14px] overflow-hidden"
+              style={{
+                border: '1.5px solid rgba(43,138,132,0.22)',
+                background: 'rgba(255,252,243,0.72)',
+                boxShadow: '0 4px 18px rgba(28,13,12,0.08)',
+              }}>
               {CARDS.map((card, i) => {
                 const pct      = total ? Math.round((votes[i] / total) * 100) : 0;
                 const isChoice = choice === i;
                 const isLeader = revealed && i === leader;
+                const isOpen   = expanded === i;
+                const isLast   = i === CARDS.length - 1;
+
                 return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 18 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.12 + i * 0.07 }}
-                    animate={isChoice && !reduce ? { scale: [1, 1.025, 1] } : {}}
-                    className="bulbframe relative rounded-[12px] p-[9px]"
-                    style={{
-                      background: 'var(--teal-deep)',
-                      boxShadow: isLeader
-                        ? '0 8px 24px rgba(140,42,84,0.28), 0 0 0 1.5px var(--gold-hi)'
-                        : '0 3px 12px rgba(28,13,12,0.2)',
-                      transition: 'box-shadow 0.45s ease',
-                    }}
-                  >
-                    <AnimatePresence>
-                      {isLeader && (
+                  <div key={i}>
+
+                    {/* ── Row header — always visible, acts as toggle ── */}
+                    <button
+                      onClick={() => setExpanded(isOpen ? null : i)}
+                      className="w-full flex items-center gap-[12px] px-[14px] py-[11px] text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--teal)]"
+                      style={{
+                        background: isOpen ? `${FLAVOR.accent}12` : 'transparent',
+                        cursor: 'pointer',
+                      }}
+                      aria-expanded={isOpen}
+                    >
+                      {/* Tiny flavor thumbnail */}
+                      <div className="shrink-0 w-[38px] h-[38px] rounded-[6px] flex items-center justify-center p-[3px]"
+                        style={{ background: card.bg, boxShadow: 'inset 0 0 0 1px rgba(28,13,12,0.07)' }}>
+                        <img loading="lazy" src={card.img} alt="" aria-hidden="true"
+                          className="w-full h-full object-contain"
+                          style={{ filter: 'drop-shadow(0 1px 3px rgba(28,13,12,0.2))' }} />
+                      </div>
+
+                      {/* Name + note */}
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[16px] leading-tight text-[var(--cocoa)]" style={macklin}>
+                          {card.name}
+                          {isLeader && (
+                            <span className="ml-[8px] text-[9px] tracking-[1px] uppercase font-bold px-[6px] py-[2px] rounded-full text-[var(--cream-hi)]"
+                              style={{ background: 'var(--berry-deep)', verticalAlign: 'middle' }}>
+                              ★ Leading
+                            </span>
+                          )}
+                        </div>
+                        <div className="font-script-alt text-[12px] text-[var(--berry)] leading-snug truncate">
+                          {card.note}
+                        </div>
+                      </div>
+
+                      {/* Expand indicator */}
+                      <motion.div
+                        animate={{ rotate: isOpen ? 45 : 0 }}
+                        transition={{ duration: 0.22, ease: 'easeInOut' }}
+                        className="shrink-0 w-[22px] h-[22px] rounded-full flex items-center justify-center text-[14px] font-bold leading-none"
+                        style={{
+                          color: FLAVOR.accent,
+                          background: isOpen ? `${FLAVOR.accent}18` : 'transparent',
+                          border: `1.5px solid ${FLAVOR.accent}50`,
+                        }}
+                        aria-hidden="true"
+                      >+</motion.div>
+                    </button>
+
+                    {/* ── Expandable card "box" ── */}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
                         <motion.div
-                          initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.3, type: 'spring', stiffness: 280, damping: 18 }}
-                          className="absolute -top-[10px] -right-[8px] z-20 px-[8px] py-[3px] rounded-full text-[9px] tracking-[1px] uppercase font-bold text-[var(--cream-hi)]"
-                          style={{ background: 'var(--berry-deep)', border: '1.5px solid var(--gold-hi)' }}
-                        >★ Leading</motion.div>
+                          key="box"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                          style={{ overflow: 'hidden' }}
+                        >
+                          {/* The full card — teal-deep outer, cream inner */}
+                          <div className="bulbframe relative mx-[12px] mb-[12px] rounded-[11px] p-[8px]"
+                            style={{
+                              background: 'var(--teal-deep)',
+                              boxShadow: isLeader
+                                ? '0 8px 28px rgba(140,42,84,0.26), 0 0 0 1.5px var(--gold-hi)'
+                                : '0 4px 16px rgba(28,13,12,0.24)',
+                            }}>
+
+                            <div className="flex items-center gap-[12px] rounded-[7px] overflow-hidden relative"
+                              style={{ background: card.bg, boxShadow: 'inset 0 0 0 1px rgba(28,13,12,0.06)' }}>
+
+                              {/* Larger image in the expanded box */}
+                              <div className="shrink-0 w-[96px] h-[96px] flex items-center justify-center p-[8px]">
+                                <img loading="lazy" src={card.img} alt="" aria-hidden="true"
+                                  className="w-full h-full object-contain"
+                                  style={{ filter: 'drop-shadow(0 3px 6px rgba(28,13,12,0.24))' }} />
+                              </div>
+
+                              {/* Details + action */}
+                              <div className="flex-1 py-[12px] pr-[14px]">
+                                <div className="text-[18px] leading-tight text-[var(--cocoa)] mb-[2px]" style={macklin}>
+                                  {card.name}
+                                </div>
+                                <div className="font-script-alt text-[13px] text-[var(--berry)] mb-[10px]">
+                                  {card.note}
+                                </div>
+
+                                {/* Sparkle burst */}
+                                {burst === i && !reduce && (
+                                  <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-30">
+                                    {Array.from({ length: 8 }).map((_, s) => {
+                                      const ang = (s / 8) * Math.PI * 2;
+                                      return (
+                                        <motion.span key={s} className="absolute text-[12px]"
+                                          initial={{ opacity: 1, x: 0, y: 0, scale: 0.5 }}
+                                          animate={{ opacity: 0, x: Math.cos(ang)*60, y: Math.sin(ang)*60, scale: 1 }}
+                                          transition={{ duration: 0.8, ease: 'easeOut' }}
+                                          style={{ color: s % 2 ? 'var(--gold-hi)' : 'var(--berry)' }}>
+                                          {s % 3 === 0 ? '♥' : '✦'}
+                                        </motion.span>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+
+                                {!revealed ? (
+                                  <button onClick={() => handleVote(i)}
+                                    className="relative vote-btn clickable font-sans bg-[var(--cocoa)] text-[var(--cream)] border-none py-[7px] px-[16px] rounded-full text-[12px] font-semibold tracking-[0.4px] mech-btn hover:bg-[var(--berry)] hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--berry)]">
+                                    Vote for this
+                                    {burst === i && !reduce && [...Array(8)].map((_, j) => {
+                                      const angle = (j * 45 + Math.random() * 20 - 10) * (Math.PI / 180);
+                                      const dist  = 34 + Math.random() * 18;
+                                      const colors = ['var(--berry)', 'var(--gold-hi)', 'var(--cream-hi)'];
+                                      return (
+                                        <span key={j} className="sprinkle"
+                                          style={{ '--tx': Math.cos(angle)*dist+'px', '--ty': Math.sin(angle)*dist+'px', '--r': Math.random()*360+'deg', backgroundColor: colors[j%colors.length] } as React.CSSProperties} />
+                                      );
+                                    })}
+                                  </button>
+                                ) : (
+                                  <div className="flex items-center gap-[8px]">
+                                    <div className="text-[22px] leading-none shrink-0" style={{ ...macklin, color: 'var(--cocoa)' }}>
+                                      <CountUp to={pct} reduce={reduce} suffix="%" />
+                                    </div>
+                                    <div className="flex-1">
+                                      <div className="h-[6px] bg-[rgba(28,13,12,0.12)] rounded-full overflow-hidden">
+                                        <motion.div className="h-full rounded-full"
+                                          style={{ background: isLeader ? 'var(--gold)' : FLAVOR.accent }}
+                                          initial={{ width: 0 }} animate={{ width: `${pct}%` }}
+                                          transition={reduce ? { duration: 0 } : { duration: 0.9, ease: 'easeOut', delay: 0.1 }} />
+                                      </div>
+                                      <div className="text-[10px] mt-[3px] text-[var(--cocoa)] opacity-55">
+                                        <CountUp to={votes[i]} reduce={reduce} /> votes
+                                        {isChoice && <span className="ml-1 text-[var(--berry-deep)] font-bold">· your pick ♥</span>}
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
                       )}
                     </AnimatePresence>
 
-                    {/* Horizontal layout inside the card */}
-                    <div className="flex items-center gap-[10px] rounded-[7px] overflow-hidden"
-                      style={{ background: card.bg, boxShadow: 'inset 0 0 0 1px rgba(28,13,12,0.06)' }}>
-
-                      {/* Flavor image */}
-                      <div className="shrink-0 w-[80px] h-[80px] flex items-center justify-center p-[6px]">
-                        <img loading="lazy" decoding="async" src={card.img} alt="" aria-hidden="true"
-                          className="w-full h-full object-contain"
-                          style={{ filter: 'drop-shadow(0 2px 4px rgba(28,13,12,0.22))' }} />
-                      </div>
-
-                      {/* Text + action */}
-                      <div className="flex-1 py-[10px] pr-[12px]">
-                        <div className="font-normal text-[16px] mb-[1px] text-[var(--cocoa)] leading-tight" style={macklin}>
-                          {card.name}
-                        </div>
-                        <div className="font-script-alt text-[12px] text-[var(--berry)] mb-[8px] leading-snug">
-                          {card.note}
-                        </div>
-
-                        {/* Sparkle burst */}
-                        {burst === i && !reduce && (
-                          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-30">
-                            {Array.from({ length: 8 }).map((_, s) => {
-                              const ang = (s / 8) * Math.PI * 2;
-                              return (
-                                <motion.span key={s} className="absolute text-[11px]"
-                                  initial={{ opacity: 1, x: 0, y: 0, scale: 0.5 }}
-                                  animate={{ opacity: 0, x: Math.cos(ang)*55, y: Math.sin(ang)*55, scale: 1 }}
-                                  transition={{ duration: 0.75, ease: 'easeOut' }}
-                                  style={{ color: s % 2 ? 'var(--gold-hi)' : 'var(--berry)' }}>
-                                  {s % 3 === 0 ? '♥' : '✦'}
-                                </motion.span>
-                              );
-                            })}
-                          </div>
-                        )}
-
-                        {!revealed ? (
-                          <button onClick={() => handleVote(i)}
-                            className="relative vote-btn clickable font-sans bg-[var(--cocoa)] text-[var(--cream)] border-none py-[6px] px-[14px] rounded-full text-[11.5px] font-semibold tracking-[0.4px] mech-btn hover:bg-[var(--berry)] hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--berry)]">
-                            Vote for this
-                            {burst === i && !reduce && [...Array(8)].map((_, j) => {
-                              const angle = (j * 45 + Math.random() * 20 - 10) * (Math.PI / 180);
-                              const dist  = 32 + Math.random() * 18;
-                              const colors = ['var(--berry)', 'var(--gold-hi)', 'var(--cream-hi)'];
-                              return (
-                                <span key={j} className="sprinkle"
-                                  style={{ '--tx': Math.cos(angle)*dist+'px', '--ty': Math.sin(angle)*dist+'px', '--r': Math.random()*360+'deg', backgroundColor: colors[j%colors.length] } as React.CSSProperties} />
-                              );
-                            })}
-                          </button>
-                        ) : (
-                          <div className="flex items-center gap-[8px]">
-                            <div className="text-[20px] leading-none shrink-0" style={{ ...macklin, color: 'var(--cocoa)' }}>
-                              <CountUp to={pct} reduce={reduce} suffix="%" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="h-[5px] bg-[rgba(28,13,12,0.12)] rounded-full overflow-hidden">
-                                <motion.div className="h-full rounded-full"
-                                  style={{ background: isLeader ? 'var(--gold)' : FLAVOR.accent }}
-                                  initial={{ width: 0 }} animate={{ width: `${pct}%` }}
-                                  transition={reduce ? { duration: 0 } : { duration: 0.9, ease: 'easeOut', delay: 0.15 }} />
-                              </div>
-                              <div className="text-[10px] mt-[3px] text-[var(--cocoa)] opacity-55">
-                                <CountUp to={votes[i]} reduce={reduce} /> votes
-                                {isChoice && <span className="ml-1 text-[var(--berry-deep)] font-bold">· your pick ♥</span>}
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
+                    {/* Row separator */}
+                    {!isLast && (
+                      <div className="mx-[14px] h-px" style={{ background: `${FLAVOR.accent}20` }} />
+                    )}
+                  </div>
                 );
               })}
             </div>
