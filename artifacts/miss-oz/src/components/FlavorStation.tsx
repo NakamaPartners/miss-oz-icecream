@@ -267,7 +267,7 @@ export default function FlavorStation() {
 
               <div className="text-[clamp(56px,6.5vw,88px)] leading-[0.88] mb-[14px]"
                 style={{ fontFamily: 'var(--font-groovy)', fontStyle: 'italic', color: '#E3B44C', letterSpacing: '-0.02em' }}>
-                you decide.
+                Vote Now!!
               </div>
 
               <p className="text-[15px] italic leading-relaxed"
