@@ -257,7 +257,13 @@ export default function FlavorStation() {
           >
             {/* Display headline */}
             <div className="mb-[18px]">
-              <div />
+              <div className="inline-flex items-center gap-[10px] mb-[14px] self-start px-[12px] py-[5px] rounded-full"
+                style={{ background: 'rgba(227,180,76,0.1)', border: '1px solid rgba(227,180,76,0.28)' }}>
+                <span className="text-[9px] tracking-[4px] uppercase font-bold"
+                  style={{ color: '#E3B44C', fontFamily: 'var(--font-sans)' }}>
+                  Community Vote
+                </span>
+              </div>
 
               <div className="text-[clamp(56px,6.5vw,88px)] leading-[0.88] mb-[14px]"
                 style={{ fontFamily: 'var(--font-groovy)', fontStyle: 'italic', color: '#E3B44C', letterSpacing: '-0.02em' }}>
