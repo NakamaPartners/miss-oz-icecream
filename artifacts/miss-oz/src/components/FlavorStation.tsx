@@ -13,12 +13,12 @@ const FLAVOR = {
 };
 
 const CARDS = [
-  { name: 'Ube Honeycomb',        note: 'purple, golden, a little dramatic', bg: '#EFE6F5', img: '/images/flavor-ube.webp' },
-  { name: 'Rose & Pistachio',     note: 'the summer rose, all grown up',      bg: '#F6D9E4', img: '/images/flavor-rose.webp' },
-  { name: 'Brown Butter Croffle', note: 'the croffle, but frozen',            bg: '#F0E2C4', img: '/images/flavor-croffle.webp' },
+  { name: 'Licorice',       note: 'dark, bold, beautifully old-school',       bg: '#E9E3E5', symbol: '●' },
+  { name: 'Vietnam Coffee', note: 'deep roast with a creamy condensed finish', bg: '#EAD8BE', symbol: '☕' },
+  { name: 'Honey Lavender', note: 'wildflower honey with a soft floral bloom', bg: '#E6DDF4', symbol: '✿' },
 ];
 const SEED_VOTES = [84, 121, 63];
-const VOTE_KEY   = 'missoz-flavor-vote-v2';
+const VOTE_KEY   = 'missoz-flavor-vote-v3';
 
 const macklin = { fontFamily: 'var(--font-groovy)', fontWeight: 400, fontStyle: 'italic' as const };
 
@@ -305,9 +305,11 @@ export default function FlavorStation() {
                       {/* Thumbnail in warm bg */}
                       <div className="shrink-0 w-[40px] h-[40px] rounded-[8px] flex items-center justify-center overflow-hidden"
                         style={{ background: card.bg }}>
-                        <img loading="lazy" src={card.img} alt="" aria-hidden="true"
-                          className="w-[34px] h-[34px] object-contain"
-                          style={{ filter: 'drop-shadow(0 1px 3px rgba(28,13,12,0.25))' }} />
+                        <span aria-hidden="true"
+                          className="leading-none"
+                          style={{ fontSize: card.name === 'Licorice' ? '25px' : '24px', color: card.name === 'Licorice' ? '#23100e' : '#5E1735' }}>
+                          {card.symbol}
+                        </span>
                       </div>
 
                       {/* Name + note */}
@@ -367,9 +369,11 @@ export default function FlavorStation() {
                                 {/* Larger image */}
                                 <div className="shrink-0 w-[88px] h-[88px] rounded-[8px] flex items-center justify-center"
                                   style={{ background: card.bg }}>
-                                  <img loading="lazy" src={card.img} alt={card.name}
-                                    className="w-[76px] h-[76px] object-contain"
-                                    style={{ filter: 'drop-shadow(0 3px 7px rgba(28,13,12,0.28))' }} />
+                                  <span aria-hidden="true"
+                                    className="leading-none"
+                                    style={{ fontSize: card.name === 'Licorice' ? '56px' : '48px', color: card.name === 'Licorice' ? '#23100e' : '#5E1735' }}>
+                                    {card.symbol}
+                                  </span>
                                 </div>
 
                                 {/* Details + CTA */}

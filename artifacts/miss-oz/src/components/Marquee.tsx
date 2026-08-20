@@ -15,6 +15,12 @@ export default function Marquee() {
       </span>
       <span className="text-[var(--gold-hi)] text-[16px] md:text-[20px]"
         style={{ textShadow: '0 0 8px rgba(227,180,76,0.8)' }}>✦</span>
+       <span className="font-display font-normal uppercase text-[17px] md:text-[23px] text-[var(--pink)] tracking-[3px] whitespace-nowrap"
+         style={{ textShadow: '0 0 10px rgba(244,169,199,0.55), 0 0 22px rgba(244,169,199,0.25)' }}>
+         Small Batch, Big Heart
+       </span>
+       <span className="text-[var(--gold-hi)] text-[16px] md:text-[20px]"
+         style={{ textShadow: '0 0 8px rgba(227,180,76,0.8)' }}>✦</span>
       <span className="font-display font-normal uppercase text-[18px] md:text-[24px] text-[var(--cream)] tracking-[4px] whitespace-nowrap"
         style={{ textShadow: '0 0 10px rgba(242,225,194,0.4)' }}>
         Est. 2007
