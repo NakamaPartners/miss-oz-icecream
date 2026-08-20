@@ -3,9 +3,12 @@ import { Bunting, Starburst } from './Decor';
 import InquireForm from './InquireForm';
 
 const items = [
-  { price: '$130', name: '2.5 gal ice cream', note: 'Any flavor on the case list · churned to order' },
-  { price: '$80', name: 'Whole Basque cheesecake', note: 'Burnt-top, 10" round · serves ~14' },
-  { price: '$15', name: 'Chocolate chip cookie dough', note: 'Six pre-portioned pucks · bake off fresh' },
+  { name: '1.5-Gallon Ice Cream Tubs' },
+  { name: '2.5-Gallon Ice Cream Tubs' },
+  { name: 'Original Basque Cheesecake (10-inch, serves 12)' },
+  { name: 'Chocolate Chip Cookies' },
+  { name: 'Walnut Chocolate Chip Cookies' },
+  { name: 'Pecan Chocolate Chip Cookies' },
 ];
 
 /** Scalloped parlor awning in cream + berry stripes */
@@ -146,13 +149,13 @@ export default function Wholesale() {
                 </div>
               </div>
 
-              {/* RIGHT BOARD — chalk price list */}
+              {/* RIGHT BOARD — wholesale offerings */}
               <div className="text-left px-[26px] md:px-[42px] py-[42px] md:py-[56px]" style={chalkboard}>
                 <div
                   className="text-center text-[#f3ead6]"
                   style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px,3vw,30px)', textShadow: '0 0 12px rgba(243,234,214,0.16)' }}
                 >
-                  Trade Price List
+                  Wholesale Offerings
                 </div>
 
                 <div className="flex items-center justify-center gap-3 mt-4 mb-5 text-[var(--gold-hi)]" aria-hidden="true">
@@ -169,19 +172,10 @@ export default function Wholesale() {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, margin: '-40px' }}
                       transition={{ duration: 0.5, delay: 0.15 + i * 0.12 }}
-                      className={`flex items-baseline gap-3 py-[16px] ${i > 0 ? 'border-t border-[rgba(243,234,214,0.18)]' : ''}`}
+                      className={`flex items-start gap-3 py-[14px] ${i > 0 ? 'border-t border-[rgba(243,234,214,0.18)]' : ''}`}
                     >
-                      <div className="min-w-0">
-                        <div className="text-[18px] md:text-[20px] text-[#f3ead6] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>{item.name}</div>
-                        <div className="italic text-[13px] text-[#e9e0cc] opacity-65 leading-snug mt-[2px]" style={{ fontFamily: 'var(--font-sans)' }}>{item.note}</div>
-                      </div>
-                      <span aria-hidden="true" className="flex-1 self-end mb-[7px] border-b border-dotted border-[rgba(243,234,214,0.35)]" />
-                      <div
-                        className="text-[28px] md:text-[32px] text-[var(--gold-hi)] leading-none whitespace-nowrap"
-                        style={{ fontFamily: 'var(--font-display)', textShadow: '0 0 12px rgba(227,180,76,0.3)' }}
-                      >
-                        {item.price}
-                      </div>
+                      <span aria-hidden="true" className="mt-[5px] text-[var(--gold-hi)]">✦</span>
+                      <div className="min-w-0 text-[18px] md:text-[20px] text-[#f3ead6] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>{item.name}</div>
                     </motion.li>
                   ))}
                 </ul>

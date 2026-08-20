@@ -72,7 +72,7 @@ const FLAVORS: { name: string; desc: string }[] = [
 
 const MENU_CATEGORIES = ['Flavors', 'Sundaes', 'Croffles & Desserts', 'Drinks', 'Whole Cakes'];
 
-type MenuItem = { name: string; note?: string };
+type MenuItem = { name: string; note?: string; details?: string[] };
 const MENU_ITEMS: Record<string, MenuItem[]> = {
   Sundaes: [
     { name: 'Rose City Banana Split', note: 'Vanilla, strawberry, and chocolate ice cream with three different sauces, topped with whipped cream, sprinkles, and cherries.' },
@@ -83,9 +83,10 @@ const MENU_ITEMS: Record<string, MenuItem[]> = {
     { name: 'Milkshakes', note: 'Blended thick & rich in any of our rotating flavors' },
   ],
   'Whole Cakes': [
-    { name: 'Basque Cheesecake', note: 'Requires ordering at least seven days in advance' },
-    { name: 'Ice Cream Cake', note: 'Layered in any of our flavors — fully custom built to order' },
-    { name: 'Celebration Cake', note: 'Decorated for birthdays, anniversaries & milestones' },
+    {
+      name: 'Original Basque Cheesecake',
+      details: ['6" — $45', '8" — $60 (8 slices)', '10" — $75 (12 slices)'],
+    },
   ],
 };
 
@@ -931,6 +932,11 @@ export default function Postcard() {
                               <div>
                                 <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.05vw,15px)' }}>{item.name}</div>
                                 {item.note && <div className="mt-[4px] leading-snug text-[#6E5A54] italic" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>{item.note}</div>}
+                                {item.details && (
+                                  <ul className="mt-[7px] space-y-[4px] text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>
+                                    {item.details.map(detail => <li key={detail} className="flex items-center gap-[7px]"><span aria-hidden="true">◦</span>{detail}</li>)}
+                                  </ul>
+                                )}
                               </div>
                             </div>
                           ))}
@@ -938,9 +944,9 @@ export default function Postcard() {
                         <div>
                           <div aria-hidden="true" className="mt-[clamp(16px,2vw,22px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
                           <div className="mt-[clamp(14px,1.8vw,20px)] rounded-[8px] px-[clamp(14px,1.8vw,22px)] py-[clamp(13px,1.6vw,19px)] text-center" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)' }}>
-                            <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 1.1 }}>Custom Orders Welcome</div>
+                            <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 1.1 }}>Basque Cheesecake Orders</div>
                             <p className="mt-[8px] text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
-                              We'll build your cake in any flavor from our menu. Perfect for birthdays, anniversaries, or any sweet milestone. Reserve at least one week in advance.
+                              Our Original Basque Cheesecake is available in three sizes. Reserve at least one week in advance.
                             </p>
                           </div>
                         </div>
