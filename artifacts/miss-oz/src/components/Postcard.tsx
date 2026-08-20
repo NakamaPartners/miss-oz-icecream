@@ -75,9 +75,7 @@ const MENU_CATEGORIES = ['Flavors', 'Sundaes', 'Croffles & Desserts', 'Drinks', 
 type MenuItem = { name: string; note?: string };
 const MENU_ITEMS: Record<string, MenuItem[]> = {
   Sundaes: [
-    { name: 'Miss Oz Cherry Crown Sundae', note: 'House ice cream, Bing cherry compote, fresh whipped cream' },
-    { name: 'Midnight Fudge Sundae', note: 'Dark chocolate fudge sauce, toasted almonds, two scoops vanilla' },
-    { name: 'Birthday Cup Sundae', note: 'Sprinkles, cake crumble & a festive scoop of your choice' },
+    { name: 'Rose City Banana Split', note: 'Vanilla, strawberry, and chocolate ice cream with three different sauces, topped with whipped cream, sprinkles, and cherries.' },
   ],
   Drinks: [
     { name: 'Root Beer Float', note: 'Creamy house vanilla in an icy frosted mug' },
@@ -837,8 +835,14 @@ export default function Postcard() {
                       <div className="flex-1 flex flex-col justify-between">
                         <div className="mt-[clamp(16px,2vw,24px)] flex flex-col">
                           {[
-                            { name: 'Croffle', note: 'Crispy croissant-waffle baked fresh, served warm with a scoop on top' },
-                            { name: 'Crème Brûlée', note: 'Classic custard with a golden caramelized sugar crust' },
+                            { name: 'Brunost', note: 'Plain croffle with a mini scoop of vanilla ice cream, drizzle with Norwegian brown cheese.' },
+                            { name: 'Fresh Banana' },
+                            { name: 'Strawberry' },
+                            { name: 'Nutella' },
+                            { name: 'Oreo' },
+                            { name: 'Tiramisu' },
+                            { name: 'Fresh Cream' },
+                            { name: 'Plain' },
                             { name: 'Seasonal Dessert Board', note: "Rotating specials — ask your scooper for today's selection" },
                           ].map((item, i) => (
                             <div key={item.name} className="flex items-start gap-[10px] py-[clamp(11px,1.3vw,17px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
