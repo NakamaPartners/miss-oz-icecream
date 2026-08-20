@@ -56,17 +56,17 @@ const TONES: Record<Tone, { bg: string; border: string; title: string; desc: str
 
 
 const FLAVORS: { name: string; desc: string }[] = [
-  { name: 'Mexican Vanilla', desc: 'Creamy classic with real vanilla' },
-  { name: 'Matcha', desc: 'Premium green tea, earthy & smooth' },
+  { name: 'Mexican Vanilla', desc: 'Extra rich vanilla flavor from 4-fold vanilla extract.' },
+  { name: 'Matcha', desc: 'Ceremonial-grade matcha with an earthy, smooth flavor.' },
   { name: 'Kulfi', desc: 'Traditional Indian cardamom & pistachio' },
-  { name: 'Birthday Cake', desc: 'Sweet cake batter with rainbow sprinkles' },
-  { name: 'Butter Pecan', desc: 'Toasted pecans in buttery cream' },
+  { name: 'Birthday Cake', desc: 'Sweet yellow cake with confetti sprinkles.' },
+  { name: 'Butter Pecan', desc: 'Toasted pecans in our house-made Scotch sauce.' },
   { name: 'Salty Caramel', desc: 'Buttery caramel with sea salt' },
-  { name: 'Mint Chip', desc: 'Cool mint with dark chocolate chips' },
+  { name: 'Mint Chip', desc: 'Fresh mint steeped with loose-leaf tea and mixed with semi-sweet chocolate chips.' },
   { name: 'Coffee Crackle', desc: 'Coffee ice cream with chocolate crackle' },
   { name: 'Fresh Banana', desc: 'Real banana. Naturally sweet' },
-  { name: 'Belgian Chocolate', desc: 'Smooth & rich Belgian chocolate' },
-  { name: 'Cookies & Cream', desc: 'Chocolate cookies in sweet cream' },
+  { name: 'Belgian Chocolate', desc: 'House-made chocolate base with premium Sudan cocoa powder.' },
+  { name: 'Cookies & Cream', desc: 'Oreo cookies folded into sweet cream.' },
   { name: 'Marionberry', desc: 'Oregon marionberries in creamy goodness' },
 ];
 
