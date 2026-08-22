@@ -852,13 +852,13 @@ export default function Postcard() {
                         <div className="mt-[clamp(16px,2vw,24px)] flex flex-col">
                           {[
                             { name: 'Brunost', note: 'Plain croffle with a mini scoop of vanilla ice cream, drizzle with Norwegian brown cheese.' },
-                            { name: 'Fresh Banana' },
-                            { name: 'Strawberry' },
-                            { name: 'Nutella' },
-                            { name: 'Oreo' },
-                            { name: 'Tiramisu' },
-                            { name: 'Fresh Cream' },
-                            { name: 'Plain' },
+                            { name: 'Fresh Banana', note: 'Warm croffle with fresh banana slices and a mini scoop of vanilla ice cream.' },
+                            { name: 'Strawberry', note: 'Fresh strawberries with whipped cream and a mini scoop of vanilla ice cream.' },
+                            { name: 'Nutella', note: 'Warm croffle spread with creamy Nutella and a mini scoop of vanilla ice cream.' },
+                            { name: 'Oreo', note: 'Crushed Oreo cookies with sweet cream and a mini scoop of vanilla ice cream.' },
+                            { name: 'Tiramisu', note: 'Espresso-soaked croffle with mascarpone cream and a dusting of cocoa.' },
+                            { name: 'Fresh Cream', note: 'Warm croffle topped with freshly whipped cream and a mini scoop of vanilla ice cream.' },
+                            { name: 'Plain', note: 'Classic plain croffle, baked fresh and served warm.' },
                             { name: 'Seasonal Dessert Board', note: "Rotating specials — ask your scooper for today's selection" },
                           ].map((item, i) => (
                             <div key={item.name} className="flex items-start gap-[10px] py-[clamp(11px,1.3vw,17px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
