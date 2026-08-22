@@ -15,12 +15,6 @@ export default function Marquee() {
       </span>
       <span className="text-[var(--gold-hi)] text-[16px] md:text-[20px]"
         style={{ textShadow: '0 0 8px rgba(227,180,76,0.8)' }}>✦</span>
-        <span className="font-display font-bold uppercase text-[19px] md:text-[27px] text-[var(--gold-hi)] tracking-[3px] whitespace-nowrap"
-          style={{ textShadow: '0 0 10px rgba(227,180,76,0.7), 0 0 22px rgba(227,180,76,0.3)' }}>
-         Small Batch, Big Heart
-       </span>
-       <span className="text-[var(--gold-hi)] text-[16px] md:text-[20px]"
-         style={{ textShadow: '0 0 8px rgba(227,180,76,0.8)' }}>✦</span>
       <span className="font-display font-normal uppercase text-[18px] md:text-[24px] text-[var(--cream)] tracking-[4px] whitespace-nowrap"
         style={{ textShadow: '0 0 10px rgba(242,225,194,0.4)' }}>
         Est. 2007
@@ -38,12 +32,12 @@ export default function Marquee() {
         style={{ background: '#110505' }}>
         <div className="flex justify-center px-4 pb-4 md:pb-5">
           <div
-            className="inline-flex items-center gap-2 md:gap-3 rounded-full border border-[rgba(227,180,76,0.75)] bg-[rgba(227,180,76,0.12)] px-3 md:px-5 py-2 text-center font-display font-bold uppercase text-[var(--gold-hi)] tracking-[2px] md:tracking-[3px] text-[14px] md:text-[26px] whitespace-nowrap"
+            className="inline-flex items-center gap-[10px] md:gap-3 rounded-full border border-[rgba(227,180,76,0.75)] bg-[rgba(227,180,76,0.12)] px-4 md:px-6 py-2.5 text-center font-display font-bold uppercase text-[var(--gold-hi)] tracking-[2px] md:tracking-[3px] text-[16px] md:text-[30px] whitespace-nowrap"
             style={{ boxShadow: '0 0 18px rgba(227,180,76,0.18), inset 0 0 14px rgba(227,180,76,0.08)', textShadow: '0 0 10px rgba(227,180,76,0.7)' }}
           >
-            <span aria-hidden="true" className="text-[10px] md:text-[16px]">✦</span>
+            <span aria-hidden="true" className="text-[11px] md:text-[17px]">✦</span>
             Small Batch, Big Heart
-            <span aria-hidden="true" className="text-[10px] md:text-[16px]">✦</span>
+            <span aria-hidden="true" className="text-[11px] md:text-[17px]">✦</span>
           </div>
         </div>
         <div className="mq-track flex gap-10 w-max items-center animate-[mq_22s_linear_infinite]">
