@@ -94,6 +94,21 @@ const UBEREATS_URL = 'https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-
 
 const hrefFor = (t: string) => (t === 'ubereats' ? UBEREATS_URL : t === 'home' ? '#home' : `#${t}`);
 
+function BasqueCheesecakeIllustration() {
+  return (
+    <svg viewBox="0 0 180 150" role="img" aria-label="Illustration of a Basque cheesecake" className="w-full h-full">
+      <ellipse cx="90" cy="126" rx="68" ry="13" fill="#6b3a3b" opacity=".14" />
+      <path d="M28 112c5 9 29 16 62 16s57-7 62-16l-4-16H32Z" fill="#e5c992" stroke="#6b3a3b" strokeWidth="3" />
+      <path d="M32 97c0-15 26-28 58-28s58 13 58 28-26 24-58 24-58-9-58-24Z" fill="#dcae68" stroke="#6b3a3b" strokeWidth="3" />
+      <path d="M37 91c4-16 25-29 53-29s49 13 53 29c-12 8-30 12-53 12s-41-4-53-12Z" fill="#70402f" stroke="#48252a" strokeWidth="3" />
+      <path d="M48 82c9-10 23-15 42-15 18 0 32 5 42 15-12 5-26 8-42 8-17 0-31-3-42-8Z" fill="#9a5b3d" opacity=".7" />
+      <path d="M64 76c5-5 8-8 10-13M91 83c-2-7 0-13 4-19M116 79c-2-4-2-8 0-12" fill="none" stroke="#e0a56b" strokeWidth="3" strokeLinecap="round" opacity=".75" />
+      <circle cx="137" cy="48" r="10" fill="#9b3553" stroke="#6b3a3b" strokeWidth="2" />
+      <path d="M133 45c3-4 7-4 9-1" fill="none" stroke="#f4d9a0" strokeWidth="2" strokeLinecap="round" opacity=".7" />
+    </svg>
+  );
+}
+
 function scrollToId(target: string, behavior: ScrollBehavior = 'smooth') {
   if (target === 'home') { window.scrollTo({ top: 0, behavior }); return; }
   const el = document.getElementById(target);
@@ -925,19 +940,32 @@ export default function Postcard() {
                     {/* ── WHOLE CAKES ── */}
                     {cat === 'Whole Cakes' && (
                       <div className="flex-1 flex flex-col justify-between">
-                        <div className="mt-[clamp(18px,2.2vw,28px)] flex flex-col">
+                        <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex items-center">
                           {MENU_ITEMS['Whole Cakes'].map((item, i) => (
-                            <div key={item.name} className="flex items-start gap-[10px] py-[clamp(12px,1.4vw,19px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
-                              <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
-                              <div>
-                                <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.05vw,15px)' }}>{item.name}</div>
-                                {item.note && <div className="mt-[4px] leading-snug text-[#6E5A54] italic" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>{item.note}</div>}
-                                {item.details && (
-                                  <ul className="mt-[7px] space-y-[4px] text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>
-                                    {item.details.map(detail => <li key={detail} className="flex items-center gap-[7px]"><span aria-hidden="true">◦</span>{detail}</li>)}
-                                  </ul>
-                                )}
+                            <div key={item.name} className="w-full rounded-[12px] p-[clamp(16px,2.2vw,30px)]" style={{ background: 'linear-gradient(135deg, rgba(227,180,76,0.14), rgba(234,184,206,0.2))', border: '1px solid rgba(94,23,53,0.2)', boxShadow: '0 10px 24px rgba(94,23,53,0.1)' }}>
+                              <div className="flex flex-col sm:flex-row items-center gap-[clamp(15px,2vw,28px)]">
+                                <div className="shrink-0 w-[clamp(122px,13vw,168px)] h-[clamp(108px,11vw,142px)] rounded-full flex items-center justify-center" style={{ background: 'rgba(251,244,230,0.72)', border: '1px dashed rgba(94,23,53,0.25)' }}>
+                                  <BasqueCheesecakeIllustration />
+                                </div>
+                                <div className="flex-1 text-center sm:text-left">
+                                  <div className="uppercase font-bold tracking-[2.5px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(15px,1.45vw,21px)' }}>{item.name}</div>
+                                  <div className="mt-[6px] text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(21px,2vw,30px)', lineHeight: 1 }}>Original recipe · baked slow</div>
+                                  <div className="mt-[8px] text-[#6E5A54] leading-snug" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11px,0.9vw,13px)' }}>Rich, caramelized, and creamy at the center. Choose your size:</div>
+                                </div>
                               </div>
+                              {item.details && (
+                                <div className="mt-[clamp(18px,2vw,26px)] grid grid-cols-3 gap-[8px]">
+                                  {item.details.map(detail => {
+                                    const [size, ...priceParts] = detail.split(' — ');
+                                    return (
+                                      <div key={detail} className="rounded-[8px] py-[9px] px-[4px] text-center" style={{ background: 'rgba(251,244,230,0.76)', border: '1px solid rgba(94,23,53,0.14)' }}>
+                                        <div className="font-bold text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.15vw,16px)' }}>{size}</div>
+                                        <div className="mt-[2px] text-[var(--marionberry)] font-bold" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,1vw,15px)' }}>{priceParts.join(' — ')}</div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              )}
                             </div>
                           ))}
                         </div>
