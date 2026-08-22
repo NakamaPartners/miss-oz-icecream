@@ -888,13 +888,28 @@ export default function Postcard() {
                     {/* ── SUNDAES ── */}
                     {cat === 'Sundaes' && (
                       <div className="flex-1 flex flex-col justify-between">
-                        <div className="mt-[clamp(18px,2.2vw,28px)] flex flex-col">
-                          {MENU_ITEMS['Sundaes'].map((item, i) => (
-                            <div key={item.name} className="flex items-start gap-[10px] py-[clamp(12px,1.4vw,19px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
-                              <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
-                              <div>
-                                <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.05vw,15px)' }}>{item.name}</div>
-                                {item.note && <div className="mt-[4px] leading-snug text-[#6E5A54] italic" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>{item.note}</div>}
+                        <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex items-center">
+                          {MENU_ITEMS['Sundaes'].map(item => (
+                            <div key={item.name} className="w-full overflow-hidden rounded-[12px]" style={{ background: 'linear-gradient(135deg, rgba(234,184,206,0.34), rgba(227,180,76,0.16))', border: '1px solid rgba(94,23,53,0.2)', boxShadow: '0 12px 28px rgba(94,23,53,0.14)' }}>
+                              <div className="grid grid-cols-1 sm:grid-cols-[minmax(145px,0.82fr)_1fr] min-h-[270px]">
+                                <div className="relative min-h-[205px] sm:min-h-0 overflow-hidden">
+                                  <img loading="lazy" decoding="async" src="/images/card-sundae.webp" alt="Vintage illustration of a cherry-topped ice cream sundae" className="absolute inset-0 w-full h-full object-cover" />
+                                  <div className="absolute left-3 top-3 rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-[2px] text-[#3B1E2B]" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.2)', fontFamily: 'var(--font-sans)' }}>A Portland classic</div>
+                                  <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-16" style={{ background: 'linear-gradient(transparent, rgba(59,30,43,0.38))' }} />
+                                </div>
+                                <div className="flex flex-col justify-center px-[clamp(18px,2.5vw,34px)] py-[clamp(20px,2.5vw,32px)] text-center sm:text-left">
+                                  <div className="flex items-center justify-center sm:justify-start gap-2 text-[var(--pink)] text-[10px] uppercase tracking-[3px] font-bold" style={{ fontFamily: 'var(--font-sans)' }}>
+                                    <span aria-hidden="true">✦</span> The signature split <span aria-hidden="true">✦</span>
+                                  </div>
+                                  <div className="mt-[8px] uppercase font-bold tracking-[2.5px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(17px,1.65vw,24px)' }}>{item.name}</div>
+                                  <div className="mt-[7px] text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(22px,2vw,30px)', lineHeight: 1 }}>Three scoops. Pure joy.</div>
+                                  {item.note && <div className="mt-[11px] leading-relaxed text-[#6E5A54] italic" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11px,0.9vw,13px)' }}>{item.note}</div>}
+                                  <div className="mt-[16px] flex flex-wrap justify-center sm:justify-start gap-[7px]">
+                                    {['Vanilla', 'Strawberry', 'Chocolate', 'Three sauces'].map(tag => (
+                                      <span key={tag} className="rounded-full px-3 py-[5px] text-[10px] font-semibold uppercase tracking-[1px] text-[#3B1E2B]" style={{ background: 'rgba(251,244,230,0.72)', border: '1px solid rgba(94,23,53,0.15)', fontFamily: 'var(--font-sans)' }}>{tag}</span>
+                                    ))}
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           ))}
