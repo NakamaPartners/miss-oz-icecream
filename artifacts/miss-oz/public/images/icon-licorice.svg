@@ -1,12 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <radialGradient id="licorice" cx="35%" cy="28%" r="75%">
-      <stop offset="0" stop-color="#4b252a"/>
-      <stop offset=".55" stop-color="#211013"/>
-      <stop offset="1" stop-color="#0c0708"/>
+    <radialGradient id="licorice" cx="34%" cy="25%" r="76%">
+      <stop offset="0" stop-color="#5c3030"/>
+      <stop offset=".46" stop-color="#2f161b"/>
+      <stop offset="1" stop-color="#12090d"/>
     </radialGradient>
   </defs>
-  <circle cx="50" cy="53" r="27" fill="#160b0d" opacity=".18"/>
-  <circle cx="50" cy="48" r="25" fill="url(#licorice)"/>
-  <ellipse cx="42" cy="39" rx="8" ry="5" fill="#fff" opacity=".14" transform="rotate(-28 42 39)"/>
+  <circle cx="50" cy="55" r="28" fill="#3a2020" opacity=".22"/>
+  <circle cx="50" cy="49" r="25" fill="url(#licorice)" stroke="#6f4a3f" stroke-width="2"/>
+  <path d="M35 42c4-10 15-16 26-12" fill="none" stroke="#d4aa85" stroke-width="2.5" stroke-linecap="round" opacity=".24"/>
+  <path d="M32 57c3 10 12 16 22 17" fill="none" stroke="#0b0609" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+  <circle cx="43" cy="38" r="3" fill="#f1d4a9" opacity=".2"/>
 </svg>
