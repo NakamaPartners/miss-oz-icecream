@@ -9,7 +9,7 @@ const FLAVOR = {
   script:      'something fresh is coming',
   description: 'Smooth and creamy dairy-free sorbet, made with real coconut milk and cream. No shortcuts.',
   tags:        ['Dairy-free', 'Coconut milk & cream'],
-  poster:      '/images/coconut-sorbet-clean.png',
+  poster:      '/images/coconut-sorbet-fresh-scoop.png',
 };
 
 const CARDS = [
@@ -183,7 +183,7 @@ export default function FlavorStation() {
                 <div className="tape-strip tape-peel top-[-10px] right-[10%]  rotate-3" aria-hidden="true" />
                 <div className="tape-strip tape-peel top-[-6px]  left-[10%] -rotate-6" aria-hidden="true" />
                 <div className="rounded-[5px] p-[5px]" style={{ background: 'var(--cream-hi)' }}>
-                  <img loading="lazy" decoding="async" src={FLAVOR.poster}
+                  <img loading="eager" decoding="async" src={FLAVOR.poster}
                     alt={`${FLAVOR.name} seasonal flavor poster — Miss Oz Ice Cream`}
                     className="block w-full h-auto rounded-[2px]" />
                 </div>
