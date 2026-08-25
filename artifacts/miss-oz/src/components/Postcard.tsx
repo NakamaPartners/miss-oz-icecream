@@ -117,7 +117,7 @@ function handleNav(e: React.MouseEvent<HTMLAnchorElement>, target: string) {
 
 /* Soft ink-on-paper fade on all four edges of the hero scene */
 const HERO_MASK =
-  'linear-gradient(to bottom, transparent 0%, black 2.5%, black 96%, transparent 100%), linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)';
+  'linear-gradient(to bottom, transparent 0%, black 8%, black 96%, transparent 100%), linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)';
 
 export default function Postcard() {
   const [slide, setSlide] = useState(0);
