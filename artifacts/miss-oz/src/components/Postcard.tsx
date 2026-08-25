@@ -881,16 +881,22 @@ export default function Postcard() {
                     {cat === 'Croffles & Desserts' && (
                       <div className="flex-1 flex flex-col justify-between">
                         <div className="mt-[clamp(16px,2vw,24px)] flex flex-col">
+                          <p className="leading-relaxed text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
+                            Please note that we <strong>do NOT serve croffles warm.</strong> They are cooled before serving to achieve a crispy exterior with a chewy center.
+                          </p>
+                          <div className="mt-[clamp(14px,1.6vw,20px)] uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,13px)' }}>
+                            Descriptions:
+                          </div>
                           {[
-                            { name: 'Brunost', note: 'Plain croffle with a mini scoop of vanilla ice cream, drizzle with Norwegian brown cheese.' },
-                            { name: 'Fresh Banana', note: 'Warm croffle with fresh banana slices and a mini scoop of vanilla ice cream.' },
-                            { name: 'Strawberry', note: 'Fresh strawberries with whipped cream and a mini scoop of vanilla ice cream.' },
-                            { name: 'Nutella', note: 'Warm croffle spread with creamy Nutella and a mini scoop of vanilla ice cream.' },
-                            { name: 'Oreo', note: 'Crushed Oreo cookies with sweet cream and a mini scoop of vanilla ice cream.' },
-                            { name: 'Tiramisu', note: 'Espresso-soaked croffle with mascarpone cream and a dusting of cocoa.' },
-                            { name: 'Fresh Cream', note: 'Warm croffle topped with freshly whipped cream and a mini scoop of vanilla ice cream.' },
-                            { name: 'Plain', note: 'Classic plain croffle, baked fresh and served warm.' },
-                            { name: 'Seasonal Dessert Board', note: "Rotating specials — ask your scooper for today's selection" },
+                            { name: 'Fresh Banana', note: 'Fresh whipped cream, sliced bananas, and chocolate sauce.' },
+                            { name: 'Strawberry', note: 'Fresh whipped cream, fresh strawberries, and chocolate syrup.' },
+                            { name: 'Nutella', note: 'Nutella paired with fresh whipped cream.' },
+                            { name: 'Oreo', note: 'Fresh whipped cream topped with Oreo cookies.' },
+                            { name: 'Tiramisu', note: 'Fresh whipped cream and cocoa powder, creating a tiramisu-inspired flavor that pairs beautifully with the chewy, buttery croffle.' },
+                            { name: 'Seasonal Dessert', note: 'See our Instagram or website for seasonal offerings.' },
+                            { name: 'Walnut Chocolate Chip Cookie', note: "Inspired by Levain Bakery's famous chunky cookies with a crisp exterior and soft, chewy center." },
+                            { name: 'Butter Pecan Cookie', note: "Inspired by Levain Bakery's chunky cookies with a crisp exterior and soft, chewy center." },
+                            { name: 'Traditional Chocolate Chip Cookie' },
                           ].map((item, i) => (
                             <div key={item.name} className="flex items-start gap-[10px] py-[clamp(11px,1.3vw,17px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
                               <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
@@ -905,7 +911,7 @@ export default function Postcard() {
                           <div aria-hidden="true" className="mt-[clamp(16px,2vw,22px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
                           <div className="mt-[clamp(14px,1.8vw,20px)] rounded-[8px] px-[clamp(14px,1.8vw,22px)] py-[clamp(13px,1.6vw,19px)] text-center" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)' }}>
                             <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 1.1 }}>always housemade, never rushed</div>
-                            <p className="mt-[8px] text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>Our dessert menu rotates with the season. See the full current selection on Uber Eats.</p>
+                            <p className="mt-[8px] text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>See the full menu on Uber Eats.</p>
                             <a href={UBEREATS_URL} target="_blank" rel="noopener noreferrer"
                               className="mt-[clamp(10px,1.2vw,14px)] inline-flex items-center gap-1.5 rounded-full bg-[var(--berry-deep)] text-[var(--cream-hi)] font-bold uppercase tracking-[2px] transition-colors hover:bg-[var(--berry)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
                               style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.85vw,12px)', padding: '8px 22px' }}>
