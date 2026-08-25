@@ -880,10 +880,7 @@ export default function Postcard() {
                     {/* ── CROFFLES & DESSERTS ── */}
                     {cat === 'Croffles & Desserts' && (
                       <div className="flex-1 flex flex-col justify-between">
-                        <div className="mt-[clamp(16px,2vw,24px)] flex flex-col">
-                          <p className="leading-relaxed text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
-                            Please note that we <strong>do NOT serve croffles warm.</strong> They are cooled before serving to achieve a crispy exterior with a chewy center.
-                          </p>
+                        <div className="mt-[clamp(16px,2vw,24px)] flex flex-col text-center">
                           <div className="mt-[clamp(14px,1.6vw,20px)] uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,13px)' }}>
                             Descriptions:
                           </div>
@@ -898,7 +895,7 @@ export default function Postcard() {
                             { name: 'Butter Pecan Cookie', note: "Inspired by Levain Bakery's chunky cookies with a crisp exterior and soft, chewy center." },
                             { name: 'Traditional Chocolate Chip Cookie' },
                           ].map((item, i) => (
-                            <div key={item.name} className="flex items-start gap-[10px] py-[clamp(11px,1.3vw,17px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
+                            <div key={item.name} className="flex items-start justify-center gap-[10px] py-[clamp(11px,1.3vw,17px)] text-center" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
                               <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
                               <div>
                                 <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.05vw,15px)' }}>{item.name}</div>
@@ -927,13 +924,12 @@ export default function Postcard() {
                       <div className="flex-1 flex flex-col justify-between">
                         <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex flex-col items-center gap-[clamp(16px,2vw,24px)]">
                           {MENU_ITEMS['Sundaes'].map((item, index) => {
-                            const sundaeImages = ['/images/card-sundae.webp', '/images/card-parlor.webp', '/images/mascot-sundae.webp'];
-                            const isMascot = index === 2;
+                            const sundaeImages = ['/images/card-sundae.webp', '/images/sundae-midnight-fudge.png', '/images/sundae-banana-split.png'];
                             return (
                             <div key={item.name} className="w-full overflow-hidden rounded-[12px]" style={{ background: 'linear-gradient(135deg, rgba(234,184,206,0.34), rgba(227,180,76,0.16))', border: '1px solid rgba(94,23,53,0.2)', boxShadow: '0 12px 28px rgba(94,23,53,0.14)' }}>
                               <div className="grid grid-cols-1 sm:grid-cols-[minmax(145px,0.82fr)_1fr] min-h-[180px]">
                                 <div className="relative min-h-[140px] sm:min-h-0 overflow-hidden">
-                                  <img loading="lazy" decoding="async" src={sundaeImages[index]} alt={`Vintage illustration for ${item.name}`} className={`absolute inset-0 w-full h-full ${isMascot ? 'object-contain p-5' : 'object-cover'}`} />
+                                  <img loading="lazy" decoding="async" src={sundaeImages[index]} alt={`Vintage illustration for ${item.name}`} className="absolute inset-0 w-full h-full object-cover" />
                                   <div className="absolute left-3 top-3 rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-[2px] text-[#3B1E2B]" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.2)', fontFamily: 'var(--font-sans)' }}>A Portland classic</div>
                                   <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-16" style={{ background: 'linear-gradient(transparent, rgba(59,30,43,0.38))' }} />
                                 </div>
@@ -970,9 +966,9 @@ export default function Postcard() {
                     {/* ── DRINKS ── */}
                     {cat === 'Drinks' && (
                       <div className="flex-1 flex flex-col justify-between">
-                        <div className="mt-[clamp(18px,2.2vw,28px)] flex flex-col">
+                        <div className="mt-[clamp(18px,2.2vw,28px)] flex flex-col text-center">
                           {MENU_ITEMS['Drinks'].map((item, i) => (
-                            <div key={item.name} className="flex items-start gap-[10px] py-[clamp(12px,1.4vw,19px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
+                            <div key={item.name} className="flex items-start justify-center gap-[10px] py-[clamp(12px,1.4vw,19px)] text-center" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
                               <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
                               <div>
                                 <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.05vw,15px)' }}>{item.name}</div>
