@@ -281,7 +281,7 @@ export default function Postcard() {
               alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
               className="h-auto transition-[width] duration-300 ease-out"
               style={{
-                width: isHeaderScrolled ? 'clamp(64px,6.2vw,78px)' : 'clamp(160px,15vw,190px)',
+                width: isHeaderScrolled ? 'clamp(64px,6.2vw,78px)' : 'clamp(240px,22.5vw,285px)',
                 filter: 'drop-shadow(0 2px 10px rgba(93,26,58,0.18))',
               }}
             />
