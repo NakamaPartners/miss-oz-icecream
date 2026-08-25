@@ -917,8 +917,8 @@ export default function Postcard() {
                         <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex flex-col items-center gap-[clamp(16px,2vw,24px)]">
                           {MENU_ITEMS['Sundaes'].map(item => (
                             <div key={item.name} className="w-full overflow-hidden rounded-[12px]" style={{ background: 'linear-gradient(135deg, rgba(234,184,206,0.34), rgba(227,180,76,0.16))', border: '1px solid rgba(94,23,53,0.2)', boxShadow: '0 12px 28px rgba(94,23,53,0.14)' }}>
-                              <div className="grid grid-cols-1 sm:grid-cols-[minmax(145px,0.82fr)_1fr] min-h-[270px]">
-                                <div className="relative min-h-[205px] sm:min-h-0 overflow-hidden">
+                              <div className="grid grid-cols-1 sm:grid-cols-[minmax(145px,0.82fr)_1fr] min-h-[180px]">
+                                <div className="relative min-h-[140px] sm:min-h-0 overflow-hidden">
                                   <img loading="lazy" decoding="async" src="/images/card-sundae.webp" alt="Vintage illustration of a cherry-topped ice cream sundae" className="absolute inset-0 w-full h-full object-cover" />
                                   <div className="absolute left-3 top-3 rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-[2px] text-[#3B1E2B]" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.2)', fontFamily: 'var(--font-sans)' }}>A Portland classic</div>
                                   <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-16" style={{ background: 'linear-gradient(transparent, rgba(59,30,43,0.38))' }} />
