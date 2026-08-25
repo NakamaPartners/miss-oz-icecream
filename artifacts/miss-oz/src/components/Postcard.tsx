@@ -170,7 +170,7 @@ export default function Postcard() {
       </div>
 
       {/* MASTHEAD — desktop only; mobile nav overlays the hero photo */}
-      <div aria-hidden="true" className="hidden md:block h-[clamp(100px,9vw,120px)]" />
+      <div aria-hidden="true" className="hidden md:block h-[clamp(130px,13vw,170px)]" />
       <header
         className="fixed top-0 left-[clamp(20px,2.5vw,36px)] right-[clamp(20px,2.5vw,36px)] z-[970] mx-auto max-w-[1400px] px-[4vw] hidden md:block transition-[padding,background-color,box-shadow] duration-300 ease-out"
         style={{
