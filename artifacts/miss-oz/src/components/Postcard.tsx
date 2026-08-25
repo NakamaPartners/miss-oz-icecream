@@ -181,7 +181,7 @@ export default function Postcard() {
         style={{
           paddingTop: isHeaderScrolled ? '7px' : '12px',
           paddingBottom: isHeaderScrolled ? '7px' : '16px',
-          background: isHeaderScrolled ? 'rgba(242,225,194,0.98)' : 'rgba(242,225,194,0.94)',
+          background: 'var(--cream)',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
           boxShadow: isHeaderScrolled ? '0 6px 22px rgba(20,8,12,0.2)' : '0 5px 18px rgba(20,8,12,0.12)',
