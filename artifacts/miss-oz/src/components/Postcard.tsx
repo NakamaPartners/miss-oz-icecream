@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { createPortal } from 'react-dom';
 import { Bunting } from './Decor';
 import OrderChooser from './OrderChooser';
 
@@ -135,6 +136,7 @@ export default function Postcard() {
   const [activeCategory, setActiveCategory] = useState('Flavors');
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [cakeOrderStatus, setCakeOrderStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [cakeOrderOpen, setCakeOrderOpen] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
@@ -161,6 +163,17 @@ export default function Postcard() {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
+
+  useEffect(() => {
+    if (!cakeOrderOpen) return;
+    const closeOnEscape = (e: KeyboardEvent) => { if (e.key === 'Escape') setCakeOrderOpen(false); };
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [cakeOrderOpen]);
 
   const current = SLIDES[slide] ?? SLIDES[0];
   const followingWednesday = getFollowingWednesday();
@@ -199,6 +212,7 @@ export default function Postcard() {
   }
 
   return (
+    <>
     <section
       id="home"
       className="relative pt-0 md:pt-[clamp(56px,7.5vw,100px)] pb-[clamp(30px,5vw,60px)] overflow-hidden"
@@ -1049,45 +1063,10 @@ export default function Postcard() {
                               <div>10-inch Whole Cake — <strong>$85</strong> (12 slices)</div>
                             </div>
                             <p className="mt-[12px]">The reason the 8&quot; and 10&quot; cakes are the same price is that they use the <strong>same amount of ingredients.</strong> The 8-inch version is taller and yields 8 larger slices, while the 10-inch version is wider and yields 12 thinner slices.</p>
-                            <p className="mt-[12px] italic">I’ve finalized the ordering system for our whole Basque cheesecakes. Since they are handmade in small batches and require a multi-day cooling and aging process, I’d like the website to operate on a fixed weekly pre-order schedule.</p>
                           </div>
-                          <div className="rounded-[9px] p-[clamp(14px,1.7vw,22px)]" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)' }}>
-                            <div className="text-center text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 1.1 }}>Weekly Basque Cheesecake Schedule</div>
-                            <div className="mt-[14px] grid grid-cols-2 gap-x-[18px] gap-y-[12px] text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.85vw,12px)' }}>
-                              <div><strong className="text-[#3B1E2B]">Orders Open</strong><br />Monday at 11:00 AM through Friday at 8:00 PM<br /><em>Orders may close earlier if the weekly quantity sells out.</em></div>
-                              <div><strong className="text-[#3B1E2B]">Production Day</strong><br />The following Monday</div>
-                              <div><strong className="text-[#3B1E2B]">Cooling &amp; Aging</strong><br />Monday–Tuesday</div>
-                              <div><strong className="text-[#3B1E2B]">Pickup Day</strong><br />Wednesday</div>
-                            </div>
-                            <p className="mt-[14px] text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.85vw,12px)' }}>Orders placed during the Monday–Friday ordering window are for pickup on the <strong>following Wednesday by noon</strong>, not the Wednesday of the same week.</p>
-                          </div>
-                          <div className="text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
-                            <div className="font-bold text-[#3B1E2B]">Handcrafted in Limited Weekly Batches</div>
-                            <p className="mt-[7px]">Our whole Basque cheesecakes are made from scratch using 100% premium cream cheese and zero flour. Each cake is slow-baked, cooled at room temperature, and refrigerated overnight to develop its signature rich and creamy texture.</p>
-                            <p className="mt-[9px]">Orders open every Monday at 11:00 AM and close Friday at 8:00 PM, or earlier if the weekly batch sells out. All confirmed orders will be ready for pickup the following Wednesday.</p>
-                            <p className="mt-[9px]"><strong>Only a limited number of whole cheesecakes are made each week.</strong> Once the weekly batch is sold out, ordering will reopen the following Monday.</p>
-                          </div>
-                          <form onSubmit={handleCakeOrderSubmit} className="rounded-[9px] p-[clamp(14px,1.7vw,22px)]" style={{ background: 'rgba(227,180,76,0.1)', border: '1px solid rgba(94,23,53,0.15)' }}>
-                            <div className="text-center text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 1.1 }}>Place a Pre-Order</div>
-                            <div className="mt-[14px] grid gap-[10px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: '11px' }}>
-                              <label> Cake size
-                                <select name="cakeSize" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }}>
-                                  <option value="">Choose a size</option><option>6-inch</option><option>8-inch</option><option>10-inch</option>
-                                </select>
-                              </label>
-                              <label>Quantity<input name="quantity" type="number" min="1" defaultValue="1" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
-                              <label>Customer name<input name="name" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
-                              <label>Phone number<input name="phone" type="tel" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
-                              <label>Email address<input name="email" type="email" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
-                              <label>Pickup date<input name="pickupDate" value={followingWednesday} readOnly className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.55)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
-                              <label>Order notes<textarea name="notes" rows={2} className="mt-1 w-full resize-y rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
-                            </div>
-                            <button type="submit" disabled={cakeOrderStatus === 'sending'} className="mt-[14px] w-full rounded-full bg-[var(--berry-deep)] px-5 py-2.5 font-bold uppercase tracking-[1.5px] text-[var(--cream-hi)] disabled:opacity-60">
-                              {cakeOrderStatus === 'sending' ? 'Sending…' : 'Submit Pre-Order'}
-                            </button>
-                            {cakeOrderStatus === 'sent' && <p className="mt-2 text-center text-[#3B1E2B]">Thank you — your pre-order request has been sent.</p>}
-                            {cakeOrderStatus === 'error' && <p className="mt-2 text-center text-[var(--berry-deep)]">We couldn’t send your request. Please try again.</p>}
-                          </form>
+                          <button type="button" onClick={() => { setCakeOrderStatus('idle'); setCakeOrderOpen(true); }} className="w-full rounded-full bg-[var(--berry-deep)] px-5 py-3 font-bold uppercase tracking-[1.5px] text-[var(--cream-hi)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)]" style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
+                            Order a Whole Cheesecake →
+                          </button>
                         </div>
                         <div>
                           <div aria-hidden="true" className="mt-[clamp(16px,2vw,22px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
@@ -1246,5 +1225,89 @@ export default function Postcard() {
         </div>
       </div>
     </section>
+    {cakeOrderOpen && createPortal(
+      <AnimatePresence>
+        <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="whole-cake-order-title"
+          className="fixed inset-0 z-[2000] flex items-start justify-center overflow-y-auto p-[14px] sm:p-[28px]"
+          style={{ background: 'rgba(28,13,12,0.72)', backdropFilter: 'blur(5px)' }}
+          onMouseDown={(e) => { if (e.target === e.currentTarget) setCakeOrderOpen(false); }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="relative my-auto w-full max-w-[720px] rounded-[12px] p-[clamp(18px,3vw,34px)]"
+            style={{ background: 'var(--cream-hi)', boxShadow: '0 20px 70px rgba(0,0,0,0.4)', border: '2px solid var(--gold)' }}
+            initial={{ opacity: 0, y: 18, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+          >
+            <button type="button" aria-label="Close whole cheesecake order form" onClick={() => setCakeOrderOpen(false)} className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full text-[22px] text-[var(--berry-deep)] hover:bg-[rgba(94,23,53,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--berry)]">×</button>
+            <div className="pr-10">
+              <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(25px,3vw,34px)', lineHeight: 1.1 }}>Whole Basque Cheesecake</div>
+              <h2 id="whole-cake-order-title" className="mt-1 text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(20px,2.4vw,28px)' }}>Place a Pre-Order</h2>
+            </div>
+            <div className="mt-5 grid gap-5 text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,1vw,14px)' }}>
+              <div>
+                <p className="italic">I’ve finalized the ordering system for our whole Basque cheesecakes. Since they are handmade in small batches and require a multi-day cooling and aging process, our website operates on a fixed weekly pre-order schedule.</p>
+              </div>
+              <div className="rounded-[9px] p-[clamp(14px,2vw,22px)]" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.25)' }}>
+                <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(22px,2.4vw,29px)', lineHeight: 1.1 }}>How to Order</div>
+                <ol className="mt-3 list-decimal space-y-2 pl-5">
+                  <li>Submit your cake size, quantity, and contact details below during the weekly ordering window.</li>
+                  <li>Orders open Monday at 11:00 AM through Friday at 8:00 PM. Orders may close early if the weekly quantity sells out.</li>
+                  <li>We produce cakes the following Monday and cool and age them Monday–Tuesday.</li>
+                  <li>Your confirmed order will be ready for pickup the following Wednesday by noon — not the Wednesday of the same week.</li>
+                </ol>
+              </div>
+              <div>
+                <div className="font-bold text-[#3B1E2B]">Weekly Basque Cheesecake Schedule</div>
+                <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-3">
+                  <div><strong className="text-[#3B1E2B]">Orders Open</strong><br />Monday at 11:00 AM through Friday at 8:00 PM<br /><em>May close earlier if sold out.</em></div>
+                  <div><strong className="text-[#3B1E2B]">Production Day</strong><br />The following Monday</div>
+                  <div><strong className="text-[#3B1E2B]">Cooling &amp; Aging</strong><br />Monday–Tuesday</div>
+                  <div><strong className="text-[#3B1E2B]">Pickup Day</strong><br />The following Wednesday by noon</div>
+                </div>
+              </div>
+              <div>
+                <div className="font-bold text-[#3B1E2B]">Handcrafted in Limited Weekly Batches</div>
+                <p className="mt-2">Our whole Basque cheesecakes are made from scratch using 100% premium cream cheese and zero flour. Each cake is slow-baked, cooled at room temperature, and refrigerated overnight to develop its signature rich and creamy texture.</p>
+                <p className="mt-2">Orders open every Monday at 11:00 AM and close Friday at 8:00 PM, or earlier if the weekly batch sells out. All confirmed orders will be ready for pickup the following Wednesday.</p>
+                <p className="mt-2"><strong>Only a limited number of whole cheesecakes are made each week.</strong> Once the weekly batch is sold out, ordering will reopen the following Monday.</p>
+              </div>
+              <form onSubmit={handleCakeOrderSubmit} className="rounded-[9px] p-[clamp(14px,2vw,22px)]" style={{ background: 'rgba(227,180,76,0.12)', border: '1px solid rgba(94,23,53,0.18)' }}>
+                <div className="font-bold text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(18px,2vw,23px)' }}>Your Order Details</div>
+                <div className="mt-4 grid gap-3 text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
+                  <label>Cake size
+                    <select name="cakeSize" required className="mt-1 w-full rounded-[6px] px-3 py-2.5" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.22)' }}>
+                      <option value="">Choose a size</option><option>6-inch</option><option>8-inch</option><option>10-inch</option>
+                    </select>
+                  </label>
+                  <label>Quantity<input name="quantity" type="number" min="1" defaultValue="1" required className="mt-1 w-full rounded-[6px] px-3 py-2.5" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.22)' }} /></label>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <label>Customer name<input name="name" required className="mt-1 w-full rounded-[6px] px-3 py-2.5" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.22)' }} /></label>
+                    <label>Phone number<input name="phone" type="tel" required className="mt-1 w-full rounded-[6px] px-3 py-2.5" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.22)' }} /></label>
+                  </div>
+                  <label>Email address<input name="email" type="email" required className="mt-1 w-full rounded-[6px] px-3 py-2.5" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.22)' }} /></label>
+                  <label>Pickup date<input name="pickupDate" value={`${followingWednesday} by noon`} readOnly className="mt-1 w-full rounded-[6px] px-3 py-2.5" style={{ background: 'rgba(251,244,230,0.6)', border: '1px solid rgba(94,23,53,0.22)' }} /></label>
+                  <label>Order notes<textarea name="notes" rows={3} className="mt-1 w-full resize-y rounded-[6px] px-3 py-2.5" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.22)' }} /></label>
+                </div>
+                <button type="submit" disabled={cakeOrderStatus === 'sending'} className="mt-4 w-full rounded-full bg-[var(--berry-deep)] px-5 py-3 font-bold uppercase tracking-[1.5px] text-[var(--cream-hi)] transition-transform hover:-translate-y-0.5 disabled:opacity-60" style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
+                  {cakeOrderStatus === 'sending' ? 'Sending…' : 'Submit Pre-Order'}
+                </button>
+                {cakeOrderStatus === 'sent' && <p className="mt-3 text-center text-[#3B1E2B]">Thank you — your pre-order request has been sent.</p>}
+                {cakeOrderStatus === 'error' && <p className="mt-3 text-center text-[var(--berry-deep)]">We couldn’t send your request. Please try again.</p>}
+              </form>
+            </div>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>,
+      document.body
+    )}
+    </>
   );
 }
