@@ -1303,6 +1303,12 @@ export default function Postcard() {
                   <label>Pickup date<input name="pickupDate" value={`${followingWednesday} by noon`} readOnly className="mt-1 w-full rounded-[6px] px-3 py-2.5" style={{ background: 'rgba(251,244,230,0.6)', border: '1px solid rgba(94,23,53,0.22)' }} /></label>
                   <label>Order notes<textarea name="notes" rows={3} className="mt-1 w-full resize-y rounded-[6px] px-3 py-2.5" style={{ background: 'rgba(251,244,230,0.9)', border: '1px solid rgba(94,23,53,0.22)' }} /></label>
                 </div>
+                <div className="mt-4 rounded-[7px] px-3 py-3 text-[#5B4540]" style={{ background: 'rgba(251,244,230,0.62)', border: '1px dashed rgba(94,23,53,0.24)', fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
+                  <div className="font-bold text-[#3B1E2B]">Payment</div>
+                  <p className="mt-1">Payment in full will be required when placing your order because each cake is prepared specifically for you.</p>
+                  <p className="mt-1 font-bold text-[var(--berry-deep)]">Your order is confirmed only after payment has been completed.</p>
+                  <div className="mt-2 rounded-[5px] px-3 py-2 text-center italic opacity-70" style={{ border: '1px solid rgba(94,23,53,0.18)' }}>Payment checkout placeholder</div>
+                </div>
                 <button type="submit" disabled={cakeOrderStatus === 'sending'} className="mt-4 w-full rounded-full bg-[var(--berry-deep)] px-5 py-3 font-bold uppercase tracking-[1.5px] text-[var(--cream-hi)] transition-transform hover:-translate-y-0.5 disabled:opacity-60" style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
                   {cakeOrderStatus === 'sending' ? 'Sending…' : 'Submit Pre-Order'}
                 </button>
