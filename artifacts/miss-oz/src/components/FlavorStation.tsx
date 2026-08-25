@@ -13,9 +13,9 @@ const FLAVOR = {
 };
 
 const CARDS = [
-  { name: 'Licorice',       note: 'dark, bold, beautifully old-school',       bg: '#E9E3E5', img: '/images/licorice-vote.jpeg' },
-  { name: 'Vietnam Coffee', note: 'deep roast with a creamy condensed finish', bg: '#EAD8BE', img: '/images/vietnam-coffee-vote.jpeg' },
-  { name: 'Honey Lavender', note: 'wildflower honey with a soft floral bloom', bg: '#E6DDF4', img: '/images/honey-lavender-vote.jpeg' },
+  { name: 'Licorice',       note: 'dark, bold, beautifully old-school',       bg: '#E9E3E5', icon: '/images/icon-licorice.svg',       img: '/images/licorice-vote.jpeg' },
+  { name: 'Vietnam Coffee', note: 'deep roast with a creamy condensed finish', bg: '#EAD8BE', icon: '/images/icon-vietnam-coffee.svg', img: '/images/vietnam-coffee-vote.jpeg' },
+  { name: 'Honey Lavender', note: 'wildflower honey with a soft floral bloom', bg: '#E6DDF4', icon: '/images/icon-honey-lavender.svg', img: '/images/honey-lavender-vote.jpeg' },
 ];
 const SEED_VOTES = [84, 121, 63];
 const VOTE_KEY   = 'missoz-flavor-vote-v3';
@@ -305,7 +305,7 @@ export default function FlavorStation() {
                       {/* Thumbnail in warm bg */}
                       <div className="shrink-0 w-[40px] h-[40px] rounded-[8px] flex items-center justify-center overflow-hidden"
                         style={{ background: card.bg }}>
-                        <img loading="lazy" src={card.img} alt="" aria-hidden="true"
+                        <img loading="lazy" src={card.icon} alt="" aria-hidden="true"
                           className="w-[34px] h-[34px] object-contain"
                           style={{ filter: 'drop-shadow(0 1px 3px rgba(28,13,12,0.25))' }} />
                       </div>
@@ -365,10 +365,10 @@ export default function FlavorStation() {
                               <div className="flex items-center gap-[14px] p-[14px]">
 
                                 {/* Larger image */}
-                                <div className="shrink-0 w-[88px] h-[88px] rounded-[8px] flex items-center justify-center"
+                                <div className="shrink-0 w-[132px] h-[132px] rounded-[10px] flex items-center justify-center overflow-hidden"
                                   style={{ background: card.bg }}>
                                   <img loading="lazy" src={card.img} alt={card.name}
-                                    className="w-[76px] h-[76px] object-contain"
+                                    className="w-full h-full object-cover"
                                     style={{ filter: 'drop-shadow(0 3px 7px rgba(28,13,12,0.28))' }} />
                                 </div>
 
