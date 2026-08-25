@@ -13,9 +13,9 @@ const FLAVOR = {
 };
 
 const CARDS = [
-  { name: 'Licorice',       note: 'dark, bold, beautifully old-school',       bg: '#E9E3E5', img: '/images/icon-licorice.svg' },
+  { name: 'Licorice',       note: 'dark, bold, beautifully old-school',       bg: '#E9E3E5', img: '/images/licorice-vote.jpeg' },
   { name: 'Vietnam Coffee', note: 'deep roast with a creamy condensed finish', bg: '#EAD8BE', img: '/images/vietnam-coffee-vote.jpeg' },
-  { name: 'Honey Lavender', note: 'wildflower honey with a soft floral bloom', bg: '#E6DDF4', img: '/images/icon-honey-lavender.svg' },
+  { name: 'Honey Lavender', note: 'wildflower honey with a soft floral bloom', bg: '#E6DDF4', img: '/images/honey-lavender-vote.jpeg' },
 ];
 const SEED_VOTES = [84, 121, 63];
 const VOTE_KEY   = 'missoz-flavor-vote-v3';
