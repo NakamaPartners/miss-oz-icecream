@@ -198,7 +198,7 @@ export default function Postcard() {
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          className="relative hidden md:grid items-stretch transition-[min-height] duration-300 ease-out"
+          className="relative hidden md:grid items-stretch transition-[grid-template-columns,min-height] duration-300 ease-out"
           style={{
             gridTemplateColumns: isHeaderScrolled
               ? 'minmax(0,1fr) clamp(140px,15vw,176px) minmax(0,1fr)'
