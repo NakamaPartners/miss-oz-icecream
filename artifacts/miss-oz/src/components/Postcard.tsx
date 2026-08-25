@@ -890,15 +890,15 @@ export default function Postcard() {
                             { name: 'Nutella', note: 'Nutella paired with fresh whipped cream.' },
                             { name: 'Oreo', note: 'Fresh whipped cream topped with Oreo cookies.' },
                             { name: 'Tiramisu', note: 'Fresh whipped cream and cocoa powder, creating a tiramisu-inspired flavor that pairs beautifully with the chewy, buttery croffle.' },
-                            { name: 'Seasonal Dessert', note: 'See our Instagram or website for seasonal offerings.' },
                             { name: 'Walnut Chocolate Chip Cookie', note: "Inspired by Levain Bakery's famous chunky cookies with a crisp exterior and soft, chewy center." },
                             { name: 'Butter Pecan Cookie', note: "Inspired by Levain Bakery's chunky cookies with a crisp exterior and soft, chewy center." },
-                            { name: 'Traditional Chocolate Chip Cookie' },
+                            { name: 'Traditional Chocolate Chip Cookie', note: 'A classic chocolate chip cookie with a crisp exterior and soft, chewy center.' },
+                            { name: 'Seasonal Dessert', note: 'See our Instagram or website for seasonal offerings.' },
                           ].map((item, i) => (
                             <div key={item.name} className="flex items-start justify-center gap-[10px] py-[clamp(11px,1.3vw,17px)] text-center" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
                               <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
                               <div>
-                                <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.05vw,15px)' }}>{item.name}</div>
+                                <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(13px,1.15vw,16px)' }}>{item.name}</div>
                                 <div className="mt-[4px] leading-snug text-[#6E5A54] italic" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>{item.note}</div>
                               </div>
                             </div>
@@ -971,7 +971,7 @@ export default function Postcard() {
                             <div key={item.name} className="flex items-start justify-center gap-[10px] py-[clamp(12px,1.4vw,19px)] text-center" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
                               <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
                               <div>
-                                <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.05vw,15px)' }}>{item.name}</div>
+                                <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(13px,1.15vw,16px)' }}>{item.name}</div>
                                 {item.note && <div className="mt-[4px] leading-snug text-[#6E5A54] italic" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.85vw,12px)' }}>{item.note}</div>}
                               </div>
                             </div>
