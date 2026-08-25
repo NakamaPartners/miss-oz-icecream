@@ -15,6 +15,15 @@ interface Props {
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
+const BUSINESS_TYPES = ['Coffee Shop', 'Restaurant', 'Grocery', 'Bakery', 'Catering', 'Hotel', 'Other'];
+const WHOLESALE_PRODUCTS = [
+  'Ice Cream (1.5 Gallon)',
+  'Ice Cream (2.5 Gallon)',
+  'Basque Cheesecake',
+  'Cookies',
+  'Other',
+];
+
 export default function InquireForm({
   type,
   submitLabel = 'Send inquiry',
@@ -22,27 +31,64 @@ export default function InquireForm({
   darkBg = false,
 }: Props) {
   const [name, setName] = useState('');
+  const [businessName, setBusinessName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+  const [businessType, setBusinessType] = useState('');
+  const [productsOfInterest, setProductsOfInterest] = useState<string[]>([]);
+  const [estimatedOrderVolume, setEstimatedOrderVolume] = useState('');
+  const [additionalInformation, setAdditionalInformation] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [open, setOpen] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !message.trim()) return;
+    const wholesaleComplete =
+      type !== 'wholesale' ||
+      (businessName.trim() &&
+        name.trim() &&
+        email.trim() &&
+        phone.trim() &&
+        businessType &&
+        productsOfInterest.length > 0 &&
+        estimatedOrderVolume.trim());
+    if (!name.trim() || !email.trim() || (!message.trim() && type !== 'wholesale') || !wholesaleComplete) return;
     setStatus('sending');
     try {
       // Use BASE_URL so the path is correct in both Replit dev and Vercel deploy
       const base = import.meta.env.BASE_URL?.replace(/\/$/, '') ?? '';
+      const wholesaleMessage = [
+        `Business Name: ${businessName.trim()}`,
+        `Contact Person: ${name.trim()}`,
+        `Email Address: ${email.trim()}`,
+        `Phone Number: ${phone.trim()}`,
+        `Business Type: ${businessType}`,
+        `Products of Interest: ${productsOfInterest.join(', ')}`,
+        `Estimated Order Volume: ${estimatedOrderVolume.trim()}`,
+        `Additional Information: ${additionalInformation.trim() || 'None provided'}`,
+      ].join('\n');
       const res = await fetch(`${base}/api/inquire`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone: phone || undefined, type, message }),
+        body: JSON.stringify({
+          name,
+          email,
+          phone: phone || undefined,
+          type,
+          message: type === 'wholesale' ? wholesaleMessage : message,
+          businessName: type === 'wholesale' ? businessName : undefined,
+          contactPerson: type === 'wholesale' ? name : undefined,
+          businessType: type === 'wholesale' ? businessType : undefined,
+          productsOfInterest: type === 'wholesale' ? productsOfInterest : undefined,
+          estimatedOrderVolume: type === 'wholesale' ? estimatedOrderVolume : undefined,
+          additionalInformation: type === 'wholesale' ? additionalInformation : undefined,
+        }),
       });
       if (!res.ok) throw new Error('server error');
       setStatus('success');
-      setName(''); setEmail(''); setPhone(''); setMessage('');
+      setName(''); setBusinessName(''); setEmail(''); setPhone(''); setMessage('');
+      setBusinessType(''); setProductsOfInterest([]); setEstimatedOrderVolume(''); setAdditionalInformation('');
     } catch {
       setStatus('error');
     }
@@ -101,17 +147,32 @@ export default function InquireForm({
                 color: darkBg ? '#f3ead6' : 'var(--berry)',
               }}
             >
-              Message received ♥
+              {type === 'wholesale'
+                ? 'Thank you for your interest in becoming a wholesale partner with Miss Oz Ice Cream Cafe!'
+                : 'Message received ♥'}
             </div>
-            <p
-              className="text-[14px] italic mb-4"
-              style={{
-                fontFamily: 'var(--font-sans)',
-                color: darkBg ? 'rgba(243,234,214,0.7)' : 'rgba(28,13,12,0.6)',
-              }}
-            >
-              We'll be in touch soon.
-            </p>
+            {type === 'wholesale' ? (
+              <div
+                className="text-[14px] leading-relaxed mb-4"
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  color: darkBg ? 'rgba(243,234,214,0.7)' : 'rgba(28,13,12,0.6)',
+                }}
+              >
+                <p>We've received your inquiry and will review it carefully.</p>
+                <p className="mt-2">We'll contact you within 1–2 business days to discuss pricing, product availability, and the next steps.</p>
+              </div>
+            ) : (
+              <p
+                className="text-[14px] italic mb-4"
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  color: darkBg ? 'rgba(243,234,214,0.7)' : 'rgba(28,13,12,0.6)',
+                }}
+              >
+                We'll be in touch soon.
+              </p>
+            )}
             <button
               type="button"
               onClick={reset}
@@ -130,20 +191,34 @@ export default function InquireForm({
             onSubmit={handleSubmit}
             className="max-w-[460px] mx-auto text-left"
           >
+            {type === 'wholesale' && (
+              <div className="mb-5">
+                <label className={labelClass}>Business Name</label>
+                <input
+                  type="text"
+                  value={businessName}
+                  onChange={(e) => setBusinessName(e.target.value)}
+                  maxLength={120}
+                  required
+                  placeholder="Your business name"
+                  className={inputClass}
+                />
+              </div>
+            )}
             <div className="mb-5">
-              <label className={labelClass}>Your name</label>
+              <label className={labelClass}>{type === 'wholesale' ? 'Contact Person' : 'Your name'}</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 maxLength={80}
                 required
-                placeholder="Name or business name"
+                placeholder={type === 'wholesale' ? 'Your name' : 'Name or business name'}
                 className={inputClass}
               />
             </div>
             <div className="mb-5">
-              <label className={labelClass}>Email</label>
+              <label className={labelClass}>{type === 'wholesale' ? 'Email Address' : 'Email'}</label>
               <input
                 type="email"
                 value={email}
@@ -156,41 +231,81 @@ export default function InquireForm({
             </div>
             <div className="mb-5">
               <label className={labelClass}>
-                Phone{' '}
-                <span
-                  className="normal-case font-normal"
-                  style={{ opacity: 0.6 }}
-                >
-                  (optional)
-                </span>
+                {type === 'wholesale' ? 'Phone Number' : <>Phone <span className="normal-case font-normal" style={{ opacity: 0.6 }}>(optional)</span></>}
               </label>
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 maxLength={30}
+                required={type === 'wholesale'}
                 placeholder="503-555-0100"
                 className={inputClass}
               />
             </div>
-            <div className="mb-6">
-              <label className={labelClass}>Tell us more</label>
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                maxLength={1200}
-                rows={4}
-                required
-                placeholder={
-                  type === 'wholesale'
-                    ? 'What products are you interested in, quantities, timeline…'
-                    : type === 'event'
-                    ? 'Date, number of guests, type of event…'
-                    : 'How can we help?'
-                }
-                className={textareaClass}
-              />
-            </div>
+            {type === 'wholesale' ? (
+              <>
+                <div className="mb-5">
+                  <label className={labelClass}>Business Type</label>
+                  <select value={businessType} onChange={(e) => setBusinessType(e.target.value)} required className={inputClass}>
+                    <option value="">Choose a business type</option>
+                    {BUSINESS_TYPES.map((option) => <option key={option} value={option}>{option}</option>)}
+                  </select>
+                </div>
+                <fieldset className="mb-5">
+                  <legend className={labelClass}>Products of Interest</legend>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {WHOLESALE_PRODUCTS.map((product) => (
+                      <label key={product} className="flex items-center gap-2 text-[15px]" style={{ color: darkBg ? '#f3ead6' : 'var(--cocoa)', fontFamily: 'var(--font-sans)' }}>
+                        <input
+                          type="checkbox"
+                          checked={productsOfInterest.includes(product)}
+                          onChange={(e) => setProductsOfInterest((current) => e.target.checked ? [...current, product] : current.filter((item) => item !== product))}
+                          className="h-4 w-4 accent-[var(--gold-hi)]"
+                        />
+                        {product}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <div className="mb-5">
+                  <label className={labelClass}>Estimated Order Volume</label>
+                  <input
+                    type="text"
+                    value={estimatedOrderVolume}
+                    onChange={(e) => setEstimatedOrderVolume(e.target.value)}
+                    maxLength={160}
+                    required
+                    placeholder="How much product do you expect to order?"
+                    className={inputClass}
+                  />
+                </div>
+                <div className="mb-6">
+                  <label className={labelClass}>Additional Information</label>
+                  <textarea
+                    value={additionalInformation}
+                    onChange={(e) => setAdditionalInformation(e.target.value)}
+                    maxLength={1200}
+                    rows={4}
+                    placeholder="Tell us anything else we should know."
+                    className={textareaClass}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="mb-6">
+                <label className={labelClass}>Tell us more</label>
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  maxLength={1200}
+                  rows={4}
+                  required
+                  placeholder={type === 'event' ? 'Date, number of guests, type of event…' : 'How can we help?'}
+                  className={textareaClass}
+                />
+              </div>
+            )}
 
             {status === 'error' && (
               <p className="text-[13px] text-red-400 mb-4 italic" role="alert">
@@ -201,7 +316,14 @@ export default function InquireForm({
             <div className="flex items-center gap-4 flex-wrap">
               <button
                 type="submit"
-                disabled={status === 'sending' || !name.trim() || !email.trim() || !message.trim()}
+                disabled={
+                  status === 'sending' ||
+                  !name.trim() ||
+                  !email.trim() ||
+                  (type === 'wholesale'
+                    ? !businessName.trim() || !phone.trim() || !businessType || productsOfInterest.length === 0 || !estimatedOrderVolume.trim()
+                    : !message.trim())
+                }
                 className="bg-[var(--cocoa)] text-[var(--cream)] py-[11px] px-[26px] rounded-full text-[14px] font-semibold tracking-[0.5px] mech-btn hover:bg-[var(--berry)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"
               >
                 {status === 'sending' ? 'Sending…' : 'Send message'}
