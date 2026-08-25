@@ -134,12 +134,20 @@ export default function Postcard() {
   const [paused, setPaused] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('Flavors');
+  const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
     const close = (e: MediaQueryListEvent) => { if (e.matches) setMenuOpen(false); };
     mq.addEventListener('change', close);
     return () => mq.removeEventListener('change', close);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setIsHeaderScrolled(window.scrollY > 72);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
@@ -173,18 +181,29 @@ export default function Postcard() {
 
       {/* MASTHEAD — desktop only; mobile nav overlays the hero photo */}
       <div aria-hidden="true" className="hidden md:block h-[clamp(160px,18.2vw,232px)]" />
-      <header className="fixed top-0 left-0 right-0 z-[970] mx-auto max-w-[1400px] px-[4vw] py-[12px] md:py-[16px] hidden md:block"
-        style={{ background: 'rgba(242,225,194,0.94)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', boxShadow: '0 5px 18px rgba(20,8,12,0.12)' }}>
+      <header
+        className="fixed top-0 left-0 right-0 z-[970] mx-auto max-w-[1400px] px-[4vw] hidden md:block transition-[padding,background-color,box-shadow] duration-300 ease-out"
+        style={{
+          paddingTop: isHeaderScrolled ? '7px' : '12px',
+          paddingBottom: isHeaderScrolled ? '7px' : '16px',
+          background: isHeaderScrolled ? 'rgba(242,225,194,0.98)' : 'rgba(242,225,194,0.94)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          boxShadow: isHeaderScrolled ? '0 6px 22px rgba(20,8,12,0.2)' : '0 5px 18px rgba(20,8,12,0.12)',
+        }}
+      >
 
         {/* ── DESKTOP HEADER ── */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          className="relative hidden md:grid items-stretch"
+          className="relative hidden md:grid items-stretch transition-[min-height] duration-300 ease-out"
           style={{
-            gridTemplateColumns: 'minmax(0,1fr) clamp(200px,22vw,260px) minmax(0,1fr)',
-            minHeight: 'clamp(84px,9.5vw,112px)',
+            gridTemplateColumns: isHeaderScrolled
+              ? 'minmax(0,1fr) clamp(140px,15vw,176px) minmax(0,1fr)'
+              : 'minmax(0,1fr) clamp(200px,22vw,260px) minmax(0,1fr)',
+            minHeight: isHeaderScrolled ? '58px' : 'clamp(84px,9.5vw,112px)',
             overflow: 'visible',
           }}
         >
@@ -262,8 +281,11 @@ export default function Postcard() {
             <img
               src="/images/logo-official.webp"
               alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
-              className="h-auto"
-              style={{ width: 'clamp(220px,23.5vw,290px)', filter: 'drop-shadow(0 2px 10px rgba(93,26,58,0.18))' }}
+              className="h-auto transition-[width] duration-300 ease-out"
+              style={{
+                width: isHeaderScrolled ? 'clamp(126px,14vw,176px)' : 'clamp(220px,23.5vw,290px)',
+                filter: 'drop-shadow(0 2px 10px rgba(93,26,58,0.18))',
+              }}
             />
           </div>
         </motion.div>
