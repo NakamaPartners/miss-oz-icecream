@@ -25,11 +25,6 @@ const SLIDES: { src: string; alt: string; pos?: string }[] = [
     pos: 'center 62%',
   },
   {
-    src: '/images/slide-sidewalk.webp',
-    alt: 'The tree-lined Pearl District sidewalk outside the cafe, with the pink Miss Oz sign and Ice Cream & Coffee painted on the window',
-    pos: 'center 60%',
-  },
-  {
     src: '/images/slide-counter.webp',
     alt: 'The Miss Oz ice cream counter — illuminated Miss Oz sign, chalkboard menus, string lights, and glass display cases',
     pos: 'center 48%',
@@ -201,9 +196,9 @@ export default function Postcard() {
           className="relative hidden md:grid items-stretch transition-[grid-template-columns,min-height] duration-300 ease-out"
           style={{
             gridTemplateColumns: isHeaderScrolled
-              ? 'minmax(0,1fr) clamp(140px,15vw,176px) minmax(0,1fr)'
+              ? 'minmax(0,1fr) clamp(104px,12vw,140px) minmax(0,1fr)'
               : 'minmax(0,1fr) clamp(200px,22vw,260px) minmax(0,1fr)',
-            minHeight: isHeaderScrolled ? '58px' : 'clamp(84px,9.5vw,112px)',
+            minHeight: isHeaderScrolled ? '68px' : 'clamp(84px,9.5vw,112px)',
             overflow: 'visible',
           }}
         >
@@ -275,15 +270,19 @@ export default function Postcard() {
 
           {/* LOGO — absolutely centered */}
           <div
-            className="absolute left-1/2 top-1/2 z-20 flex flex-col items-center"
-            style={{ transform: 'translate(-52.18%, -50%)', overflow: 'visible' }}
+            className="absolute left-1/2 z-20 flex flex-col items-center transition-[top,transform] duration-300 ease-out"
+            style={{
+              top: isHeaderScrolled ? '50%' : '0',
+              transform: isHeaderScrolled ? 'translate(-52.18%, -50%)' : 'translate(-52.18%, 0)',
+              overflow: 'visible',
+            }}
           >
             <img
               src="/images/logo-official.webp"
               alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
               className="h-auto transition-[width] duration-300 ease-out"
               style={{
-                width: isHeaderScrolled ? 'clamp(126px,14vw,176px)' : 'clamp(220px,23.5vw,290px)',
+                width: isHeaderScrolled ? 'clamp(64px,6.2vw,78px)' : 'clamp(220px,23.5vw,290px)',
                 filter: 'drop-shadow(0 2px 10px rgba(93,26,58,0.18))',
               }}
             />
