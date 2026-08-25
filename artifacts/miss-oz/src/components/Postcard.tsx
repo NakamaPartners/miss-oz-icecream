@@ -282,6 +282,13 @@ export default function Postcard() {
             />
           </div>
         </motion.div>
+        <div
+          aria-hidden="true"
+          className="absolute left-0 right-0 bottom-[-32px] h-[32px] pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, var(--cream) 0%, rgba(242,225,194,0.72) 36%, rgba(242,225,194,0) 100%)',
+          }}
+        />
       </header>
 
       {/* HERO SCENE — composite: cone foreground left + rotating café backdrop right.
