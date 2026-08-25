@@ -914,7 +914,7 @@ export default function Postcard() {
                     {/* ── SUNDAES ── */}
                     {cat === 'Sundaes' && (
                       <div className="flex-1 flex flex-col justify-between">
-                        <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex items-center">
+                        <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex flex-col items-center gap-[clamp(16px,2vw,24px)]">
                           {MENU_ITEMS['Sundaes'].map(item => (
                             <div key={item.name} className="w-full overflow-hidden rounded-[12px]" style={{ background: 'linear-gradient(135deg, rgba(234,184,206,0.34), rgba(227,180,76,0.16))', border: '1px solid rgba(94,23,53,0.2)', boxShadow: '0 12px 28px rgba(94,23,53,0.14)' }}>
                               <div className="grid grid-cols-1 sm:grid-cols-[minmax(145px,0.82fr)_1fr] min-h-[270px]">
