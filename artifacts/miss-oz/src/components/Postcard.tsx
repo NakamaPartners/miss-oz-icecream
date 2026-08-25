@@ -700,7 +700,7 @@ export default function Postcard() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[270px_1fr_270px] lg:grid-cols-[302px_1fr_302px] gap-[clamp(14px,1.8vw,22px)] items-stretch md:px-[clamp(20px,3vw,48px)]">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(120px,270px)_minmax(380px,1fr)_minmax(120px,270px)] lg:grid-cols-[minmax(120px,302px)_minmax(420px,1fr)_minmax(120px,302px)] gap-[clamp(14px,1.8vw,22px)] items-stretch md:px-[clamp(20px,3vw,48px)]">
 
           {/* LEFT — forest-green menu category card with striped awning (decorative list, like a painted parlor sign) */}
           <aside aria-label="Menu categories" className="relative mx-auto w-full max-w-[320px] md:max-w-none hidden md:flex flex-col">
