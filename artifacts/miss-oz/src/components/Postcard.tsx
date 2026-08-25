@@ -77,7 +77,7 @@ const MENU_ITEMS: Record<string, MenuItem[]> = {
   'Whole Cakes': [
     {
       name: 'Original Basque Cheesecake',
-      details: ['6" — $45', '8" — $60 (8 slices)', '10" — $75 (12 slices)'],
+      details: ['6" — $55', '8" — $85 (8 slices)', '10" — $85 (12 slices)'],
     },
   ],
 };
@@ -85,6 +85,13 @@ const MENU_ITEMS: Record<string, MenuItem[]> = {
 const UBEREATS_URL = 'https://www.ubereats.com/store/miss-oz-ice-cream-cafe-aka-cool-moon-ice-creams/YEfj7ZgZS2m7Wm2og7PphQ';
 
 const hrefFor = (t: string) => (t === 'ubereats' ? UBEREATS_URL : t === 'home' ? '#home' : `#${t}`);
+
+function getFollowingWednesday() {
+  const date = new Date();
+  const daysUntilWednesday = (3 - date.getDay() + 7) % 7 || 7;
+  date.setDate(date.getDate() + daysUntilWednesday);
+  return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+}
 
 function BasqueCheesecakeIllustration() {
   return (
@@ -127,6 +134,7 @@ export default function Postcard() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('Flavors');
   const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
+  const [cakeOrderStatus, setCakeOrderStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
@@ -155,6 +163,40 @@ export default function Postcard() {
   }, [menuOpen]);
 
   const current = SLIDES[slide] ?? SLIDES[0];
+  const followingWednesday = getFollowingWednesday();
+
+  async function handleCakeOrderSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setCakeOrderStatus('sending');
+    const form = e.currentTarget;
+    const values = new FormData(form);
+    const message = [
+      'Whole Basque Cheesecake pre-order',
+      `Cake size: ${values.get('cakeSize')}`,
+      `Quantity: ${values.get('quantity')}`,
+      `Pickup date: ${values.get('pickupDate')}`,
+      `Order notes: ${values.get('notes') || 'None'}`,
+    ].join('\n');
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+    try {
+      const response = await fetch(`${base}/api/inquire`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: values.get('name'),
+          email: values.get('email'),
+          phone: values.get('phone'),
+          type: 'general',
+          message,
+        }),
+      });
+      if (!response.ok) throw new Error('Order request failed');
+      form.reset();
+      setCakeOrderStatus('sent');
+    } catch {
+      setCakeOrderStatus('error');
+    }
+  }
 
   return (
     <section
@@ -992,42 +1034,66 @@ export default function Postcard() {
                     {/* ── WHOLE CAKES ── */}
                     {cat === 'Whole Cakes' && (
                       <div className="flex-1 flex flex-col justify-between">
-                        <div className="mt-[clamp(18px,2.2vw,28px)] flex-1 flex items-center">
-                          {MENU_ITEMS['Whole Cakes'].map((item, i) => (
-                            <div key={item.name} className="w-full rounded-[12px] p-[clamp(16px,2.2vw,30px)]" style={{ background: 'linear-gradient(135deg, rgba(227,180,76,0.14), rgba(234,184,206,0.2))', border: '1px solid rgba(94,23,53,0.2)', boxShadow: '0 10px 24px rgba(94,23,53,0.1)' }}>
-                              <div className="flex flex-col sm:flex-row items-center gap-[clamp(15px,2vw,28px)]">
-                                <div className="shrink-0 w-[clamp(122px,13vw,168px)] h-[clamp(108px,11vw,142px)] rounded-full flex items-center justify-center" style={{ background: 'rgba(251,244,230,0.72)', border: '1px dashed rgba(94,23,53,0.25)' }}>
-                                  <BasqueCheesecakeIllustration />
-                                </div>
-                                <div className="flex-1 text-center sm:text-left">
-                                  <div className="uppercase font-bold tracking-[2.5px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(15px,1.45vw,21px)' }}>{item.name}</div>
-                                  <div className="mt-[6px] text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(21px,2vw,30px)', lineHeight: 1 }}>Original recipe · baked slow</div>
-                                  <div className="mt-[8px] text-[#6E5A54] leading-snug" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(11px,0.9vw,13px)' }}>Rich, caramelized, and creamy at the center. Choose your size:</div>
-                                </div>
-                              </div>
-                              {item.details && (
-                                <div className="mt-[clamp(18px,2vw,26px)] grid grid-cols-3 gap-[8px]">
-                                  {item.details.map(detail => {
-                                    const [size, ...priceParts] = detail.split(' — ');
-                                    return (
-                                      <div key={detail} className="rounded-[8px] py-[9px] px-[4px] text-center" style={{ background: 'rgba(251,244,230,0.76)', border: '1px solid rgba(94,23,53,0.14)' }}>
-                                        <div className="font-bold text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(12px,1.15vw,16px)' }}>{size}</div>
-                                        <div className="mt-[2px] text-[var(--marionberry)] font-bold" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,1vw,15px)' }}>{priceParts.join(' — ')}</div>
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              )}
+                        <div className="mt-[clamp(18px,2.2vw,28px)] flex flex-col gap-[clamp(18px,2vw,26px)]">
+                          <div className="grid grid-cols-2 gap-[10px]">
+                            <img src="/images/whole-cheesecake-slice.jpeg" alt="Slice of Original Basque Cheesecake" className="h-[clamp(120px,14vw,190px)] w-full rounded-[10px] object-cover" />
+                            <img src="/images/whole-basque-cheesecake.jpeg" alt="Whole Original Basque Cheesecake" className="h-[clamp(120px,14vw,190px)] w-full rounded-[10px] object-cover" />
+                          </div>
+                          <div className="text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
+                            <div className="uppercase font-bold tracking-[2.5px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(15px,1.45vw,21px)' }}>Original Basque Cheesecake</div>
+                            <p className="mt-[10px]"><strong>Crafted fresh for every order.</strong> To ensure the highest quality and texture, our Basque Cheesecakes are available by pre-order only.</p>
+                            <div className="mt-[16px] font-semibold text-[#3B1E2B]">Pricing:</div>
+                            <div className="mt-[7px] grid gap-[5px]">
+                              <div>6-inch Whole Cake — <strong>$55</strong></div>
+                              <div>8-inch Whole Cake — <strong>$85</strong> (8 slices)</div>
+                              <div>10-inch Whole Cake — <strong>$85</strong> (12 slices)</div>
                             </div>
-                          ))}
+                            <p className="mt-[12px]">The reason the 8&quot; and 10&quot; cakes are the same price is that they use the <strong>same amount of ingredients.</strong> The 8-inch version is taller and yields 8 larger slices, while the 10-inch version is wider and yields 12 thinner slices.</p>
+                            <p className="mt-[12px] italic">I’ve finalized the ordering system for our whole Basque cheesecakes. Since they are handmade in small batches and require a multi-day cooling and aging process, I’d like the website to operate on a fixed weekly pre-order schedule.</p>
+                          </div>
+                          <div className="rounded-[9px] p-[clamp(14px,1.7vw,22px)]" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)' }}>
+                            <div className="text-center text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 1.1 }}>Weekly Basque Cheesecake Schedule</div>
+                            <div className="mt-[14px] grid grid-cols-2 gap-x-[18px] gap-y-[12px] text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.85vw,12px)' }}>
+                              <div><strong className="text-[#3B1E2B]">Orders Open</strong><br />Monday at 11:00 AM through Friday at 8:00 PM<br /><em>Orders may close earlier if the weekly quantity sells out.</em></div>
+                              <div><strong className="text-[#3B1E2B]">Production Day</strong><br />The following Monday</div>
+                              <div><strong className="text-[#3B1E2B]">Cooling &amp; Aging</strong><br />Monday–Tuesday</div>
+                              <div><strong className="text-[#3B1E2B]">Pickup Day</strong><br />Wednesday</div>
+                            </div>
+                            <p className="mt-[14px] text-[#6E5A54]" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10px,0.85vw,12px)' }}>Orders placed during the Monday–Friday ordering window are for pickup on the <strong>following Wednesday by noon</strong>, not the Wednesday of the same week.</p>
+                          </div>
+                          <div className="text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
+                            <div className="font-bold text-[#3B1E2B]">Handcrafted in Limited Weekly Batches</div>
+                            <p className="mt-[7px]">Our whole Basque cheesecakes are made from scratch using 100% premium cream cheese and zero flour. Each cake is slow-baked, cooled at room temperature, and refrigerated overnight to develop its signature rich and creamy texture.</p>
+                            <p className="mt-[9px]">Orders open every Monday at 11:00 AM and close Friday at 8:00 PM, or earlier if the weekly batch sells out. All confirmed orders will be ready for pickup the following Wednesday.</p>
+                            <p className="mt-[9px]"><strong>Only a limited number of whole cheesecakes are made each week.</strong> Once the weekly batch is sold out, ordering will reopen the following Monday.</p>
+                          </div>
+                          <form onSubmit={handleCakeOrderSubmit} className="rounded-[9px] p-[clamp(14px,1.7vw,22px)]" style={{ background: 'rgba(227,180,76,0.1)', border: '1px solid rgba(94,23,53,0.15)' }}>
+                            <div className="text-center text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 1.1 }}>Place a Pre-Order</div>
+                            <div className="mt-[14px] grid gap-[10px] text-[#3B1E2B]" style={{ fontFamily: 'var(--font-sans)', fontSize: '11px' }}>
+                              <label> Cake size
+                                <select name="cakeSize" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }}>
+                                  <option value="">Choose a size</option><option>6-inch</option><option>8-inch</option><option>10-inch</option>
+                                </select>
+                              </label>
+                              <label>Quantity<input name="quantity" type="number" min="1" defaultValue="1" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
+                              <label>Customer name<input name="name" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
+                              <label>Phone number<input name="phone" type="tel" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
+                              <label>Email address<input name="email" type="email" required className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
+                              <label>Pickup date<input name="pickupDate" value={followingWednesday} readOnly className="mt-1 w-full rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.55)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
+                              <label>Order notes<textarea name="notes" rows={2} className="mt-1 w-full resize-y rounded-[6px] px-3 py-2" style={{ background: 'rgba(251,244,230,0.8)', border: '1px solid rgba(94,23,53,0.2)' }} /></label>
+                            </div>
+                            <button type="submit" disabled={cakeOrderStatus === 'sending'} className="mt-[14px] w-full rounded-full bg-[var(--berry-deep)] px-5 py-2.5 font-bold uppercase tracking-[1.5px] text-[var(--cream-hi)] disabled:opacity-60">
+                              {cakeOrderStatus === 'sending' ? 'Sending…' : 'Submit Pre-Order'}
+                            </button>
+                            {cakeOrderStatus === 'sent' && <p className="mt-2 text-center text-[#3B1E2B]">Thank you — your pre-order request has been sent.</p>}
+                            {cakeOrderStatus === 'error' && <p className="mt-2 text-center text-[var(--berry-deep)]">We couldn’t send your request. Please try again.</p>}
+                          </form>
                         </div>
                         <div>
                           <div aria-hidden="true" className="mt-[clamp(16px,2vw,22px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
                           <div className="mt-[clamp(14px,1.8vw,20px)] rounded-[8px] px-[clamp(14px,1.8vw,22px)] py-[clamp(13px,1.6vw,19px)] text-center" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)' }}>
                             <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 1.1 }}>Basque Cheesecake Orders</div>
-                            <p className="mt-[8px] text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
-                              Our Original Basque Cheesecake is available in three sizes. Reserve at least one week in advance.
-                            </p>
+                            <p className="mt-[8px] text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>Reserve at least one week in advance for a handcrafted whole cheesecake.</p>
                           </div>
                         </div>
                       </div>
