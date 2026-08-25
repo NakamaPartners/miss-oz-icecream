@@ -1266,32 +1266,13 @@ export default function Postcard() {
               <h2 id="whole-cake-order-title" className="mt-1 text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(20px,2.4vw,28px)' }}>Place a Pre-Order</h2>
             </div>
             <div className="mt-5 grid gap-5 text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px,1vw,14px)' }}>
-              <div>
-                <p className="italic">I’ve finalized the ordering system for our whole Basque cheesecakes. Since they are handmade in small batches and require a multi-day cooling and aging process, our website operates on a fixed weekly pre-order schedule.</p>
-              </div>
               <div className="rounded-[9px] p-[clamp(14px,2vw,22px)]" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.25)' }}>
                 <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(22px,2.4vw,29px)', lineHeight: 1.1 }}>How to Order</div>
                 <ol className="mt-3 list-decimal space-y-2 pl-5">
-                  <li>Submit your cake size, quantity, and contact details below during the weekly ordering window.</li>
-                  <li>Orders open Monday at 11:00 AM through Friday at 8:00 PM. Orders may close early if the weekly quantity sells out.</li>
-                  <li>We produce cakes the following Monday and cool and age them Monday–Tuesday.</li>
-                  <li>Your confirmed order will be ready for pickup the following Wednesday by noon — not the Wednesday of the same week.</li>
+                  <li>Choose your cake size and quantity.</li>
+                  <li>Enter your contact details and any order notes.</li>
+                  <li>Submit your request and we’ll follow up to confirm it.</li>
                 </ol>
-              </div>
-              <div>
-                <div className="font-bold text-[#3B1E2B]">Weekly Basque Cheesecake Schedule</div>
-                <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-3">
-                  <div><strong className="text-[#3B1E2B]">Orders Open</strong><br />Monday at 11:00 AM through Friday at 8:00 PM<br /><em>May close earlier if sold out.</em></div>
-                  <div><strong className="text-[#3B1E2B]">Production Day</strong><br />The following Monday</div>
-                  <div><strong className="text-[#3B1E2B]">Cooling &amp; Aging</strong><br />Monday–Tuesday</div>
-                  <div><strong className="text-[#3B1E2B]">Pickup Day</strong><br />The following Wednesday by noon</div>
-                </div>
-              </div>
-              <div>
-                <div className="font-bold text-[#3B1E2B]">Handcrafted in Limited Weekly Batches</div>
-                <p className="mt-2">Our whole Basque cheesecakes are made from scratch using 100% premium cream cheese and zero flour. Each cake is slow-baked, cooled at room temperature, and refrigerated overnight to develop its signature rich and creamy texture.</p>
-                <p className="mt-2">Orders open every Monday at 11:00 AM and close Friday at 8:00 PM, or earlier if the weekly batch sells out. All confirmed orders will be ready for pickup the following Wednesday.</p>
-                <p className="mt-2"><strong>Only a limited number of whole cheesecakes are made each week.</strong> Once the weekly batch is sold out, ordering will reopen the following Monday.</p>
               </div>
               <form onSubmit={handleCakeOrderSubmit} className="rounded-[9px] p-[clamp(14px,2vw,22px)]" style={{ background: 'rgba(227,180,76,0.12)', border: '1px solid rgba(94,23,53,0.18)' }}>
                 <div className="font-bold text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(18px,2vw,23px)' }}>Your Order Details</div>
