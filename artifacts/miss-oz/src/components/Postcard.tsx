@@ -823,6 +823,16 @@ export default function Postcard() {
                             {active && <span aria-hidden="true" className="text-[8px] opacity-70">✦</span>}
                           </span>
                         </motion.button>
+                        {c === 'Whole Cakes' && (
+                          <button
+                            type="button"
+                            onClick={() => { setCakeOrderStatus('idle'); setCakeOrderOpen(true); }}
+                            className="mt-1 rounded-full px-3 py-1 text-[var(--gold-hi)] transition-colors hover:bg-[rgba(255,217,138,0.14)] hover:text-[var(--cream-hi)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+                            style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(18px,1.5vw,22px)', lineHeight: 1 }}
+                          >
+                            Order Here!
+                          </button>
+                        )}
                       </div>
                     );
                   })}
@@ -1053,20 +1063,22 @@ export default function Postcard() {
                             <img src="/images/whole-cheesecake-slice.jpeg" alt="Slice of Original Basque Cheesecake" className="h-[clamp(120px,14vw,190px)] w-full rounded-[10px] object-cover" />
                             <img src="/images/whole-basque-cheesecake.jpeg" alt="Whole Original Basque Cheesecake" className="h-[clamp(120px,14vw,190px)] w-full rounded-[10px] object-cover" />
                           </div>
-                          <div className="text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
-                            <div className="uppercase font-bold tracking-[2.5px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(15px,1.45vw,21px)' }}>Original Basque Cheesecake</div>
-                            <p className="mt-[10px]"><strong>Crafted fresh for every order.</strong> To ensure the highest quality and texture, our Basque Cheesecakes are available by pre-order only.</p>
-                            <div className="mt-[16px] font-semibold text-[#3B1E2B]">Pricing:</div>
-                            <div className="mt-[7px] grid gap-[5px]">
-                              <div>6-inch Whole Cake — <strong>$55</strong></div>
-                              <div>8-inch Whole Cake — <strong>$85</strong> (8 slices)</div>
-                              <div>10-inch Whole Cake — <strong>$85</strong> (12 slices)</div>
+                          <div className="relative overflow-hidden rounded-[12px] p-[clamp(17px,2.2vw,28px)] text-[#6E5A54] leading-relaxed" style={{ background: 'linear-gradient(145deg, rgba(255,248,229,0.96), rgba(245,220,199,0.72))', border: '2px solid rgba(94,23,53,0.55)', boxShadow: '0 10px 24px rgba(94,23,53,0.16)', fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
+                            <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full" style={{ background: 'rgba(227,180,76,0.25)' }} />
+                            <div className="relative text-[var(--berry-deep)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(25px,2.6vw,36px)', lineHeight: 1 }}>Original Basque Cheesecake</div>
+                            <p className="relative mt-[12px] rounded-[7px] px-3 py-2.5 text-[#4D3538]" style={{ background: 'rgba(255,255,255,0.38)' }}><strong className="text-[var(--berry-deep)]">Crafted fresh for every order.</strong> To ensure the highest quality and texture, our Basque Cheesecakes are available by pre-order only.</p>
+                            <div className="relative mt-[18px] font-bold text-[#3B1E2B]" style={{ fontSize: 'clamp(14px,1.1vw,17px)' }}>Pricing</div>
+                            <div className="relative mt-[9px] grid gap-[7px] sm:grid-cols-3">
+                              <div className="rounded-[8px] px-2 py-2.5 text-center" style={{ background: 'rgba(255,255,255,0.58)', border: '1px solid rgba(227,180,76,0.85)' }}><div className="font-semibold text-[#3B1E2B]">6-inch</div><strong className="text-[var(--berry-deep)]">$55</strong></div>
+                              <div className="rounded-[8px] px-2 py-2.5 text-center" style={{ background: 'rgba(255,255,255,0.58)', border: '1px solid rgba(227,180,76,0.85)' }}><div className="font-semibold text-[#3B1E2B]">8-inch</div><strong className="text-[var(--berry-deep)]">$85</strong><div className="text-[10px]">(8 slices)</div></div>
+                              <div className="rounded-[8px] px-2 py-2.5 text-center" style={{ background: 'rgba(255,255,255,0.58)', border: '1px solid rgba(227,180,76,0.85)' }}><div className="font-semibold text-[#3B1E2B]">10-inch</div><strong className="text-[var(--berry-deep)]">$85</strong><div className="text-[10px]">(12 slices)</div></div>
                             </div>
-                            <p className="mt-[12px]">The reason the 8&quot; and 10&quot; cakes are the same price is that they use the <strong>same amount of ingredients.</strong> The 8-inch version is taller and yields 8 larger slices, while the 10-inch version is wider and yields 12 thinner slices.</p>
+                            <p className="relative mt-[14px] rounded-[7px] px-3 py-2.5 text-[#4D3538]" style={{ background: 'rgba(94,23,53,0.06)' }}>The reason the 8&quot; and 10&quot; cakes are the same price is that they use the <strong className="text-[var(--berry-deep)]">same amount of ingredients.</strong> The 8-inch version is taller and yields 8 larger slices, while the 10-inch version is wider and yields 12 thinner slices.</p>
                           </div>
-                          <div className="rounded-[9px] p-[clamp(14px,1.7vw,22px)] text-[#6E5A54] leading-relaxed" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)', fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
-                            <div className="font-bold text-[#3B1E2B]">Handcrafted in Limited Weekly Batches</div>
-                            <p className="mt-[7px]">Our whole Basque cheesecakes are made from scratch using 100% premium cream cheese and zero flour. Each cake is slow-baked, cooled at room temperature, and refrigerated overnight to develop its signature rich and creamy texture.</p>
+                          <div className="relative overflow-hidden rounded-[10px] p-[clamp(18px,2.2vw,28px)] text-[#5B4540] leading-relaxed" style={{ background: 'rgba(251,244,230,0.9)', border: '2px solid var(--berry-deep)', boxShadow: '0 5px 0 rgba(227,180,76,0.7), inset 0 0 0 5px rgba(242,225,194,0.55)', fontFamily: 'var(--font-sans)', fontSize: 'clamp(11px,0.95vw,13.5px)' }}>
+                            <div className="relative text-[var(--berry-deep)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(18px,1.7vw,24px)', lineHeight: 1 }}>Made fresh weekly · by pre-order</div>
+                            <div className="relative mt-[9px] font-bold text-[var(--berry-deep)]" style={{ fontFamily: "'DM Serif Display', serif", fontStyle: 'italic', fontSize: 'clamp(20px,2vw,28px)', lineHeight: 1.12 }}>Handcrafted in Limited Weekly Batches</div>
+                            <p className="relative mt-[11px] text-[#4D3538]">Our whole Basque cheesecakes are made from scratch using 100% premium cream cheese and zero flour. Each cake is slow-baked, cooled at room temperature, and refrigerated overnight to develop its signature rich and creamy texture.</p>
                           </div>
                           <button type="button" onClick={() => { setCakeOrderStatus('idle'); setCakeOrderOpen(true); }} className="w-full rounded-full bg-[var(--berry-deep)] px-5 py-3 font-bold uppercase tracking-[1.5px] text-[var(--cream-hi)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)]" style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
                             Order a Whole Cheesecake →
