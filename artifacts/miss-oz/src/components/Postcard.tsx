@@ -65,6 +65,8 @@ const MENU_CATEGORIES = ['Flavors', 'Sundaes', 'Croffles & Desserts', 'Drinks', 
 type MenuItem = { name: string; note?: string; details?: string[] };
 const MENU_ITEMS: Record<string, MenuItem[]> = {
   Sundaes: [
+    { name: 'Miss Oz Cherry Crown Sundae', note: 'Three mini scoops and One single scoop topped with our house-made cherry syrup for a classic old-fashioned sundae.' },
+    { name: 'Midnight Fudge Sundae', note: 'Two scoops with our house-made hot fudge, whipped cream, rainbow sprinkles and a cherry on top.' },
     { name: 'Rose City Banana Split', note: 'Vanilla, strawberry, and chocolate ice cream with three different sauces, topped with whipped cream, sprinkles, and cherries.' },
   ],
   Drinks: [
