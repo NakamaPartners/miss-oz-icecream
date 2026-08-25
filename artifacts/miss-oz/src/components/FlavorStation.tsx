@@ -14,7 +14,7 @@ const FLAVOR = {
 
 const CARDS = [
   { name: 'Licorice',       note: 'dark, bold, beautifully old-school',       bg: '#E9E3E5', img: '/images/icon-licorice.svg' },
-  { name: 'Vietnam Coffee', note: 'deep roast with a creamy condensed finish', bg: '#EAD8BE', img: '/images/icon-vietnam-coffee.svg' },
+  { name: 'Vietnam Coffee', note: 'deep roast with a creamy condensed finish', bg: '#EAD8BE', img: '/images/vietnam-coffee-vote.jpeg' },
   { name: 'Honey Lavender', note: 'wildflower honey with a soft floral bloom', bg: '#E6DDF4', img: '/images/icon-honey-lavender.svg' },
 ];
 const SEED_VOTES = [84, 121, 63];
