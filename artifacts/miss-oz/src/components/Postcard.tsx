@@ -1067,14 +1067,6 @@ export default function Postcard() {
                           <div className="rounded-[9px] p-[clamp(14px,1.7vw,22px)] text-[#6E5A54] leading-relaxed" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)', fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
                             <div className="font-bold text-[#3B1E2B]">Handcrafted in Limited Weekly Batches</div>
                             <p className="mt-[7px]">Our whole Basque cheesecakes are made from scratch using 100% premium cream cheese and zero flour. Each cake is slow-baked, cooled at room temperature, and refrigerated overnight to develop its signature rich and creamy texture.</p>
-                            <div className="mt-[14px] font-bold text-[#3B1E2B]">Weekly Schedule</div>
-                            <div className="mt-[7px] grid gap-[5px] sm:grid-cols-2">
-                              <div><strong>Orders open:</strong> Monday 11:00 AM–Friday 8:00 PM</div>
-                              <div><strong>Production:</strong> The following Monday</div>
-                              <div><strong>Cooling &amp; aging:</strong> Monday–Tuesday</div>
-                              <div><strong>Pickup:</strong> Following Wednesday by noon</div>
-                            </div>
-                            <p className="mt-[10px]"><strong>Important:</strong> Your pickup is the following Wednesday, not the Wednesday of the same week.</p>
                           </div>
                           <button type="button" onClick={() => { setCakeOrderStatus('idle'); setCakeOrderOpen(true); }} className="w-full rounded-full bg-[var(--berry-deep)] px-5 py-3 font-bold uppercase tracking-[1.5px] text-[var(--cream-hi)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)]" style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
                             Order a Whole Cheesecake →
@@ -1271,6 +1263,16 @@ export default function Postcard() {
                   <li>Enter your contact details and any order notes.</li>
                   <li>Submit your request and we’ll follow up to confirm it.</li>
                 </ol>
+              </div>
+              <div className="rounded-[9px] p-[clamp(14px,2vw,22px)]" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.25)' }}>
+                <div className="font-bold text-[#3B1E2B]">Weekly Schedule</div>
+                <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-3">
+                  <div><strong>Orders open:</strong> Monday 11:00 AM–Friday 8:00 PM</div>
+                  <div><strong>Production:</strong> The following Monday</div>
+                  <div><strong>Cooling &amp; aging:</strong> Monday–Tuesday</div>
+                  <div><strong>Pickup:</strong> Following Wednesday by noon</div>
+                </div>
+                <p className="mt-3"><strong>Important:</strong> Your pickup is the following Wednesday, not the Wednesday of the same week.</p>
               </div>
               <form onSubmit={handleCakeOrderSubmit} className="rounded-[9px] p-[clamp(14px,2vw,22px)]" style={{ background: 'rgba(227,180,76,0.12)', border: '1px solid rgba(94,23,53,0.18)' }}>
                 <div className="font-bold text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(18px,2vw,23px)' }}>Your Order Details</div>
