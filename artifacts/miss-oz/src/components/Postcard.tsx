@@ -1067,8 +1067,6 @@ export default function Postcard() {
                           <div className="rounded-[9px] p-[clamp(14px,1.7vw,22px)] text-[#6E5A54] leading-relaxed" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)', fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
                             <div className="font-bold text-[#3B1E2B]">Handcrafted in Limited Weekly Batches</div>
                             <p className="mt-[7px]">Our whole Basque cheesecakes are made from scratch using 100% premium cream cheese and zero flour. Each cake is slow-baked, cooled at room temperature, and refrigerated overnight to develop its signature rich and creamy texture.</p>
-                            <p className="mt-[9px]">Orders open every Monday at 11:00 AM and close Friday at 8:00 PM, or earlier if the weekly batch sells out. All confirmed orders will be ready for pickup the following Wednesday.</p>
-                            <p className="mt-[9px]"><strong>Only a limited number of whole cheesecakes are made each week.</strong> Once the weekly batch is sold out, ordering will reopen the following Monday.</p>
                             <div className="mt-[14px] font-bold text-[#3B1E2B]">Weekly Schedule</div>
                             <div className="mt-[7px] grid gap-[5px] sm:grid-cols-2">
                               <div><strong>Orders open:</strong> Monday 11:00 AM–Friday 8:00 PM</div>
