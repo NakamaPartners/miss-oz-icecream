@@ -30,9 +30,9 @@ const SLIDES: { src: string; alt: string; pos?: string }[] = [
     pos: 'center 60%',
   },
   {
-    src: '/images/slide-interior.jpg',
-    alt: 'The Miss Oz ice cream counter — display case full of flavors, chalkboard menu on the wall, string lights, and colorful bunting overhead',
-    pos: 'center 40%',
+    src: '/images/slide-counter.webp',
+    alt: 'The Miss Oz ice cream counter — illuminated Miss Oz sign, chalkboard menus, string lights, and glass display cases',
+    pos: 'center 48%',
   },
 ];
 
@@ -172,7 +172,9 @@ export default function Postcard() {
       </div>
 
       {/* MASTHEAD — desktop only; mobile nav overlays the hero photo */}
-      <header className="relative z-20 mx-auto max-w-[1400px] px-[4vw] mt-[12px] mb-[clamp(64px,8.5vw,116px)] hidden md:block">
+      <div aria-hidden="true" className="hidden md:block h-[clamp(160px,18.2vw,232px)]" />
+      <header className="fixed top-0 left-0 right-0 z-[970] mx-auto max-w-[1400px] px-[4vw] py-[12px] md:py-[16px] hidden md:block"
+        style={{ background: 'rgba(242,225,194,0.94)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', boxShadow: '0 5px 18px rgba(20,8,12,0.12)' }}>
 
         {/* ── DESKTOP HEADER ── */}
         <motion.div
@@ -449,14 +451,14 @@ export default function Postcard() {
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
-              className="md:hidden absolute top-4 left-4 z-30 flex flex-col justify-center items-center gap-[5px] w-[42px] h-[42px] rounded-xl pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+              className="md:hidden fixed top-4 left-4 z-[970] flex flex-col justify-center items-center gap-[5px] w-[42px] h-[42px] rounded-xl pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
               style={{ background: 'rgba(242,225,194,0.88)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
             >
               <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
               <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300" style={{ opacity: menuOpen ? 0 : 1 }} />
               <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
             </button>
-            <div className="md:hidden absolute top-3 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+            <div className="md:hidden fixed top-3 left-1/2 -translate-x-1/2 z-[970] pointer-events-none">
               <img
                 src="/images/logo-official.webp"
                 alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
