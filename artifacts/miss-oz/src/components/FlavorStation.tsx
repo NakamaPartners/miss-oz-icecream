@@ -9,7 +9,7 @@ const FLAVOR = {
   script:      'something fresh is coming',
   description: 'Smooth and creamy dairy-free sorbet, made with real coconut milk and cream. No shortcuts.',
   tags:        ['Dairy-free', 'Coconut milk & cream'],
-  poster:      '/images/coconut-sorbet-fresh-scoop.png',
+  poster:      '/images/coconut-sorbet-selected.png',
 };
 
 const CARDS = [
