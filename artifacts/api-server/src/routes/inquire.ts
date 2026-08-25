@@ -58,7 +58,7 @@ router.post("/inquire", async (req, res) => {
     : "general";
   const isWholesale = inquiryType === "wholesale";
   const productChoices = Array.isArray(productsOfInterest)
-    ? productsOfInterest.filter((product): product is string => typeof product === "string" && product.trim())
+    ? productsOfInterest.filter((product): product is string => typeof product === "string" && Boolean(product.trim()))
     : [];
 
   if (isWholesale) {
