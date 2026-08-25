@@ -21,3 +21,10 @@ uri = "file://artifacts/miss-oz/public/images/coconut-sorbet-poster.jpg"
 type = "image"
 title = "Earlier Coconut Sorbet Image"
 description = "The earlier teal tropical Coconut Sorbet scoop image."
+
+[[outputs]]
+id = "mKJpmZ-lR9CciU9UEwDde"
+uri = "file://artifacts/miss-oz/public/images/coconut-sorbet-tropical.png"
+type = "image"
+title = "Other Coconut Sorbet Image"
+description = "The other vintage Miss Oz Coconut Sorbet poster."
