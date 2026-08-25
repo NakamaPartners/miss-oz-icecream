@@ -142,7 +142,7 @@ export default function MeetOz() {
             inspection.
           </p>
           <p className="font-script-alt text-[clamp(22px,2.6vw,30px)] text-[var(--berry)] leading-snug mt-6">
-            Oz has tasted every flavor before you have.
+            Oz has cared every flavor before you have.
           </p>
         </motion.div>
 
