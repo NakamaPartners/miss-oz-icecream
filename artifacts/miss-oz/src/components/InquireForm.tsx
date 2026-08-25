@@ -39,6 +39,11 @@ export default function InquireForm({
   const [productsOfInterest, setProductsOfInterest] = useState<string[]>([]);
   const [estimatedOrderVolume, setEstimatedOrderVolume] = useState('');
   const [additionalInformation, setAdditionalInformation] = useState('');
+  const [eventDate, setEventDate] = useState('');
+  const [eventTime, setEventTime] = useState('');
+  const [numberOfServings, setNumberOfServings] = useState('');
+  const [desiredOrderQuantities, setDesiredOrderQuantities] = useState('');
+  const [additionalEventDetails, setAdditionalEventDetails] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [open, setOpen] = useState(false);
 
@@ -53,7 +58,13 @@ export default function InquireForm({
         businessType &&
         productsOfInterest.length > 0 &&
         estimatedOrderVolume.trim());
-    if (!name.trim() || !email.trim() || (!message.trim() && type !== 'wholesale') || !wholesaleComplete) return;
+    const eventComplete =
+      type !== 'event' ||
+      (eventDate.trim() &&
+        eventTime.trim() &&
+        numberOfServings.trim() &&
+        desiredOrderQuantities.trim());
+    if (!name.trim() || !email.trim() || (!message.trim() && type !== 'wholesale' && type !== 'event') || !wholesaleComplete || !eventComplete) return;
     setStatus('sending');
     try {
       // Use BASE_URL so the path is correct in both Replit dev and Vercel deploy
@@ -68,6 +79,13 @@ export default function InquireForm({
         `Estimated Order Volume: ${estimatedOrderVolume.trim()}`,
         `Additional Information: ${additionalInformation.trim() || 'None provided'}`,
       ].join('\n');
+      const eventMessage = [
+        `Event Date: ${eventDate.trim()}`,
+        `Event Time: ${eventTime.trim()}`,
+        `Number of Servings: ${numberOfServings.trim()}`,
+        `Desired Order Quantities: ${desiredOrderQuantities.trim()}`,
+        `Additional Event Details: ${additionalEventDetails.trim() || 'None provided'}`,
+      ].join('\n');
       const res = await fetch(`${base}/api/inquire`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -76,19 +94,25 @@ export default function InquireForm({
           email,
           phone: phone || undefined,
           type,
-          message: type === 'wholesale' ? wholesaleMessage : message,
+          message: type === 'wholesale' ? wholesaleMessage : type === 'event' ? eventMessage : message,
           businessName: type === 'wholesale' ? businessName : undefined,
           contactPerson: type === 'wholesale' ? name : undefined,
           businessType: type === 'wholesale' ? businessType : undefined,
           productsOfInterest: type === 'wholesale' ? productsOfInterest : undefined,
           estimatedOrderVolume: type === 'wholesale' ? estimatedOrderVolume : undefined,
           additionalInformation: type === 'wholesale' ? additionalInformation : undefined,
+          eventDate: type === 'event' ? eventDate : undefined,
+          eventTime: type === 'event' ? eventTime : undefined,
+          numberOfServings: type === 'event' ? numberOfServings : undefined,
+          desiredOrderQuantities: type === 'event' ? desiredOrderQuantities : undefined,
+          additionalEventDetails: type === 'event' ? additionalEventDetails : undefined,
         }),
       });
       if (!res.ok) throw new Error('server error');
       setStatus('success');
       setName(''); setBusinessName(''); setEmail(''); setPhone(''); setMessage('');
       setBusinessType(''); setProductsOfInterest([]); setEstimatedOrderVolume(''); setAdditionalInformation('');
+      setEventDate(''); setEventTime(''); setNumberOfServings(''); setDesiredOrderQuantities(''); setAdditionalEventDetails('');
     } catch {
       setStatus('error');
     }
@@ -162,6 +186,31 @@ export default function InquireForm({
                 <p>We've received your inquiry and will review it carefully.</p>
                 <p className="mt-2">We'll contact you within 1–2 business days to discuss pricing, product availability, and the next steps.</p>
               </div>
+            ) : type === 'event' ? (
+              <>
+                <div className="mb-5 grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label className={labelClass}>Event Date</label>
+                    <input type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} required className={inputClass} />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Event Time</label>
+                    <input type="time" value={eventTime} onChange={(e) => setEventTime(e.target.value)} required className={inputClass} />
+                  </div>
+                </div>
+                <div className="mb-5">
+                  <label className={labelClass}>Number of Servings</label>
+                  <input type="number" min="1" value={numberOfServings} onChange={(e) => setNumberOfServings(e.target.value)} required placeholder="How many guests will you serve?" className={inputClass} />
+                </div>
+                <div className="mb-5">
+                  <label className={labelClass}>Desired Order Quantities</label>
+                  <textarea value={desiredOrderQuantities} onChange={(e) => setDesiredOrderQuantities(e.target.value)} maxLength={600} rows={3} required placeholder="For example: 50 single scoops, 30 double scoops" className={textareaClass} />
+                </div>
+                <div className="mb-6">
+                  <label className={labelClass}>Additional Event Details</label>
+                  <textarea value={additionalEventDetails} onChange={(e) => setAdditionalEventDetails(e.target.value)} maxLength={1200} rows={4} placeholder="Tell us anything else about your event." className={textareaClass} />
+                </div>
+              </>
             ) : (
               <p
                 className="text-[14px] italic mb-4"
@@ -322,6 +371,8 @@ export default function InquireForm({
                   !email.trim() ||
                   (type === 'wholesale'
                     ? !businessName.trim() || !phone.trim() || !businessType || productsOfInterest.length === 0 || !estimatedOrderVolume.trim()
+                    : type === 'event'
+                    ? !eventDate.trim() || !eventTime.trim() || !numberOfServings.trim() || !desiredOrderQuantities.trim()
                     : !message.trim())
                 }
                 className="bg-[var(--cocoa)] text-[var(--cream)] py-[11px] px-[26px] rounded-full text-[14px] font-semibold tracking-[0.5px] mech-btn hover:bg-[var(--berry)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--gold)]"

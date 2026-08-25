@@ -38,6 +38,11 @@ router.post("/inquire", async (req, res) => {
     productsOfInterest,
     estimatedOrderVolume,
     additionalInformation,
+    eventDate,
+    eventTime,
+    numberOfServings,
+    desiredOrderQuantities,
+    additionalEventDetails,
   } = req.body ?? {};
 
   if (typeof name !== "string" || !name.trim()) {
@@ -87,6 +92,24 @@ router.post("/inquire", async (req, res) => {
       return;
     }
   }
+  if (inquiryType === "event") {
+    if (typeof eventDate !== "string" || !eventDate.trim()) {
+      res.status(400).json({ error: "Event date is required" });
+      return;
+    }
+    if (typeof eventTime !== "string" || !eventTime.trim()) {
+      res.status(400).json({ error: "Event time is required" });
+      return;
+    }
+    if (typeof numberOfServings !== "string" || !numberOfServings.trim()) {
+      res.status(400).json({ error: "Number of servings is required" });
+      return;
+    }
+    if (typeof desiredOrderQuantities !== "string" || !desiredOrderQuantities.trim()) {
+      res.status(400).json({ error: "Desired order quantities are required" });
+      return;
+    }
+  }
 
   const payload = {
     name: name.trim().slice(0, 80),
@@ -100,6 +123,11 @@ router.post("/inquire", async (req, res) => {
     productsOfInterest: productChoices.slice(0, 5).map((product) => product.trim().slice(0, 80)),
     estimatedOrderVolume: typeof estimatedOrderVolume === "string" ? estimatedOrderVolume.trim().slice(0, 160) : undefined,
     additionalInformation: typeof additionalInformation === "string" ? additionalInformation.trim().slice(0, 1200) : undefined,
+    eventDate: typeof eventDate === "string" ? eventDate.trim().slice(0, 40) : undefined,
+    eventTime: typeof eventTime === "string" ? eventTime.trim().slice(0, 40) : undefined,
+    numberOfServings: typeof numberOfServings === "string" ? numberOfServings.trim().slice(0, 40) : undefined,
+    desiredOrderQuantities: typeof desiredOrderQuantities === "string" ? desiredOrderQuantities.trim().slice(0, 600) : undefined,
+    additionalEventDetails: typeof additionalEventDetails === "string" ? additionalEventDetails.trim().slice(0, 1200) : undefined,
   };
 
   logger.info({ inquiry: { ...payload, email: "[redacted]" } }, "Inquiry received");
@@ -120,6 +148,17 @@ router.post("/inquire", async (req, res) => {
         { label: "Products of Interest", value: payload.productsOfInterest.join(", "), multiline: true },
         { label: "Estimated Order Volume", value: payload.estimatedOrderVolume ?? "" },
         { label: "Additional Information", value: payload.additionalInformation || "None provided", multiline: true },
+      ]
+    : inquiryType === "event"
+    ? [
+        { label: "Name", value: payload.name },
+        { label: "Email", value: payload.email, isEmail: true },
+        ...(payload.phone ? [{ label: "Phone", value: payload.phone }] : []),
+        { label: "Event Date", value: payload.eventDate ?? "" },
+        { label: "Event Time", value: payload.eventTime ?? "" },
+        { label: "Number of Servings", value: payload.numberOfServings ?? "" },
+        { label: "Desired Order Quantities", value: payload.desiredOrderQuantities ?? "", multiline: true },
+        { label: "Additional Event Details", value: payload.additionalEventDetails || "None provided", multiline: true },
       ]
     : [
         { label: "Name", value: payload.name },
