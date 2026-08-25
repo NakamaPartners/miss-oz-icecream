@@ -298,7 +298,7 @@ export default function Postcard() {
           bright and natural, while staying below the marquee frame (960). */}
       <div className="relative w-full z-[955] pointer-events-none">
         <div
-          className="w-full relative max-w-[1400px] mx-auto px-[4vw]"
+          className="w-full relative max-w-none px-0"
           style={{
             maskImage: HERO_MASK,
             WebkitMaskImage: HERO_MASK,
@@ -619,7 +619,7 @@ export default function Postcard() {
       </AnimatePresence>
 
       {/* SECTION PANELS — poster-like taped cards, click to explore */}
-      <div id="step-inside" className="relative z-20 mx-auto max-w-[1300px] px-[4vw] sm:px-0 mt-[clamp(18px,2.4vw,30px)]" style={{ scrollMarginTop: '32px' }}>
+      <div id="step-inside" className="relative z-20 mx-auto max-w-none px-0 mt-[clamp(18px,2.4vw,30px)]" style={{ scrollMarginTop: '32px' }}>
         <div className="flex items-center justify-center gap-3 mb-[clamp(14px,1.8vw,22px)]">
           <span className="w-10 h-px bg-[var(--gold)] opacity-60" aria-hidden="true" />
           <span className="text-[var(--berry-deep)] text-[12px] tracking-[4px] uppercase font-bold" style={{ fontFamily: 'var(--font-sans)' }}>Step Inside</span>
@@ -814,7 +814,12 @@ export default function Postcard() {
                   <motion.div
                     key={cat}
                     className="flex flex-col"
-                    style={{ gridArea: '1 / 1', height: '100%', pointerEvents: isActive ? 'auto' : 'none' } as React.CSSProperties}
+                    style={{
+                      gridArea: '1 / 1',
+                      height: isActive ? 'auto' : 0,
+                      overflow: isActive ? 'visible' : 'hidden',
+                      pointerEvents: isActive ? 'auto' : 'none',
+                    } as React.CSSProperties}
                     initial={false}
                     animate={{
                       opacity: isActive ? 1 : 0,
