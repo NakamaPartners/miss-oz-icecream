@@ -880,7 +880,7 @@ export default function Postcard() {
                     {/* ── CROFFLES & DESSERTS ── */}
                     {cat === 'Croffles & Desserts' && (
                       <div className="flex-1 flex flex-col justify-between">
-                        <div className="mt-[clamp(16px,2vw,24px)] flex flex-col text-center">
+                        <div className="mt-[clamp(16px,2vw,24px)] flex flex-col">
                           <div className="mt-[clamp(14px,1.6vw,20px)] uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(11px,0.95vw,13px)' }}>
                             Descriptions:
                           </div>
@@ -895,7 +895,7 @@ export default function Postcard() {
                             { name: 'Traditional Chocolate Chip Cookie', note: 'A classic chocolate chip cookie with a crisp exterior and soft, chewy center.' },
                             { name: 'Seasonal Dessert', note: 'See our Instagram or website for seasonal offerings.' },
                           ].map((item, i) => (
-                            <div key={item.name} className="flex items-start justify-center gap-[10px] py-[clamp(11px,1.3vw,17px)] text-center" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
+                            <div key={item.name} className="flex items-start gap-[10px] py-[clamp(11px,1.3vw,17px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
                               <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
                               <div>
                                 <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(13px,1.15vw,16px)' }}>{item.name}</div>
@@ -966,9 +966,9 @@ export default function Postcard() {
                     {/* ── DRINKS ── */}
                     {cat === 'Drinks' && (
                       <div className="flex-1 flex flex-col justify-between">
-                        <div className="mt-[clamp(18px,2.2vw,28px)] flex flex-col text-center">
+                        <div className="mt-[clamp(18px,2.2vw,28px)] flex flex-col">
                           {MENU_ITEMS['Drinks'].map((item, i) => (
-                            <div key={item.name} className="flex items-start justify-center gap-[10px] py-[clamp(12px,1.4vw,19px)] text-center" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
+                            <div key={item.name} className="flex items-start gap-[10px] py-[clamp(12px,1.4vw,19px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
                               <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
                               <div>
                                 <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(13px,1.15vw,16px)' }}>{item.name}</div>
