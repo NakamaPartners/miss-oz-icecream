@@ -24,11 +24,6 @@ const SLIDES: { src: string; alt: string; pos?: string }[] = [
     alt: 'The brick corner of the shop at dusk, with a glowing ice cream cone sculpture of string lights above the awning and the pink Miss Oz sidewalk sign out front',
     pos: 'center 62%',
   },
-  {
-    src: '/images/slide-counter.webp',
-    alt: 'The Miss Oz ice cream counter — illuminated Miss Oz sign, chalkboard menus, string lights, and glass display cases',
-    pos: 'center 48%',
-  },
 ];
 
 const NAV = [
@@ -157,7 +152,7 @@ export default function Postcard() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  const current = SLIDES[slide];
+  const current = SLIDES[slide] ?? SLIDES[0];
 
   return (
     <section
