@@ -175,7 +175,7 @@ export default function Postcard() {
       </div>
 
       {/* MASTHEAD — desktop only; mobile nav overlays the hero photo */}
-      <div aria-hidden="true" className="hidden md:block h-[clamp(160px,18.2vw,232px)]" />
+      <div aria-hidden="true" className="hidden md:block h-[clamp(100px,9vw,120px)]" />
       <header
         className="fixed top-0 left-0 right-0 z-[970] mx-auto max-w-[1400px] px-[4vw] hidden md:block transition-[padding,background-color,box-shadow] duration-300 ease-out"
         style={{
@@ -198,7 +198,7 @@ export default function Postcard() {
             gridTemplateColumns: isHeaderScrolled
               ? 'minmax(0,1fr) clamp(104px,12vw,140px) minmax(0,1fr)'
               : 'minmax(0,1fr) clamp(150px,16vw,190px) minmax(0,1fr)',
-            minHeight: isHeaderScrolled ? '68px' : 'clamp(84px,9.5vw,112px)',
+            minHeight: isHeaderScrolled ? '68px' : 'clamp(118px,14vw,160px)',
             overflow: 'visible',
           }}
         >
@@ -281,7 +281,7 @@ export default function Postcard() {
               alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
               className="h-auto transition-[width] duration-300 ease-out"
               style={{
-                width: isHeaderScrolled ? 'clamp(64px,6.2vw,78px)' : 'clamp(110px,11vw,140px)',
+                width: isHeaderScrolled ? 'clamp(64px,6.2vw,78px)' : 'clamp(140px,14vw,180px)',
                 filter: 'drop-shadow(0 2px 10px rgba(93,26,58,0.18))',
               }}
             />
