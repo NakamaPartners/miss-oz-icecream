@@ -1064,6 +1064,20 @@ export default function Postcard() {
                             </div>
                             <p className="mt-[12px]">The reason the 8&quot; and 10&quot; cakes are the same price is that they use the <strong>same amount of ingredients.</strong> The 8-inch version is taller and yields 8 larger slices, while the 10-inch version is wider and yields 12 thinner slices.</p>
                           </div>
+                          <div className="rounded-[9px] p-[clamp(14px,1.7vw,22px)] text-[#6E5A54] leading-relaxed" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)', fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>
+                            <div className="font-bold text-[#3B1E2B]">Handcrafted in Limited Weekly Batches</div>
+                            <p className="mt-[7px]">Our whole Basque cheesecakes are made from scratch using 100% premium cream cheese and zero flour. Each cake is slow-baked, cooled at room temperature, and refrigerated overnight to develop its signature rich and creamy texture.</p>
+                            <p className="mt-[9px]">Orders open every Monday at 11:00 AM and close Friday at 8:00 PM, or earlier if the weekly batch sells out. All confirmed orders will be ready for pickup the following Wednesday.</p>
+                            <p className="mt-[9px]"><strong>Only a limited number of whole cheesecakes are made each week.</strong> Once the weekly batch is sold out, ordering will reopen the following Monday.</p>
+                            <div className="mt-[14px] font-bold text-[#3B1E2B]">Weekly Schedule</div>
+                            <div className="mt-[7px] grid gap-[5px] sm:grid-cols-2">
+                              <div><strong>Orders open:</strong> Monday 11:00 AM–Friday 8:00 PM</div>
+                              <div><strong>Production:</strong> The following Monday</div>
+                              <div><strong>Cooling &amp; aging:</strong> Monday–Tuesday</div>
+                              <div><strong>Pickup:</strong> Following Wednesday by noon</div>
+                            </div>
+                            <p className="mt-[10px]"><strong>Important:</strong> Your pickup is the following Wednesday, not the Wednesday of the same week.</p>
+                          </div>
                           <button type="button" onClick={() => { setCakeOrderStatus('idle'); setCakeOrderOpen(true); }} className="w-full rounded-full bg-[var(--berry-deep)] px-5 py-3 font-bold uppercase tracking-[1.5px] text-[var(--cream-hi)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-hi)]" style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
                             Order a Whole Cheesecake →
                           </button>
@@ -1072,7 +1086,7 @@ export default function Postcard() {
                           <div aria-hidden="true" className="mt-[clamp(16px,2vw,22px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
                           <div className="mt-[clamp(14px,1.8vw,20px)] rounded-[8px] px-[clamp(14px,1.8vw,22px)] py-[clamp(13px,1.6vw,19px)] text-center" style={{ background: 'rgba(94,23,53,0.05)', border: '1px dashed rgba(94,23,53,0.2)' }}>
                             <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(20px,1.8vw,26px)', lineHeight: 1.1 }}>Basque Cheesecake Orders</div>
-                            <p className="mt-[8px] text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>Reserve at least one week in advance for a handcrafted whole cheesecake.</p>
+                            <p className="mt-[8px] text-[#6E5A54] leading-relaxed" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>Made fresh to order in limited weekly batches.</p>
                           </div>
                         </div>
                       </div>
