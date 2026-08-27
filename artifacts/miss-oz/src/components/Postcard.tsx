@@ -957,12 +957,15 @@ export default function Postcard() {
                             { name: 'Nutella', note: 'Nutella paired with fresh whipped cream.' },
                             { name: 'Oreo', note: 'Fresh whipped cream topped with Oreo cookies.' },
                             { name: 'Tiramisu', note: 'Fresh whipped cream and cocoa powder, creating a tiramisu-inspired flavor that pairs beautifully with the chewy, buttery croffle.' },
-                            { name: 'Walnut Chocolate Chip Cookie', note: "Inspired by Levain Bakery's famous chunky cookies with a crisp exterior and soft, chewy center." },
-                            { name: 'Butter Pecan Cookie', note: "Inspired by Levain Bakery's chunky cookies with a crisp exterior and soft, chewy center." },
-                            { name: 'Traditional Chocolate Chip Cookie', note: 'A classic chocolate chip cookie with a crisp exterior and soft, chewy center.' },
+                            { name: 'Walnut Chocolate Chip Cookie', note: "Inspired by Levain Bakery's famous chunky cookies with a crisp exterior and soft, chewy center.", image: '/images/cookie-walnut.jpeg' },
+                            { name: 'Butter Pecan Cookie', note: "Inspired by Levain Bakery's chunky cookies with a crisp exterior and soft, chewy center.", image: '/images/cookie-coffee.jpeg' },
+                            { name: 'Traditional Chocolate Chip Cookie', note: 'A classic chocolate chip cookie with a crisp exterior and soft, chewy center.', image: '/images/cookie-stack.jpeg' },
                             { name: 'Seasonal Dessert', note: 'See our Instagram or website for seasonal offerings.' },
                           ].map((item, i) => (
                             <div key={item.name} className="flex items-start gap-[10px] py-[clamp(11px,1.3vw,17px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
+                               {'image' in item && item.image && (
+                                 <img src={item.image} alt={`${item.name} cookies`} className="h-[68px] w-[68px] sm:h-[76px] sm:w-[76px] shrink-0 rounded-[8px] object-cover" />
+                               )}
                               <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
                               <div>
                                 <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(13px,1.15vw,16px)' }}>{item.name}</div>
