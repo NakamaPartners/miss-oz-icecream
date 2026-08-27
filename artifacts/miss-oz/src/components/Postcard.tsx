@@ -957,15 +957,12 @@ export default function Postcard() {
                             { name: 'Nutella', note: 'Nutella paired with fresh whipped cream.' },
                             { name: 'Oreo', note: 'Fresh whipped cream topped with Oreo cookies.' },
                             { name: 'Tiramisu', note: 'Fresh whipped cream and cocoa powder, creating a tiramisu-inspired flavor that pairs beautifully with the chewy, buttery croffle.' },
-                            { name: 'Walnut Chocolate Chip Cookie', note: "Inspired by Levain Bakery's famous chunky cookies with a crisp exterior and soft, chewy center.", image: '/images/cookie-walnut.jpeg' },
-                            { name: 'Butter Pecan Cookie', note: "Inspired by Levain Bakery's chunky cookies with a crisp exterior and soft, chewy center.", image: '/images/cookie-coffee.jpeg' },
-                            { name: 'Traditional Chocolate Chip Cookie', note: 'A classic chocolate chip cookie with a crisp exterior and soft, chewy center.', image: '/images/cookie-stack.jpeg' },
+                            { name: 'Walnut Chocolate Chip Cookie', note: "Inspired by Levain Bakery's famous chunky cookies with a crisp exterior and soft, chewy center." },
+                            { name: 'Butter Pecan Cookie', note: "Inspired by Levain Bakery's chunky cookies with a crisp exterior and soft, chewy center." },
+                            { name: 'Traditional Chocolate Chip Cookie', note: 'A classic chocolate chip cookie with a crisp exterior and soft, chewy center.' },
                             { name: 'Seasonal Dessert', note: 'See our Instagram or website for seasonal offerings.' },
                           ].map((item, i) => (
                             <div key={item.name} className="flex items-start gap-[10px] py-[clamp(11px,1.3vw,17px)]" style={{ borderTop: i > 0 ? '1px solid rgba(94,23,53,0.1)' : 'none' }}>
-                               {'image' in item && item.image && (
-                                 <img src={item.image} alt={`${item.name} cookies`} className="h-[68px] w-[68px] sm:h-[76px] sm:w-[76px] shrink-0 rounded-[8px] object-cover" />
-                               )}
                               <span aria-hidden="true" className="text-[var(--pink)] mt-[5px] shrink-0" style={{ fontSize: 9 }}>●</span>
                               <div>
                                 <div className="uppercase font-bold tracking-[2px] text-[#3B1E2B]" style={{ fontFamily: "'Libertinus Math', serif", fontSize: 'clamp(13px,1.15vw,16px)' }}>{item.name}</div>
@@ -973,6 +970,15 @@ export default function Postcard() {
                               </div>
                             </div>
                           ))}
+                          <div className="mt-[clamp(20px,2.4vw,30px)] text-center">
+                            <div className="text-[var(--marionberry)]" style={{ fontFamily: "'Cookie', cursive", fontSize: 'clamp(22px,2.2vw,30px)', lineHeight: 1.1 }}>Fresh-baked favorites</div>
+                            <p className="mt-[7px] text-[#6E5A54] italic" style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(10.5px,0.9vw,12.5px)' }}>A few of the housemade sweets you may find at Miss Oz.</p>
+                            <div className="mt-[14px] grid grid-cols-3 gap-[8px] sm:gap-[12px]">
+                              <img src="/images/cookie-walnut.jpeg" alt="Housemade cookies" className="h-[88px] sm:h-[118px] w-full rounded-[8px] object-cover" />
+                              <img src="/images/cookie-coffee.jpeg" alt="Housemade cookies with coffee" className="h-[88px] sm:h-[118px] w-full rounded-[8px] object-cover" />
+                              <img src="/images/cookie-stack.jpeg" alt="Stack of housemade cookies" className="h-[88px] sm:h-[118px] w-full rounded-[8px] object-cover" />
+                            </div>
+                          </div>
                         </div>
                         <div>
                           <div aria-hidden="true" className="mt-[clamp(16px,2vw,22px)] h-px w-full" style={{ backgroundImage: 'repeating-linear-gradient(90deg, rgba(94,23,53,0.35) 0 4px, transparent 4px 9px)' }} />
