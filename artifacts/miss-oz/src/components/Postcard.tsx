@@ -525,27 +525,6 @@ export default function Postcard() {
               ))}
             </div>
 
-            {/* ── MOBILE: hamburger + logo overlaid on hero photo ── */}
-            <button
-              type="button"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((o) => !o)}
-              className="md:hidden fixed top-4 left-4 z-[970] flex flex-col justify-center items-center gap-[5px] w-[42px] h-[42px] rounded-xl pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-              style={{ background: 'rgba(242,225,194,0.88)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
-            >
-              <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
-              <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300" style={{ opacity: menuOpen ? 0 : 1 }} />
-              <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
-            </button>
-            <div className="md:hidden fixed top-3 left-1/2 -translate-x-1/2 z-[970] pointer-events-none">
-              <img
-                src="/images/logo-official.webp"
-                alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
-                className="h-auto"
-                style={{ width: '88px', filter: 'drop-shadow(0 2px 10px rgba(20,8,12,0.35))' }}
-              />
-            </div>
           </div>
 
         </div>
@@ -569,6 +548,28 @@ export default function Postcard() {
             <span className="w-6 sm:w-10 h-px bg-[var(--gold-hi)] opacity-50" />
           </div>
         </div>
+      </div>
+
+      {/* MOBILE: keep navigation controls outside the masked/overflow-hidden hero layers for reliable taps */}
+      <button
+        type="button"
+        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen((o) => !o)}
+        className="md:hidden fixed top-4 left-4 z-[970] flex flex-col justify-center items-center gap-[5px] w-[42px] h-[42px] rounded-xl pointer-events-auto touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+        style={{ background: 'rgba(242,225,194,0.88)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
+      >
+        <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
+        <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300" style={{ opacity: menuOpen ? 0 : 1 }} />
+        <span className="block h-[2px] w-[18px] bg-[var(--cocoa)] rounded-full transition-all duration-300 origin-center" style={{ transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
+      </button>
+      <div className="md:hidden fixed top-3 left-1/2 -translate-x-1/2 z-[970] pointer-events-none">
+        <img
+          src="/images/logo-official.webp"
+          alt="Miss Oz — Ice Cream Cafe, Portland Oregon"
+          className="h-auto"
+          style={{ width: '88px', filter: 'drop-shadow(0 2px 10px rgba(20,8,12,0.35))' }}
+        />
       </div>
 
       {/* MOBILE MENU — fixed full-screen overlay, slides in from top */}
